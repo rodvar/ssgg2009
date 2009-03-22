@@ -1,0 +1,225 @@
+# depslib dependency file v1.0
+1237764553 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/tp1/main.cpp
+	<stdlib.h>
+	"Geometria/Segmento.h"
+
+1197321239 /usr/include/GL/glut.h
+	"freeglut_std.h"
+
+1197321239 /usr/include/GL/freeglut_std.h
+	<windows.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1207432987 /usr/include/GL/gl.h
+	"gl_mangle.h"
+	<stdlib.h>
+	<windows.h>
+	<GL/mesa_wgl.h>
+	<GL/glext.h>
+
+1207432987 /usr/include/GL/gl_mangle.h
+
+1221228479 /usr/include/stdlib.h
+	<features.h>
+	<stddef.h>
+	<bits/waitflags.h>
+	<bits/waitstatus.h>
+	<xlocale.h>
+	<sys/types.h>
+	<alloca.h>
+	<bits/stdlib.h>
+	<bits/stdlib-ldbl.h>
+
+1221228438 /usr/include/features.h
+	<sys/cdefs.h>
+	<gnu/stubs.h>
+
+1221228507 /usr/include/sys/cdefs.h
+	<features.h>
+	<bits/wordsize.h>
+
+1221228479 /usr/include/bits/wordsize.h
+
+1221228438 /usr/include/gnu/stubs.h
+	<bits/wordsize.h>
+	<gnu/stubs-32.h>
+	<gnu/stubs-64.h>
+
+1221228569 /usr/include/gnu/stubs-64.h
+
+1221228501 /usr/include/bits/waitflags.h
+
+1221228501 /usr/include/bits/waitstatus.h
+	<endian.h>
+
+1221228490 /usr/include/endian.h
+	<features.h>
+	<bits/endian.h>
+
+1221228490 /usr/include/bits/endian.h
+
+1221228448 /usr/include/xlocale.h
+
+1221228501 /usr/include/sys/types.h
+	<features.h>
+	<bits/types.h>
+	<time.h>
+	<stddef.h>
+	<endian.h>
+	<sys/select.h>
+	<sys/sysmacros.h>
+	<bits/pthreadtypes.h>
+
+1221228501 /usr/include/bits/types.h
+	<features.h>
+	<bits/wordsize.h>
+	<bits/typesizes.h>
+
+1221228501 /usr/include/bits/typesizes.h
+
+1221228495 /usr/include/time.h
+	<features.h>
+	<stddef.h>
+	<bits/time.h>
+	<bits/types.h>
+	<bits/types.h>
+	<bits/types.h>
+	<bits/types.h>
+	<bits/types.h>
+	<xlocale.h>
+
+1221228495 /usr/include/bits/time.h
+	<bits/types.h>
+	<bits/types.h>
+
+1221228507 /usr/include/sys/select.h
+	<features.h>
+	<bits/types.h>
+	<bits/select.h>
+	<bits/sigset.h>
+	<time.h>
+	<bits/time.h>
+
+1221228507 /usr/include/bits/select.h
+
+1221228477 /usr/include/bits/sigset.h
+
+1221228501 /usr/include/sys/sysmacros.h
+	<features.h>
+
+1221228501 /usr/include/bits/pthreadtypes.h
+	<bits/wordsize.h>
+
+1221228479 /usr/include/alloca.h
+	<features.h>
+	<stddef.h>
+
+1221228479 /usr/include/bits/stdlib.h
+
+1221228479 /usr/include/bits/stdlib-ldbl.h
+
+1207432987 /usr/include/GL/glext.h
+	<windows.h>
+	<stddef.h>
+	<inttypes.h>
+	<inttypes.h>
+	<inttypes.h>
+	<stdint.h>
+	<stdint.h>
+	<inttypes.h>
+
+1221228479 /usr/include/inttypes.h
+	<features.h>
+	<stdint.h>
+	<stddef.h>
+
+1221228479 /usr/include/stdint.h
+	<features.h>
+	<bits/wchar.h>
+	<bits/wordsize.h>
+
+1221228492 /usr/include/bits/wchar.h
+
+1207432897 /usr/include/GL/glu.h
+	"glu_mangle.h"
+	<GL/gl.h>
+
+1207432897 /usr/include/GL/glu_mangle.h
+
+1237762829 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/tp1/Coordenadas.cpp
+	"Coordenadas.h"
+
+1237761576 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/tp1/Coordenadas.h
+	"GL/glut.h"
+	<math.h>
+
+1237761291 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/tp1/DDA.cpp
+	"DDA.h"
+
+1237757619 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/tp1/DDA.h
+	"Coordenadas.h"
+
+1221228471 /usr/include/math.h
+	<features.h>
+	<bits/huge_val.h>
+	<bits/huge_valf.h>
+	<bits/huge_vall.h>
+	<bits/inf.h>
+	<bits/nan.h>
+	<bits/mathdef.h>
+	<bits/mathcalls.h>
+	<bits/mathcalls.h>
+	<bits/mathcalls.h>
+	<bits/mathinline.h>
+
+1221228471 /usr/include/bits/huge_val.h
+	<endian.h>
+
+1221228471 /usr/include/bits/huge_valf.h
+
+1221228471 /usr/include/bits/huge_vall.h
+
+1221228471 /usr/include/bits/inf.h
+
+1221228471 /usr/include/bits/nan.h
+	<endian.h>
+
+1221228471 /usr/include/bits/mathdef.h
+	<bits/wordsize.h>
+
+1221228471 /usr/include/bits/mathcalls.h
+
+1221228471 /usr/include/bits/mathinline.h
+
+1237761715 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/tp1/FiguraGeometrica.cpp
+	"FiguraGeometrica.h"
+
+1237762207 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/tp1/FiguraGeometrica.h
+	"Coordenadas.h"
+
+1237762701 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/tp1/Segmento.cpp
+	"Segmento.h"
+
+1237763493 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/tp1/Segmento.h
+	"FiguraGeometrica.h"
+
+1237762829 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/tp1/Geometria/Coordenadas.cpp
+	"Coordenadas.h"
+
+1237761576 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/tp1/Geometria/Coordenadas.h
+	"GL/glut.h"
+	<math.h>
+
+1237761715 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/tp1/Geometria/FiguraGeometrica.cpp
+	"FiguraGeometrica.h"
+
+1237762207 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/tp1/Geometria/FiguraGeometrica.h
+	"Coordenadas.h"
+
+1237762701 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/tp1/Geometria/Segmento.cpp
+	"Segmento.h"
+
+1237763493 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/tp1/Geometria/Segmento.h
+	"FiguraGeometrica.h"
+
