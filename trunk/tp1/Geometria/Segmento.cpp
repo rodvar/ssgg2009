@@ -12,7 +12,7 @@ Segmento::~Segmento()
     delete this->hasta;
 }
 
-double Segmento::pendiente(){
+float Segmento::pendiente(){
     // TODO
     return 0;
 }
@@ -48,14 +48,14 @@ void Segmento::dibujarDDA(){
     else{
         int deltay = this->hasta->getY() - y;
         int deltax = this->hasta->getX() - x;
-        double pendiente = (double)deltay/deltax;
+        float pendiente = (float)deltay/deltax;
         if (fabs(pendiente) < 1){ // x guia
-            double yReal = (double)y;
+            float yReal = (float)y;
             fin = this->hasta->getX();
             if (x > this->hasta->getX()){
                 fin = x;
                 x = this->hasta->getX();
-                yReal = (double)this->hasta->getY();
+                yReal = (float)this->hasta->getY();
             }
             for (unsigned int i = x; i < fin; i++){
                 glVertex2i(i, y);
@@ -64,13 +64,13 @@ void Segmento::dibujarDDA(){
             }
         }
         else{// y guia
-            double xReal = (double)x;
-            double paso = (1/pendiente);
+            float xReal = (float)x;
+            float paso = (1/pendiente);
             fin = this->hasta->getY();
             if (y > this->hasta->getY()){
                 fin = y;
                 y = this->hasta->getY();
-                xReal = (double)this->hasta->getX();
+                xReal = (float)this->hasta->getX();
             }
             for (unsigned int i = y; i <fin; i++){
                 glVertex2i(x, i);

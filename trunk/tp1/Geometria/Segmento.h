@@ -22,7 +22,7 @@ class Segmento : public FiguraGeometrica
         /**
          * Devuelve la pendiente del segmento
          */
-        double pendiente();
+        float pendiente();
 
         /**
          * Dibuja el segmento

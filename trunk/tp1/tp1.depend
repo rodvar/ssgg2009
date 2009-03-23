@@ -223,3 +223,33 @@
 1237763493 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/tp1/Geometria/Segmento.h
 	"FiguraGeometrica.h"
 
+1237762829 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Coordenadas.cpp
+	"Coordenadas.h"
+
+1237761576 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Coordenadas.h
+	"GL/glut.h"
+	<math.h>
+
+1237761715 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/FiguraGeometrica.cpp
+	"FiguraGeometrica.h"
+
+1237762207 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/FiguraGeometrica.h
+	"Coordenadas.h"
+
+1237765285 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Segmento.cpp
+	"Segmento.h"
+
+1237765284 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Segmento.h
+	"FiguraGeometrica.h"
+
+1237772240 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/main.cpp
+	<stdlib.h>
+	"Geometria/Segmento.h"
+	"Geometria/Circunferencia.h"
+
+1237772076 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Circunferencia.cpp
+	"Circunferencia.h"
+
+1237765675 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Circunferencia.h
+	"FiguraGeometrica.h"
+

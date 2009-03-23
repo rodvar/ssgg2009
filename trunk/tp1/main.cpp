@@ -4,6 +4,7 @@
 ///
 #include <stdlib.h>
 #include "Geometria/Segmento.h"
+#include "Geometria/Circunferencia.h"
 
 #define ANCHO	800
 #define ALTO	600
@@ -28,10 +29,14 @@ void init(void)
 // Este metodo se llama constantemente en el loop de la ventana si no hay otro evento
 void display(void)
 {
-    FiguraGeometrica* figura = new Segmento(new Coordenadas(),new Coordenadas(800,600));
-    FiguraGeometrica* figura2 = new Segmento(new Coordenadas(0,600),new Coordenadas(800,0));
-    FiguraGeometrica* figura3 = new Segmento(new Coordenadas(400,0),new Coordenadas(400,600));
-    FiguraGeometrica* figura4 = new Segmento(new Coordenadas(800,300),new Coordenadas(0,300));
+    FiguraGeometrica* segmento1 = new Segmento(new Coordenadas(),new Coordenadas(800,600));
+    FiguraGeometrica* segmento2 = new Segmento(new Coordenadas(0,600),new Coordenadas(800,0));
+    FiguraGeometrica* segmento3 = new Segmento(new Coordenadas(400,0),new Coordenadas(400,600));
+    FiguraGeometrica* segmento4 = new Segmento(new Coordenadas(800,300),new Coordenadas(0,300));
+    FiguraGeometrica* circunferencia1 = new Circunferencia(50, new Coordenadas(400,300));
+    FiguraGeometrica* circunferencia2 = new Circunferencia(100, new Coordenadas(400,300));
+    FiguraGeometrica* circunferencia3 = new Circunferencia(200, new Coordenadas(400,300));
+    FiguraGeometrica* circunferencia4 = new Circunferencia(300, new Coordenadas(400,300));
 
 	///
 	//glClear(GL_COLOR_BUFFER_BIT); // pinta todo de negro
@@ -42,17 +47,25 @@ void display(void)
     glColor3f(0.0,1.0,0.0);// Seteo el color en verde
 	glBegin(GL_POINTS);
 
-	figura->dibujar();
-	figura2->dibujar();
-	figura3->dibujar();
-	figura4->dibujar();
+	segmento1->dibujar();
+	segmento2->dibujar();
+	segmento3->dibujar();
+	segmento4->dibujar();
+	circunferencia1->dibujar();
+	circunferencia2->dibujar();
+	circunferencia3->dibujar();
+	circunferencia4->dibujar();
 
 	glEnd();
 
-	delete figura;
-	delete figura2;
-	delete figura3;
-	delete figura4;
+	delete segmento1;
+	delete segmento2;
+	delete segmento3;
+	delete segmento4;
+	delete circunferencia1;
+	delete circunferencia2;
+	delete circunferencia3;
+	delete circunferencia4;
 
 	///
   	glutSwapBuffers();
