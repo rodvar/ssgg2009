@@ -32,6 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Geometria/Circunferencia.cpp" />
+		<Unit filename="Geometria/Circunferencia.h" />
 		<Unit filename="Geometria/Coordenadas.cpp" />
 		<Unit filename="Geometria/Coordenadas.h" />
 		<Unit filename="Geometria/FiguraGeometrica.cpp" />
