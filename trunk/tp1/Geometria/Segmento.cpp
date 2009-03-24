@@ -18,11 +18,11 @@ float Segmento::pendiente(){
 }
 
 void Segmento::dibujar(){
-    this->dibujarDDA();
-    //this->dibujarBresenham();
+    //this->dibujarDDA();
+    this->dibujarBresenham();
 }
 
-void Segmento::dibujarDDA(){
+void Segmento::dibujarDDA() {
     unsigned int x = this->desde->getX();
     unsigned int y = this->desde->getY();
     unsigned int fin;
@@ -81,6 +81,43 @@ void Segmento::dibujarDDA(){
     }
 }
 
-void Segmento::dibujarBresenham(){
-    //TODO: haceme nico!! jaja
+void Segmento::dibujarBresenham() {
+    unsigned int x0 = floor(this->desde->getX());
+    unsigned int y0 = floor(this->desde->getY());
+    unsigned int x1 = floor(this->hasta->getX());
+    unsigned int y1 = floor(this->hasta->getY());
+
+    int dx = x1 - x0;
+    int dy = y1 - y0;
+
+    glVertex2i(x0,y0);
+    if (abs(dx) > abs(dy)) {          // pendiente < 1
+        float m = (float) dy / (float) dx;
+        float b = y0 - m*x0;
+        if(dx<0) {
+            dx = -1;
+        } else {
+            dx =  1;
+        }
+        while (x0 != x1) {
+            x0 += dx;
+            y0 = round(m*x0 + b);
+            glVertex2i(x0,y0);
+        }
+    } else {
+        if (dy != 0) {
+            float m = (float) dx / (float) dy;
+            float b = x0 - m*y0;
+            if(dy<0) {
+                dy = -1;
+            } else {
+                dy = 1;
+            }
+            while (y0 != y1) {
+                y0 += dy;
+                x0 = round(m*y0 + b);
+                glVertex2i(x0,y0);
+            }
+        }
+    }
 }

@@ -12,8 +12,8 @@ Circunferencia::~Circunferencia()
 }
 
 void Circunferencia::dibujar(){
-    this->dibujarBresenham();
-    //this->dibujarDDA();
+    //this->dibujarBresenham();
+    this->dibujarDDA();
 }
 
 void Circunferencia::dibujarBresenham(){
@@ -37,6 +37,32 @@ void Circunferencia::dibujarBresenham(){
     }
 }
 
-void Circunferencia::dibujarDDA(){
-    //TODO: Haceme nicaaaa ;)
+void Circunferencia::dibujarDDA() {
+    int x, y, r2;
+    int xCenter = this->centro->getX();
+    int yCenter = this->centro->getY();
+
+    r2 = radio*radio;
+    glVertex2i(xCenter, yCenter + radio);
+    glVertex2i(xCenter, yCenter - radio);
+    glVertex2i(xCenter + radio, yCenter);
+    glVertex2i(xCenter - radio, yCenter);
+
+    y = radio;
+    x = 1;
+    y = (int) (sqrt(r2 - 1) + 0.5);
+    while (x < y) {
+        glVertex2i(xCenter + x, yCenter + y); glVertex2i(xCenter + x, yCenter - y);
+        glVertex2i(xCenter - x, yCenter + y); glVertex2i(xCenter - x, yCenter - y);
+        glVertex2i(xCenter + y, yCenter + x); glVertex2i(xCenter + y, yCenter - x);
+        glVertex2i(xCenter - y, yCenter + x); glVertex2i(xCenter - y, yCenter - x);
+        x += 1;
+        y = (int) (sqrt(r2 - x*x) + 0.5);
+    }
+    if (x == y) {
+        glVertex2i(xCenter + x, yCenter + y);
+        glVertex2i(xCenter + x, yCenter - y);
+        glVertex2i(xCenter - x, yCenter + y);
+        glVertex2i(xCenter - x, yCenter - y);
+    }
 }
