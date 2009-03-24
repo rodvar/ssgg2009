@@ -20,9 +20,22 @@ class Coordenadas
         void setY(unsigned int val) { y = val; }
 
         /**
+         * Devuelve una copia de las coordenadas
+         */
+        virtual Coordenadas* copia(){ return new Coordenadas(this->x,this->y);}
+
+        /**
+         * Devuelve TRUE si this tiene mayor o igual valor en x que el parametro c.
+         * FALSE en caso contrario
+         */
+        bool mayorX(Coordenadas* c);
+
+        /**
          * Devuelve la distancia hasta las coordenadas pasadas por parametro
          */
         virtual double distancia (Coordenadas* hasta);
+
+
 
     protected:
     private:

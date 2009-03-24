@@ -40,6 +40,8 @@
 		<Unit filename="Geometria/FiguraGeometrica.h" />
 		<Unit filename="Geometria/Segmento.cpp" />
 		<Unit filename="Geometria/Segmento.h" />
+		<Unit filename="Geometria/Triangulo.cpp" />
+		<Unit filename="Geometria/Triangulo.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<envvars />

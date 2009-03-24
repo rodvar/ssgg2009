@@ -3,6 +3,8 @@
 
 #include "Coordenadas.h"
 
+#define INFINITO 10000000
+
 class FiguraGeometrica
 {
     public:

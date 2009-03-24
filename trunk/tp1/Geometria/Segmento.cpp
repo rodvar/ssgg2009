@@ -13,8 +13,25 @@ Segmento::~Segmento()
 }
 
 float Segmento::pendiente(){
-    // TODO
-    return 0;
+    float pendiente = 0;
+    Coordenadas* inicio = this->desde;
+    Coordenadas* fin = this->hasta;
+    int dx, dy;
+    if (this->desde->mayorX(this->hasta)){
+        inicio = this->hasta;
+        fin = this->desde;
+    }
+    dy = fin->getY() - inicio->getY();
+    dx = fin->getX() - inicio->getX();
+    if (dx == 0)
+        pendiente = INFINITO;
+    else
+        pendiente = (float)(dy)/(dx);
+    return pendiente;
+}
+
+double Segmento::longitud(){
+    return (this->desde->distancia(hasta));
 }
 
 void Segmento::dibujar(){

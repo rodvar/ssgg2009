@@ -25,6 +25,11 @@ class Segmento : public FiguraGeometrica
         float pendiente();
 
         /**
+         * Devuelve la longitud del segmento
+         */
+        double longitud();
+
+        /**
          * Dibuja el segmento
          */
         void dibujar();
