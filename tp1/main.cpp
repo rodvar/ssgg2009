@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include "Geometria/Segmento.h"
 #include "Geometria/Circunferencia.h"
+#include "Geometria/Triangulo.h"
 
 #define ANCHO	800
 #define ALTO	600
@@ -38,6 +39,8 @@ void display(void)
     FiguraGeometrica* circunferencia3 = new Circunferencia(200, new Coordenadas(400,300));
     FiguraGeometrica* circunferencia4 = new Circunferencia(300, new Coordenadas(400,300));
 
+    FiguraGeometrica* triangulo1 = new Triangulo(new Coordenadas(50,500), new Coordenadas(400,0), new Coordenadas(750,500));
+
 	///
 	//glClear(GL_COLOR_BUFFER_BIT); // pinta todo de negro
    	glMatrixMode(GL_MODELVIEW);
@@ -55,9 +58,12 @@ void display(void)
 	circunferencia2->dibujar();
 	circunferencia3->dibujar();
 	circunferencia4->dibujar();
+	glColor3f(1.0,0.0,0.0);// Seteo el color en verde
+	triangulo1->dibujar();
 
 	glEnd();
 
+    delete triangulo1;
 	delete segmento1;
 	delete segmento2;
 	delete segmento3;
