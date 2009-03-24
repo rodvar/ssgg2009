@@ -2,7 +2,7 @@
 #define SEGMENTO_H
 
 #include "FiguraGeometrica.h"
-
+#include "stdlib.h"
 
 class Segmento : public FiguraGeometrica
 {
