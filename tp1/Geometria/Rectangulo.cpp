@@ -61,10 +61,9 @@ void Rectangulo::dibujar(){
 void Rectangulo::rellenar() {
     glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
     Coordenadas* coordenadaNO = getVerticeNO();
-    for(int j=coordenadaNO->getY();j<(this->altura+coordenadaNO->getY());j++) {
-        for(int i=coordenadaNO->getX();i<(this->base+coordenadaNO->getX());i++) {
-            if(i>coordenadaNO->getX() && j>coordenadaNO->getY())
-                glVertex2i(i,j);
+    for(int j=(coordenadaNO->getY()+1);j<(this->altura+coordenadaNO->getY());j++) {
+        for(int i=(coordenadaNO->getX()+1);i<(this->base+coordenadaNO->getX());i++) {
+            glVertex2i(i,j);
         }
     }
     delete coordenadaNO;
