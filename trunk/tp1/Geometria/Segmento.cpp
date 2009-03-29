@@ -41,9 +41,9 @@ void Segmento::dibujar(){
 }
 
 void Segmento::dibujarDDA() {
-    unsigned int x = this->desde->getX();
-    unsigned int y = this->desde->getY();
-    unsigned int fin;
+    int x = this->desde->getX();
+    int y = this->desde->getY();
+    int fin;
 
     if (this->hasta->getY() == y){ //paralela eje x
         fin = this->hasta->getX();
@@ -51,7 +51,7 @@ void Segmento::dibujarDDA() {
             fin = x;
             x = this->hasta->getX();
         }
-        for ( unsigned int i = x ; i < fin; i++)
+        for ( int i = x ; i < fin; i++)
             glVertex2i(i, y);
     }
     else if (this->hasta->getX() == x){//paralela eje y
@@ -60,7 +60,7 @@ void Segmento::dibujarDDA() {
             fin = y;
             y = this->hasta->getY();
         }
-        for (unsigned int i = y; i < fin; i++)
+        for ( int i = y; i < fin; i++)
             glVertex2i(x, i);
     }
     else{
@@ -75,7 +75,7 @@ void Segmento::dibujarDDA() {
                 x = this->hasta->getX();
                 yReal = (float)this->hasta->getY();
             }
-            for (unsigned int i = x; i < fin; i++){
+            for ( int i = x; i < fin; i++){
                 glVertex2i(i, y);
                 yReal = yReal + pendiente;
                 y = floor(yReal);
@@ -90,7 +90,7 @@ void Segmento::dibujarDDA() {
                 y = this->hasta->getY();
                 xReal = (float)this->hasta->getX();
             }
-            for (unsigned int i = y; i <fin; i++){
+            for (int i = y; i <fin; i++){
                 glVertex2i(x, i);
                 xReal = xReal + paso;
                 x = floor(xReal);

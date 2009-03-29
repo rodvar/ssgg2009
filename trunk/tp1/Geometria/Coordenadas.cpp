@@ -6,7 +6,7 @@ Coordenadas::Coordenadas()
     this->y = 0;
 }
 
-Coordenadas::Coordenadas(unsigned int x, unsigned int y){
+Coordenadas::Coordenadas(int x, int y){
     this->x = x;
     this->y = y;
 }

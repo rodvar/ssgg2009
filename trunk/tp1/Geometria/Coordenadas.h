@@ -13,12 +13,12 @@ class Coordenadas
 {
     public:
         Coordenadas();
-        Coordenadas(unsigned int x, unsigned int y);
+        Coordenadas(int x, int y);
         virtual ~Coordenadas();
-        unsigned int getX() { return x; }
-        void setX(unsigned int val) { x = val; }
-        unsigned int getY() { return y; }
-        void setY(unsigned int val) { y = val; }
+        int getX() { return x; }
+        void setX(int val) { x = val; }
+        int getY() { return y; }
+        void setY(int val) { y = val; }
 
         /**
          * Devuelve una copia de las coordenadas
@@ -40,8 +40,8 @@ class Coordenadas
 
     protected:
     private:
-        unsigned int x;
-        unsigned int y;
+        int x;
+        int y;
 };
 
 #endif // COORDENADAS_H

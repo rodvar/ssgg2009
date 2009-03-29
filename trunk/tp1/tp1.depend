@@ -223,10 +223,10 @@
 1237763493 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/tp1/Geometria/Segmento.h
 	"FiguraGeometrica.h"
 
-1237937015 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Coordenadas.cpp
+1238359382 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Coordenadas.cpp
 	"Coordenadas.h"
 
-1237936449 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Coordenadas.h
+1238359382 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Coordenadas.h
 	"GL/glut.h"
 	<math.h>
 
@@ -237,18 +237,19 @@
 	"Coordenadas.h"
 	"../Visualizacion/Color.h"
 
-1238356003 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Segmento.cpp
+1238359442 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Segmento.cpp
 	"Segmento.h"
 
 1237937112 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Segmento.h
 	"FiguraGeometrica.h"
 	"stdlib.h"
 
-1238355831 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/main.cpp
+1238359043 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/main.cpp
 	<stdlib.h>
 	"Geometria/Segmento.h"
 	"Geometria/Circunferencia.h"
 	"Geometria/Triangulo.h"
+	"Geometria/Cuadrado.h"
 
 1238355975 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Circunferencia.cpp
 	"Circunferencia.h"
@@ -268,6 +269,21 @@
 1238353714 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Visualizacion/Color.cpp
 	"Color.h"
 
+<<<<<<< .mine
+1238359284 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Rectangulo.cpp
+	"Rectangulo.h"
+	"Segmento.h"
+
+1238358354 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Rectangulo.h
+	"FiguraGeometrica.h"
+
+1238359189 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Cuadrado.cpp
+	"Cuadrado.h"
+
+1238359196 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Cuadrado.h
+	"Rectangulo.h"
+
+=======
 1238352582 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Coordenadas.cpp
 	"Coordenadas.h"
 
@@ -314,3 +330,4 @@
 	"Geometria/Circunferencia.h"
 	"Geometria/Triangulo.h"
 
+>>>>>>> .r14
