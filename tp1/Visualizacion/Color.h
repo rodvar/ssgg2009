@@ -21,6 +21,11 @@ class Color
         float getRojo() { return rojo; }
         float getVerde() { return verde; }
         float getAzul() { return azul; }
+
+        /**
+         * Devuelve una copia del Color
+         */
+        Color* copia(){ return new Color(this->rojo,this->verde,this->azul);}
     protected:
     private:
         float rojo;

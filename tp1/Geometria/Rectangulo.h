@@ -36,7 +36,7 @@ class Rectangulo : public FiguraGeometrica
         void dibujar();
 
         /**
-         * Rellenar el rectangulo en la pantalla actual
+         * Rellena el rectangulo del color de relleno seteado
          */
         void rellenar();
 
