@@ -31,5 +31,5 @@ void Triangulo::dibujar(){
 }
 
 void Triangulo::rellenar() {
-
+    glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
 }
