@@ -28,6 +28,11 @@ public:
      */
     void dibujar();
 
+    /**
+     * Rellena el triangulo en la pantalla actual
+     */
+    void rellenar();
+
 protected:
 private:
     Coordenadas* verticeA;

@@ -19,6 +19,12 @@ class FiguraGeometrica
          */
         virtual void dibujar() = 0;
 
+        /**
+         * Metodo abstracto Rellenar.
+         * Rellena la figura en la pantalla de trabajo actual.
+         */
+        virtual void rellenar() = 0;
+
         // Getters colores
         Color* getColorBorde() { return this->borde; }
         Color* getColorRelleno() { return this->relleno; }

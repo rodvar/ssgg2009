@@ -139,3 +139,7 @@ void Segmento::dibujarBresenham() {
         }
     }
 }
+
+void Segmento::rellenar() {
+
+}

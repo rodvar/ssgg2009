@@ -268,3 +268,49 @@
 1238353714 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Visualizacion/Color.cpp
 	"Color.h"
 
+1238352582 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Coordenadas.cpp
+	"Coordenadas.h"
+
+1238358244 /home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Coordenadas.h
+	"GL/glut.h"
+	"GL/glx.h"
+	<math.h>
+
+1238356664 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Circunferencia.cpp
+	"Circunferencia.h"
+
+1238359031 /home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Circunferencia.h
+	"FiguraGeometrica.h"
+
+1238358915 /home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/FiguraGeometrica.h
+	"Coordenadas.h"
+	"../Visualizacion/Color.h"
+
+1238356664 /home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Visualizacion/Color.h
+
+1238358938 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/FiguraGeometrica.cpp
+	"FiguraGeometrica.h"
+
+1238356664 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Segmento.cpp
+	"Segmento.h"
+
+1238359046 /home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Segmento.h
+	"FiguraGeometrica.h"
+	"stdlib.h"
+
+1238356664 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Triangulo.cpp
+	"Triangulo.h"
+	"Segmento.h"
+
+1238359063 /home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Triangulo.h
+	"FiguraGeometrica.h"
+
+1238356664 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Visualizacion/Color.cpp
+	"Color.h"
+
+1238358668 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/main.cpp
+	<stdlib.h>
+	"Geometria/Segmento.h"
+	"Geometria/Circunferencia.h"
+	"Geometria/Triangulo.h"
+
