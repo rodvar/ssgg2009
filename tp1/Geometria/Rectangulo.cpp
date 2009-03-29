@@ -1,5 +1,6 @@
 #include "Rectangulo.h"
 #include "Segmento.h"
+#include <stdio.h>
 
 Rectangulo::Rectangulo(float base, float altura, Coordenadas* centro)
 {
@@ -57,6 +58,14 @@ void Rectangulo::dibujar(){
     delete alturaOeste;
 }
 
-void Rectangulo::rellenar(){
-    // TODO
+void Rectangulo::rellenar() {
+    glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
+    Coordenadas* coordenadaNO = getVerticeNO();
+    for(int j=coordenadaNO->getY();j<(this->altura+coordenadaNO->getY());j++) {
+        for(int i=coordenadaNO->getX();i<(this->base+coordenadaNO->getX());i++) {
+            if(i>coordenadaNO->getX() && j>coordenadaNO->getY())
+                glVertex2i(i,j);
+        }
+    }
+    delete coordenadaNO;
 }

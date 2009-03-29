@@ -53,10 +53,10 @@ void display(void)
 
 	glBegin(GL_POINTS);
 
-
 	segmento2->setColorBorde(new Color(1.0,0,0));
 	segmento1->setColorBorde(new Color(0,0,1.0));
 	rectangulo1->setColorBorde(new Color(1.0,1.0,0));
+	rectangulo1->setColorRelleno(new Color(0.3,0.6,0.5));
 	circunferencia1->setColorBorde(new Color(1.0,0,0));
 	triangulo1->setColorBorde(new Color(1.0,0,0));
 	cuadrado1->setColorBorde(new Color(0,1.0,1.0));
@@ -71,6 +71,7 @@ void display(void)
 	circunferencia4->dibujar();
 	triangulo1->dibujar();
 	rectangulo1->dibujar();
+	rectangulo1->rellenar();
 	cuadrado1->dibujar();
 
 	glEnd();

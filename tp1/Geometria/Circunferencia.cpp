@@ -68,5 +68,5 @@ void Circunferencia::dibujarDDA() {
 }
 
 void Circunferencia::rellenar() {
-
+    glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
 }
