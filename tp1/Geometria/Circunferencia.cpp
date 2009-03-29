@@ -12,8 +12,8 @@ Circunferencia::~Circunferencia()
 }
 
 void Circunferencia::dibujar(){
-    //this->dibujarBresenham();
-    this->dibujarDDA();
+    glColor3f(this->borde->getRojo(), this->borde->getVerde(), this->borde->getAzul());
+    this->dibujarBresenham();
 }
 
 void Circunferencia::dibujarBresenham(){

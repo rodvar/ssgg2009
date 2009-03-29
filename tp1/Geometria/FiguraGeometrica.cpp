@@ -2,10 +2,24 @@
 
 FiguraGeometrica::FiguraGeometrica()
 {
-    //ctor
+    this->borde = new Color(1.0,1.0,1.0);
+    this->relleno = NULL;
 }
 
 FiguraGeometrica::~FiguraGeometrica()
 {
-    //dtor
+    delete this->borde;
+    if (this->relleno)
+        delete this->relleno;
+}
+
+void FiguraGeometrica::setColorBorde(Color* color){
+    delete this->borde;
+    this->borde = color;
+}
+
+void FiguraGeometrica::setColorRelleno(Color* color){
+    if (this->relleno)
+        delete this->relleno;
+    this->relleno = color;
 }

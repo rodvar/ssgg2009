@@ -230,35 +230,41 @@
 	"GL/glut.h"
 	<math.h>
 
-1237761715 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/FiguraGeometrica.cpp
+1238356031 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/FiguraGeometrica.cpp
 	"FiguraGeometrica.h"
 
-1237936879 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/FiguraGeometrica.h
+1238356054 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/FiguraGeometrica.h
 	"Coordenadas.h"
+	"../Visualizacion/Color.h"
 
-1237937141 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Segmento.cpp
+1238356003 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Segmento.cpp
 	"Segmento.h"
 
 1237937112 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Segmento.h
 	"FiguraGeometrica.h"
 	"stdlib.h"
 
-1237934529 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/main.cpp
+1238355831 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/main.cpp
 	<stdlib.h>
 	"Geometria/Segmento.h"
 	"Geometria/Circunferencia.h"
 	"Geometria/Triangulo.h"
 
-1237935207 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Circunferencia.cpp
+1238355975 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Circunferencia.cpp
 	"Circunferencia.h"
 
 1237765675 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Circunferencia.h
 	"FiguraGeometrica.h"
 
-1237933409 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Triangulo.cpp
+1238355764 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Triangulo.cpp
 	"Triangulo.h"
 	"Segmento.h"
 
 1237933095 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Triangulo.h
 	"FiguraGeometrica.h"
+
+1238353873 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Visualizacion/Color.h
+
+1238353714 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Visualizacion/Color.cpp
+	"Color.h"
 

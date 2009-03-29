@@ -46,8 +46,8 @@ void display(void)
    	glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 	///
+    //glColor3f(0.0,1.0,0.0);// Seteo el color en verde
 
-    glColor3f(0.0,1.0,0.0);// Seteo el color en verde
 	glBegin(GL_POINTS);
 
 	segmento1->dibujar();
@@ -58,7 +58,6 @@ void display(void)
 	circunferencia2->dibujar();
 	circunferencia3->dibujar();
 	circunferencia4->dibujar();
-	glColor3f(1.0,0.0,0.0);// Seteo el color en verde
 	triangulo1->dibujar();
 
 	glEnd();

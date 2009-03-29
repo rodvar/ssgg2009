@@ -16,6 +16,7 @@ Triangulo::~Triangulo()
 }
 
 void Triangulo::dibujar(){
+    glColor3f(this->borde->getRojo(), this->borde->getVerde(), this->borde->getAzul());
     Segmento* segmentoAB = new Segmento(this->verticeA->copia(), this->verticeB->copia());
     Segmento* segmentoBC = new Segmento(this->verticeB->copia(), this->verticeC->copia());
     Segmento* segmentoCA = new Segmento(this->verticeC->copia(), this->verticeA->copia());
