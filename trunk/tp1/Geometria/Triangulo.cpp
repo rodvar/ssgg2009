@@ -27,3 +27,7 @@ void Triangulo::dibujar(){
     delete segmentoBC;
     delete segmentoCA;
 }
+
+void Triangulo::rellenar() {
+
+}

@@ -34,6 +34,11 @@ class Segmento : public FiguraGeometrica
          */
         void dibujar();
 
+        /**
+         * Rellena el segmento
+         */
+        void rellenar();
+
     protected:
     private:
         // Dibuja el Segmento segun el algoritmo DDA

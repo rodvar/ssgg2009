@@ -27,6 +27,11 @@ public:
      */
     void dibujar();
 
+    /**
+     * Rellena la circunferencia en la pantalla actual
+     */
+    void rellenar();
+
 protected:
 private:
     // Dibuja por el algoritmo DDA

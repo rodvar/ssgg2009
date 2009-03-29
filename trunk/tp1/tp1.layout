@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="Geometria/Circunferencia.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="543" topLine="44" />
+	<File name="Geometria/Circunferencia.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="1181" topLine="24" />
 	</File>
 	<File name="Geometria/Circunferencia.h" open="0" top="0" tabpos="0">
-		<Cursor position="667" topLine="12" />
+		<Cursor position="667" topLine="0" />
 	</File>
 	<File name="Geometria/Coordenadas.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="478" topLine="12" />
+		<Cursor position="478" topLine="0" />
 	</File>
 	<File name="Geometria/Coordenadas.h" open="0" top="0" tabpos="2">
-		<Cursor position="842" topLine="24" />
+		<Cursor position="842" topLine="2" />
 	</File>
 	<File name="Geometria/FiguraGeometrica.h" open="0" top="0" tabpos="0">
-		<Cursor position="218" topLine="5" />
+		<Cursor position="218" topLine="0" />
 	</File>
 	<File name="Geometria/Segmento.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="698" topLine="25" />
+		<Cursor position="698" topLine="0" />
 	</File>
 	<File name="Geometria/Segmento.h" open="0" top="0" tabpos="0">
-		<Cursor position="651" topLine="12" />
+		<Cursor position="651" topLine="0" />
 	</File>
-	<File name="main.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="981" topLine="43" />
+	<File name="main.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="87" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

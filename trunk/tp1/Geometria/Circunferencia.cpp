@@ -66,3 +66,7 @@ void Circunferencia::dibujarDDA() {
         glVertex2i(xCenter - x, yCenter - y);
     }
 }
+
+void Circunferencia::rellenar() {
+
+}
