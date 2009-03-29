@@ -6,6 +6,7 @@
 #include "Geometria/Segmento.h"
 #include "Geometria/Circunferencia.h"
 #include "Geometria/Triangulo.h"
+#include "Geometria/Cuadrado.h"
 
 #define ANCHO	800
 #define ALTO	600
@@ -38,6 +39,8 @@ void display(void)
     FiguraGeometrica* circunferencia2 = new Circunferencia(100, new Coordenadas(400,300));
     FiguraGeometrica* circunferencia3 = new Circunferencia(200, new Coordenadas(400,300));
     FiguraGeometrica* circunferencia4 = new Circunferencia(300, new Coordenadas(400,300));
+    FiguraGeometrica* rectangulo1 = new Rectangulo(200, 400, new Coordenadas(400,300));
+    FiguraGeometrica* cuadrado1 = new Cuadrado(250, new Coordenadas(400,300));
 
     FiguraGeometrica* triangulo1 = new Triangulo(new Coordenadas(50,500), new Coordenadas(400,0), new Coordenadas(750,500));
 
@@ -59,9 +62,13 @@ void display(void)
 	circunferencia3->dibujar();
 	circunferencia4->dibujar();
 	triangulo1->dibujar();
+	rectangulo1->dibujar();
+	cuadrado1->dibujar();
 
 	glEnd();
 
+    delete cuadrado1;
+    delete rectangulo1;
     delete triangulo1;
 	delete segmento1;
 	delete segmento2;
