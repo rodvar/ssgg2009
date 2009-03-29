@@ -35,8 +35,9 @@ double Segmento::longitud(){
 }
 
 void Segmento::dibujar(){
-    //this->dibujarDDA();
-    this->dibujarBresenham();
+    glColor3f(this->borde->getRojo(), this->borde->getVerde(), this->borde->getAzul());
+    this->dibujarDDA();
+    //this->dibujarBresenham();
 }
 
 void Segmento::dibujarDDA() {
