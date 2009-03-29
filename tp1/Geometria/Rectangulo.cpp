@@ -52,3 +52,7 @@ void Rectangulo::dibujar(){
     delete alturaEste;
     delete alturaOeste;
 }
+
+void Rectangulo::rellenar() {
+
+}

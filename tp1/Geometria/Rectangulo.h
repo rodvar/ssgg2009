@@ -35,6 +35,11 @@ class Rectangulo : public FiguraGeometrica
          */
         void dibujar();
 
+        /**
+         * Rellenar el rectangulo en la pantalla actual
+         */
+        void rellenar();
+
     protected:
         float base;
         float altura;

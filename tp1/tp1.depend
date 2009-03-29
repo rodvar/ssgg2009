@@ -269,7 +269,8 @@
 1238353714 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Visualizacion/Color.cpp
 	"Color.h"
 
-<<<<<<< .mine
+1238353714 ne
+
 1238359284 source:/home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Rectangulo.cpp
 	"Rectangulo.h"
 	"Segmento.h"
@@ -283,16 +284,16 @@
 1238359196 /home/rodrigo/INGENIERIA/SISTEMASGRAFICOS/grupotps/tp1/Geometria/Cuadrado.h
 	"Rectangulo.h"
 
-=======
-1238352582 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Coordenadas.cpp
+1238359196 o.h"
+
+1238360192 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Coordenadas.cpp
 	"Coordenadas.h"
 
-1238358244 /home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Coordenadas.h
+1238360192 /home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Coordenadas.h
 	"GL/glut.h"
-	"GL/glx.h"
 	<math.h>
 
-1238356664 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Circunferencia.cpp
+1238359003 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Circunferencia.cpp
 	"Circunferencia.h"
 
 1238359031 /home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Circunferencia.h
@@ -307,14 +308,14 @@
 1238358938 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/FiguraGeometrica.cpp
 	"FiguraGeometrica.h"
 
-1238356664 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Segmento.cpp
+1238360192 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Segmento.cpp
 	"Segmento.h"
 
 1238359046 /home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Segmento.h
 	"FiguraGeometrica.h"
 	"stdlib.h"
 
-1238356664 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Triangulo.cpp
+1238358973 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Triangulo.cpp
 	"Triangulo.h"
 	"Segmento.h"
 
@@ -330,4 +331,14 @@
 	"Geometria/Circunferencia.h"
 	"Geometria/Triangulo.h"
 
->>>>>>> .r14
+1238358668 4
+
+1238360192 source:/home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Cuadrado.cpp
+	"Cuadrado.h"
+
+1238360192 /home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Cuadrado.h
+	"Rectangulo.h"
+
+1238360330 /home/nicolas/workspace/Facultad/Sistemas Graficos/tp1/Geometria/Rectangulo.h
+	"FiguraGeometrica.h"
+

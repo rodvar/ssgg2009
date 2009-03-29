@@ -2,7 +2,6 @@
 #define COORDENADAS_H
 
 #include "GL/glut.h"
-#include "GL/glx.h"
 #include <math.h>
 
 /**
