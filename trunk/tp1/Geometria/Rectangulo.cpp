@@ -43,6 +43,10 @@ void Rectangulo::dibujar(){
     Segmento* baseNorte = new Segmento(this->getVerticeNE(), this->getVerticeNO());
     Segmento* alturaOeste = new Segmento(this->getVerticeNO(), this->getVerticeSO());
     Segmento* alturaEste = new Segmento(this->getVerticeSE(), this->getVerticeNE());
+    baseSur->setColorBorde(this->borde->copia());
+    baseNorte->setColorBorde(this->borde->copia());
+    alturaEste->setColorBorde(this->borde->copia());
+    alturaOeste->setColorBorde(this->borde->copia());
     baseSur->dibujar();
     alturaEste->dibujar();
     baseNorte->dibujar();
@@ -53,6 +57,6 @@ void Rectangulo::dibujar(){
     delete alturaOeste;
 }
 
-void Rectangulo::rellenar() {
-
+void Rectangulo::rellenar(){
+    // TODO
 }
