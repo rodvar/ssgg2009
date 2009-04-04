@@ -36,12 +36,20 @@
 		<Unit filename="Geometria/Circunferencia.h" />
 		<Unit filename="Geometria/Coordenadas.cpp" />
 		<Unit filename="Geometria/Coordenadas.h" />
+		<Unit filename="Geometria/Cuadrado.cpp" />
+		<Unit filename="Geometria/Cuadrado.h" />
 		<Unit filename="Geometria/FiguraGeometrica.cpp" />
 		<Unit filename="Geometria/FiguraGeometrica.h" />
+		<Unit filename="Geometria/Rectangulo.cpp" />
+		<Unit filename="Geometria/Rectangulo.h" />
 		<Unit filename="Geometria/Segmento.cpp" />
 		<Unit filename="Geometria/Segmento.h" />
 		<Unit filename="Geometria/Triangulo.cpp" />
 		<Unit filename="Geometria/Triangulo.h" />
+		<Unit filename="Visualizacion/Color.cpp" />
+		<Unit filename="Visualizacion/Color.h" />
+		<Unit filename="Visualizacion/Grilla.cpp" />
+		<Unit filename="Visualizacion/Grilla.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<envvars />

@@ -40,6 +40,9 @@ class Rectangulo : public FiguraGeometrica
          */
         void rellenar();
 
+        /** Sobrecarga del operador = **/
+        bool operator = (Rectangulo* rectangulo);
+
     protected:
         float base;
         float altura;
