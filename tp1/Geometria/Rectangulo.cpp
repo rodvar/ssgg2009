@@ -68,3 +68,7 @@ void Rectangulo::rellenar() {
     }
     delete coordenadaNO;
 }
+
+bool Rectangulo::operator = (Rectangulo* rectangulo){
+    return ((rectangulo->getBase() == this->base) && (rectangulo->getAltura() == this->altura));
+}
