@@ -73,3 +73,7 @@ Rectangulo* Grilla::obtenerCelda(float x, float y){
     }
     return rectangulo;
 }
+
+float Grilla::distanciaOrigen(Coordenadas* punto){
+    return this->origen->distancia(punto);
+}
