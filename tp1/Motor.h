@@ -5,7 +5,8 @@
 #define BRESENHAM 'B'
 #define DDA 'D'
 
-#include "Geometria/FiguraGeometrica.h"
+#include "Geometria/Circunferencia.h"
+#include "Geometria/Segmento.h"
 #include "Visualizacion/Pantalla.h"
 #include <list.h>
 
@@ -42,6 +43,23 @@ class Motor
          * Realiza los cambios pertinentes en los datos, y los pasa a la Pantalla
          */
         void actualizar();
+
+        /**
+         * Realiza la logica del algoritmo Breseham para mostrar en la pantalla que
+         * pixeles se pintan al dibujar una Circunferencia cuyo radio es la distancia del
+         * origen de la grilla a cRadio. Al final llama a actualizar
+         * @param cRadio Coordenadas de uno de los puntos de la circunferencia
+         */
+        void simulacionBresenham(Coordenadas* cRadio);
+
+        /**
+         * Realiza la logica del algoritmo DDA para mostrar en la pantalla que pixeles
+         * se pintan al dibujar un segmento cuyos limites son desde, hasta. Al finalizar
+         * llama a actualizar
+         * @param desde Coordenadas de inicio del segmento a trazar
+         * @param hasta Coordenadas de fin del segmento a trazar
+         */
+        void simulacionDDA(Coordenadas* desde, Coordenadas* hasta);
 
     protected:
     private:

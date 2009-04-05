@@ -27,6 +27,7 @@ class Grilla
         Grilla(int filas, int columnas, float dx, float dy, Coordenadas* posicion);
 
         virtual ~Grilla();
+        Coordenadas* getOrigen() { return this->origen->copia(); }
 
         /**
          * Dibuja la grilla en la pantalla actual
@@ -39,6 +40,14 @@ class Grilla
          * @return La celda correspondiente en la Grilla, NULL si no existe
          */
         Rectangulo* obtenerCelda(float x, float y);
+
+        /**
+         * @return La distancia al origen de la grilla
+         * @param punto El punto distante al origen
+         */
+        float distanciaOrigen(Coordenadas* punto);
+
+
 
     protected:
     private:

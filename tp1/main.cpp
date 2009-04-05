@@ -61,15 +61,25 @@ void keyboard(unsigned char key, int x, int y)
 
 /*
  * boton  GLUT_LEFT_BUTTON,  GLUT_MIDDLE_BUTTON, or  GLUT_RIGHT_BUTTON
- * estado GL_UP or GL_DOWN
+ * estado GLUT_UP or GLUT_DOWN
 */
 void mouse(int boton, int estado, int x, int y){
+    static Coordenadas* desde = NULL;
     switch (Motor::getInstancia()->getModo()){
         case BRESENHAM:
-            // Modo p/ circunferencias
+            if (estado == GLUT_DOWN)
+                Motor::getInstancia()->simulacionBresenham(new Coordenadas(x,y));
             break;
         case DDA:
-            // Modo para lineas
+            if (estado == GLUT_DOWN){
+                if (!desde)
+                    desde = new Coordenadas(x,y);
+                else {
+                    Motor::getInstancia()->simulacionDDA(desde->copia(), new Coordenadas(x,y));
+                    delete (desde);
+                    desde = NULL;
+                }
+            }
             break;
         default:
             break;

@@ -18,3 +18,16 @@ void Motor::cambiarModo(){
     this->datos.clear();
     this->pantalla = new Pantalla();
 }
+
+void Motor::simulacionBresenham(Coordenadas* cRadio){
+    Circunferencia* circunferencia = new Circunferencia(
+        this->pantalla->getGrilla()->distanciaOrigen(cRadio), this->pantalla->getGrilla()->getOrigen());
+
+    delete circunferencia;
+}
+
+void Motor::simulacionDDA(Coordenadas* desde, Coordenadas* hasta){
+    Segmento* segmento = new Segmento(desde, hasta);
+
+    delete segmento;
+}

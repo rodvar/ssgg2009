@@ -23,6 +23,7 @@ class Pantalla
          */
         Pantalla();
         virtual ~Pantalla();
+        Grilla* getGrilla(){ return this->grilla; }
 
         /**
          * Dibuja todos los elementos que participan de la escena actual
