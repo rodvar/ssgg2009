@@ -5,9 +5,6 @@
 #include <stdlib.h>
 #include "Motor.h"
 
-#define ANCHO	800
-#define ALTO	600
-
 char caption[]="Sistema Gráficos - 66.71 - 2009c1";
 
 
@@ -49,11 +46,34 @@ void keyboard(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
-	case 0x1b: // 'Escape' = Cierra la aplicacion
-        Motor::limpiar();
-		exit (1);
-		break;
+        case 0x1b: // 'Escape' = Cierra la aplicacion
+            Motor::limpiar();
+            exit (1);
+            break;
+        case 'c':
+            Motor::getInstancia()->cambiarModo();
+            glutPostRedisplay();
+            break;
+        default:
+            break;
 	}
+}
+
+/*
+ * boton  GLUT_LEFT_BUTTON,  GLUT_MIDDLE_BUTTON, or  GLUT_RIGHT_BUTTON
+ * estado GL_UP or GL_DOWN
+*/
+void mouse(int boton, int estado, int x, int y){
+    switch (Motor::getInstancia()->getModo()){
+        case BRESENHAM:
+            // Modo p/ circunferencias
+            break;
+        case DDA:
+            // Modo para lineas
+            break;
+        default:
+            break;
+    }
 }
 
 
@@ -66,6 +86,7 @@ int main(int argc, char** argv)
    glutCreateWindow (caption);
    init ();
    glutKeyboardFunc(keyboard);
+   glutMouseFunc(mouse);
    glutDisplayFunc(display);
    glutReshapeFunc(reshape);
    glutMainLoop();

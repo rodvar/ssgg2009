@@ -8,8 +8,8 @@
 // Configuracion Grilla - Pantalla
 #define FILAS 10
 #define COLUMNAS 10
-#define DX 80.0
-#define DY 55.0
+#define DX 60.0
+#define DY 41.625
 //
 
 /**
@@ -18,6 +18,9 @@
 class Pantalla
 {
     public:
+        /**
+         * La Pantalla queda contruida con su grilla centrada en el display
+         */
         Pantalla();
         virtual ~Pantalla();
 

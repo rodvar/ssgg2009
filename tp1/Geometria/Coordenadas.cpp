@@ -28,3 +28,7 @@ double Coordenadas::distancia (Coordenadas* hasta){
     int deltaY = hasta->getY() - this->y;
     return sqrt(deltaX*deltaX + deltaY*deltaY);
 }
+
+bool Coordenadas::operator = (Coordenadas* coordenadas){
+    return ((this->x == coordenadas->getX()) && (this->y == coordenadas->getY()));
+}
