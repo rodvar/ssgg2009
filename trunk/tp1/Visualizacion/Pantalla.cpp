@@ -2,7 +2,7 @@
 
 Pantalla::Pantalla()
 {
-    this->grilla = new Grilla(FILAS,COLUMNAS,DX,DY);
+    this->grilla = new Grilla(FILAS,COLUMNAS,DX,DY, new Coordenadas(ORIGEN_X,ORIGEN_Y));
 }
 
 Pantalla::~Pantalla()

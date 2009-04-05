@@ -72,3 +72,8 @@ void Rectangulo::rellenar() {
 bool Rectangulo::operator = (Rectangulo* rectangulo){
     return ((rectangulo->getBase() == this->base) && (rectangulo->getAltura() == this->altura));
 }
+
+bool Rectangulo::contiene(float x, float y){
+    //TODO
+    return false;
+}

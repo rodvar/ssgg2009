@@ -1,6 +1,10 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
+// Modos de sistema
+#define BRESENHAM 'B'
+#define DDA 'D'
+
 #include "Geometria/FiguraGeometrica.h"
 #include "Visualizacion/Pantalla.h"
 #include <list.h>
@@ -29,6 +33,11 @@ class Motor
             delete (Motor::getInstancia());
         }
 
+        char getModo() { return this->modo; }
+
+        /** Realiza el switch entre los 2 modos posibles **/
+        void cambiarModo();
+
         /**
          * Realiza los cambios pertinentes en los datos, y los pasa a la Pantalla
          */
@@ -38,11 +47,13 @@ class Motor
     private:
         list<FiguraGeometrica*> datos;
         Pantalla* pantalla;
+        char modo; // 'B' para Bresenham, 'D' para DDA
 
         // Constructor
         Motor (){
             this->pantalla = new Pantalla();
             this->datos.clear();
+            this->modo = 'D'; // Inicia en modo lineas (con DDA)
         }
 
         //Destructor

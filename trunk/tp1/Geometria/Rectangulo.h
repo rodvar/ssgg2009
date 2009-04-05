@@ -40,6 +40,11 @@ class Rectangulo : public FiguraGeometrica
          */
         void rellenar();
 
+        /**
+         * Devuelve true si la figura contiene al punto (x,y)
+         */
+        bool contiene(float x, float y);
+
         /** Sobrecarga del operador = **/
         bool operator = (Rectangulo* rectangulo);
 

@@ -46,10 +46,14 @@
 		<Unit filename="Geometria/Segmento.h" />
 		<Unit filename="Geometria/Triangulo.cpp" />
 		<Unit filename="Geometria/Triangulo.h" />
+		<Unit filename="Motor.cpp" />
+		<Unit filename="Motor.h" />
 		<Unit filename="Visualizacion/Color.cpp" />
 		<Unit filename="Visualizacion/Color.h" />
 		<Unit filename="Visualizacion/Grilla.cpp" />
 		<Unit filename="Visualizacion/Grilla.h" />
+		<Unit filename="Visualizacion/Pantalla.cpp" />
+		<Unit filename="Visualizacion/Pantalla.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<envvars />

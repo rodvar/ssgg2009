@@ -39,6 +39,11 @@ class Segmento : public FiguraGeometrica
          */
         void rellenar();
 
+        /**
+         * Devuelve true si la figura contiene al punto (x,y)
+         */
+        bool contiene(float x, float y);
+
     protected:
     private:
         // Dibuja el Segmento segun el algoritmo DDA

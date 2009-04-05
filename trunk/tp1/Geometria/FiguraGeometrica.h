@@ -25,6 +25,12 @@ class FiguraGeometrica
          */
         virtual void rellenar() = 0;
 
+        /**
+         * Metodo abstracto contiene (x,y)
+         * Devuelve true si la figura contiene al punto (x,y)
+         */
+        virtual bool contiene(float x, float y) = 0;
+
         // Getters colores
         Color* getColorBorde() { return this->borde; }
         Color* getColorRelleno() { return this->relleno; }
