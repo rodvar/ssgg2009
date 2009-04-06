@@ -23,3 +23,9 @@ void FiguraGeometrica::setColorRelleno(Color* color){
         delete this->relleno;
     this->relleno = color;
 }
+
+void FiguraGeometrica::setColorRelleno(float r, float g, float b){
+    if (this->relleno)
+        delete this->relleno;
+    this->relleno = new Color(r,g,b);
+}

@@ -45,6 +45,11 @@ class Motor
         void actualizar();
 
         /**
+         * @return TRUE si esta en rango de trabajo, false en caso contrario
+         */
+        bool enRango(int x, int y);
+
+        /**
          * Realiza la logica del algoritmo Breseham para mostrar en la pantalla que
          * pixeles se pintan al dibujar una Circunferencia cuyo radio es la distancia del
          * origen de la grilla a cRadio. Al final llama a actualizar
@@ -84,6 +89,9 @@ class Motor
             }
             this->datos.clear();
         }
+
+        // Elimina todos los objetos para dibujar en la lista de datos
+        void limpiarBufferDatos();
 };
 
 #endif // MOTOR_H

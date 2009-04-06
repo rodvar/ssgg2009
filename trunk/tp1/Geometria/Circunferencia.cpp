@@ -71,7 +71,7 @@ void Circunferencia::rellenar() {
     glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
 }
 
-bool Circunferencia::contiene(float x, float y){
+bool Circunferencia::contiene(int x, int y){
     //TODO
     return false;
 }

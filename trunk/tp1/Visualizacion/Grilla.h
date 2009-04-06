@@ -39,7 +39,24 @@ class Grilla
          * @param y La coordenada ordenada en el SR del hardware
          * @return La celda correspondiente en la Grilla, NULL si no existe
          */
-        Rectangulo* obtenerCelda(float x, float y);
+        Rectangulo* obtenerCelda(int x, int y);
+
+        /**
+         * @param posicion La posicion de la celda a obtener
+         * @return La celda correspondiente en la Grilla, NULL si no existe
+         */
+        Rectangulo* obtenerCelda(Coordenadas* posicion);
+
+        /**
+         * Traduce las coordenadas pasadas coomo x,y a las coordenadas en el SR
+         * de la grilla
+         */
+        Coordenadas* posicionEnGrilla(int x, int y);
+
+        /**
+         * Devuelve la clave coordenadas de la celda pasada por parametro
+         */
+        Coordenadas* obtenerPosicion(Rectangulo* celda);
 
         /**
          * @return La distancia al origen de la grilla
@@ -47,7 +64,11 @@ class Grilla
          */
         float distanciaOrigen(Coordenadas* punto);
 
-
+        /**
+         * @return TRUE si es un punto perteneciente a la grilla, false en caso
+         *         contrario
+         */
+        bool enRango(int x, int y);
 
     protected:
     private:

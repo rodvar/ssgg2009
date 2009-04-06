@@ -63,7 +63,7 @@ void Grilla::dibujarEjeX(){
     delete segmento;
 }
 
-Rectangulo* Grilla::obtenerCelda(float x, float y){
+Rectangulo* Grilla::obtenerCelda(int x, int y){
     Rectangulo* rectangulo = NULL;
     map<Coordenadas*,Rectangulo*>::iterator it=this->mapa.begin();
     while ((it != this->mapa.end()) && (!rectangulo)){
@@ -74,6 +74,44 @@ Rectangulo* Grilla::obtenerCelda(float x, float y){
     return rectangulo;
 }
 
+Rectangulo* Grilla::obtenerCelda(Coordenadas* posicion){
+    Rectangulo* celda = NULL;
+    map<Coordenadas*,Rectangulo*>::iterator it= this->mapa.find(posicion);
+    if (it != this->mapa.end())
+        celda = ((Rectangulo*)it->second);
+    return celda;
+}
+
+Coordenadas* Grilla::obtenerPosicion(Rectangulo* celda){
+    Coordenadas* posicion = NULL;
+    map<Coordenadas*,Rectangulo*>::iterator it=this->mapa.begin();
+    while ((it != this->mapa.end()) && (!posicion)){
+        if (((Rectangulo*)it->second) == celda)
+            posicion = (Coordenadas*)it->first;
+        it++;
+    }
+    return posicion;
+}
+
+Coordenadas* Grilla::posicionEnGrilla(int x, int y){
+    Coordenadas* posicion = NULL;
+    Rectangulo* rectangulo = NULL;
+    map<Coordenadas*,Rectangulo*>::iterator it=this->mapa.begin();
+    while ((it != this->mapa.end()) && (!posicion)){
+        rectangulo = (Rectangulo*)it->second;
+        if (rectangulo->contiene(x,y))
+            posicion = (Coordenadas*)it->first;
+        it++;
+    }
+    return posicion;
+}
+
 float Grilla::distanciaOrigen(Coordenadas* punto){
     return this->origen->distancia(punto);
+}
+
+bool Grilla::enRango(int x, int y){
+    return ( (x >= this->origen->getX()) && (y <= this->origen->getY())
+        && (x < (this->origen->getX() + this->columnas*this->unidadX))
+        && (y > (this->origen->getY() - this->filas*this->unidadY)));
 }

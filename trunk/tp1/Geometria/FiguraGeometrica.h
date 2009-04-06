@@ -29,7 +29,7 @@ class FiguraGeometrica
          * Metodo abstracto contiene (x,y)
          * Devuelve true si la figura contiene al punto (x,y)
          */
-        virtual bool contiene(float x, float y) = 0;
+        virtual bool contiene(int x, int y) = 0;
 
         // Getters colores
         Color* getColorBorde() { return this->borde; }
@@ -37,6 +37,8 @@ class FiguraGeometrica
         // Setters colores
         void setColorBorde(Color* color);
         void setColorRelleno(Color* color);
+        void setColorRelleno(float r, float g, float b);
+        void quitarColorRelleno() { delete this->relleno; }
 
     protected:
         Color* borde;

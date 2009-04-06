@@ -56,24 +56,32 @@ void Rectangulo::dibujar(){
     delete baseNorte;
     delete alturaEste;
     delete alturaOeste;
+    this->rellenar();
 }
 
 void Rectangulo::rellenar() {
-    glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
-    Coordenadas* coordenadaNO = getVerticeNO();
-    for(int j=(coordenadaNO->getY()+1);j<(this->altura+coordenadaNO->getY());j++) {
-        for(int i=(coordenadaNO->getX()+1);i<(this->base+coordenadaNO->getX());i++) {
-            glVertex2i(i,j);
+    if (this->relleno){
+        glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
+        Coordenadas* coordenadaNO = getVerticeNO();
+        for(int j=(coordenadaNO->getY()+1);j<(this->altura+coordenadaNO->getY());j++) {
+            for(int i=(coordenadaNO->getX()+1);i<(this->base+coordenadaNO->getX());i++) {
+                glVertex2i(i,j);
+            }
         }
+        delete coordenadaNO;
     }
-    delete coordenadaNO;
 }
 
 bool Rectangulo::operator = (Rectangulo* rectangulo){
     return ((rectangulo->getBase() == this->base) && (rectangulo->getAltura() == this->altura));
 }
 
-bool Rectangulo::contiene(float x, float y){
-    //TODO
-    return false;
+bool Rectangulo::contiene(int x, int y){
+    Coordenadas* so = this->getVerticeSO();
+    Coordenadas* ne = this->getVerticeNE();
+    bool contenido = ((x >= so->getX()) && (x <= ne->getX())
+                    && (y <= so->getY()) && (y >= ne->getY()));
+    delete so;
+    delete ne;
+    return contenido;
 }
