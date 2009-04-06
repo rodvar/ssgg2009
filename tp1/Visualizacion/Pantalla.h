@@ -3,7 +3,7 @@
 
 #include "Grilla.h"
 #include "../Geometria/FiguraGeometrica.h"
-#include <list.h>
+#include <list>
 
 // Configuracion Grilla - Pantalla
 #define FILAS 10

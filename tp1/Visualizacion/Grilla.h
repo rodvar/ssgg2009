@@ -2,7 +2,7 @@
 #define GRILLA_H
 
 #include "../Geometria/Cuadrado.h"
-#include <map.h>
+#include <map>
 
 
 #define ORIGEN_X 60
