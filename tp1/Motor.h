@@ -8,7 +8,7 @@
 #include "Geometria/Circunferencia.h"
 #include "Geometria/Segmento.h"
 #include "Visualizacion/Pantalla.h"
-#include <list.h>
+#include <list>
 
 /**
  * Motor del sistema. Realiza el procesamiento de datos y los despliega en la vista
