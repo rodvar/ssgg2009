@@ -29,6 +29,6 @@ double Coordenadas::distancia (Coordenadas* hasta){
     return sqrt(deltaX*deltaX + deltaY*deltaY);
 }
 
-bool Coordenadas::operator = (Coordenadas* coordenadas){
+bool Coordenadas::operator == (Coordenadas* coordenadas){
     return ((this->x == coordenadas->getX()) && (this->y == coordenadas->getY()));
 }

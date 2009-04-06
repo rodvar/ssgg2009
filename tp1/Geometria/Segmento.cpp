@@ -153,7 +153,7 @@ void Segmento::rellenar() {
 
 }
 
-bool Segmento::contiene(float x, float y){
+bool Segmento::contiene(int x, int y){
     //TODO
     return false;
 }

@@ -36,7 +36,7 @@ class Coordenadas
         virtual double distancia (Coordenadas* hasta);
 
         /** Sobrecarga del operador = **/
-        bool operator = (Coordenadas* coordenadas);
+        bool operator == (Coordenadas* coordenadas);
 
     protected:
     private:

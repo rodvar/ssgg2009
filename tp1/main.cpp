@@ -52,7 +52,7 @@ void keyboard(unsigned char key, int x, int y)
             break;
         case 'c':
             Motor::getInstancia()->cambiarModo();
-            glutPostRedisplay();
+            Motor::getInstancia()->actualizar();
             break;
         default:
             break;
@@ -65,24 +65,26 @@ void keyboard(unsigned char key, int x, int y)
 */
 void mouse(int boton, int estado, int x, int y){
     static Coordenadas* desde = NULL;
-    switch (Motor::getInstancia()->getModo()){
-        case BRESENHAM:
-            if (estado == GLUT_DOWN)
-                Motor::getInstancia()->simulacionBresenham(new Coordenadas(x,y));
-            break;
-        case DDA:
-            if (estado == GLUT_DOWN){
-                if (!desde)
-                    desde = new Coordenadas(x,y);
-                else {
-                    Motor::getInstancia()->simulacionDDA(desde->copia(), new Coordenadas(x,y));
-                    delete (desde);
-                    desde = NULL;
+    if (Motor::getInstancia()->enRango(x,y)){
+        switch (Motor::getInstancia()->getModo()){
+            case BRESENHAM:
+                if (estado == GLUT_DOWN)
+                    Motor::getInstancia()->simulacionBresenham(new Coordenadas(x,y));
+                break;
+            case DDA:
+                if (estado == GLUT_DOWN){
+                    if (!desde)
+                        desde = new Coordenadas(x,y);
+                    else {
+                        Motor::getInstancia()->simulacionDDA(desde->copia(), new Coordenadas(x,y));
+                        delete (desde);
+                        desde = NULL;
+                    }
                 }
-            }
-            break;
-        default:
-            break;
+                break;
+            default:
+                break;
+        }
     }
 }
 

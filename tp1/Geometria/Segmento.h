@@ -42,7 +42,7 @@ class Segmento : public FiguraGeometrica
         /**
          * Devuelve true si la figura contiene al punto (x,y)
          */
-        bool contiene(float x, float y);
+        bool contiene(int x, int y);
 
     protected:
     private:
