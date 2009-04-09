@@ -25,6 +25,7 @@ void Motor::simulacionBresenham(Coordenadas* cRadio){
         this->pantalla->getGrilla()->distanciaOrigen(cRadio), this->pantalla->getGrilla()->getOrigen());
     this->limpiarBufferDatos();
     this->datos.insert(this->datos.end(),circunferencia);
+
     this->actualizar();
 }
 
@@ -35,6 +36,7 @@ void Motor::simulacionDDA(Coordenadas* desde, Coordenadas* hasta){
     Rectangulo* celdaDesde;
     Rectangulo* celdaHasta;
     this->limpiarBufferDatos();
+
     this->datos.insert(this->datos.end(),segmento);
 
     celdaDesde = grilla->obtenerCelda(desde->getX(), desde->getY());
@@ -43,7 +45,7 @@ void Motor::simulacionDDA(Coordenadas* desde, Coordenadas* hasta){
     celdaDesde->setColorRelleno(0,1,0);
     celdaDesde->dibujar();
     celdaHasta->setColorRelleno(0,1,0);
-    celdaDesde->dibujar();
+    celdaHasta->dibujar();
 
     this->actualizar();
 }
