@@ -2,6 +2,7 @@
 #define GRILLA_H
 
 #include "../Geometria/Cuadrado.h"
+#include "../Geometria/Numero.h"
 #include <map>
 
 

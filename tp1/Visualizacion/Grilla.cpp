@@ -45,6 +45,41 @@ void Grilla::dibujar(){
         ((Rectangulo*)it->second)->dibujar();
         it++;
     }
+
+    int initX = 115;
+    int i = 60;
+    int j = 1;
+    Numero* numero1 = new Numero(new Coordenadas(initX,525),j++);
+    numero1->dibujar();
+    Numero* numero2 = new Numero(new Coordenadas(initX+i,525),j++);
+    numero2->dibujar();
+    Numero* numero3 = new Numero(new Coordenadas(initX+i*2,525),j++);
+    numero3->dibujar();
+    Numero* numero4 = new Numero(new Coordenadas(initX+i*3,525),j++);
+    numero4->dibujar();
+    Numero* numero5 = new Numero(new Coordenadas(initX+i*4,525),j++);
+    numero5->dibujar();
+    Numero* numero6 = new Numero(new Coordenadas(initX+i*5,525),j++);
+    numero6->dibujar();
+    Numero* numero7 = new Numero(new Coordenadas(initX+i*6,525),j++);
+    numero7->dibujar();
+    Numero* numero8 = new Numero(new Coordenadas(initX+i*7,525),j++);
+    numero8->dibujar();
+    Numero* numero9 = new Numero(new Coordenadas(initX+i*8,525),j++);
+    numero9->dibujar();
+    Numero* numero10 = new Numero(new Coordenadas(initX+i*9,525),j++);
+    numero10->dibujar();
+
+    delete numero1;
+    delete numero2;
+    delete numero3;
+    delete numero4;
+    delete numero5;
+    delete numero6;
+    delete numero7;
+    delete numero8;
+    delete numero9;
+    delete numero10;
 }
 
 void Grilla::dibujarEjeY(){
