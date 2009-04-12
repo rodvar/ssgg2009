@@ -50,6 +50,26 @@ void Segmento::dibujar(){
 }
 
 void Segmento::dibujarDDA() {
+	int dx = this->hasta->getX()-this->desde->getX();
+	int dy = this->hasta->getY()-this->desde->getY();
+	int steps, k;
+	float xIncrement, yIncrement, x=this->desde->getX(), y=this->desde->getY();
+	if (abs(dx)>abs(dy)) {
+		steps = abs(dx);
+	} else {
+		steps = abs(dy);
+	}
+	xIncrement = dx / (float)steps;
+	yIncrement = dy / (float)steps;
+	glVertex2i((int)(x+0.5), (int)(y+0.95));
+	for(k=0;k<steps;k++) {
+		x+=xIncrement;
+		y+=yIncrement;
+		glVertex2i((int)(x+0.95), (int)(y+0.5));
+	}
+}
+
+/*void Segmento::dibujarDDA() {
     int x = this->desde->getX();
     int y = this->desde->getY();
     int fin;
@@ -106,7 +126,7 @@ void Segmento::dibujarDDA() {
             }
         }
     }
-}
+}*/
 
 void Segmento::dibujarBresenham() {
     unsigned int x0 = floor(this->desde->getX());

@@ -7,16 +7,15 @@ Numero::Numero(Coordenadas* coordenadas, float numero) {
 
 Numero::~Numero() {
 	delete this->coordenadas;
+	delete this->color;
 }
 
 void Numero::setSize(int size) {
 	this->size = size;
 }
 
-void Numero::setColor(int r, int g, int b) {
-	this->r=r;
-	this->g=g;
-	this->b=b;
+void Numero::setColor(Color* color) {
+	this->color=color;
 }
 
 void Numero::dibujar() {

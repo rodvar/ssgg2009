@@ -4,6 +4,7 @@
 #include "../Geometria/Cuadrado.h"
 #include "../Geometria/Numero.h"
 #include <map>
+#include "GL/glut.h"
 
 
 #define ORIGEN_X 60
