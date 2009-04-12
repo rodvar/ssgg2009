@@ -48,40 +48,40 @@ void Grilla::dibujar(){
     }
 
 //    //Dibujo las guias de los puntos en el eje Y
-//    int initY = 90;
-//    for(int i=0;i<9;i++) {
-//		Segmento* segmento = new Segmento(new Coordenadas(initY,525),new Coordenadas(initY,515));
-//		segmento->dibujar();
-//		delete segmento;
-//		initY+=60;
-//    }
-//
+    int initY = 90;
+    for(int i=0;i<9;i++) {
+		Segmento* segmento = new Segmento(new Coordenadas(initY,525),new Coordenadas(initY,515));
+		segmento->dibujar();
+		delete segmento;
+		initY+=60;
+    }
+
 //    //Dibujo los numeros de los puntos en el eje Y
-//    initY = 85;
-//    for(int j=0;j<9;j++) {
-//		Numero* numero = new Numero(new Coordenadas(initY,535),j+1);
-//		numero->dibujar();
-//		delete numero;
-//		initY+=60;
-//    }
+    initY = 85;
+    for(int j=0;j<9;j++) {
+		Numero* numero = new Numero(new Coordenadas(initY,535),j+1);
+		numero->dibujar();
+		delete numero;
+		initY+=60;
+    }
 
 //    //Dibujo las guias de los puntos en el eje X
-//    int initX = 90;
-//    for(int i=0;i<9;i++) {
-//		Segmento* segmento = new Segmento(new Coordenadas(initX,525),new Coordenadas(initX,515));
-//		segmento->dibujar();
-//		delete segmento;
-//		initX+=60;
-//    }
+    int initX = 90;
+    for(int i=0;i<9;i++) {
+		Segmento* segmento = new Segmento(new Coordenadas(initX,525),new Coordenadas(initX,515));
+		segmento->dibujar();
+		delete segmento;
+		initX+=60;
+    }
 //
 //    //Dibujo los numeros de los puntos en el eje X
-//    initX = 85;
-//    for(int j=0;j<9;j++) {
-//		Numero* numero = new Numero(new Coordenadas(initX,535),j+1);
-//		numero->dibujar();
-//		delete numero;
-//		initX+=60;
-//    }
+    initX = 85;
+    for(int j=0;j<9;j++) {
+		Numero* numero = new Numero(new Coordenadas(initX,535),j+1);
+		numero->dibujar();
+		delete numero;
+		initX+=60;
+    }
 }
 
 void Grilla::dibujarEjeY(){

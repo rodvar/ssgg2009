@@ -32,20 +32,44 @@ void Motor::simulacionBresenham(Coordenadas* cRadio){
 void Motor::simulacionDDA(Coordenadas* desde, Coordenadas* hasta){
     Grilla* grilla = this->pantalla->getGrilla();
     Segmento* segmento = new Segmento(desde, hasta);
-    //Coordenadas* posicion;
-    Rectangulo* celdaDesde;
-    Rectangulo* celdaHasta;
+//    Coordenadas* coordenadas;
+    Rectangulo* celda;
     this->limpiarBufferDatos();
 
     this->datos.insert(this->datos.end(),segmento);
 
-    celdaDesde = grilla->obtenerCelda(desde->getX(), desde->getY());
-    celdaHasta = grilla->obtenerCelda(hasta->getX(), hasta->getY());
+//    celda = grilla->obtenerCelda(desde->getX(), desde->getY());
+//    celda->setColorRelleno(0,1,0);
+//    celda->dibujar();
+//    delete celda;
 
-    celdaDesde->setColorRelleno(0,1,0);
-    celdaDesde->dibujar();
-    celdaHasta->setColorRelleno(0,1,0);
-    celdaHasta->dibujar();
+	int dx = hasta->getX()-desde->getX();
+	int dy = hasta->getY()-desde->getY();
+	int steps, k;
+	float xIncrement, yIncrement, x=desde->getX(), y=desde->getY();
+	if (abs(dx)>abs(dy)) {
+		steps = abs(dx);
+	} else {
+		steps = abs(dy);
+	}
+	xIncrement = dx / (float)steps;
+	yIncrement = dy / (float)steps;
+	celda = grilla->obtenerCelda(grilla->posicionEnGrilla((int)(x+0.5), (int)(y+0.5)));
+	celda->setColorRelleno(0,1,0);
+	celda->dibujar();
+//	delete celda;
+	for(k=0;k<steps;k++) {
+		x+=xIncrement;
+		y+=yIncrement;
+		celda = grilla->obtenerCelda(grilla->posicionEnGrilla((int)(x+0.5), (int)(y+0.5)));
+		celda->setColorRelleno(0,1,0);
+		celda->dibujar();
+//		delete celda;
+	}
+
+//    celdaHasta = grilla->obtenerCelda(hasta->getX(), hasta->getY());
+//    celdaHasta->setColorRelleno(0,1,0);
+//    celdaHasta->dibujar();
 
     this->actualizar();
 }
