@@ -44,19 +44,19 @@ class Grilla
         Rectangulo* obtenerCelda(int x, int y);
 
         /**
-         * @param posicion La posicion de la celda a obtener
+         * @param posicion La posicion de la celda en la grilla
          * @return La celda correspondiente en la Grilla, NULL si no existe
          */
         Rectangulo* obtenerCelda(Coordenadas* posicion);
 
         /**
-         * Traduce las coordenadas pasadas coomo x,y a las coordenadas en el SR
-         * de la grilla
+         * Traduce las coordenadas pasadas coomo x,y a las coordenadas en el
+         * Sistema de Referencia de la grilla
          */
         Coordenadas* posicionEnGrilla(int x, int y);
 
         /**
-         * Devuelve la clave coordenadas de la celda pasada por parametro
+         * Devuelve las coordenadas en la grilla de la celda pasada por parametro
          */
         Coordenadas* obtenerPosicion(Rectangulo* celda);
 
@@ -79,6 +79,7 @@ class Grilla
         // La clave del mapa es la coordenada que tiene sentido para la grilla.
         // Ademas el valor, tiene su propia coordenada donde se dibuja
         map<Coordenadas*,Rectangulo*> mapa;
+        //map<Coordenadas*,Rectangulo*, bool(*)(Coordenadas*,Coordenadas*)> mapa; Probar esto!
 
         // Dibuja el eje X,Y de acuerdo a la poscion de la grilla
         void dibujarEjeX();

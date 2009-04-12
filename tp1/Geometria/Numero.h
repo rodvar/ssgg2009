@@ -15,6 +15,7 @@ private:
 
 public:
 	Numero(Coordenadas* coordenadas, float numero);
+	Numero(Coordenadas* coordenadas, int numero);
 
 	void setSize(int size);
 	void setColor(Color* color);

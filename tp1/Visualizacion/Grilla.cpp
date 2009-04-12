@@ -104,7 +104,8 @@ Rectangulo* Grilla::obtenerCelda(int x, int y){
     Rectangulo* rectangulo = NULL;
     map<Coordenadas*,Rectangulo*>::iterator it=this->mapa.begin();
     while ((it != this->mapa.end()) && (!rectangulo)){
-        if (((Rectangulo*)it->second)->contiene(x,y))
+        Coordenadas* clave = (Coordenadas*)it->first;
+        if ((x == clave->getX()) && (y == clave->getY()))
             rectangulo = (Rectangulo*)it->second;
         it++;
     }
@@ -112,11 +113,7 @@ Rectangulo* Grilla::obtenerCelda(int x, int y){
 }
 
 Rectangulo* Grilla::obtenerCelda(Coordenadas* posicion){
-    Rectangulo* celda = NULL;
-    map<Coordenadas*,Rectangulo*>::iterator it= this->mapa.find(posicion);
-    if (it != this->mapa.end())
-        celda = ((Rectangulo*)it->second);
-    return celda;
+    return this->obtenerCelda(posicion->getX(), posicion->getY());
 }
 
 Coordenadas* Grilla::obtenerPosicion(Rectangulo* celda){
