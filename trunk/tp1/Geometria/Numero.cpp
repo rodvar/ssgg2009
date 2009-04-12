@@ -5,6 +5,11 @@ Numero::Numero(Coordenadas* coordenadas, float numero) {
 	this->numero = numero;
 }
 
+Numero::Numero(Coordenadas* coordenadas, int numero) {
+	this->coordenadas = coordenadas;
+	this->numero = (float)numero;
+}
+
 Numero::~Numero() {
 	delete this->coordenadas;
 	delete this->color;

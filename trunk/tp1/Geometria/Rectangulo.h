@@ -20,6 +20,7 @@ class Rectangulo : public FiguraGeometrica
         virtual ~Rectangulo();
         float getBase() { return base; }
         float getAltura() { return altura; }
+        Coordenadas getCentro() { return *this->centro; }
 
         /* Devuelve las coordenadas del vertice NorOeste del rectangulo*/
         Coordenadas* getVerticeNO();

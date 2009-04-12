@@ -73,6 +73,9 @@ class Motor
         Pantalla* pantalla;
         char modo; // 'B' para Bresenham, 'D' para DDA
 
+        // Regenera la pantalla
+        void regenerarPantalla();
+
         // Constructor
         Motor (){
             this->pantalla = new Pantalla();
