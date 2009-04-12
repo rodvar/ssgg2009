@@ -1,11 +1,11 @@
 ///
-/// Sistemas Gráficos - 6671
+/// Sistemas Grï¿½ficos - 6671
 /// 1er cuatrimestre 2009
 ///
 #include <stdlib.h>
 #include "Motor.h"
 
-char caption[]="Sistema Gráficos - 66.71 - 2009c1";
+char caption[]="Sistema Grï¿½ficos - 66.71 - 2009c1";
 
 
 void reshape(int w, int h)

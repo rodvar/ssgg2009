@@ -11,15 +11,13 @@ private:
 	Coordenadas* coordenadas;
 	float numero;
 	int size;
-	int r;
-	int g;
-	int b;
+	Color* color;
 
 public:
 	Numero(Coordenadas* coordenadas, float numero);
 
 	void setSize(int size);
-	void setColor(int r, int g, int b);
+	void setColor(Color* color);
 	void dibujar();
     void rellenar();
     bool contiene(int x, int y);
