@@ -61,11 +61,11 @@ void Segmento::dibujarDDA() {
 	}
 	xIncrement = dx / (float)steps;
 	yIncrement = dy / (float)steps;
-	glVertex2i((int)(x+0.5), (int)(y+0.95));
+	glVertex2i((int)(x+0.5), (int)(y+0.5));
 	for(k=0;k<steps;k++) {
 		x+=xIncrement;
 		y+=yIncrement;
-		glVertex2i((int)(x+0.95), (int)(y+0.5));
+		glVertex2i((int)(x+0.5), (int)(y+0.5));
 	}
 }
 
