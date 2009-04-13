@@ -7,5 +7,4 @@ Cuadrado::Cuadrado(float lado, Coordenadas* centro):Rectangulo(lado,lado,centro)
 
 Cuadrado::~Cuadrado()
 {
-    delete this->centro;
 }
