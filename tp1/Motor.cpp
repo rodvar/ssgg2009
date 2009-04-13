@@ -21,11 +21,37 @@ void Motor::cambiarModo(){
 }
 
 void Motor::simulacionBresenham(Coordenadas* cRadio){
+    Grilla* grilla = this->pantalla->getGrilla();
+    Rectangulo* sup;
+    Rectangulo* inf;
+    int x,y,e;
     Circunferencia* circunferencia = new Circunferencia(
-        this->pantalla->getGrilla()->distanciaOrigen(cRadio), this->pantalla->getGrilla()->getOrigen());
+        grilla->distanciaOrigen(cRadio), grilla->getOrigen());
     this->limpiarBufferDatos();
     this->datos.insert(this->datos.end(),circunferencia);
 
+    Coordenadas* inicial = grilla->posicionEnGrilla(circunferencia->getRadio(),grilla->getOrigen()->getY());
+    x = inicial->getX();
+    y = inicial->getY();
+    e = 0;
+    while (y <= x){
+        sup = grilla->obtenerCelda(x,y);
+        if (sup){
+            sup->setColorRelleno(0,1,0);
+            sup->rellenar();
+        }
+        inf = grilla->obtenerCelda(y,x);
+        if (inf){
+            inf->setColorRelleno(0,1,0);
+            inf->rellenar();
+        }
+        e = e + 2*y + 1;
+        y++;
+        if ( 2*e > ( 2*x - 1)) {
+            x--;
+            e = e - 2*x + 1;
+        }
+    }
     this->actualizar();
 }
 

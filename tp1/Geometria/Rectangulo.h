@@ -46,9 +46,6 @@ class Rectangulo : public FiguraGeometrica
          */
         bool contiene(int x, int y);
 
-        /** Sobrecarga del operador = **/
-        bool operator = (Rectangulo* rectangulo);
-
     protected:
         float base;
         float altura;

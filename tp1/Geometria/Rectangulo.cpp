@@ -72,10 +72,6 @@ void Rectangulo::rellenar() {
     }
 }
 
-bool Rectangulo::operator = (Rectangulo* rectangulo){
-    return ((rectangulo->getBase() == this->base) && (rectangulo->getAltura() == this->altura));
-}
-
 bool Rectangulo::contiene(int x, int y){
     Coordenadas* so = this->getVerticeSO();
     Coordenadas* ne = this->getVerticeNE();
