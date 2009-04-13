@@ -8,8 +8,8 @@
 // Configuracion Grilla - Pantalla
 #define FILAS 10
 #define COLUMNAS 10
-#define DX 60.0
-#define DY 41.625
+#define DX 50
+#define DY 50
 //
 
 /**
