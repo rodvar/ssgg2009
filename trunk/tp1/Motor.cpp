@@ -1,5 +1,4 @@
 #include "Motor.h"
-#include <iostream>
 
 void Motor::actualizar(){
     this->pantalla->actualizar(this->datos);
@@ -51,7 +50,6 @@ void Motor::simulacionDDA(Coordenadas* desde, Coordenadas* hasta){
 	} else {
 		steps = abs(posicionHasta->getY()-posicionDesde->getY());
 	}
-	cout<<"dx:"<<posicionDesde->getX()<<" dy:"<<posicionDesde->getY()<<" steps:"<<steps<<endl;
 	xIncrement = dx / (float)steps;
 	yIncrement = dy / (float)steps;
 	celda = grilla->obtenerCelda(grilla->posicionEnGrilla((int)(x+0.5), (int)(y+0.5)));
@@ -60,8 +58,6 @@ void Motor::simulacionDDA(Coordenadas* desde, Coordenadas* hasta){
 	for(k=0;k<steps;k++) {
 		x+=xIncrement;
 		y+=yIncrement;
-		cout<<grilla->posicionEnGrilla((int)(x+0.5), (int)(y+0.5))->getX()<<" | "<<grilla->posicionEnGrilla((int)(x+0.5), (int)(y+0.5))->getY()<<endl;
-		cout<<(int)(x+0.5)<<" "<<(int)(y+0.5)<<" | "<<endl;
 		celda = grilla->obtenerCelda(grilla->posicionEnGrilla((int)(x+0.5), (int)(y+0.5)));
 		celda->setColorRelleno(0,1,0);
 		celda->dibujar();
