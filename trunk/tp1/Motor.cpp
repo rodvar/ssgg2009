@@ -10,14 +10,8 @@ void Motor::cambiarModo(){
         this->modo = 'B';
     else
         this->modo = 'D';
-    delete this->pantalla;
-    list<FiguraGeometrica*>::iterator it=this->datos.begin() ;
-    while(it != this->datos.end()){
-        delete ((FiguraGeometrica*)*it);
-        it++;
-    }
-    this->datos.clear();
-    this->pantalla = new Pantalla();
+    this->limpiarBufferDatos();
+    this->regenerarPantalla();
 }
 
 void Motor::simulacionBresenham(Coordenadas* cRadio){
@@ -26,11 +20,12 @@ void Motor::simulacionBresenham(Coordenadas* cRadio){
     Rectangulo* inf;
     int x,y,e;
     Circunferencia* circunferencia = new Circunferencia(
-        grilla->distanciaOrigen(cRadio), grilla->getOrigen());
+        grilla->distanciaOrigen(cRadio), grilla->getOrigen()->copia());
+    this->regenerarPantalla();
     this->limpiarBufferDatos();
     this->datos.insert(this->datos.end(),circunferencia);
 
-    Coordenadas* inicial = grilla->posicionEnGrilla(circunferencia->getRadio(),grilla->getOrigen()->getY());
+    Coordenadas* inicial = grilla->posicionEnGrilla(grilla->getOrigen()->getX() + floor(circunferencia->getRadio()),grilla->getOrigen()->getY());
     x = inicial->getX();
     y = inicial->getY();
     e = 0;
@@ -52,14 +47,16 @@ void Motor::simulacionBresenham(Coordenadas* cRadio){
             e = e - 2*x + 1;
         }
     }
+    delete cRadio;
+    delete circunferencia;
     this->actualizar();
 }
 
 void Motor::simulacionDDA(Coordenadas* desde, Coordenadas* hasta){
     Grilla* grilla = this->pantalla->getGrilla();
     Segmento* segmento = new Segmento(desde, hasta);
-//    Coordenadas* coordenadas;
     Rectangulo* celda;
+    this->regenerarPantalla();
     this->limpiarBufferDatos();
 
     this->datos.insert(this->datos.end(),segmento);
@@ -104,4 +101,9 @@ void Motor::limpiarBufferDatos(){
         it++;
     }
     this->datos.clear();
+}
+
+void Motor::regenerarPantalla(){
+    delete this->pantalla;
+    this->pantalla = new Pantalla();
 }

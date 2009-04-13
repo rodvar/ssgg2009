@@ -73,9 +73,6 @@ class Motor
         Pantalla* pantalla;
         char modo; // 'B' para Bresenham, 'D' para DDA
 
-        // Regenera la pantalla
-        void regenerarPantalla();
-
         // Constructor
         Motor (){
             this->pantalla = new Pantalla();
@@ -93,6 +90,9 @@ class Motor
             }
             this->datos.clear();
         }
+
+        // Regenera la pantalla borrando el ultimo dibujo
+        void regenerarPantalla();
 
         // Elimina todos los objetos para dibujar en la lista de datos
         void limpiarBufferDatos();
