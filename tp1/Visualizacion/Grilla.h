@@ -56,6 +56,12 @@ class Grilla
         Coordenadas* posicionEnGrilla(int x, int y);
 
         /**
+         * Si para un cierto valor x, este esta fuera del rango de la grilla, este
+         * metodo devuelve el numero de columna donde estaria de existir la celda correspondiente
+         */
+        int posicionVirtual (const int x);
+
+        /**
          * Devuelve las coordenadas en la grilla de la celda pasada por parametro
          */
         Coordenadas* obtenerPosicion(Rectangulo* celda);

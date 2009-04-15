@@ -47,43 +47,43 @@ void Grilla::dibujar(){
         it++;
     }
 
-    //Dibujo las guias de los puntos en el eje Y
-    int initY = 85;
+    //Dibujo las guias de los puntos en el eje X
+    int init = this->origen->getX() + this->unidadX/2;
     Segmento* segmento;
-    for(int i=0;i<=9;i++) {
-		segmento = new Segmento(new Coordenadas(initY,525),new Coordenadas(initY,515));
+    for(int i=0;i<this->columnas;i++) {
+		segmento = new Segmento(new Coordenadas(init,525),new Coordenadas(init,515));
 		segmento->dibujar();
-		initY+=50;
+        delete segmento;
+		init+=this->unidadX;
     }
-	delete segmento;
 
-    //Dibujo los numeros de los puntos en el eje Y
-    initY = 80;
+    //Dibujo los numeros de los puntos en el eje X
+    init = this->origen->getX() + this->unidadX/2 - 5;
     Numero* numero;
-    for(int j=0;j<=9;j++) {
-		numero = new Numero(new Coordenadas(initY,535),j);
+    for(int j=0;j<this->columnas;j++) {
+		numero = new Numero(new Coordenadas(init,535),j);
 		numero->dibujar();
-		initY+=50;
+        delete numero;
+		init+= this->unidadX;
     }
-	delete numero;
 
-//    //Dibujo las guias de los puntos en el eje X
-//    int initX = 90;
-//    for(int i=0;i<9;i++) {
-//		Segmento* segmento = new Segmento(new Coordenadas(initX,525),new Coordenadas(initX,515));
-//		segmento->dibujar();
-//		delete segmento;
-//		initX+=60;
-//    }
-//
-//    //Dibujo los numeros de los puntos en el eje X
-//    initX = 85;
-//    for(int j=0;j<9;j++) {
-//		Numero* numero = new Numero(new Coordenadas(initX,535),j+1);
-//		numero->dibujar();
-//		delete numero;
-//		initX+=60;
-//    }
+    //Dibujo las guias de los puntos en el eje X
+    init = this->origen->getY() - this->unidadY/2;
+    for(int i=0;i<this->filas;i++) {
+		segmento = new Segmento(new Coordenadas(this->origen->getX() - 5,init),new Coordenadas(this->origen->getX() + 5,init));
+		segmento->dibujar();
+        delete segmento;
+		init-=this->unidadY;
+    }
+
+    //Dibujo los numeros de los puntos en el eje X
+    init = this->origen->getY() - this->unidadY/2 - 5;
+    for(int j=0;j<this->columnas;j++) {
+		numero = new Numero(new Coordenadas(this->origen->getX() - 20,init),j);
+		numero->dibujar();
+        delete numero;
+		init-= this->unidadX;
+    }
 }
 
 void Grilla::dibujarEjeY(){
@@ -140,6 +140,10 @@ Coordenadas* Grilla::posicionEnGrilla(int x, int y){
         it++;
     }
     return posicion;
+}
+
+int Grilla::posicionVirtual (const int x){
+    return ((x - this->origen->getX())/this->unidadX);
 }
 
 float Grilla::distanciaOrigen(Coordenadas* punto){
