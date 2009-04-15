@@ -146,6 +146,11 @@ int Grilla::posicionVirtual (const int x){
     return ((x - this->origen->getX())/this->unidadX);
 }
 
+Coordenadas* Grilla::getExtremoNE(){
+    return (new Coordenadas(this->origen->getX() + this->columnas*this->unidadX,
+        this->origen->getY() - this->filas*this->unidadY));
+}
+
 float Grilla::distanciaOrigen(Coordenadas* punto){
     return this->origen->distancia(punto);
 }
