@@ -49,6 +49,20 @@ void Segmento::dibujar(){
     }
 }
 
+void Segmento::dibujarPunteado() {
+    glColor3f(this->borde->getRojo(), this->borde->getVerde(), this->borde->getAzul());
+    switch (Motor::getInstancia()->getModo()){
+        case 'D':
+            this->dibujarDDAPunteado();
+            break;
+        case 'B':
+            this->dibujarBresenham();
+            break;
+        default:
+            break;
+    }
+}
+
 void Segmento::dibujarDDA() {
 	int dx = this->hasta->getX()-this->desde->getX();
 	int dy = this->hasta->getY()-this->desde->getY();
@@ -69,64 +83,34 @@ void Segmento::dibujarDDA() {
 	}
 }
 
-/*void Segmento::dibujarDDA() {
-    int x = this->desde->getX();
-    int y = this->desde->getY();
-    int fin;
-
-    if (this->hasta->getY() == y){ //paralela eje x
-        fin = this->hasta->getX();
-        if (x > this->hasta->getX()){
-            fin = x;
-            x = this->hasta->getX();
-        }
-        for ( int i = x ; i < fin; i++)
-            glVertex2i(i, y);
-    }
-    else if (this->hasta->getX() == x){//paralela eje y
-        fin = this->hasta->getY();
-        if (y > this->hasta->getY()){
-            fin = y;
-            y = this->hasta->getY();
-        }
-        for ( int i = y; i < fin; i++)
-            glVertex2i(x, i);
-    }
-    else{
-        int deltay = this->hasta->getY() - y;
-        int deltax = this->hasta->getX() - x;
-        float pendiente = (float)deltay/deltax;
-        if (fabs(pendiente) < 1){ // x guia
-            float yReal = (float)y;
-            fin = this->hasta->getX();
-            if (x > this->hasta->getX()){
-                fin = x;
-                x = this->hasta->getX();
-                yReal = (float)this->hasta->getY();
-            }
-            for ( int i = x; i < fin; i++){
-                glVertex2i(i, y);
-                yReal = yReal + pendiente;
-                y = floor(yReal);
-            }
-        }
-        else{// y guia
-            float xReal = (float)x;
-            float paso = (1/pendiente);
-            fin = this->hasta->getY();
-            if (y > this->hasta->getY()){
-                fin = y;
-                y = this->hasta->getY();
-                xReal = (float)this->hasta->getX();
-            }
-            for (int i = y; i <fin; i++){
-                glVertex2i(x, i);
-                xReal = xReal + paso;
-                x = floor(xReal);
-            }
-        }
-    }
-}*/
+void Segmento::dibujarDDAPunteado() {
+	int pixelCounter = 1;
+	int canDraw = true;
+	int dx = this->hasta->getX()-this->desde->getX();
+	int dy = this->hasta->getY()-this->desde->getY();
+	int steps, k;
+	float xIncrement, yIncrement, x=this->desde->getX(), y=this->desde->getY();
+	if (abs(dx)>abs(dy)) {
+		steps = abs(dx);
+	} else {
+		steps = abs(dy);
+	}
+	xIncrement = dx / (float)steps;
+	yIncrement = dy / (float)steps;
+	glVertex2i((int)(x+0.5), (int)(y+0.5));
+	for(k=0;k<steps;k++) {
+		x+=xIncrement;
+		y+=yIncrement;
+		if(canDraw) {
+			glVertex2i((int)(x+0.5), (int)(y+0.5));
+		}
+		pixelCounter++;
+		if(pixelCounter==10) {
+			pixelCounter=0;
+			canDraw=!canDraw;
+		}
+	}
+}
 
 void Segmento::dibujarBresenham() {
     unsigned int x0 = floor(this->desde->getX());

@@ -20,6 +20,12 @@ class FiguraGeometrica
         virtual void dibujar() = 0;
 
         /**
+         * Metodo abstracto Dibujar.
+         * Dibuja la figura en la pantalla de trabajo actual.
+         */
+        virtual void dibujarPunteado() = 0;
+
+        /**
          * Metodo abstracto Rellenar.
          * Rellena la figura en la pantalla de trabajo actual.
          */

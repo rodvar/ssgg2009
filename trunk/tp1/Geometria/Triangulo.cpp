@@ -30,6 +30,10 @@ void Triangulo::dibujar(){
     delete segmentoCA;
 }
 
+void Triangulo::dibujarPunteado() {
+	return dibujar();
+}
+
 void Triangulo::rellenar() {
     glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
 }

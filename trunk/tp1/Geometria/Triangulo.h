@@ -29,6 +29,11 @@ public:
     void dibujar();
 
     /**
+     * Dibuja el triangulo punteado en la pantalla actual
+     */
+    void dibujarPunteado();
+
+    /**
      * Rellena el triangulo en la pantalla actual
      */
     void rellenar();

@@ -28,6 +28,11 @@ public:
     void dibujar();
 
     /**
+     * Dibuja la circunferencia punteada en la pantalla actual
+     */
+    void dibujarPunteado();
+
+    /**
      * Rellena la circunferencia en la pantalla actual
      */
     void rellenar();
