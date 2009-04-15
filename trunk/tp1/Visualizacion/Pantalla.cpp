@@ -15,6 +15,7 @@ void Pantalla::actualizar(list<FiguraGeometrica*> figuras){
     list<FiguraGeometrica*>::iterator it=figuras.begin() ;
     while(it != figuras.end()){
         ((FiguraGeometrica*)*it)->dibujar();
+        ((FiguraGeometrica*)*it)->rellenar();
         it++;
     }
 }
