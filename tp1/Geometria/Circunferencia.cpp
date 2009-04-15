@@ -68,7 +68,10 @@ void Circunferencia::dibujarDDA() {
 }
 
 void Circunferencia::rellenar() {
-    glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
+    if (this->relleno){
+        glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
+
+    }
 }
 
 bool Circunferencia::contiene(int x, int y){

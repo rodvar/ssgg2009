@@ -1,5 +1,4 @@
 #include "Motor.h"
-#include <iostream.h>
 
 void Motor::actualizar(){
     this->pantalla->actualizar(this->datos);
@@ -20,11 +19,16 @@ void Motor::simulacionBresenham(Coordenadas* cRadio){
     Rectangulo* sup;
     Rectangulo* inf;
     int x,y,e;
-    Circunferencia* circunferencia = new Circunferencia(
-        grilla->distanciaOrigen(cRadio), grilla->getOrigen()->copia());
     this->regenerarPantalla();
     this->limpiarBufferDatos();
+    Circunferencia* circunferencia = new Circunferencia(
+        grilla->distanciaOrigen(cRadio), grilla->getOrigen()->copia());
+    circunferencia->setColorBorde(new Color(1,0,0));
+    Circunferencia* punto = new Circunferencia(5,cRadio);
+    punto->setColorBorde(new Color(1,0,0));
+    punto->setColorRelleno(new Color(1,0,0));
     this->datos.insert(this->datos.end(),circunferencia);
+    this->datos.insert(this->datos.end(),punto);
 
     x = grilla->getOrigen()->getX() + floor(circunferencia->getRadio());
     y = grilla->getOrigen()->getY();
@@ -56,18 +60,26 @@ void Motor::simulacionBresenham(Coordenadas* cRadio){
             e = e - 2*x + 1;
         }
     }
-    delete cRadio;
     this->actualizar();
 }
 
 void Motor::simulacionDDA(Coordenadas* desde, Coordenadas* hasta){
     Grilla* grilla = this->pantalla->getGrilla();
     Segmento* segmento = new Segmento(desde, hasta);
+    Circunferencia* puntoD = new Circunferencia(5,desde->copia());
+    Circunferencia* puntoH = new Circunferencia(5,hasta->copia());
+    segmento->setColorBorde(new Color(1,0,0));
+    puntoD->setColorBorde(new Color(1,0,0));
+    puntoD->setColorRelleno(new Color(1,0,0));
+    puntoH->setColorBorde(new Color(1,0,0));
+    puntoH->setColorRelleno(new Color(1,0,0));
     Rectangulo* celda;
     this->regenerarPantalla();
     this->limpiarBufferDatos();
 
     this->datos.insert(this->datos.end(),segmento);
+    this->datos.insert(this->datos.end(),puntoD);
+    this->datos.insert(this->datos.end(),puntoH);
 
     /* -- Simulacion del DDALine --> */
     Coordenadas* posicionDesde = grilla->posicionEnGrilla(desde->getX(), desde->getY());
