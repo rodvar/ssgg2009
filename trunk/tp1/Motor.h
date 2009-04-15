@@ -8,6 +8,7 @@
 #include "Geometria/Circunferencia.h"
 #include "Geometria/Segmento.h"
 #include "Geometria/Numero.h"
+#include "Geometria/Letra.h"
 #include "Visualizacion/Pantalla.h"
 #include <list>
 
