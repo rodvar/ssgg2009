@@ -59,6 +59,27 @@ void Rectangulo::dibujar(){
     this->rellenar();
 }
 
+void Rectangulo::dibujarPunteado() {
+    glColor3f(this->borde->getRojo(), this->borde->getVerde(), this->borde->getAzul());
+    Segmento* baseSur = new Segmento(this->getVerticeSO(), this->getVerticeSE());
+    Segmento* baseNorte = new Segmento(this->getVerticeNE(), this->getVerticeNO());
+    Segmento* alturaOeste = new Segmento(this->getVerticeNO(), this->getVerticeSO());
+    Segmento* alturaEste = new Segmento(this->getVerticeSE(), this->getVerticeNE());
+    baseSur->setColorBorde(this->borde->copia());
+    baseNorte->setColorBorde(this->borde->copia());
+    alturaEste->setColorBorde(this->borde->copia());
+    alturaOeste->setColorBorde(this->borde->copia());
+    baseSur->dibujarPunteado();
+    alturaEste->dibujarPunteado();
+    baseNorte->dibujarPunteado();
+    alturaOeste->dibujarPunteado();
+    delete baseSur;
+    delete baseNorte;
+    delete alturaEste;
+    delete alturaOeste;
+    this->rellenar();
+}
+
 void Rectangulo::rellenar() {
     if (this->relleno){
         glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());

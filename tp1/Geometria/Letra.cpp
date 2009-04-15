@@ -42,6 +42,10 @@ void Letra::dibujar(){
     }
 }
 
+void Letra::dibujarPunteado() {
+	return dibujar();
+}
+
 void Letra::rellenar(){
 
 }

@@ -43,7 +43,7 @@ void Grilla::dibujar(){
     this->dibujarEjeY();
     map<Coordenadas*,Rectangulo*>::iterator it=this->mapa.begin();
     while(it != this->mapa.end()){
-        ((Rectangulo*)it->second)->dibujar();
+        ((Rectangulo*)it->second)->dibujarPunteado();
         it++;
     }
 

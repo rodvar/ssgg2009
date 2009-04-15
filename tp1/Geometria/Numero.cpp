@@ -132,6 +132,10 @@ void Numero::dibujar() {
 	delete linea7;
 }
 
+void Numero::dibujarPunteado() {
+	return dibujar();
+}
+
 void Numero::rellenar() {
 }
 

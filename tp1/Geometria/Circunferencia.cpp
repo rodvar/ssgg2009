@@ -16,6 +16,10 @@ void Circunferencia::dibujar(){
     this->dibujarBresenham();
 }
 
+void Circunferencia::dibujarPunteado() {
+	return dibujar();
+}
+
 void Circunferencia::dibujarBresenham(){
     int x, y, e;
     unsigned int xCentro = this->centro->getX();

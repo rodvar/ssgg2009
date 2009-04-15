@@ -37,6 +37,11 @@ class Rectangulo : public FiguraGeometrica
         void dibujar();
 
         /**
+         * Dibuja el rectangulo en la pantalla actual
+         */
+        void dibujarPunteado();
+
+        /**
          * Rellena el rectangulo del color de relleno seteado
          */
         void rellenar();

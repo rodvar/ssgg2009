@@ -12,6 +12,7 @@ class Letra : public FiguraGeometrica
         Color* getColor() { return this->borde; }
         void setColor(Color* color);
         void dibujar();
+        void dibujarPunteado();
         void rellenar();
         bool contiene(int x, int y);
 

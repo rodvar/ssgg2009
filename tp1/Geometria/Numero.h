@@ -20,6 +20,7 @@ public:
 	void setSize(int size);
 	void setColor(Color* color);
 	void dibujar();
+	void dibujarPunteado();
     void rellenar();
     bool contiene(int x, int y);
 

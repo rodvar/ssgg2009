@@ -35,6 +35,11 @@ class Segmento : public FiguraGeometrica
         void dibujar();
 
         /**
+         * Dibuja el segmento
+         */
+        void dibujarPunteado();
+
+        /**
          * Rellena el segmento
          */
         void rellenar();
@@ -45,15 +50,19 @@ class Segmento : public FiguraGeometrica
         bool contiene(int x, int y);
 
     protected:
-    private:
+        // Variables miembro
+        Coordenadas* desde;
+        Coordenadas* hasta;
+
         // Dibuja el Segmento segun el algoritmo DDA
         void dibujarDDA();
         // Dibuja el segmento segun el algoritmo Bresenham
         void dibujarBresenham();
 
-        // Variables miembro
-        Coordenadas* desde;
-        Coordenadas* hasta;
+    private:
+
+    	void dibujarDDAPunteado();
+
 };
 
 #endif // SEGMENTO_H
