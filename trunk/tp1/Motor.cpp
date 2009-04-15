@@ -1,4 +1,5 @@
 #include "Motor.h"
+#include <iostream.h>
 
 void Motor::actualizar(){
     this->pantalla->actualizar(this->datos);
@@ -25,9 +26,17 @@ void Motor::simulacionBresenham(Coordenadas* cRadio){
     this->limpiarBufferDatos();
     this->datos.insert(this->datos.end(),circunferencia);
 
-    Coordenadas* inicial = grilla->posicionEnGrilla(grilla->getOrigen()->getX() + floor(circunferencia->getRadio()),grilla->getOrigen()->getY());
-    x = inicial->getX();
-    y = inicial->getY();
+    x = grilla->getOrigen()->getX() + floor(circunferencia->getRadio());
+    y = grilla->getOrigen()->getY();
+    Coordenadas* inicial = grilla->posicionEnGrilla(x,y);
+
+    if (inicial){
+        x = inicial->getX();
+        y = inicial->getY();
+    }else {
+        x = grilla->posicionVirtual(x);
+        y = 0;
+    }
     e = 0;
     while (y <= x){
         sup = grilla->obtenerCelda(x,y);
@@ -48,7 +57,6 @@ void Motor::simulacionBresenham(Coordenadas* cRadio){
         }
     }
     delete cRadio;
-    delete circunferencia;
     this->actualizar();
 }
 
