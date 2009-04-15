@@ -1,11 +1,13 @@
 #include "Numero.h"
 
 Numero::Numero(Coordenadas* coordenadas, float numero) {
+    this->color = new Color(0,0,0);
 	this->coordenadas = coordenadas;
 	this->numero = numero;
 }
 
 Numero::Numero(Coordenadas* coordenadas, int numero) {
+    this->color = new Color(0,0,0);
 	this->coordenadas = coordenadas;
 	this->numero = (float)numero;
 }
@@ -20,6 +22,7 @@ void Numero::setSize(int size) {
 }
 
 void Numero::setColor(Color* color) {
+    delete color;
 	this->color=color;
 }
 
