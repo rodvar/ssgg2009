@@ -28,6 +28,7 @@ void Triangulo::dibujar(){
     delete segmentoAB;
     delete segmentoBC;
     delete segmentoCA;
+    this->rellenar();
 }
 
 void Triangulo::dibujarPunteado() {
@@ -35,5 +36,31 @@ void Triangulo::dibujarPunteado() {
 }
 
 void Triangulo::rellenar() {
-    glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
+    int yMin,yMax,xMin,xMax;
+    Coordenadas* coordenadas;
+    if (this->relleno){
+        glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
+        /* TODO
+            Hay q hacer un preprocesamiento antes de pintar para ver los limites desde
+            y hasta de X para cada Y del triangulo! (se puede usar una matriz entera
+            de Y filas por 2 columnas (Xmin, Xmax)
+        */
+        /*coordenadas = this->verticeA->menorY(this->verticeB);
+        coordenadas = this->verticeC->menorY(coordenadas);
+        yMin = coordenadas->getY();
+        coordenadas = this->verticeA->mayorY(this->verticeB);
+        coordenadas = this->verticeC->mayorY(coordenadas);
+        yMax = coordenadas->getY();
+        coordenadas = this->verticeA->menorX(this->verticeB);
+        coordenadas = this->verticeC->menorX(coordenadas);
+        xMin = coordenadas->getX();
+        coordenadas = this->verticeA->mayorX(this->verticeB);
+        coordenadas = this->verticeC->mayorX(coordenadas);
+        xMax = coordenadas->getX();*/
+
+    }
+}
+
+bool Triangulo::contiene(int x, int y){
+    return false;
 }

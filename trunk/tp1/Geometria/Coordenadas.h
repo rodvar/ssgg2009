@@ -28,7 +28,27 @@ class Coordenadas
          * Devuelve TRUE si this tiene mayor o igual valor en x que el parametro c.
          * FALSE en caso contrario
          */
-        bool mayorX(Coordenadas* c);
+        bool tieneMayorX(Coordenadas* c);
+
+        /**
+         * Devuelve las Coordenadas de mayor valor en X
+         */
+        Coordenadas* mayorX(Coordenadas* c);
+
+        /**
+         * Devuelve las Coordenadas de menor valor en X
+         */
+        Coordenadas* menorX(Coordenadas* c);
+
+        /**
+         * Devuelve las Coordenadas de mayor valor en Y
+         */
+        Coordenadas* mayorY(Coordenadas* c);
+
+        /**
+         * Devuelve las Coordenadas de menor valor en Y
+         */
+        Coordenadas* menorY(Coordenadas* c);
 
         /**
          * Devuelve la distancia hasta las coordenadas pasadas por parametro

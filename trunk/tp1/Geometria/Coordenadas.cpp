@@ -17,10 +17,34 @@ Coordenadas::~Coordenadas()
     //dtor
 }
 
-bool Coordenadas::mayorX(Coordenadas* c){
+bool Coordenadas::tieneMayorX(Coordenadas* c){
     bool mayor;
     (this->x >= c->getX())? mayor = true : mayor = false;
     return mayor;
+}
+
+Coordenadas* Coordenadas::mayorX(Coordenadas* c){
+    Coordenadas* coordenadas;
+    (this->x > c->getX()) ? coordenadas = this : coordenadas = c;
+    return coordenadas;
+}
+
+Coordenadas* Coordenadas::menorX(Coordenadas* c){
+    Coordenadas* coordenadas;
+    (this->x < c->getX()) ? coordenadas =  this : coordenadas =  c;
+    return coordenadas;
+}
+
+Coordenadas* Coordenadas::mayorY(Coordenadas* c){
+    Coordenadas* coordenadas;
+    (this->y > c->getY()) ? coordenadas =  this : coordenadas =  c;
+    return coordenadas;
+}
+
+Coordenadas* Coordenadas::menorY(Coordenadas* c){
+    Coordenadas* coordenadas;
+    (this->y < c->getY()) ? coordenadas =  this : coordenadas =  c;
+    return coordenadas;
 }
 
 double Coordenadas::distancia (Coordenadas* hasta){

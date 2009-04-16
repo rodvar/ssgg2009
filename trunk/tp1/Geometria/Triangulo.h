@@ -34,6 +34,11 @@ public:
     void dibujarPunteado();
 
     /**
+     * Devuelve TRUE si (x,y) esta contenido en el triangulo
+     */
+    bool contiene(int x, int y);
+
+    /**
      * Rellena el triangulo en la pantalla actual
      */
     void rellenar();

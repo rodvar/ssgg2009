@@ -151,6 +151,11 @@ Coordenadas* Grilla::getExtremoNE(){
         this->origen->getY() - this->filas*this->unidadY));
 }
 
+Coordenadas* Grilla::getExtremoSE(){
+    return (new Coordenadas(this->origen->getX() + this->columnas*this->unidadX,
+        this->origen->getY()));
+}
+
 float Grilla::distanciaOrigen(Coordenadas* punto){
     return this->origen->distancia(punto);
 }

@@ -72,6 +72,11 @@ class Grilla
         Coordenadas* getExtremoNE();
 
         /**
+         * Devuelve las coordenadas OpenGL de la celda inferior derecha
+         */
+        Coordenadas* getExtremoSE();
+
+        /**
          * @return La distancia al origen de la grilla
          * @param punto El punto distante al origen
          */
