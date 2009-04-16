@@ -82,3 +82,25 @@ bool Circunferencia::contiene(int x, int y){
     //TODO
     return false;
 }
+
+double Circunferencia::calcularX(int y, bool positivo){
+    double x = this->centro->getX();
+
+    if (this->enRangoY(y)){
+        y -= this->centro->getY();
+        if (positivo)
+            x += sqrt(this->radio*this->radio - y*y);
+        else
+            x -= sqrt(this->radio*this->radio - y*y);
+    }
+    return x;
+}
+
+double Circunferencia::distanciaX(Coordenadas c){
+    double x = this->calcularX(c.getY(), true);
+    return (c.getX() - x);
+}
+
+bool Circunferencia::enRangoY(int y ){
+    return ((y >= (this->centro->getY() - this->radio)) && (y <= (this->centro->getY() + this->radio)));
+}
