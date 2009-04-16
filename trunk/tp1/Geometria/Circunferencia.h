@@ -23,6 +23,18 @@ public:
     unsigned int getYCentro(){ return this->centro->getY(); }
 
     /**
+     * Calcula la coordenada x perteneciente a la circunferencia, correspondiente al Y pasado por parametro
+     * @param y Es el la ordenada al origen del punto cuyo x quiero calcular
+     * @param positivo Si es TRUE, devuelve el X a derecha del centro, el izq en caso contrario
+     */
+    double calcularX(int y, bool positivo);
+
+    /**
+     * Devuelve la distancia a la circunferencia paralela al eje X del punto c
+     */
+    double distanciaX(Coordenadas c);
+
+    /**
      * Dibuja la circunferencia en la pantalla actual
      */
     void dibujar();
@@ -48,6 +60,8 @@ private:
     void dibujarDDA();
     // Dibuja por el algoritmo Bresenham
     void dibujarBresenham();
+    // True si el valor y esta comprendido dentro de los valores posible de la circunferencia
+    bool enRangoY(int y);
 
     // Variables miembro
     float radio;

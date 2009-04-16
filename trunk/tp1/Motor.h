@@ -98,6 +98,13 @@ class Motor
 
         // Elimina todos los objetos para dibujar en la lista de datos
         void limpiarBufferDatos();
+
+        /**
+         * Devuelve un valor de error porcentual con 2 decimales
+         * @param xReal El valor x real de la circunferencia
+         * @param distancia El error absoluto con respecto a la circunferencia
+         */
+        double calcularIncertidumbrePje(double xReal, double distancia);
 };
 
 #endif // MOTOR_H
