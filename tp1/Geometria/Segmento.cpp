@@ -18,7 +18,7 @@ float Segmento::pendiente(){
     Coordenadas* inicio = this->desde;
     Coordenadas* fin = this->hasta;
     int dx, dy;
-    if (this->desde->mayorX(this->hasta)){
+    if (this->desde->tieneMayorX(this->hasta)){
         inicio = this->hasta;
         fin = this->desde;
     }
