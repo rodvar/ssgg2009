@@ -40,10 +40,6 @@ void Numero::dibujar() {
 	Segmento* negativo = new Segmento(new Coordenadas(
 			this->coordenadas->getX()-5,this->coordenadas->getY()+5),
 			new Coordenadas(this->coordenadas->getX()-10,this->coordenadas->getY()+5));
-/*
-	char string[5];
-	sprintf(string,"%f",this->numero);
-*/
 
 	// Numeros negativos
 	if(this->numero < 0) {

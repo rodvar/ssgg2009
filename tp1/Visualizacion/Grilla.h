@@ -30,7 +30,7 @@ class Grilla
         Grilla(int filas, int columnas, float dx, float dy, Coordenadas* posicion);
 
         virtual ~Grilla();
-        Coordenadas* getOrigen() { return this->origen->copia(); }
+        Coordenadas* getOrigen() { return (this->origen->copia()); }
 
         /**
          * Dibuja la grilla en la pantalla actual
