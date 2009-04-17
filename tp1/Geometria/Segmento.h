@@ -62,6 +62,7 @@ class Segmento : public FiguraGeometrica
     private:
 
     	void dibujarDDAPunteado();
+    	void dibujarBresenhamPunteado();
 
 };
 
