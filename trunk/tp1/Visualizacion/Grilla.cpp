@@ -161,7 +161,8 @@ Coordenadas* Grilla::getExtremoSE(){
 }
 
 float Grilla::distanciaOrigen(Coordenadas* punto){
-    return this->origen->distancia(punto);
+    float retorno = this->origen->distancia(punto);
+    return retorno;
 }
 
 bool Grilla::enRango(int x, int y){

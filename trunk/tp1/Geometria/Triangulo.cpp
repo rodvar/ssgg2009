@@ -57,22 +57,21 @@ void Triangulo::rellenar() {
         coordenadas = this->verticeA->mayorX(this->verticeB);
         coordenadas = this->verticeC->mayorX(coordenadas);
         xMax = coordenadas->getX();*/
+        Scanline* scanline = new Scanline();
+        int cnt=3;
+
+        dcPt *PolyVertices;
+        PolyVertices = (dcPt *)calloc(cnt, sizeof(dcPt));
+
+        PolyVertices[0].x = this->verticeA->getX(); PolyVertices[0].y = this->verticeA->getY();
+        PolyVertices[1].x = this->verticeB->getX(); PolyVertices[1].y = this->verticeB->getY();
+        PolyVertices[2].x = this->verticeC->getX(); PolyVertices[2].y = this->verticeC->getY();
+
+        scanline->scanFill(cnt,PolyVertices);
+
+        delete PolyVertices;
 
     }
-
-    Scanline* scanline = new Scanline();
-    int cnt=3;
-
-    dcPt *PolyVertices;
-    PolyVertices = (dcPt *)calloc(cnt, sizeof(dcPt));
-
-    PolyVertices[0].x = this->verticeA->getX(); PolyVertices[0].y = this->verticeA->getY();
-    PolyVertices[1].x = this->verticeB->getX(); PolyVertices[1].y = this->verticeB->getY();
-    PolyVertices[2].x = this->verticeC->getX(); PolyVertices[2].y = this->verticeC->getY();
-
-    scanline->scanFill(cnt,PolyVertices);
-
-    delete PolyVertices;
     delete scanline;
 }
 
