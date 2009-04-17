@@ -25,7 +25,11 @@ void Motor::simulacionBresenham(Coordenadas* cRadio){
     this->regenerarPantalla();
     this->limpiarBufferDatos();
 
-    Triangulo* triangulo = new Triangulo(grilla->getOrigen()->copia(), grilla->getExtremoNE(), grilla->getExtremoSE() );
+    Triangulo* triangulo = new Triangulo(
+    		grilla->getOrigen()->copia(),
+    		grilla->getExtremoNE(),
+    		grilla->getExtremoSE());
+    triangulo->setColorRelleno(0.2,0.2,0.2);
     Circunferencia* circunferencia = new Circunferencia(grilla->distanciaOrigen(cRadio), grilla->getOrigen()->copia());
     Circunferencia* punto = new Circunferencia(5,cRadio);
     Segmento* divisor = new Segmento(grilla->getOrigen()->copia(), grilla->getExtremoNE());

@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "Motor.h"
 
-char caption[]="Sistema Gr�ficos - 66.71 - 2009c1";
+char caption[]="Sistema Graficos - 66.71 - 2009c1";
 
 
 void reshape(int w, int h)
