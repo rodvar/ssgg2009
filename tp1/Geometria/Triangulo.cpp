@@ -73,6 +73,7 @@ void Triangulo::rellenar() {
     scanline->scanFill(cnt,PolyVertices);
 
     delete PolyVertices;
+    delete scanline;
 }
 
 bool Triangulo::contiene(int x, int y){
