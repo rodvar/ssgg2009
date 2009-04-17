@@ -29,7 +29,6 @@ void Motor::simulacionBresenham(Coordenadas* cRadio){
     		grilla->getOrigen()->copia(),
     		grilla->getExtremoNE(),
     		grilla->getExtremoSE());
-    triangulo->setColorRelleno(0.2,0.2,0.2);
     Circunferencia* circunferencia = new Circunferencia(grilla->distanciaOrigen(cRadio), grilla->getOrigen()->copia());
     Circunferencia* punto = new Circunferencia(5,cRadio);
     Segmento* divisor = new Segmento(grilla->getOrigen()->copia(), grilla->getExtremoNE());
@@ -38,7 +37,7 @@ void Motor::simulacionBresenham(Coordenadas* cRadio){
     divisor->setColorBorde(new Color(0,0,1));
     punto->setColorBorde(new Color(1,0,0));
     punto->setColorRelleno(new Color(1,0,0));
-    triangulo->setColorRelleno(new Color(0.5,0.5,0.5));
+    triangulo->setColorRelleno(new Color(0.7,0.7,0.7));
     this->datos.insert(this->datos.end(),triangulo);
     this->datos.insert(this->datos.end(),divisor);
     this->datos.insert(this->datos.end(),circunferencia);
