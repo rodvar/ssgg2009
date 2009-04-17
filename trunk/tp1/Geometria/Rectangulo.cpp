@@ -84,24 +84,6 @@ void Rectangulo::rellenar() {
     if (this->relleno){
         glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
 
-        /*Scanline* scanline = new Scanline();
-        Coordenadas* coordenadaNO = getVerticeNO();
-        int cnt=4;
-
-        dcPt *PolyVertices;
-        PolyVertices = (dcPt *)calloc(cnt, sizeof(dcPt));
-
-        PolyVertices[0].x = coordenadaNO->getX(); PolyVertices[0].y = coordenadaNO->getY();
-        PolyVertices[1].x = coordenadaNO->getX()+this->base; PolyVertices[1].y = coordenadaNO->getY();
-        PolyVertices[2].x = coordenadaNO->getX()+this->base; PolyVertices[2].y = coordenadaNO->getY() + this->altura;
-        PolyVertices[3].x = coordenadaNO->getX(); PolyVertices[3].y = coordenadaNO->getY() + this->altura;
-
-        scanline->scanFill(cnt,PolyVertices);
-
-        delete PolyVertices;
-        delete coordenadaNO;
-        */
-
         Coordenadas* coordenadaNO = getVerticeNO();
         for(int j=(coordenadaNO->getY()+1);j<(this->altura+coordenadaNO->getY());j++) {
             for(int i=(coordenadaNO->getX()+1);i<(this->base+coordenadaNO->getX());i++) {
@@ -109,6 +91,21 @@ void Rectangulo::rellenar() {
             }
         }
         delete coordenadaNO;
+//        Scanline* scanline = new Scanline();
+//        int cnt=4;
+//
+//        dcPt *PolyVertices;
+//        PolyVertices = (dcPt *)calloc(cnt, sizeof(dcPt));
+//
+//        PolyVertices[0].x = this->getVerticeNE()->getX()-1; PolyVertices[0].y = this->getVerticeNE()->getY()+1;
+//        PolyVertices[1].x = this->getVerticeNO()->getX()+1; PolyVertices[1].y = this->getVerticeNO()->getY()-1;
+//        PolyVertices[2].x = this->getVerticeSO()->getX()+1; PolyVertices[2].y = this->getVerticeSO()->getY()-1;
+//        PolyVertices[3].x = this->getVerticeSE()->getX()-1; PolyVertices[3].y = this->getVerticeSE()->getY()+1;
+//
+//        scanline->scanFill(cnt,PolyVertices);
+//
+//        delete PolyVertices;
+//        delete scanline;
     }
 }
 

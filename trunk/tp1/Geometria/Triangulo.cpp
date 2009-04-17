@@ -57,7 +57,7 @@ void Triangulo::rellenar() {
         coordenadas = this->verticeA->mayorX(this->verticeB);
         coordenadas = this->verticeC->mayorX(coordenadas);
         xMax = coordenadas->getX();*/
-        Scanline* scanline = new Scanline();
+        Scanline scanline;
         int cnt=3;
 
         dcPt *PolyVertices;
@@ -67,12 +67,11 @@ void Triangulo::rellenar() {
         PolyVertices[1].x = this->verticeB->getX(); PolyVertices[1].y = this->verticeB->getY();
         PolyVertices[2].x = this->verticeC->getX(); PolyVertices[2].y = this->verticeC->getY();
 
-        scanline->scanFill(cnt,PolyVertices);
+        scanline.scanFill(cnt,PolyVertices);
 
         delete PolyVertices;
 
     }
-    delete scanline;
 }
 
 bool Triangulo::contiene(int x, int y){
