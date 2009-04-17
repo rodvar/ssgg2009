@@ -3,6 +3,7 @@
 
 #include "../Geometria/Cuadrado.h"
 #include "../Geometria/Numero.h"
+#include "../Geometria/Triangulo.h"
 #include <map>
 #include "GL/glut.h"
 

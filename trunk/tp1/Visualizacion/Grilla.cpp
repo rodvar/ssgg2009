@@ -39,6 +39,7 @@ Grilla::~Grilla()
 }
 
 void Grilla::dibujar(){
+
     this->dibujarEjeX();
     this->dibujarEjeY();
     map<Coordenadas*,Rectangulo*>::iterator it=this->mapa.begin();
@@ -84,6 +85,14 @@ void Grilla::dibujar(){
         delete numero;
 		init-= this->unidadX;
     }
+
+    Triangulo* triangulo = new Triangulo(
+    		new Coordenadas(this->origen->getX(),this->origen->getY()),
+    		new Coordenadas(550,17),
+    		new Coordenadas(550,this->origen->getY()));
+    triangulo->setColorRelleno(0.2,0.2,0.2);
+    triangulo->rellenar();
+
 }
 
 void Grilla::dibujarEjeY(){

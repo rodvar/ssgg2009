@@ -3,6 +3,7 @@
 
 #include "Coordenadas.h"
 #include "../Visualizacion/Color.h"
+#include "../Visualizacion/Scanline.h"
 
 #define INFINITO 10000000
 
