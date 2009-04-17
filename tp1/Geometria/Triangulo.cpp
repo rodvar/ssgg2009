@@ -36,8 +36,8 @@ void Triangulo::dibujarPunteado() {
 }
 
 void Triangulo::rellenar() {
-    int yMin,yMax,xMin,xMax;
-    Coordenadas* coordenadas;
+//    int yMin,yMax,xMin,xMax;
+//    Coordenadas* coordenadas;
     if (this->relleno){
         glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
         /* TODO
@@ -59,6 +59,20 @@ void Triangulo::rellenar() {
         xMax = coordenadas->getX();*/
 
     }
+
+    Scanline* scanline = new Scanline();
+    int cnt=3;
+
+    dcPt *PolyVertices;
+    PolyVertices = (dcPt *)calloc(cnt, sizeof(dcPt));
+
+    PolyVertices[0].x = this->verticeA->getX(); PolyVertices[0].y = this->verticeA->getY();
+    PolyVertices[1].x = this->verticeB->getX(); PolyVertices[1].y = this->verticeB->getY();
+    PolyVertices[2].x = this->verticeC->getX(); PolyVertices[2].y = this->verticeC->getY();
+
+    scanline->scanFill(cnt,PolyVertices);
+
+    delete PolyVertices;
 }
 
 bool Triangulo::contiene(int x, int y){
