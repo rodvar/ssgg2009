@@ -68,7 +68,7 @@ void Grilla::dibujar(){
 		init+= this->unidadX;
     }
 
-    //Dibujo las guias de los puntos en el eje X
+    //Dibujo las guias de los puntos en el eje Y
     init = this->origen->getY() - this->unidadY/2;
     for(int i=0;i<this->filas;i++) {
 		segmento = new Segmento(new Coordenadas(this->origen->getX() - 5,init),new Coordenadas(this->origen->getX() + 5,init));
@@ -77,7 +77,9 @@ void Grilla::dibujar(){
 		init-=this->unidadY;
     }
 
-    //Dibujo los numeros de los puntos en el eje X
+    glPushMatrix();
+    glRotatef(90,0,0,1);
+    //Dibujo los numeros de los puntos en el eje Y
     init = this->origen->getY() - this->unidadY/2 - 5;
     for(int j=0;j<this->columnas;j++) {
 		numero = new Numero(new Coordenadas(this->origen->getX() - 20,init),j);
@@ -85,14 +87,7 @@ void Grilla::dibujar(){
         delete numero;
 		init-= this->unidadX;
     }
-
-    Triangulo* triangulo = new Triangulo(
-    		new Coordenadas(this->origen->getX(),this->origen->getY()),
-    		new Coordenadas(550,17),
-    		new Coordenadas(550,this->origen->getY()));
-    triangulo->setColorRelleno(0.2,0.2,0.2);
-    triangulo->rellenar();
-
+    glPopMatrix();
 }
 
 void Grilla::dibujarEjeY(){
