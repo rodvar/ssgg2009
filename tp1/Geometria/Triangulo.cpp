@@ -1,5 +1,6 @@
 #include "Triangulo.h"
 #include "Segmento.h"
+#include "../Visualizacion/Scanline.h"
 
 Triangulo::Triangulo(Coordenadas* verticeA, Coordenadas* verticeB, Coordenadas* verticeC)
 {
@@ -36,28 +37,21 @@ void Triangulo::dibujarPunteado() {
 }
 
 void Triangulo::rellenar() {
-    //int yMin,yMax,xMin,xMax;
-    //Coordenadas* coordenadas;
     if (this->relleno){
-        glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
-        /* TODO
-            Hay q hacer un preprocesamiento antes de pintar para ver los limites desde
-            y hasta de X para cada Y del triangulo! (se puede usar una matriz entera
-            de Y filas por 2 columnas (Xmin, Xmax)
-        */
-        /*coordenadas = this->verticeA->menorY(this->verticeB);
-        coordenadas = this->verticeC->menorY(coordenadas);
-        yMin = coordenadas->getY();
-        coordenadas = this->verticeA->mayorY(this->verticeB);
-        coordenadas = this->verticeC->mayorY(coordenadas);
-        yMax = coordenadas->getY();
-        coordenadas = this->verticeA->menorX(this->verticeB);
-        coordenadas = this->verticeC->menorX(coordenadas);
-        xMin = coordenadas->getX();
-        coordenadas = this->verticeA->mayorX(this->verticeB);
-        coordenadas = this->verticeC->mayorX(coordenadas);
-        xMax = coordenadas->getX();*/
+        Scanline scanline;
+        int cnt=3;
 
+        dcPt *PolyVertices;
+        PolyVertices = (dcPt *)calloc(cnt, sizeof(dcPt));
+
+        PolyVertices[0].x = this->verticeA->getX(); PolyVertices[0].y = this->verticeA->getY();
+        PolyVertices[1].x = this->verticeB->getX(); PolyVertices[1].y = this->verticeB->getY();
+        PolyVertices[2].x = this->verticeC->getX(); PolyVertices[2].y = this->verticeC->getY();
+
+        glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
+        scanline.scanFill(cnt,PolyVertices);
+
+        delete PolyVertices;
     }
 }
 

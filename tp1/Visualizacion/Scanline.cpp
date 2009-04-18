@@ -125,7 +125,6 @@ void Scanline::fillScan (int scan, Edge *active) {
         p2 = p1->next;
         for (i=p1->xIntersect; i<p2->xIntersect; i++) {
             glBegin(GL_POINTS);
-                ///glColor3f(r, g, b);
                 glVertex2i((int) i, scan);
             glEnd();
         }
