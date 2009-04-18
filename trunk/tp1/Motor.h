@@ -104,7 +104,7 @@ class Motor
          * @param xReal El valor x real de la circunferencia
          * @param distancia El error absoluto con respecto a la circunferencia
          */
-        float calcularIncertidumbrePje(float xReal, float distancia);
+        double calcularIncertidumbrePje(double xReal, double distancia);
 };
 
 #endif // MOTOR_H

@@ -53,7 +53,7 @@ class Coordenadas
         /**
          * Devuelve la distancia hasta las coordenadas pasadas por parametro
          */
-        virtual float distancia (Coordenadas* hasta);
+        virtual double distancia (Coordenadas* hasta);
 
         /** Sobrecarga del operador = **/
         bool operator == (Coordenadas* coordenadas);
