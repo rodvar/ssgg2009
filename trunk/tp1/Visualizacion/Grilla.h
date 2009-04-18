@@ -29,7 +29,7 @@ class Grilla
         Grilla(int filas, int columnas, float dx, float dy, Coordenadas* posicion);
 
         virtual ~Grilla();
-        Coordenadas* getOrigen() { return this->origen->copia(); }
+        Coordenadas getOrigen() { return *this->origen; }
 
         /**
          * Dibuja la grilla en la pantalla actual
@@ -47,13 +47,13 @@ class Grilla
          * @param posicion La posicion de la celda en la grilla
          * @return La celda correspondiente en la Grilla, NULL si no existe
          */
-        Rectangulo* obtenerCelda(Coordenadas* posicion);
+        Rectangulo* obtenerCelda(Coordenadas posicion);
 
         /**
          * Traduce las coordenadas pasadas coomo x,y a las coordenadas en el
          * Sistema de Referencia de la grilla
          */
-        Coordenadas* posicionEnGrilla(int x, int y);
+        Coordenadas posicionEnGrilla(int x, int y);
 
         /**
          * Si para un cierto valor x, este esta fuera del rango de la grilla, este
@@ -64,7 +64,7 @@ class Grilla
         /**
          * Devuelve las coordenadas en la grilla de la celda pasada por parametro
          */
-        Coordenadas* obtenerPosicion(Rectangulo* celda);
+        Coordenadas obtenerPosicion(Rectangulo celda);
 
         /**
          * Devuelve las coordenadas OpenGL de la celda superior derecha
@@ -80,13 +80,16 @@ class Grilla
          * @return La distancia al origen de la grilla
          * @param punto El punto distante al origen
          */
-        float distanciaOrigen(Coordenadas* punto);
+        float distanciaOrigen(Coordenadas punto);
 
         /**
          * @return TRUE si es un punto perteneciente a la grilla, false en caso
          *         contrario
          */
         bool enRango(int x, int y);
+
+        // Deja los valores por defecto de las celdas
+        void regenerar();
 
     protected:
     private:

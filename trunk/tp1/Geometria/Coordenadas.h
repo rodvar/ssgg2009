@@ -31,6 +31,11 @@ class Coordenadas
         bool tieneMayorX(Coordenadas* c);
 
         /**
+         * True si tienen mismos atributos, false en caso contrario
+         */
+        bool esIgual(Coordenadas c);
+
+        /**
          * Devuelve las Coordenadas de mayor valor en X
          */
         Coordenadas* mayorX(Coordenadas* c);
@@ -53,10 +58,10 @@ class Coordenadas
         /**
          * Devuelve la distancia hasta las coordenadas pasadas por parametro
          */
-        virtual double distancia (Coordenadas* hasta);
+        virtual double distancia (Coordenadas hasta);
 
         /** Sobrecarga del operador = **/
-        bool operator == (Coordenadas* coordenadas);
+        bool operator == (Coordenadas coordenadas);
 
     protected:
     private:

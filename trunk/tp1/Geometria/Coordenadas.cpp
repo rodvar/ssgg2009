@@ -47,12 +47,12 @@ Coordenadas* Coordenadas::menorY(Coordenadas* c){
     return coordenadas;
 }
 
-double Coordenadas::distancia (Coordenadas* hasta){
-    int deltaX = hasta->getX() - this->x;
-    int deltaY = hasta->getY() - this->y;
+double Coordenadas::distancia (Coordenadas hasta){
+    int deltaX = hasta.getX() - this->x;
+    int deltaY = hasta.getY() - this->y;
     return sqrt(deltaX*deltaX + deltaY*deltaY);
 }
 
-bool Coordenadas::operator == (Coordenadas* coordenadas){
-    return ((this->x == coordenadas->getX()) && (this->y == coordenadas->getY()));
+bool Coordenadas::operator == (Coordenadas coordenadas){
+    return ((this->x == coordenadas.getX()) && (this->y == coordenadas.getY()));
 }

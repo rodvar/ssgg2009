@@ -119,29 +119,31 @@ Rectangulo* Grilla::obtenerCelda(int x, int y){
     return rectangulo;
 }
 
-Rectangulo* Grilla::obtenerCelda(Coordenadas* posicion){
-    return this->obtenerCelda(posicion->getX(), posicion->getY());
+Rectangulo* Grilla::obtenerCelda(Coordenadas posicion){
+    return this->obtenerCelda(posicion.getX(), posicion.getY());
 }
 
-Coordenadas* Grilla::obtenerPosicion(Rectangulo* celda){
-    Coordenadas* posicion = NULL;
+Coordenadas Grilla::obtenerPosicion(Rectangulo celda){
+    Coordenadas posicion(-1,-1);
+    Rectangulo rectangulo;
     map<Coordenadas*,Rectangulo*>::iterator it=this->mapa.begin();
-    while ((it != this->mapa.end()) && (!posicion)){
-        if (((Rectangulo*)it->second) == celda)
-            posicion = (Coordenadas*)it->first;
+    while ((it != this->mapa.end()) && (posicion.getX() ==-1)){
+        rectangulo = ((Rectangulo)*it->second);
+        if (rectangulo.getCentro() == celda.getCentro())
+            posicion = (Coordenadas)*it->first;
         it++;
     }
     return posicion;
 }
 
-Coordenadas* Grilla::posicionEnGrilla(int x, int y){
-    Coordenadas* posicion = NULL;
+Coordenadas Grilla::posicionEnGrilla(int x, int y){
+    Coordenadas posicion(-1,-1);
     Rectangulo* rectangulo = NULL;
     map<Coordenadas*,Rectangulo*>::iterator it=this->mapa.begin();
-    while ((it != this->mapa.end()) && (!posicion)){
+    while ((it != this->mapa.end()) && (posicion.getX() == -1)){
         rectangulo = (Rectangulo*)it->second;
         if (rectangulo->contiene(x,y))
-            posicion = (Coordenadas*)it->first;
+            posicion = (Coordenadas)*it->first;
         it++;
     }
     return posicion;
@@ -161,8 +163,16 @@ Coordenadas* Grilla::getExtremoSE(){
         this->origen->getY()));
 }
 
-float Grilla::distanciaOrigen(Coordenadas* punto){
+float Grilla::distanciaOrigen(Coordenadas punto){
     return this->origen->distancia(punto);
+}
+
+void Grilla::regenerar(){
+    map<Coordenadas*,Rectangulo*>::iterator it=this->mapa.begin();
+    while (it != this->mapa.end()){
+        ((Rectangulo*)it->second)->setColorRelleno(new Color(1,1,1));
+        it++;
+    }
 }
 
 bool Grilla::enRango(int x, int y){

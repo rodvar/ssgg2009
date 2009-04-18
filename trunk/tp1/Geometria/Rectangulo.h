@@ -16,6 +16,7 @@ class Rectangulo : public FiguraGeometrica
          * @param altura La altura del rectangulo
          */
         Rectangulo(float base, float altura, Coordenadas* centro);
+        Rectangulo();
 
         virtual ~Rectangulo();
         float getBase() { return base; }
