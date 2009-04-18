@@ -1,6 +1,6 @@
 #include "Rectangulo.h"
 #include "Segmento.h"
-#include <stdio.h>
+#include "../Visualizacion/Scanline.h"
 
 Rectangulo::Rectangulo(float base, float altura, Coordenadas* centro)
 {
@@ -97,6 +97,21 @@ void Rectangulo::rellenar() {
             }
         }
         delete coordenadaNO;
+
+        /*Scanline scanline;
+        int cnt=4;
+
+        dcPt *PolyVertices;
+        PolyVertices = (dcPt *)calloc(cnt, sizeof(dcPt));
+
+        PolyVertices[0].x = this->getVerticeNE()->getX()-1; PolyVertices[0].y = this->getVerticeNE()->getY()+1;
+        PolyVertices[1].x = this->getVerticeNO()->getX()+1; PolyVertices[1].y = this->getVerticeNO()->getY()-1;
+        PolyVertices[2].x = this->getVerticeSO()->getX()+1; PolyVertices[2].y = this->getVerticeSO()->getY()-1;
+        PolyVertices[3].x = this->getVerticeSE()->getX()-1; PolyVertices[3].y = this->getVerticeSE()->getY()+1;
+
+        scanline.scanFill(cnt,PolyVertices);
+
+        delete PolyVertices;*/
     }
 
     glEnd();

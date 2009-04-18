@@ -1,6 +1,15 @@
 #include "Motor.h"
 
 void Motor::actualizar(){
+    if (this->modo == BRESENHAM){
+        Triangulo* triangulo = new Triangulo(
+                this->pantalla->getGrilla()->getOrigen().copia(),
+                this->pantalla->getGrilla()->getExtremoNE(),
+                this->pantalla->getGrilla()->getExtremoSE());
+        triangulo->setColorRelleno(new Color(0.8,0.8,0.8));
+        triangulo->dibujar();
+        delete triangulo;
+    }
     this->pantalla->actualizar(this->datos);
     glutPostRedisplay();
 }
@@ -24,7 +33,6 @@ void Motor::simulacionBresenham(Coordenadas* cRadio){
     this->regenerarPantalla();
     this->limpiarBufferDatos();
 
-    //Triangulo* triangulo = new Triangulo(grilla->getOrigen()->copia(), grilla->getExtremoNE(), grilla->getExtremoSE() );
     Circunferencia* circunferencia = new Circunferencia(grilla->distanciaOrigen(*cRadio), grilla->getOrigen().copia());
     Circunferencia* punto = new Circunferencia(5,cRadio);
     Segmento* divisor = new Segmento(grilla->getOrigen().copia(), grilla->getExtremoNE());
@@ -33,8 +41,7 @@ void Motor::simulacionBresenham(Coordenadas* cRadio){
     divisor->setColorBorde(new Color(0,0,1));
     punto->setColorBorde(new Color(1,0,0));
     punto->setColorRelleno(new Color(1,0,0));
-    //triangulo->setColorRelleno(new Color(0.5,0.5,0.5));
-    //this->datos.insert(this->datos.end(),triangulo);
+
     this->datos.insert(this->datos.end(),divisor);
     this->datos.insert(this->datos.end(),circunferencia);
     this->datos.insert(this->datos.end(),punto);
@@ -69,9 +76,6 @@ void Motor::simulacionBresenham(Coordenadas* cRadio){
             incerteza = this->calcularIncertidumbrePje(xReal, circunferencia->distanciaX(inf->getCentro()));
             numero = new Numero(new Coordenadas(600,inf->getCentro().getY()),incerteza);
             this->datos.insert(this->datos.end(),numero);
-            //Numero numero(new Coordenadas(600,inf->getCentro().getY()),incerteza);
-            //numero.dibujar();
-            // TODO : dibujar los numeros donde corresponda
         }
         e = e + 2*y + 1;
         y++;

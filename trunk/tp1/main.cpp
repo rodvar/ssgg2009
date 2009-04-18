@@ -2,7 +2,6 @@
 /// Sistemas Gr�ficos - 6671
 /// 1er cuatrimestre 2009
 ///
-#include <stdlib.h>
 #include "Motor.h"
 
 char caption[]="Sistema Gr�ficos - 66.71 - 2009c1";
