@@ -111,13 +111,13 @@ void Motor::simulacionDDA(Coordenadas* desde, Coordenadas* hasta){
 	xIncrement = dx / (float)steps;
 	yIncrement = dy / (float)steps;
 	celda = grilla->obtenerCelda(grilla->posicionEnGrilla((int)(x+0.5), (int)(y+0.5)));
-	celda->setColorRelleno(0,1,0);
+	celda->setColorRelleno(0,0.5,1);
 	celda->dibujar();
 	for(k=0;k<steps;k++) {
 		x+=xIncrement;
 		y+=yIncrement;
 		celda = grilla->obtenerCelda(grilla->posicionEnGrilla((int)(x+0.5), (int)(y+0.5)));
-		celda->setColorRelleno(0,1,0);
+		celda->setColorRelleno(0,0.5,1);
 		celda->dibujar();
 	}
     /* <-- Simulacion del DDALine -- */
