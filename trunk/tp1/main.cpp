@@ -26,6 +26,7 @@ void init(void)
 void display(void)
 {
     ///
+    glClearColor(1.0,1.0,1.0,0);
 	glClear(GL_COLOR_BUFFER_BIT); // pinta todo de negro
    	glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
