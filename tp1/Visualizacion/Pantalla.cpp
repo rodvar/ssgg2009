@@ -10,6 +10,10 @@ Pantalla::~Pantalla()
     delete this->grilla;
 }
 
+void Pantalla::regenerar(){
+    this->grilla->regenerar();
+}
+
 void Pantalla::actualizar(list<FiguraGeometrica*> figuras){
     this->grilla->dibujar();
     list<FiguraGeometrica*>::iterator it=figuras.begin() ;

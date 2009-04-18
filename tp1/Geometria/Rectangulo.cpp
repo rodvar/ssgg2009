@@ -8,6 +8,11 @@ Rectangulo::Rectangulo(float base, float altura, Coordenadas* centro)
     this->altura = altura;
     this->centro = centro;
 }
+Rectangulo::Rectangulo(){
+    this->base = 0;
+    this->altura = 0;
+    this->centro = NULL;
+}
 
 Rectangulo::~Rectangulo()
 {

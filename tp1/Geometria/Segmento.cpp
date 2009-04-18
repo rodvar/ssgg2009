@@ -32,7 +32,7 @@ float Segmento::pendiente(){
 }
 
 double Segmento::longitud(){
-    return (this->desde->distancia(hasta));
+    return (this->desde->distancia(*hasta));
 }
 
 void Segmento::dibujar(){

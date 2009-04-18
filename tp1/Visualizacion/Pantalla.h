@@ -25,6 +25,9 @@ class Pantalla
         virtual ~Pantalla();
         Grilla* getGrilla(){ return this->grilla; }
 
+        // Limpia las celdas de la pantalla
+        void regenerar();
+
         /**
          * Dibuja todos los elementos que participan de la escena actual
          */
