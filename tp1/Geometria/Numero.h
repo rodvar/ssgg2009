@@ -4,6 +4,8 @@
 #include "FiguraGeometrica.h"
 #include "Coordenadas.h"
 #include "Segmento.h"
+#include <string.h>
+#include <iostream.h>
 
 class Numero : public FiguraGeometrica {
 
@@ -26,6 +28,9 @@ public:
 
 
 	virtual ~Numero();
+private:
+    // Parsea un float como string
+    std::string convertirReal(float value);
 };
 
 #endif /* NUMERO_H_ */
