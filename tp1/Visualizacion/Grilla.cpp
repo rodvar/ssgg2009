@@ -67,7 +67,7 @@ void Grilla::dibujar(){
 		init+= this->unidadX;
     }
 
-    //Dibujo las guias de los puntos en el eje X
+    //Dibujo las guias de los puntos en el eje Y
     init = this->origen->getY() - this->unidadY/2;
     for(int i=0;i<this->filas;i++) {
 		segmento = new Segmento(new Coordenadas(this->origen->getX() - 5,init),new Coordenadas(this->origen->getX() + 5,init));
@@ -77,13 +77,18 @@ void Grilla::dibujar(){
     }
 
     //Dibujo los numeros de los puntos en el eje X
-    init = this->origen->getY() - this->unidadY/2 - 5;
+    init = this->origen->getY() - this->unidadY/2 + 2;
     for(int j=0;j<this->columnas;j++) {
-		numero = new Numero(new Coordenadas(this->origen->getX() - 20,init),j);
+		numero = new Numero(new Coordenadas(),j);
+		glPushMatrix();
+		glTranslatef(this->origen->getX()-25,init,0);
+        glRotatef(-90,0,0,1);
 		numero->dibujar();
+        glPopMatrix();
         delete numero;
 		init-= this->unidadX;
     }
+
 }
 
 void Grilla::dibujarEjeY(){
