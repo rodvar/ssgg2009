@@ -39,7 +39,6 @@ Grilla::~Grilla()
 }
 
 void Grilla::dibujar(){
-
     this->dibujarEjeX();
     this->dibujarEjeY();
     map<Coordenadas*,Rectangulo*>::iterator it=this->mapa.begin();
@@ -68,7 +67,7 @@ void Grilla::dibujar(){
 		init+= this->unidadX;
     }
 
-    //Dibujo las guias de los puntos en el eje Y
+    //Dibujo las guias de los puntos en el eje X
     init = this->origen->getY() - this->unidadY/2;
     for(int i=0;i<this->filas;i++) {
 		segmento = new Segmento(new Coordenadas(this->origen->getX() - 5,init),new Coordenadas(this->origen->getX() + 5,init));
@@ -77,9 +76,7 @@ void Grilla::dibujar(){
 		init-=this->unidadY;
     }
 
-    glPushMatrix();
-    glRotatef(90,0,0,1);
-    //Dibujo los numeros de los puntos en el eje Y
+    //Dibujo los numeros de los puntos en el eje X
     init = this->origen->getY() - this->unidadY/2 - 5;
     for(int j=0;j<this->columnas;j++) {
 		numero = new Numero(new Coordenadas(this->origen->getX() - 20,init),j);
@@ -87,7 +84,6 @@ void Grilla::dibujar(){
         delete numero;
 		init-= this->unidadX;
     }
-    glPopMatrix();
 }
 
 void Grilla::dibujarEjeY(){
@@ -161,8 +157,7 @@ Coordenadas* Grilla::getExtremoSE(){
 }
 
 float Grilla::distanciaOrigen(Coordenadas* punto){
-    float retorno = this->origen->distancia(punto);
-    return retorno;
+    return this->origen->distancia(punto);
 }
 
 bool Grilla::enRango(int x, int y){

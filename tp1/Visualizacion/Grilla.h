@@ -3,7 +3,6 @@
 
 #include "../Geometria/Cuadrado.h"
 #include "../Geometria/Numero.h"
-#include "../Geometria/Triangulo.h"
 #include <map>
 #include "GL/glut.h"
 
@@ -30,7 +29,7 @@ class Grilla
         Grilla(int filas, int columnas, float dx, float dy, Coordenadas* posicion);
 
         virtual ~Grilla();
-        Coordenadas* getOrigen() { return (this->origen->copia()); }
+        Coordenadas* getOrigen() { return this->origen->copia(); }
 
         /**
          * Dibuja la grilla en la pantalla actual

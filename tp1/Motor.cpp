@@ -16,37 +16,32 @@ void Motor::cambiarModo(){
 
 void Motor::simulacionBresenham(Coordenadas* cRadio){
     Grilla* grilla = this->pantalla->getGrilla();
-    Numero* numero;
     Rectangulo* sup;
     Rectangulo* inf;
     int x,y,e;
-    float incerteza,xReal;
+    double incerteza,xReal;
 
     this->regenerarPantalla();
     this->limpiarBufferDatos();
 
-    /*Triangulo* triangulo = new Triangulo(
-    		grilla->getOrigen(),
-    		grilla->getExtremoNE(),
-    		grilla->getExtremoSE());*/
-    Circunferencia* circunferencia = new Circunferencia(grilla->distanciaOrigen(cRadio), grilla->getOrigen());
+    //Triangulo* triangulo = new Triangulo(grilla->getOrigen()->copia(), grilla->getExtremoNE(), grilla->getExtremoSE() );
+    Circunferencia* circunferencia = new Circunferencia(grilla->distanciaOrigen(cRadio), grilla->getOrigen()->copia());
     Circunferencia* punto = new Circunferencia(5,cRadio);
-    Segmento* divisor = new Segmento(grilla->getOrigen(), grilla->getExtremoNE());
+    Segmento* divisor = new Segmento(grilla->getOrigen()->copia(), grilla->getExtremoNE());
     Letra* letra = new Letra(new Coordenadas(600,100),'E');
     circunferencia->setColorBorde(new Color(1,0,0));
     divisor->setColorBorde(new Color(0,0,1));
     punto->setColorBorde(new Color(1,0,0));
     punto->setColorRelleno(new Color(1,0,0));
-    //triangulo->setColorRelleno(new Color(0.7,0.7,0.7));
+    //triangulo->setColorRelleno(new Color(0.5,0.5,0.5));
     //this->datos.insert(this->datos.end(),triangulo);
     this->datos.insert(this->datos.end(),divisor);
     this->datos.insert(this->datos.end(),circunferencia);
     this->datos.insert(this->datos.end(),punto);
     this->datos.insert(this->datos.end(),letra);
 
-    Coordenadas* origen = grilla->getOrigen();
-    x = origen->getX() + floor(circunferencia->getRadio());
-    y = origen->getY();
+    x = grilla->getOrigen()->getX() + floor(circunferencia->getRadio());
+    y = grilla->getOrigen()->getY();
     Coordenadas* inicial = grilla->posicionEnGrilla(x,y);
 
     if (inicial){
@@ -71,8 +66,7 @@ void Motor::simulacionBresenham(Coordenadas* cRadio){
             inf->rellenar();
             xReal = circunferencia->calcularX(inf->getCentro().getY(),true);
             incerteza = this->calcularIncertidumbrePje(xReal, circunferencia->distanciaX(inf->getCentro()));
-            numero = new Numero(new Coordenadas(600,inf->getCentro().getY()),incerteza);
-            this->datos.insert(this->datos.end(),numero);
+            // TODO : dibujar los numeros donde corresponda
         }
         e = e + 2*y + 1;
         y++;
@@ -149,7 +143,7 @@ void Motor::regenerarPantalla(){
     this->pantalla = new Pantalla();
 }
 
-float Motor::calcularIncertidumbrePje(float xReal, float distancia){
-    float incertidumbre = distancia/xReal;
-    return (float)((int)(incertidumbre * 100))/100 ;
+double Motor::calcularIncertidumbrePje(double xReal, double distancia){
+    double incertidumbre = distancia/xReal;
+    return (double)((int)(incertidumbre * 100))/100 ;
 }
