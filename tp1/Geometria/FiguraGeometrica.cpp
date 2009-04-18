@@ -2,7 +2,7 @@
 
 FiguraGeometrica::FiguraGeometrica()
 {
-    this->borde = new Color(1.0,1.0,1.0);
+    this->borde = new Color(0,0,0);
     this->relleno = NULL;
 }
 

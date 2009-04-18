@@ -36,8 +36,8 @@ void Triangulo::dibujarPunteado() {
 }
 
 void Triangulo::rellenar() {
-    int yMin,yMax,xMin,xMax;
-    Coordenadas* coordenadas;
+    //int yMin,yMax,xMin,xMax;
+    //Coordenadas* coordenadas;
     if (this->relleno){
         glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
         /* TODO
