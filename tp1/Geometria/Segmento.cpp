@@ -75,12 +75,17 @@ void Segmento::dibujarDDA() {
 	}
 	xIncrement = dx / (float)steps;
 	yIncrement = dy / (float)steps;
+
+	glBegin(GL_POINTS);
+
 	glVertex2i((int)(x+0.5), (int)(y+0.5));
 	for(k=0;k<steps;k++) {
 		x+=xIncrement;
 		y+=yIncrement;
 		glVertex2i((int)(x+0.5), (int)(y+0.5));
 	}
+
+	glEnd();
 }
 
 void Segmento::dibujarDDAPunteado() {
@@ -97,6 +102,9 @@ void Segmento::dibujarDDAPunteado() {
 	}
 	xIncrement = dx / (float)steps;
 	yIncrement = dy / (float)steps;
+
+	glBegin(GL_POINTS);
+
 	glVertex2i((int)(x+0.5), (int)(y+0.5));
 	for(k=0;k<steps;k++) {
 		x+=xIncrement;
@@ -110,6 +118,8 @@ void Segmento::dibujarDDAPunteado() {
 			canDraw=!canDraw;
 		}
 	}
+
+	glEnd();
 }
 
 void Segmento::dibujarBresenham() {
@@ -120,6 +130,8 @@ void Segmento::dibujarBresenham() {
 
     int dx = x1 - x0;
     int dy = y1 - y0;
+
+    glBegin(GL_POINTS);
 
     glVertex2i(x0,y0);
     if (abs(dx) > abs(dy)) {          // pendiente < 1
@@ -151,6 +163,8 @@ void Segmento::dibujarBresenham() {
             }
         }
     }
+
+    glEnd();
 }
 
 void Segmento::dibujarBresenhamPunteado(){
@@ -163,6 +177,8 @@ void Segmento::dibujarBresenhamPunteado(){
 
     int dx = x1 - x0;
     int dy = y1 - y0;
+
+    glBegin(GL_POINTS);
 
     glVertex2i(x0,y0);
     if (abs(dx) > abs(dy)) {          // pendiente < 1
@@ -206,6 +222,8 @@ void Segmento::dibujarBresenhamPunteado(){
             }
         }
     }
+
+    glEnd();
 }
 
 void Segmento::rellenar() {

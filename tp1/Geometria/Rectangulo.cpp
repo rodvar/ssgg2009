@@ -81,6 +81,8 @@ void Rectangulo::dibujarPunteado() {
 }
 
 void Rectangulo::rellenar() {
+	glBegin(GL_POINTS);
+
     if (this->relleno){
         glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
         Coordenadas* coordenadaNO = getVerticeNO();
@@ -91,6 +93,8 @@ void Rectangulo::rellenar() {
         }
         delete coordenadaNO;
     }
+
+    glEnd();
 }
 
 bool Rectangulo::contiene(int x, int y){

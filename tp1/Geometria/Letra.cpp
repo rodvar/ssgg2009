@@ -22,9 +22,9 @@ void Letra::dibujar(){
         case 'E':
             int x = this->centro->getX();
             int y = this->centro->getY();
-            Segmento* horizontal = new Segmento(new Coordenadas(x,y), new Coordenadas(x+10,y));
-            Segmento* horizontalN = new Segmento(new Coordenadas(x,y-5), new Coordenadas(x+10,y-5));
-            Segmento* horizontalS = new Segmento(new Coordenadas(x,y+5), new Coordenadas(x+10,y+5));
+            Segmento* horizontal = new Segmento(new Coordenadas(x,y), new Coordenadas(x+8,y));
+            Segmento* horizontalN = new Segmento(new Coordenadas(x,y-5), new Coordenadas(x+8,y-5));
+            Segmento* horizontalS = new Segmento(new Coordenadas(x,y+5), new Coordenadas(x+8,y+5));
             Segmento* vertical = new Segmento(new Coordenadas(x,y-5), new Coordenadas(x,y+5));
             horizontal->setColorBorde(this->borde->copia());
             horizontalN->setColorBorde(this->borde->copia());

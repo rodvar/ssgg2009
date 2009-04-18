@@ -27,6 +27,9 @@ void Circunferencia::dibujarBresenham(){
     x = floor(this->radio);
     y = 0;
     e = 0;
+
+	glBegin(GL_POINTS);
+
     while ( y <= x) {
         glVertex2i(xCentro + x, yCentro + y ); glVertex2i(xCentro + y, yCentro + x );
         glVertex2i(xCentro - x, yCentro + y ); glVertex2i(xCentro - y, yCentro + x );
@@ -39,6 +42,8 @@ void Circunferencia::dibujarBresenham(){
             e = e - 2*x + 1;
         }
     }
+
+    glEnd();
 }
 
 void Circunferencia::dibujarDDA() {
@@ -47,6 +52,9 @@ void Circunferencia::dibujarDDA() {
     int yCenter = this->centro->getY();
 
     r2 = radio*radio;
+
+	glBegin(GL_POINTS);
+
     glVertex2i(xCenter, yCenter + radio);
     glVertex2i(xCenter, yCenter - radio);
     glVertex2i(xCenter + radio, yCenter);
@@ -69,13 +77,19 @@ void Circunferencia::dibujarDDA() {
         glVertex2i(xCenter - x, yCenter + y);
         glVertex2i(xCenter - x, yCenter - y);
     }
+
+    glEnd();
 }
 
 void Circunferencia::rellenar() {
+	glBegin(GL_POINTS);
+
     if (this->relleno){
         glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
 
     }
+
+    glEnd();
 }
 
 bool Circunferencia::contiene(int x, int y){

@@ -31,11 +31,7 @@ void display(void)
    	glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 	///
-	glBegin(GL_POINTS);
-
-        Motor::getInstancia()->actualizar();
-
-	glEnd();
+    Motor::getInstancia()->actualizar();
     ///
   	glutSwapBuffers();
 	///
