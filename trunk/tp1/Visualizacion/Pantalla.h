@@ -26,7 +26,7 @@ class Pantalla
         Grilla* getGrilla(){ return this->grilla; }
 
         // Limpia las celdas de la pantalla
-        void regenerar();
+        void regenerar(bool dobleColor);
 
         /**
          * Dibuja todos los elementos que participan de la escena actual

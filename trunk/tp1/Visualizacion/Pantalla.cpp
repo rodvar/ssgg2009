@@ -10,8 +10,8 @@ Pantalla::~Pantalla()
     delete this->grilla;
 }
 
-void Pantalla::regenerar(){
-    this->grilla->regenerar();
+void Pantalla::regenerar(bool dobleColor){
+    this->grilla->regenerar(dobleColor);
 }
 
 void Pantalla::actualizar(list<FiguraGeometrica*> figuras){

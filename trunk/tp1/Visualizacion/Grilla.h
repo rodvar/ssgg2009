@@ -89,7 +89,7 @@ class Grilla
         bool enRango(int x, int y);
 
         // Deja los valores por defecto de las celdas
-        void regenerar();
+        void regenerar(bool dobleColor);
 
     protected:
     private:
