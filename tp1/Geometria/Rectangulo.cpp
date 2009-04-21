@@ -7,11 +7,13 @@ Rectangulo::Rectangulo(float base, float altura, Coordenadas* centro)
     this->base = base;
     this->altura = altura;
     this->centro = centro;
+    this->rellenoParcialInferior = false;
 }
 Rectangulo::Rectangulo(){
     this->base = 0;
     this->altura = 0;
     this->centro = NULL;
+    this->rellenoParcialInferior = false;
 }
 
 Rectangulo::~Rectangulo()
