@@ -99,29 +99,45 @@ void Rectangulo::rellenar() {
 	glBegin(GL_POINTS);
 
     if (this->relleno){
-        glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
-        Coordenadas* coordenadaNO = getVerticeNO();
-        for(int j=(coordenadaNO->getY()+1);j<(this->altura+coordenadaNO->getY());j++) {
-            for(int i=(coordenadaNO->getX()+1);i<(this->base+coordenadaNO->getX());i++) {
-                glVertex2i(i,j);
-            }
+//        Coordenadas* coordenadaNO = getVerticeNO();
+//        for(int j=(coordenadaNO->getY()+1);j<(this->altura+coordenadaNO->getY());j++) {
+//            for(int i=(coordenadaNO->getX()+1);i<(this->base+coordenadaNO->getX());i++) {
+//                glVertex2i(i,j);
+//            }
+//        }
+//        delete coordenadaNO;
+
+        //        PolyVertices[0].x = this->getVerticeNE()->getX()-1; PolyVertices[0].y = this->getVerticeNE()->getY()+1;
+        //        PolyVertices[1].x = this->getVerticeNO()->getX()+1; PolyVertices[1].y = this->getVerticeNO()->getY()+1;
+        //        PolyVertices[2].x = this->getVerticeSO()->getX()+1; PolyVertices[2].y = this->getVerticeSO()->getY()-1;
+        //        PolyVertices[3].x = this->getVerticeSE()->getX()-1; PolyVertices[3].y = this->getVerticeSE()->getY()-1;
+
+        int cnt=3;
+
+        if(!rellenoParcialInferior) {
+            glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
         }
-        delete coordenadaNO;
 
-        /*Scanline scanline;
-        int cnt=4;
+        Scanline scanline1;
+        dcPt *PolyVertices1;
+        PolyVertices1 = (dcPt *)calloc(cnt, sizeof(dcPt));
+        PolyVertices1[0].x = this->getVerticeSO()->getX()+1; PolyVertices1[0].y = this->getVerticeSO()->getY()-1;
+        PolyVertices1[1].x = this->getVerticeNO()->getX()+1; PolyVertices1[1].y = this->getVerticeNO()->getY()+1;
+        PolyVertices1[2].x = this->getVerticeNE()->getX()-1; PolyVertices1[2].y = this->getVerticeNE()->getY()+1;
+        scanline1.scanFill(cnt,PolyVertices1);
+        delete PolyVertices1;
 
-        dcPt *PolyVertices;
-        PolyVertices = (dcPt *)calloc(cnt, sizeof(dcPt));
 
-        PolyVertices[0].x = this->getVerticeNE()->getX()-1; PolyVertices[0].y = this->getVerticeNE()->getY()+1;
-        PolyVertices[1].x = this->getVerticeNO()->getX()+1; PolyVertices[1].y = this->getVerticeNO()->getY()-1;
-        PolyVertices[2].x = this->getVerticeSO()->getX()+1; PolyVertices[2].y = this->getVerticeSO()->getY()-1;
-        PolyVertices[3].x = this->getVerticeSE()->getX()-1; PolyVertices[3].y = this->getVerticeSE()->getY()+1;
+        glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
+        Scanline scanline2;
+		dcPt *PolyVertices2;
+		PolyVertices2 = (dcPt *)calloc(cnt, sizeof(dcPt));
+		PolyVertices2[0].x = this->getVerticeNE()->getX()-1; PolyVertices2[0].y = this->getVerticeNE()->getY()+1;
+		PolyVertices2[1].x = this->getVerticeSO()->getX()+1; PolyVertices2[1].y = this->getVerticeSO()->getY()-1;
+		PolyVertices2[2].x = this->getVerticeSE()->getX()-1; PolyVertices2[2].y = this->getVerticeSE()->getY()-1;
+		scanline2.scanFill(cnt,PolyVertices2);
+		delete PolyVertices2;
 
-        scanline.scanFill(cnt,PolyVertices);
-
-        delete PolyVertices;*/
     }
 
     glEnd();
