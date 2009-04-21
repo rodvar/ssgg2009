@@ -43,6 +43,14 @@ Coordenadas* Rectangulo::getVerticeSE(){
     return new Coordenadas(x,y);
 }
 
+void Rectangulo::setRellenoParcial(){
+    this->rellenoParcialInferior = true;
+}
+
+void Rectangulo::setRellenoTotal(){
+    this->rellenoParcialInferior = false;
+}
+
 void Rectangulo::dibujar(){
     glColor3f(this->borde->getRojo(), this->borde->getVerde(), this->borde->getAzul());
     Segmento* baseSur = new Segmento(this->getVerticeSO(), this->getVerticeSE());

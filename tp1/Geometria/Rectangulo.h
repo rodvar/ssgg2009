@@ -21,6 +21,7 @@ class Rectangulo : public FiguraGeometrica
         virtual ~Rectangulo();
         float getBase() { return base; }
         float getAltura() { return altura; }
+        bool esRellenoParcial(){ return this->rellenoParcialInferior; }
         Coordenadas getCentro() { return *this->centro; }
 
         /* Devuelve las coordenadas del vertice NorOeste del rectangulo*/
@@ -31,6 +32,11 @@ class Rectangulo : public FiguraGeometrica
         Coordenadas* getVerticeSO();
         /* Devuelve las coordenadas del vertice SurEste del rectangulo*/
         Coordenadas* getVerticeSE();
+
+        /** Setea al rectangulo como de relleno parcial        */
+        void setRellenoParcial();
+        /** Setea al rectangulo como de relleno total        */
+        void setRellenoTotal();
 
         /**
          * Dibuja el rectangulo en la pantalla actual
@@ -53,6 +59,7 @@ class Rectangulo : public FiguraGeometrica
         bool contiene(int x, int y);
 
     protected:
+        bool rellenoParcialInferior; // indica si solo se pinta el triangulo inf der
         float base;
         float altura;
         Coordenadas* centro;
