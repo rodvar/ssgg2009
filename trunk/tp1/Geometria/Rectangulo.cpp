@@ -108,21 +108,24 @@ void Rectangulo::rellenar() {
         int cnt=3;
         glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
 
-        if(!this->rellenoParcialInferior) { // si relleno total pinto el superior
+        if(!this->rellenoParcialInferior) { // si relleno total
+            cnt++;
             PolyVertices = (dcPt *)calloc(cnt, sizeof(dcPt));
             PolyVertices[0].x = verticeSO->getX()+1; PolyVertices[0].y = verticeSO->getY()-1;
             PolyVertices[1].x = verticeNO->getX()+1; PolyVertices[1].y = verticeNO->getY()+1;
             PolyVertices[2].x = verticeNE->getX()-1; PolyVertices[2].y = verticeNE->getY()+1;
+            PolyVertices[3].x = verticeSE->getX()-1; PolyVertices[3].y = verticeSE->getY()-1;
             scanline.scanFill(cnt,PolyVertices);
             free(PolyVertices);
         }
-
-		PolyVertices = (dcPt *)calloc(cnt, sizeof(dcPt));
-		PolyVertices[0].x = verticeNE->getX()-1; PolyVertices[0].y = verticeNE->getY()+1;
-		PolyVertices[1].x = verticeSO->getX()+1; PolyVertices[1].y = verticeSO->getY()-1;
-		PolyVertices[2].x = verticeSE->getX()-1; PolyVertices[2].y = verticeSE->getY()-1;
-		scanline.scanFill(cnt,PolyVertices);
-		free(PolyVertices);
+        else{
+            PolyVertices = (dcPt *)calloc(cnt, sizeof(dcPt));
+            PolyVertices[0].x = verticeNE->getX()-1; PolyVertices[0].y = verticeNE->getY()+1;
+            PolyVertices[1].x = verticeSO->getX()+1; PolyVertices[1].y = verticeSO->getY()-1;
+            PolyVertices[2].x = verticeSE->getX()-1; PolyVertices[2].y = verticeSE->getY()-1;
+            scanline.scanFill(cnt,PolyVertices);
+            free(PolyVertices);
+        }
 		delete verticeNE;
 		delete verticeNO;
 		delete verticeSO;

@@ -115,6 +115,7 @@ void Motor::simulacionDDA(Coordenadas* desde, Coordenadas* hasta){
 	celda = grilla->obtenerCelda(grilla->posicionEnGrilla((int)(x+0.5), (int)(y+0.5)));
 	if (celda){
 	    celda->setColorRelleno(0,0.5,1);
+	    celda->setRellenoTotal();
         celda->dibujar();
 	}
 	for(k=0;k<steps;k++) {
@@ -123,6 +124,7 @@ void Motor::simulacionDDA(Coordenadas* desde, Coordenadas* hasta){
 		celda = grilla->obtenerCelda(grilla->posicionEnGrilla((int)(x+0.5), (int)(y+0.5)));
 		if(celda){
             celda->setColorRelleno(0,0.5,1);
+            celda->setRellenoTotal();
             celda->dibujar();
 		}
 	}
