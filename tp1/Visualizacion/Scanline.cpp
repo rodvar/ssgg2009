@@ -151,7 +151,7 @@ void Scanline::scanFill (int cnt, dcPt *pts)
             resortActiveList (active);
         }
     }
-
-    /* Free edge records that have been malloc’ed ... */
+    for (i=0; i<WINDOW_HEIGHT; i++)
+        free(edges[i]);
 }
 

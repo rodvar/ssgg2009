@@ -167,10 +167,23 @@ float Grilla::distanciaOrigen(Coordenadas punto){
     return this->origen->distancia(punto);
 }
 
-void Grilla::regenerar(){
+void Grilla::regenerar(bool dobleColor){
+    int x,y;
     map<Coordenadas*,Rectangulo*>::iterator it=this->mapa.begin();
     while (it != this->mapa.end()){
-        ((Rectangulo*)it->second)->setColorRelleno(new Color(1,1,1));
+        if (dobleColor){
+            x = ((Coordenadas*)it->first)->getX();
+            y = ((Coordenadas*)it->first)->getY();
+            if (x >= y){
+                if (x == y)
+                    ((Rectangulo*)it->second)->setRellenoParcial();
+                ((Rectangulo*)it->second)->setColorRelleno(new Color(0.8,0.8,0.8));
+            }
+            else
+                ((Rectangulo*)it->second)->setColorRelleno(new Color(1,1,1));
+        }
+        else
+            ((Rectangulo*)it->second)->setColorRelleno(new Color(1,1,1));
         it++;
     }
 }

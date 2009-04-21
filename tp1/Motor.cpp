@@ -1,15 +1,6 @@
 #include "Motor.h"
 
 void Motor::actualizar(){
-    if (this->modo == BRESENHAM){
-        Triangulo* triangulo = new Triangulo(
-                this->pantalla->getGrilla()->getOrigen().copia(),
-                this->pantalla->getGrilla()->getExtremoNE(),
-                this->pantalla->getGrilla()->getExtremoSE());
-        triangulo->setColorRelleno(new Color(0.8,0.8,0.8));
-        triangulo->dibujar();
-        delete triangulo;
-    }
     this->pantalla->actualizar(this->datos);
     glutPostRedisplay();
 }
@@ -71,6 +62,7 @@ void Motor::simulacionBresenham(Coordenadas* cRadio){
         inf = grilla->obtenerCelda(x,y);
         if (inf){
             inf->setColorRelleno(0,1,0);
+            inf->setRellenoTotal();
             inf->rellenar();
             xReal = circunferencia->calcularX(inf->getCentro().getY(),true);
             incerteza = this->calcularIncertidumbrePje(xReal, circunferencia->distanciaX(inf->getCentro()));
@@ -153,7 +145,10 @@ void Motor::limpiarBufferDatos(){
 }
 
 void Motor::regenerarPantalla(){
-    this->pantalla->regenerar();
+    bool dobleColor = false;
+    if (this->modo == BRESENHAM)
+        dobleColor = true;
+    this->pantalla->regenerar(dobleColor);
 }
 
 float Motor::calcularIncertidumbrePje(float xReal, float distancia){
