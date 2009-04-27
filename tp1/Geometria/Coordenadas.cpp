@@ -4,11 +4,19 @@ Coordenadas::Coordenadas()
 {
     this->x = 0;
     this->y = 0;
+    this->z = 0;
 }
 
 Coordenadas::Coordenadas(int x, int y){
     this->x = x;
     this->y = y;
+    this->z = 0;
+}
+
+Coordenadas::Coordenadas(int x, int y, int z){
+    this->x = x;
+    this->y = y;
+    this->z = z;
 }
 
 

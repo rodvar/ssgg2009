@@ -5,7 +5,7 @@
 #include <math.h>
 
 /**
- * Clase que representa Coordenadas cartesianas sobre un plano de 2 Dimensiones
+ * Clase que representa Coordenadas cartesianas
  */
 
 class Coordenadas
@@ -13,11 +13,14 @@ class Coordenadas
     public:
         Coordenadas();
         Coordenadas(int x, int y);
+        Coordenadas(int x, int y, int z);
         virtual ~Coordenadas();
         int getX() { return x; }
         void setX(int val) { x = val; }
         int getY() { return y; }
         void setY(int val) { y = val; }
+        int getZ() { return z; }
+        void setZ(int val) { z = val; }
 
         /**
          * Devuelve una copia de las coordenadas
@@ -67,6 +70,7 @@ class Coordenadas
     private:
         int x;
         int y;
+        int z;
 };
 
 #endif // COORDENADAS_H
