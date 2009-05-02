@@ -10,6 +10,7 @@ typedef struct tdcPt3 {
     int y;
     int z;
 } wcPt3;
+
 class Curva : public FiguraGeometrica
 {
     public:
