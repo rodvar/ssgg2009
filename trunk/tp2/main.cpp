@@ -1,6 +1,6 @@
 #include <GL/glut.h>
 #include <math.h>
-#include <stdlib.h>
+#include "Visualizacion/IU.h"
 
 // Variables que controlan la ubicaci�n de la c�mara en la Escena 3D
 float eye[3] = {15.0, 15.0, 5.0};
@@ -17,11 +17,6 @@ float color_esfera[4] = {0.5f, 0.5f, 0.2f, 1.0f};
 
 // Variable asociada al movimiento de rotaci�n de la esfera alrededor del eje Z
 float rotate_sphere = 0;
-
-// Variables de control
-bool view_grid = true;
-bool view_axis = true;
-
 
 // Handle para el control de las Display Lists
 GLuint dl_handle;
@@ -189,10 +184,10 @@ void display(void)
 	glLoadIdentity();
 	gluLookAt (eye[0], eye[1], eye[2], at[0], at[1], at[2], up[0], up[1], up[2]);
 
-	if (view_axis)
+	if (Pantalla::getInstancia()->ejesVisibles())
 		 glCallList(DL_AXIS);
 
-	if (view_grid)
+	if (Pantalla::getInstancia()->grillaVisible())
 		 glCallList(DL_GRID);
 	//
 	///////////////////////////////////////////////////
@@ -228,26 +223,6 @@ void reshape (int w, int h)
 	W_HEIGHT = h;
 }
 
-void keyboard (unsigned char key, int x, int y)
-{
-   switch (key) {
-      case 0x1b:
-         exit (0);
-         break;
-	  case 'g':
-		  view_grid = !view_grid;
-		  glutPostRedisplay();
-		  break;
-
-	  case 'a':
-		  view_axis = !view_axis;
-		  glutPostRedisplay();
-		  break;
-     default:
-         break;
-   }
-}
-
 int main(int argc, char** argv)
 {
    glutInit(&argc, argv);
@@ -260,7 +235,8 @@ int main(int argc, char** argv)
    init ();
    glutDisplayFunc(display);
    glutReshapeFunc(reshape);
-   glutKeyboardFunc(keyboard);
+   glutKeyboardFunc(IU::keyboard);
+   glutMouseFunc(IU::mouse);
    glutIdleFunc(OnIdle);
    glutMainLoop();
    return 0;

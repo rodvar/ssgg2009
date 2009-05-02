@@ -5,6 +5,7 @@
 #define BRESENHAM 'B'
 #define DDA 'D'
 
+#include <stdlib.h>
 #include "Geometria/Circunferencia.h"
 #include "Geometria/Segmento.h"
 #include "Geometria/Triangulo.h"
