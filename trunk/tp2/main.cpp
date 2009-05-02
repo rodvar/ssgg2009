@@ -2,12 +2,12 @@
 #include <math.h>
 #include <stdlib.h>
 
-// Variables que controlan la ubicación de la cámara en la Escena 3D
+// Variables que controlan la ubicaciï¿½n de la cï¿½mara en la Escena 3D
 float eye[3] = {15.0, 15.0, 5.0};
 float at[3]  = { 0.0,  0.0, 0.0};
 float up[3]  = { 0.0,  0.0, 1.0};
 
-// Variables asociadas a única fuente de luz de la escena
+// Variables asociadas a ï¿½nica fuente de luz de la escena
 float light_color[4] = {1.0f, 1.0f, 1.0f, 1.0f};
 float light_position[3] = {10.0f, 10.0f, 8.0f};
 float light_ambient[4] = {0.05f, 0.05f, 0.05f, 1.0f};
@@ -15,7 +15,7 @@ float light_ambient[4] = {0.05f, 0.05f, 0.05f, 1.0f};
 // Color de la esfera en movimiento dentro de la escena
 float color_esfera[4] = {0.5f, 0.5f, 0.2f, 1.0f};
 
-// Variable asociada al movimiento de rotación de la esfera alrededor del eje Z
+// Variable asociada al movimiento de rotaciï¿½n de la esfera alrededor del eje Z
 float rotate_sphere = 0;
 
 // Variables de control
@@ -30,7 +30,7 @@ GLuint dl_handle;
 #define DL_AXIS2D_TOP (dl_handle+2)
 #define DL_AXIS2D_HEIGHT (dl_handle+3)
 
-// Tamaño de la ventana
+// Tamaï¿½o de la ventana
 GLfloat window_size[2];
 #define W_WIDTH window_size[0]
 #define W_HEIGHT window_size[1]
@@ -161,7 +161,7 @@ void init(void)
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHTING);
 
-	// Generación de las Display Lists
+	// Generaciï¿½n de las Display Lists
 	glNewList(DL_AXIS, GL_COMPILE);
 		DrawAxis();
 	glEndList();
