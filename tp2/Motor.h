@@ -36,9 +36,6 @@ class Motor
 
         char getModo() { return this->modo; }
 
-        /** Realiza el switch entre los 2 modos posibles **/
-        void cambiarModo();
-
         /**
          * Realiza los cambios pertinentes en los datos, y los pasa a la Pantalla
          */

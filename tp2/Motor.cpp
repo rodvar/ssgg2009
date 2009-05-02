@@ -5,20 +5,6 @@ void Motor::actualizar(){
     glutPostRedisplay();
 }
 
-void Motor::cambiarModo(){
-    if (this->modo == 'D')
-        this->modo = 'B';
-    else
-        this->modo = 'D';
-    this->limpiarBufferDatos();
-    //this->regenerarPantalla();
-}
-
-bool Motor::enRango(int x, int y){
-    //return this->pantalla->getGrilla()->enRango(x,y);
-    return false;
-}
-
 void Motor::limpiarBufferDatos(){
     list<FiguraGeometrica*>::iterator it=this->datos.begin() ;
     while(it != this->datos.end()){
@@ -29,9 +15,6 @@ void Motor::limpiarBufferDatos(){
 }
 
 void Motor::regenerarPantalla(){
-    bool dobleColor = false;
-    if (this->modo == BRESENHAM)
-        dobleColor = true;
     //this->pantalla->regenerar(dobleColor);
 }
 
