@@ -1,7 +1,6 @@
-//#include <GL/gl.h>
-//#include <GL/glu.h>
 #include <GL/glut.h>
 #include <math.h>
+#include <stdlib.h>
 
 // Variables que controlan la ubicación de la cámara en la Escena 3D
 float eye[3] = {15.0, 15.0, 5.0};
@@ -54,6 +53,7 @@ void OnIdle (void)
     glutPostRedisplay();
 }
 
+// Ejes cartesianos 3d
 void DrawAxis()
 {
 	glDisable(GL_LIGHTING);
@@ -77,6 +77,7 @@ void DrawAxis()
 	glEnable(GL_LIGHTING);
 }
 
+// Recuadro superior derecho
 void DrawAxis2DTopView()
 {
 	glDisable(GL_LIGHTING);
@@ -90,6 +91,7 @@ void DrawAxis2DTopView()
 	glEnable(GL_LIGHTING);
 }
 
+// Recuadro inf der
 void DrawAxis2DHeightView()
 {
 	glDisable(GL_LIGHTING);
@@ -103,11 +105,13 @@ void DrawAxis2DHeightView()
 	glEnable(GL_LIGHTING);
 }
 
+/** Grilla 3d
+ */
 void DrawXYGrid()
 {
 	int i;
 	glDisable(GL_LIGHTING);
-	glColor3f(0.15, 0.1, 0.1);
+	glColor3f(0.35, 0.1, 0.1);
 	glBegin(GL_LINES);
 	for(i=-20; i<21; i++)
 	{
@@ -121,15 +125,16 @@ void DrawXYGrid()
 }
 void Set3DEnv()
 {
-	glViewport (0, 0, (GLsizei) W_WIDTH, (GLsizei) W_HEIGHT); 
+	glViewport (0, 0, (GLsizei) W_WIDTH, (GLsizei) W_HEIGHT);
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
+    // Primer parametro para modificar zoom camara
     gluPerspective(60.0, (GLfloat) W_WIDTH/(GLfloat) W_HEIGHT, 0.10, 100.0);
 }
 
 void SetPanelTopEnv()
 {
-	glViewport (TOP_VIEW_POSX, TOP_VIEW_POSY, (GLsizei) TOP_VIEW_W, (GLsizei) TOP_VIEW_H); 
+	glViewport (TOP_VIEW_POSX, TOP_VIEW_POSY, (GLsizei) TOP_VIEW_W, (GLsizei) TOP_VIEW_H);
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
 	gluOrtho2D(-0.10, 1.05, -0.10, 1.05);
@@ -137,13 +142,13 @@ void SetPanelTopEnv()
 
 void SetPanelHeightEnv()
 {
-	glViewport (HEIGHT_VIEW_POSX, HEIGHT_VIEW_POSY, (GLsizei) HEIGHT_VIEW_W, (GLsizei) HEIGHT_VIEW_H); 
+	glViewport (HEIGHT_VIEW_POSX, HEIGHT_VIEW_POSY, (GLsizei) HEIGHT_VIEW_W, (GLsizei) HEIGHT_VIEW_H);
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
 	gluOrtho2D(-0.10, 1.05, -0.10, 1.05);
 }
 
-void init(void) 
+void init(void)
 {
 	dl_handle = glGenLists(3);
 
@@ -183,10 +188,10 @@ void display(void)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	gluLookAt (eye[0], eye[1], eye[2], at[0], at[1], at[2], up[0], up[1], up[2]);
-   
+
 	if (view_axis)
 		 glCallList(DL_AXIS);
-	
+
 	if (view_grid)
 		 glCallList(DL_GRID);
 	//
@@ -202,7 +207,7 @@ void display(void)
 	glCallList(DL_AXIS2D_TOP);
 	//
 	///////////////////////////////////////////////////
-	
+
 
 	///////////////////////////////////////////////////
 	// Panel 2D para la vista del perfil de altura
@@ -227,7 +232,6 @@ void keyboard (unsigned char key, int x, int y)
 {
    switch (key) {
       case 0x1b:
-
          exit (0);
          break;
 	  case 'g':
@@ -248,13 +252,13 @@ int main(int argc, char** argv)
 {
    glutInit(&argc, argv);
    glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-   glutInitWindowSize (1024, 768); 
+   glutInitWindowSize (1024, 768);
    glutInitWindowPosition (0, 0);
-   
+
    glutCreateWindow (argv[0]);
    glutFullScreen();
    init ();
-   glutDisplayFunc(display); 
+   glutDisplayFunc(display);
    glutReshapeFunc(reshape);
    glutKeyboardFunc(keyboard);
    glutIdleFunc(OnIdle);
