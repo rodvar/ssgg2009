@@ -1,6 +1,6 @@
-#include <GL/glut.h>
 #include <math.h>
 #include "Visualizacion/IU.h"
+#include "Visualizacion/Pantalla.h"
 
 // Variables que controlan la ubicaci�n de la c�mara en la Escena 3D
 float eye[3] = {15.0, 15.0, 5.0};
@@ -25,122 +25,11 @@ GLuint dl_handle;
 #define DL_AXIS2D_TOP (dl_handle+2)
 #define DL_AXIS2D_HEIGHT (dl_handle+3)
 
-// Tama�o de la ventana
-GLfloat window_size[2];
-#define W_WIDTH window_size[0]
-#define W_HEIGHT window_size[1]
-
-#define TOP_VIEW_POSX	((int)((float)W_WIDTH*0.70f))
-#define TOP_VIEW_W		((int)((float)W_WIDTH*0.30f))
-#define TOP_VIEW_POSY	((int)((float)W_HEIGHT*0.70f))
-#define TOP_VIEW_H		((int)((float)W_HEIGHT*0.30f))
-
-#define HEIGHT_VIEW_POSX	((int)((float)W_WIDTH*0.70f))
-#define HEIGHT_VIEW_W		((int)((float)W_WIDTH*0.30f))
-#define HEIGHT_VIEW_POSY	((int)((float)W_HEIGHT*0.40f))
-#define HEIGHT_VIEW_H		((int)((float)W_HEIGHT*0.30f))
-
-
 void OnIdle (void)
 {
 	rotate_sphere += 0.1;
 	if(rotate_sphere > 360.0) rotate_sphere = 0.0;
     glutPostRedisplay();
-}
-
-// Ejes cartesianos 3d
-void DrawAxis()
-{
-	glDisable(GL_LIGHTING);
-	glBegin(GL_LINES);
-		// X
-		glColor3f(1.0, 0.0, 0.0);
-		glVertex3f(0.0, 0.0, 0.0);
-		glColor3f(0.0, 0.0, 0.0);
-		glVertex3f(15.0, 0.0, 0.0);
-		// Y
-		glColor3f(0.0, 1.0, 0.0);
-		glVertex3f(0.0, 0.0, 0.0);
-		glColor3f(0.0, 0.0, 0.0);
-		glVertex3f(0.0, 15.0, 0.0);
-		// Z
-		glColor3f(0.0, 0.0, 1.0);
-		glVertex3f(0.0, 0.0, 0.0);
-		glColor3f(0.0, 0.0, 0.0);
-		glVertex3f(0.0, 0.0, 15.0);
-	glEnd();
-	glEnable(GL_LIGHTING);
-}
-
-// Recuadro superior derecho
-void DrawAxis2DTopView()
-{
-	glDisable(GL_LIGHTING);
-	glBegin(GL_LINE_LOOP);
-		glColor3f(1.0, 1.0, 0.0);
-		glVertex3f(0.0, 0.0, 0.0);
-		glVertex3f(1.0, 0.0, 0.0);
-		glVertex3f(1.0, 1.0, 0.0);
-		glVertex3f(0.0, 1.0, 0.0);
-	glEnd();
-	glEnable(GL_LIGHTING);
-}
-
-// Recuadro inf der
-void DrawAxis2DHeightView()
-{
-	glDisable(GL_LIGHTING);
-	glBegin(GL_LINE_LOOP);
-		glColor3f(1.0, 0.5, 1.0);
-		glVertex3f(0.0, 0.0, 0.0);
-		glVertex3f(1.0, 0.0, 0.0);
-		glVertex3f(1.0, 1.0, 0.0);
-		glVertex3f(0.0, 1.0, 0.0);
-	glEnd();
-	glEnable(GL_LIGHTING);
-}
-
-/** Grilla 3d
- */
-void DrawXYGrid()
-{
-	int i;
-	glDisable(GL_LIGHTING);
-	glColor3f(0.35, 0.1, 0.1);
-	glBegin(GL_LINES);
-	for(i=-20; i<21; i++)
-	{
-		glVertex3f(i, -20.0, 0.0);
-		glVertex3f(i,  20.0, 0.0);
-		glVertex3f(-20.0, i, 0.0);
-		glVertex3f( 20.0, i, 0.0);
-	}
-	glEnd();
-	glEnable(GL_LIGHTING);
-}
-void Set3DEnv()
-{
-	glViewport (0, 0, (GLsizei) W_WIDTH, (GLsizei) W_HEIGHT);
-    glMatrixMode (GL_PROJECTION);
-    glLoadIdentity ();
-    // Primer parametro para modificar zoom camara
-    gluPerspective(60.0, (GLfloat) W_WIDTH/(GLfloat) W_HEIGHT, 0.10, 100.0);
-}
-
-void SetPanelTopEnv()
-{
-	glViewport (TOP_VIEW_POSX, TOP_VIEW_POSY, (GLsizei) TOP_VIEW_W, (GLsizei) TOP_VIEW_H);
-    glMatrixMode (GL_PROJECTION);
-    glLoadIdentity ();
-	gluOrtho2D(-0.10, 1.05, -0.10, 1.05);
-}
-
-void SetPanelHeightEnv()
-{
-	glViewport (HEIGHT_VIEW_POSX, HEIGHT_VIEW_POSY, (GLsizei) HEIGHT_VIEW_W, (GLsizei) HEIGHT_VIEW_H);
-    glMatrixMode (GL_PROJECTION);
-    glLoadIdentity ();
-	gluOrtho2D(-0.10, 1.05, -0.10, 1.05);
 }
 
 void init(void)
@@ -158,16 +47,16 @@ void init(void)
 
 	// Generaci�n de las Display Lists
 	glNewList(DL_AXIS, GL_COMPILE);
-		DrawAxis();
+		Pantalla::getInstancia()->dibujarEjes();
 	glEndList();
 	glNewList(DL_GRID, GL_COMPILE);
-		DrawXYGrid();
+		Pantalla::getInstancia()->dibujarGrilla2D();
 	glEndList();
 	glNewList(DL_AXIS2D_TOP, GL_COMPILE);
-		DrawAxis2DTopView();
+		Pantalla::getInstancia()->dibujarEjesVista2DSuperior();
 	glEndList();
 	glNewList(DL_AXIS2D_HEIGHT, GL_COMPILE);
-		DrawAxis2DHeightView();
+		Pantalla::getInstancia()->dibujarEjesVista2DInferior();
 	glEndList();
 }
 
@@ -178,7 +67,7 @@ void display(void)
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	///////////////////////////////////////////////////
 	// Escena 3D
-	Set3DEnv();
+	Pantalla::getInstancia()->setAmbiente3D();
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -195,7 +84,7 @@ void display(void)
 
 	///////////////////////////////////////////////////
 	// Panel 2D para la vista superior
-	SetPanelTopEnv();
+	Pantalla::getInstancia()->setAmbiente2DSuperior();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	gluLookAt (0, 0, 0.5, 0, 0, 0, 0, 1, 0);
@@ -206,7 +95,7 @@ void display(void)
 
 	///////////////////////////////////////////////////
 	// Panel 2D para la vista del perfil de altura
-	SetPanelHeightEnv();
+	Pantalla::getInstancia()->dibujarEjesVista2DInferior();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	gluLookAt (0, 0, 0.5, 0, 0, 0, 0, 1, 0);
@@ -219,8 +108,8 @@ void display(void)
 
 void reshape (int w, int h)
 {
-   	W_WIDTH  = w;
-	W_HEIGHT = h;
+   	Pantalla::getInstancia()->setAncho(w);
+   	Pantalla::getInstancia()->setAlto(h);
 }
 
 int main(int argc, char** argv)
