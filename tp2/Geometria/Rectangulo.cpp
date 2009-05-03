@@ -53,6 +53,12 @@ void Rectangulo::setRellenoTotal(){
     this->rellenoParcialInferior = false;
 }
 
+void Rectangulo::setCentro(Coordenadas centro) {
+    if (this->centro)
+        delete this->centro;
+    this->centro = new Coordenadas(centro.getX(), centro.getY());
+}
+
 void Rectangulo::dibujar(){
     glColor3f(this->borde->getRojo(), this->borde->getVerde(), this->borde->getAzul());
     Segmento* baseSur = new Segmento(this->getVerticeSO(), this->getVerticeSE());

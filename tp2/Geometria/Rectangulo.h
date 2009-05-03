@@ -37,6 +37,10 @@ class Rectangulo : public FiguraGeometrica
         void setRellenoParcial();
         /** Setea al rectangulo como de relleno total        */
         void setRellenoTotal();
+        /** Setea el centro del rectangulo **/
+        void setCentro(Coordenadas centro);
+        void setBase(float base) { this->base = base; }
+        void setAltura(float altura) { this->altura = altura; }
 
         /**
          * Dibuja el rectangulo en la pantalla actual
