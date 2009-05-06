@@ -4,7 +4,9 @@
 #include <stdlib.h>
 #include <GL/glut.h>
 #include "../Geometria/Rectangulo.h"
-
+#include "../Geometria/Coordenadas.h"
+#include "../Geometria/Curva.h"
+#include <list.h>
 
 class Pantalla
 {
@@ -60,6 +62,14 @@ class Pantalla
         /** TODO: Describir esta funcionalidad **/
         void setAmbiente2DInferior();
 
+        void setPuntoControlSPlines(Coordenadas coordenada);
+
+        list<Coordenadas> getPuntosControlSPlines() {return this->puntosControlBSplines;}
+
+        void setPuntoControlBezier(Coordenadas coordenada);
+
+        void dibujarFiguraBSplines();
+
     protected:
     private:
         GLfloat window_size[2];
@@ -69,6 +79,9 @@ class Pantalla
         Rectangulo inferior;
         Rectangulo central;
 
+        list<Coordenadas> puntosControlBSplines;
+        list<Coordenadas> puntosControlBezier;
+
         // configura con los valores iniciales los rectangulos visibles en la pantalla
         void configurarEscenario();
 
@@ -77,6 +90,8 @@ class Pantalla
         {
             this->view_grid = true;
             this->view_axis = true;
+            this->window_size[0]=1024;
+            this->window_size[1]=768;
             this->configurarEscenario();
         }
         // destructor

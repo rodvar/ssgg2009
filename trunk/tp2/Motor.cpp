@@ -24,5 +24,5 @@ float Motor::calcularIncertidumbrePje(float xReal, float distancia){
 }
 
 bool Motor::enRango(int x, int y){
-    return false;
+    return true;
 }

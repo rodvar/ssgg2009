@@ -3,6 +3,7 @@
 
 #include "../Motor.h"
 #include "Pantalla.h"
+#include "../Geometria/Coordenadas.h"
 
 /**
     Interfaz de Usuario: Clase que contiene toda la funcionalidad brindada al usuario

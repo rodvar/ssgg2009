@@ -2,6 +2,8 @@
 #include "Segmento.h"
 #include "Circunferencia.h"
 
+Curva::Curva(){}
+
 Curva::Curva(list<Coordenadas> puntosControl)
 {
     this->puntosControl = puntosControl;
@@ -13,7 +15,7 @@ Curva::~Curva()
 }
 
 void Curva::dibujar(){
-    this->dibujarBezier();
+    this->dibujarBSplines();
 }
 
 void Curva::dibujarPunteado(){
@@ -140,6 +142,7 @@ void Curva::dibujarBSplines(){
     int n,t,i;
     n=this->puntosControl.size();
     t=4; // degree of polynomial = t-1
+    i=0;
 
     wcPt3* control = (wcPt3*)calloc(this->puntosControl.size(), sizeof(wcPt3));
     Coordenadas c;
@@ -158,7 +161,7 @@ void Curva::dibujarBSplines(){
     out_pts = new wcPt3[resolution];
 
     bspline(n, t, control, out_pts, resolution);
-    glColor3f(1.0, 0.0, 0.0);
+    glColor3f(1.0, 1.0, 1.0);
 
 	Circunferencia* circ;
   	for (i=0; i<=n; i++) {
@@ -251,4 +254,8 @@ void Curva::bezier(wcPt3* controls, int ncontrols, int m, wcPt3* curve)
    for (i=0; i<= m ; i++)
       computePoint ( i / (float) m, &curve[i], ncontrols, controls, c);
    free (c);
+}
+
+void Curva::setPuntosControl(list<Coordenadas> pControl) {
+	this->puntosControl = pControl;
 }
