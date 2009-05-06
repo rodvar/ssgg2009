@@ -95,7 +95,7 @@ void display(void)
 
 	///////////////////////////////////////////////////
 	// Panel 2D para la vista del perfil de altura
-	Pantalla::getInstancia()->dibujarEjesVista2DInferior();
+	Pantalla::getInstancia()->setAmbiente2DInferior();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	gluLookAt (0, 0, 0.5, 0, 0, 0, 0, 1, 0);

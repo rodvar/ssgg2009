@@ -28,5 +28,20 @@ void IU::keyboard (unsigned char key, int x, int y){
 */
 void IU::mouse(int boton, int estado, int x, int y){
     if (Motor::getInstancia()->enRango(x,y)){
+    	if(boton==GLUT_LEFT_BUTTON && estado==GLUT_UP) {
+    		if(x>200 && x<600 && y>200 && y<700) {
+    			Coordenadas c;
+    			c.setX(x);
+    			c.setY(y);
+    			c.setZ(0);
+    			Pantalla::getInstancia()->setPuntoControlSPlines(c);
+    		}
+    	}
+    	if(boton==GLUT_RIGHT_BUTTON && estado==GLUT_UP) {
+    		if(Pantalla::getInstancia()->getPuntosControlSPlines().size()>1) {
+    			Pantalla::getInstancia()->dibujarFiguraBSplines();
+    		}
+
+    	}
     }
 }
