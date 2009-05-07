@@ -4,6 +4,10 @@
 #include "../Motor.h"
 #include "Pantalla.h"
 #include "../Geometria/Coordenadas.h"
+#include "../Geometria/Curva.h"
+#include "../Geometria/Rectangulo.h"
+#include "../Geometria/Circunferencia.h"
+#include <list.h>
 
 /**
     Interfaz de Usuario: Clase que contiene toda la funcionalidad brindada al usuario
@@ -36,9 +40,23 @@ class IU
         /** OnIdle **/
         static void OnIdle();
 
+        /** Dibuja la figura BSpline dentro del marco que le corresponde */
+        void dibujarFiguraBSplines();
+
+        list<Coordenadas> getPuntosControlBSplines() { return puntosControlBSplines; }
+
     protected:
+
     private:
-        // Constructor
+
+    	list<Coordenadas> puntosControlBSplines;
+        list<Coordenadas> puntosControlBezier;
+
+        void addPuntoControlBSplines(Coordenadas coordenada);
+
+        void addPuntoControlBezier(Coordenadas coordenada);
+
+    	// Constructor
         IU(){
         }
         //Destructor

@@ -4,9 +4,6 @@
 #include <stdlib.h>
 #include <GL/glut.h>
 #include "../Geometria/Rectangulo.h"
-#include "../Geometria/Coordenadas.h"
-#include "../Geometria/Curva.h"
-#include <list.h>
 
 class Pantalla
 {
@@ -68,13 +65,9 @@ class Pantalla
         /** TODO: Describir esta funcionalidad **/
         void setAmbiente2DInferior();
 
-        void setPuntoControlSPlines(Coordenadas coordenada);
+        Rectangulo getAmbiente2DSuperior() { return superior; }
 
-        list<Coordenadas> getPuntosControlSPlines() {return this->puntosControlBSplines;}
-
-        void setPuntoControlBezier(Coordenadas coordenada);
-
-        void dibujarFiguraBSplines();
+        Rectangulo getAmbiente2DInferior() { return inferior; }
 
     protected:
     private:
@@ -89,9 +82,6 @@ class Pantalla
         float color_esfera[4];
         // Variable asociada al movimiento de rotaci�n de la esfera alrededor del eje Z
         float rotate_sphere;
-
-        list<Coordenadas> puntosControlBSplines;
-        list<Coordenadas> puntosControlBezier;
 
         // configura con los valores iniciales los rectangulos visibles en la pantalla
         void configurarEscenario();
