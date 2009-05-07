@@ -18,12 +18,9 @@ class Curva : public FiguraGeometrica
          * Constructor
          * @param puntosControl Es la lista de puntos de control que definen la curva
          */
-    	Curva();
         Curva(list<Coordenadas> puntosControl);
         virtual ~Curva();
         list<Coordenadas> getPuntosControl() { return this->puntosControl; }
-
-        void setPuntosControl(list<Coordenadas> puntosControl);
 
         void dibujar();
         void dibujarPunteado();

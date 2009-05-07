@@ -107,17 +107,3 @@ void Pantalla::configurarEscenario(){
     this->inferior.setBase(this->getAncho()*0.30f);
     this->inferior.setAltura(this->getAlto()*0.30f);
 }
-
-void Pantalla::setPuntoControlSPlines(Coordenadas coordenada) {
-	this->puntosControlBSplines.push_back(coordenada);
-}
-
-void Pantalla::setPuntoControlBezier(Coordenadas coordenada) {
-	this->puntosControlBezier.push_back(coordenada);
-}
-
-void Pantalla::dibujarFiguraBSplines() {
-	Curva curva;
-	curva.setPuntosControl(this->puntosControlBSplines);
-	curva.dibujar();
-}

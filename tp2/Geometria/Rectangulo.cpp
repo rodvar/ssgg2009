@@ -18,7 +18,9 @@ Rectangulo::Rectangulo(){
 
 Rectangulo::~Rectangulo()
 {
-    delete this->centro;
+	if(this->centro!=NULL) {
+		delete this->centro;
+	}
 }
 
 Coordenadas* Rectangulo::getVerticeNO(){

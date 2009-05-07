@@ -2,8 +2,6 @@
 #include "Segmento.h"
 #include "Circunferencia.h"
 
-Curva::Curva(){}
-
 Curva::Curva(list<Coordenadas> puntosControl)
 {
     this->puntosControl = puntosControl;
@@ -237,7 +235,7 @@ void Curva::computePoint(float u, wcPt3* pt,  int ncontrols, wcPt3* controls, in
  /*Add in influence of each control point*/
    for (k=0; k < ncontrols; k++) {
       blend = c[k] * powf(u,k) * powf(1-u,n-k);
-      pt->x += controls[k].x  * blend;
+      pt->x += controls[k].x * blend;
       pt->y += controls[k].y * blend;
       pt->z += controls[k].z * blend;
     }
@@ -254,8 +252,4 @@ void Curva::bezier(wcPt3* controls, int ncontrols, int m, wcPt3* curve)
    for (i=0; i<= m ; i++)
       computePoint ( i / (float) m, &curve[i], ncontrols, controls, c);
    free (c);
-}
-
-void Curva::setPuntosControl(list<Coordenadas> pControl) {
-	this->puntosControl = pControl;
 }
