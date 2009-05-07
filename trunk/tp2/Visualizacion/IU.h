@@ -33,6 +33,8 @@ class IU
         static void keyboard (unsigned char key, int x, int y);
         /** Manejo de eventos de mouse **/
         static void mouse(int boton, int estado, int x, int y);
+        /** OnIdle **/
+        static void OnIdle();
 
     protected:
     private:
