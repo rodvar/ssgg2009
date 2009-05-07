@@ -45,3 +45,11 @@ void IU::mouse(int boton, int estado, int x, int y){
     	}
     }
 }
+
+void IU::OnIdle(){
+    float rotacion = Pantalla::getInstancia()->getRotacionEsfera();
+    rotacion += 0.1;
+	if(rotacion > 360.0) rotacion = 0.0;
+	Pantalla::getInstancia()->setRotacionEsfera(rotacion);
+    glutPostRedisplay();
+}

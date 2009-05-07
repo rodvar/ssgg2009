@@ -12,25 +12,12 @@ float light_color[4] = {1.0f, 1.0f, 1.0f, 1.0f};
 float light_position[3] = {10.0f, 10.0f, 8.0f};
 float light_ambient[4] = {0.05f, 0.05f, 0.05f, 1.0f};
 
-// Color de la esfera en movimiento dentro de la escena
-float color_esfera[4] = {0.5f, 0.5f, 0.2f, 1.0f};
-
-// Variable asociada al movimiento de rotaci�n de la esfera alrededor del eje Z
-float rotate_sphere = 0;
-
 // Handle para el control de las Display Lists
 GLuint dl_handle;
 #define DL_AXIS (dl_handle+0)
 #define DL_GRID (dl_handle+1)
 #define DL_AXIS2D_TOP (dl_handle+2)
 #define DL_AXIS2D_HEIGHT (dl_handle+3)
-
-void OnIdle (void)
-{
-	rotate_sphere += 0.1;
-	if(rotate_sphere > 360.0) rotate_sphere = 0.0;
-    glutPostRedisplay();
-}
 
 void init(void)
 {
@@ -126,7 +113,7 @@ int main(int argc, char** argv)
    glutReshapeFunc(reshape);
    glutKeyboardFunc(IU::keyboard);
    glutMouseFunc(IU::mouse);
-   glutIdleFunc(OnIdle);
+   glutIdleFunc(IU::OnIdle);
    glutMainLoop();
    return 0;
 }

@@ -33,6 +33,12 @@ class Pantalla
         bool grillaVisible() {return this->view_grid;}
         float getAncho() {return this->window_size[0];}
         float getAlto() {return this->window_size[1];}
+
+        // Esto queda??
+        float getRotacionEsfera() { return this->rotate_sphere;}
+        void setRotacionEsfera(float rot) { this->rotate_sphere = rot; }
+        //
+
         //setters
         void setEjesVisibles(bool b) { this->view_axis = b;}
         void setGrillaVisible(bool b) { this->view_grid = b;}
@@ -78,6 +84,11 @@ class Pantalla
         Rectangulo superior;
         Rectangulo inferior;
         Rectangulo central;
+        /** Estas 2 variables float posiblemente se muevan a una clase Camara*/
+        // Color de la esfera en movimiento dentro de la escena
+        float color_esfera[4];
+        // Variable asociada al movimiento de rotaci�n de la esfera alrededor del eje Z
+        float rotate_sphere;
 
         list<Coordenadas> puntosControlBSplines;
         list<Coordenadas> puntosControlBezier;
@@ -93,6 +104,12 @@ class Pantalla
             this->window_size[0]=1024;
             this->window_size[1]=768;
             this->configurarEscenario();
+            // esto queda??
+            this->color_esfera[0] = 0.5f;
+            this->color_esfera[1] = 0.5f;
+            this->color_esfera[2] = 0.2f;
+            this->color_esfera[3] = 1.0f;
+            this->rotate_sphere = 0;
         }
         // destructor
         inline ~Pantalla()
