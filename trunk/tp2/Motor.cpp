@@ -1,7 +1,8 @@
 #include "Motor.h"
+#include "Visualizacion/Pantalla.h"
 
 void Motor::actualizar(){
-    //this->pantalla->actualizar(this->datos);
+    Pantalla::getInstancia()->actualizar(this->datos);
     glutPostRedisplay();
 }
 

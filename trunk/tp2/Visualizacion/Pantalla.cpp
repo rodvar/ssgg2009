@@ -1,5 +1,57 @@
 #include "Pantalla.h"
 
+void Pantalla::actualizar(list<FiguraGeometrica*> figuras){
+    float* ojoCamara = this->camara.getOjo();
+    float* sobreCamara = this->camara.getSobre();
+    float* arribaCamara = this->camara.getArriba();
+    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	///////////////////////////////////////////////////
+	// Escena 3D
+	Pantalla::getInstancia()->setAmbiente3D();
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluLookAt (ojoCamara[0], ojoCamara[1], ojoCamara[2], sobreCamara[0],
+        sobreCamara[1], sobreCamara[2], arribaCamara[0], arribaCamara[1], arribaCamara[2]);
+
+	if (Pantalla::getInstancia()->ejesVisibles())
+		 glCallList(this->getDL_AXIS());
+
+	if (Pantalla::getInstancia()->grillaVisible())
+		 glCallList(this->getDL_GRID());
+	//
+	///////////////////////////////////////////////////
+
+
+	///////////////////////////////////////////////////
+	// Panel 2D para la vista superior
+	Pantalla::getInstancia()->setAmbiente2DSuperior();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluLookAt (0, 0, 0.5, 0, 0, 0, 0, 1, 0);
+	glCallList(this->getDL_AXIS2D_TOP());
+	//
+	///////////////////////////////////////////////////
+
+
+	///////////////////////////////////////////////////
+	// Panel 2D para la vista del perfil de altura
+	Pantalla::getInstancia()->setAmbiente2DInferior();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	gluLookAt (0, 0, 0.5, 0, 0, 0, 0, 1, 0);
+	glCallList(this->getDL_AXIS2D_HEIGHT());
+	//
+	///////////////////////////////////////////////////
+
+	glutSwapBuffers();
+}
+
+void Pantalla::redimensionar (int w, int h){
+   	Pantalla::getInstancia()->setAncho(w);
+   	Pantalla::getInstancia()->setAlto(h);
+}
+
 void Pantalla::dibujarEjes()
 {
 	glDisable(GL_LIGHTING);
@@ -106,4 +158,28 @@ void Pantalla::configurarEscenario(){
     this->inferior.setCentro(coordenadas);
     this->inferior.setBase(this->getAncho()*0.30f);
     this->inferior.setAltura(this->getAlto()*0.30f);
+
+    this->dl_handle = glGenLists(3);
+	glClearColor (0.02, 0.02, 0.04, 0.0);
+    glShadeModel (GL_SMOOTH);
+    glEnable(GL_DEPTH_TEST);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, this->luz.getColor());
+    glLightfv(GL_LIGHT0, GL_AMBIENT, this->luz.getAmbiente());
+    glLightfv(GL_LIGHT0, GL_POSITION, this->luz.getPosicion());
+    glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHTING);
+
+	// Generaci�n de las Display Lists
+	glNewList(this->getDL_AXIS(), GL_COMPILE);
+		this->dibujarEjes();
+	glEndList();
+	glNewList(this->getDL_GRID(), GL_COMPILE);
+		this->dibujarGrilla2D();
+	glEndList();
+	glNewList(this->getDL_AXIS2D_TOP(), GL_COMPILE);
+		this->dibujarEjesVista2DSuperior();
+	glEndList();
+	glNewList(this->getDL_AXIS2D_HEIGHT(), GL_COMPILE);
+		this->dibujarEjesVista2DInferior();
+	glEndList();
 }
