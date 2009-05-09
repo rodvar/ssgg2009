@@ -15,15 +15,6 @@ void Motor::limpiarBufferDatos(){
     this->datos.clear();
 }
 
-void Motor::regenerarPantalla(){
-    //this->pantalla->regenerar(dobleColor);
-}
-
-float Motor::calcularIncertidumbrePje(float xReal, float distancia){
-    float incertidumbre = distancia/xReal;
-    return (float)((int)(incertidumbre * 100))/100 ;
-}
-
 bool Motor::enRango(int x, int y){
     return true;
 }

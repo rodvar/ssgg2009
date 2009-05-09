@@ -1,5 +1,4 @@
 #include "Segmento.h"
-#include "../Motor.h"
 
 Segmento::Segmento(Coordenadas* desde, Coordenadas* hasta)
 {
@@ -37,30 +36,12 @@ double Segmento::longitud(){
 
 void Segmento::dibujar(){
     glColor3f(this->borde->getRojo(), this->borde->getVerde(), this->borde->getAzul());
-    switch (Motor::getInstancia()->getModo()){
-        case 'D':
-            this->dibujarDDA();
-            break;
-        case 'B':
-            this->dibujarBresenham();
-            break;
-        default:
-            break;
-    }
+    this->dibujarBresenham();
 }
 
 void Segmento::dibujarPunteado() {
     glColor3f(this->borde->getRojo(), this->borde->getVerde(), this->borde->getAzul());
-    switch (Motor::getInstancia()->getModo()){
-        case 'D':
-            this->dibujarDDAPunteado();
-            break;
-        case 'B':
-            this->dibujarBresenhamPunteado();
-            break;
-        default:
-            break;
-    }
+    this->dibujarBresenhamPunteado();
 }
 
 void Segmento::dibujarDDA() {

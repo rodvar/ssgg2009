@@ -35,7 +35,14 @@ class Motor
             delete (Motor::getInstancia());
         }
 
-        char getModo() { return this->modo; }
+        /** Devuelve el nivel de recursividad al dibujar el arbol **/
+        unsigned short int getNivelesArbol();
+        /** Devuelve el paso al dibujar cada tramo con BSpline **/
+        unsigned short int getPasoTramoBSpline();
+        /** Devuelve el paso al dibujar cada tramo con Bezier **/
+        unsigned short int getPasoTramoBezier();
+        /** Devuelve la cantidad de arboles que hay q dibujar en el sendero de plantacion **/
+        unsigned short int getArbolesTramoBSpline();
 
         /**
          * Realiza los cambios pertinentes en los datos, y los pasa a la Pantalla
@@ -50,12 +57,20 @@ class Motor
     protected:
     private:
         list<FiguraGeometrica*> datos;
-        char modo; // 'B' para Bresenham, 'D' para DDA
+        // Parametros de la aplicacion
+        unsigned short int nivelesArbol; // Nivel de recursividad de dibujo del arbol
+        unsigned short int pasoTramoBSpline; // cada cuanto tomo un punto del tramo
+        unsigned short int pasoTramoBezier; // idem para Bezier
+        unsigned short int arbolesTramoBSpline;// La cantidad de arboles por tramo
+
 
         // Constructor
         Motor (){
+            this->nivelesArbol = 4;
+            this->pasoTramoBSpline = 10;
+            this->pasoTramoBezier = 10;
+            this->arbolesTramoBSpline = 4;
             this->datos.clear();
-            this->modo = 'D'; // Inicia en modo lineas (con DDA)
         }
 
         //Destructor
@@ -68,18 +83,8 @@ class Motor
             this->datos.clear();
         }
 
-        //
-        void regenerarPantalla();
-
         // Elimina todos los objetos para dibujar en la lista de datos
         void limpiarBufferDatos();
-
-        /**
-         * Devuelve un valor de error porcentual con 2 decimales
-         * @param xReal El valor x real de la circunferencia
-         * @param distancia El error absoluto con respecto a la circunferencia
-         */
-        float calcularIncertidumbrePje(float xReal, float distancia);
 };
 
 #endif // MOTOR_H
