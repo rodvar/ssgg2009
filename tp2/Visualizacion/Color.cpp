@@ -7,6 +7,13 @@ Color::Color(float r, float g, float b)
     this->azul = b;
 }
 
+Color::Color()
+{
+    this->rojo = 0;
+    this->verde = 0;
+    this->azul = 0;
+}
+
 Color::~Color()
 {
 }

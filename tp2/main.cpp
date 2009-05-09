@@ -1,6 +1,4 @@
-#include <math.h>
 #include "Visualizacion/IU.h"
-#include "Visualizacion/Pantalla.h"
 
 void display(void)
 {
@@ -16,7 +14,7 @@ int main(int argc, char** argv)
    glutCreateWindow (argv[0]);
    glutFullScreen();
 
-   Pantalla::getInstancia(); // Fuerza ña inicializacion
+   Pantalla::getInstancia(); // Fuerza la inicializacion
 
    // Configuracion de callbacks
    glutDisplayFunc(display);

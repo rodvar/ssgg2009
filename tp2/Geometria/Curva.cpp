@@ -28,8 +28,111 @@ bool Curva::contiene(int x, int y){
     return false; //TODO Implementar
 }
 
-// calcula el valor de la mezcla (blending value)
-double blend(int k, int t, int *u, double v)  {
+void Curva::dibujarBSplines(){
+    int n,t,i;
+    n=this->puntosControl.size();
+    t=4; // degree of polynomial = t-1
+    i=0;
+
+    wcPt3* control = (wcPt3*)calloc(this->puntosControl.size(), sizeof(wcPt3));
+    Coordenadas c;
+
+    list<Coordenadas>::iterator it = this->puntosControl.begin();
+    while (it != this->puntosControl.end()){
+        c = (Coordenadas)*it;
+        control[i].x = c.getX();
+        control[i].y = c.getY();
+        control[i].z = c.getZ();
+        i++;it++;
+    }
+
+    int resolution = 1000;  // how many points our in our output array
+    wcPt3 *out_pts;
+    out_pts = new wcPt3[resolution];
+
+    bspline(n, t, control, out_pts, resolution);
+    glColor3f(1.0, 1.0, 1.0);
+
+	Circunferencia* circ;
+  	for (i=0; i<=n; i++) {
+  		circ = new Circunferencia(2,new Coordenadas(control[i].x,control[i].y));
+  		circ->dibujar();
+        delete circ;
+  	}
+
+  	circ = new Circunferencia(0,new Coordenadas(control[0].x,control[0].y));
+  	circ->dibujar();
+  	delete circ;
+
+  	double anteriorX=out_pts[0].x, anteriorY=out_pts[0].y;
+  	Segmento* segmento;
+  	for (i=0; i<resolution; i++) {
+  		segmento = new Segmento(new Coordenadas(anteriorX,anteriorY),new Coordenadas(out_pts[i].x,out_pts[i].y));
+  		segmento->dibujar();
+  		anteriorX=out_pts[i].x;
+  		anteriorY=out_pts[i].y;
+  		delete segmento;
+  	}
+  	free(control);
+
+}
+
+void Curva::dibujarBezier(){
+    int m = 1000;
+    wcPt3* curve = (wcPt3*)calloc(m,sizeof(wcPt3));
+    wcPt3* control = (wcPt3*)calloc(this->puntosControl.size(), sizeof(wcPt3));
+    Segmento* segmento;
+    unsigned short i =0;
+    Coordenadas c;
+    Coordenadas* desde;
+    Coordenadas* hasta;
+    list<Coordenadas>::iterator it = this->puntosControl.begin();
+    while (it != this->puntosControl.end()){
+        c = (Coordenadas)*it;
+        control[i].x = c.getX();
+        control[i].y = c.getY();
+        control[i].z = c.getZ();
+        i++;it++;
+    }
+    this->bezier(control, this->puntosControl.size(), m, curve);
+    for (i =0; i < m; i+=2){
+        desde = new Coordenadas(curve[i].x,curve[i].y,curve[i].z);
+        hasta = new Coordenadas(curve[i+1].x,curve[i+1].y,curve[i+1].z);
+        segmento = new Segmento(desde,hasta);
+        segmento->dibujar();
+        delete segmento;
+    }
+    //free(curve); // Revisar esto
+    free(control);
+}
+
+void Curva::bspline(int n, int t, wcPt3 *control, wcPt3 *output, int num_output) {
+	int *u;
+	double increment,interval;
+	wcPt3 calcxyz;
+	int output_index;
+
+	u=new int[n+t+1];
+	compute_intervals(u, n, t);
+
+	increment=(double) (n-t+2)/(num_output-1);  // how much parameter goes up each time
+	interval=0;
+
+	for (output_index=0; output_index<num_output-1; output_index++) {
+		compute_point(u, n, t, interval, control, &calcxyz);
+		output[output_index].x = calcxyz.x;
+		output[output_index].y = calcxyz.y;
+		output[output_index].z = calcxyz.z;
+		interval = interval + increment;  // increment our parameter
+	}
+	output[num_output-1].x=control[n].x;   // put in the last point
+	output[num_output-1].y=control[n].y;
+	output[num_output-1].z=control[n].z;
+
+	delete u;
+}
+
+double Curva::blend(int k, int t, int *u, double v)  {
 	double value;
 
 	// caso base para la recursion
@@ -60,8 +163,8 @@ double blend(int k, int t, int *u, double v)  {
 	return value;
 }
 
-// averigua los nudos
-void compute_intervals(int *u, int n, int t) {
+
+void Curva::compute_intervals(int *u, int n, int t) {
 	int j;
 
 	for (j=0; j<=n+t; j++) {
@@ -80,7 +183,7 @@ void compute_intervals(int *u, int n, int t) {
 	}
 }
 
-void compute_point(int *u, int n, int t, double v, wcPt3 *control, wcPt3 *output) {
+void Curva::compute_point(int *u, int n, int t, double v, wcPt3 *control, wcPt3 *output) {
 	int k;
 	double temp;
 
@@ -95,123 +198,6 @@ void compute_point(int *u, int n, int t, double v, wcPt3 *control, wcPt3 *output
 		output->y = output->y + (control[k]).y * temp;
 		output->z = output->z + (control[k]).z * temp;
 	}
-}
-
-/*********************************************************************
-Parametros:
-  n          - cantidad de puntos de control menos 1
-  t          - el grado del polinomio mas 1
-  control    - vector de puntos de control proveniente de una estructura de tipo wcPt3
-  output     - vector en el cual se insertan los puntos calculados por el spline
-  num_output - cantidad de puntos a calcular por el spline
-
-Pre-condiciones:
-  n+2>t  (no hay resultados de la curva si n+2<=t)
-  el vector control contiene la cantidad de puntos especificados por el parametro n
-  el vector output tiene el tamaño adecuado para soportar num_output puntos
-**********************************************************************/
-void bspline(int n, int t, wcPt3 *control, wcPt3 *output, int num_output) {
-	int *u;
-	double increment,interval;
-	wcPt3 calcxyz;
-	int output_index;
-
-	u=new int[n+t+1];
-	compute_intervals(u, n, t);
-
-	increment=(double) (n-t+2)/(num_output-1);  // how much parameter goes up each time
-	interval=0;
-
-	for (output_index=0; output_index<num_output-1; output_index++) {
-		compute_point(u, n, t, interval, control, &calcxyz);
-		output[output_index].x = calcxyz.x;
-		output[output_index].y = calcxyz.y;
-		output[output_index].z = calcxyz.z;
-		interval = interval + increment;  // increment our parameter
-	}
-	output[num_output-1].x=control[n].x;   // put in the last point
-	output[num_output-1].y=control[n].y;
-	output[num_output-1].z=control[n].z;
-
-	delete u;
-}
-
-void Curva::dibujarBSplines(){
-    int n,t,i;
-    n=this->puntosControl.size();
-    t=4; // degree of polynomial = t-1
-    i=0;
-
-    wcPt3* control = (wcPt3*)calloc(this->puntosControl.size(), sizeof(wcPt3));
-    Coordenadas c;
-
-    list<Coordenadas>::iterator it = this->puntosControl.begin();
-    while (it != this->puntosControl.end()){
-        c = (Coordenadas)*it;
-        control[i].x = c.getX();
-        control[i].y = c.getY();
-        control[i].z = c.getZ();
-        i++;it++;
-    }
-
-    int resolution = 1000;  // how many points our in our output array
-    wcPt3 *out_pts;
-    out_pts = new wcPt3[resolution];
-
-    bspline(n, t, control, out_pts, resolution);
-    glColor3f(1.0, 1.0, 1.0);
-
-	Circunferencia* circ;
-  	for (i=0; i<=n; i++) {
-  		circ = new Circunferencia(2,new Coordenadas(control[i].x,control[i].y));
-  		circ->dibujar();
-  	}
-  	delete circ;
-
-  	circ = new Circunferencia(0,new Coordenadas(control[0].x,control[0].y));
-  	circ->dibujar();
-  	delete circ;
-
-  	double anteriorX=out_pts[0].x, anteriorY=out_pts[0].y;
-  	Segmento* segmento;
-  	for (i=0; i<resolution; i++) {
-  		segmento = new Segmento(new Coordenadas(anteriorX,anteriorY),new Coordenadas(out_pts[i].x,out_pts[i].y));
-  		segmento->dibujar();
-  		anteriorX=out_pts[i].x;
-  		anteriorY=out_pts[i].y;
-  	}
-  	delete segmento;
-  	free(control);
-
-}
-
-void Curva::dibujarBezier(){
-    int m = 1000;
-    wcPt3* curve = (wcPt3*)calloc(m,sizeof(wcPt3));
-    wcPt3* control = (wcPt3*)calloc(this->puntosControl.size(), sizeof(wcPt3));
-    Segmento* segmento;
-    unsigned short i =0;
-    Coordenadas c;
-    Coordenadas* desde;
-    Coordenadas* hasta;
-    list<Coordenadas>::iterator it = this->puntosControl.begin();
-    while (it != this->puntosControl.end()){
-        c = (Coordenadas)*it;
-        control[i].x = c.getX();
-        control[i].y = c.getY();
-        control[i].z = c.getZ();
-        i++;it++;
-    }
-    this->bezier(control, this->puntosControl.size(), m, curve);
-    for (i =0; i < m; i+=2){
-        desde = new Coordenadas(curve[i].x,curve[i].y,curve[i].z);
-        hasta = new Coordenadas(curve[i+1].x,curve[i+1].y,curve[i+1].z);
-        segmento = new Segmento(desde,hasta);
-        segmento->dibujar();
-        delete segmento;
-    }
-    //free(curve);
-    free(control);
 }
 
 void Curva::computeCoefficients(int n, int* c){
