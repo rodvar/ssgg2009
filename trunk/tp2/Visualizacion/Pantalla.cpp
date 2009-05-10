@@ -1,5 +1,7 @@
 #include "Pantalla.h"
-#include "../Escenario/Rama.h"
+#include "../Interaccion/IU.h"
+#include "../Escenario/Rama.h" // Para probar...
+
 
 void Pantalla::actualizar(list<FiguraGeometrica*> figuras){
     float* ojoCamara = this->camara.getOjo();
@@ -22,12 +24,14 @@ void Pantalla::actualizar(list<FiguraGeometrica*> figuras){
 	if (Pantalla::getInstancia()->grillaVisible())
 		 glCallList(this->getDL_GRID());
 
+    glDisable(GL_LIGHTING);
     // Todo: Aca dibujar lo que haya que actualizar
 	Hoja* hoja = new Hoja();
 	Rama* rama = new Rama(*hoja,45);
 	rama->dibujar();
 	delete hoja;
 	delete rama;
+	glEnable(GL_LIGHTING);
     ////////////////// Fin
 
 
@@ -37,6 +41,9 @@ void Pantalla::actualizar(list<FiguraGeometrica*> figuras){
 	glLoadIdentity();
 	gluLookAt (0, 0, 0.5, 0, 0, 0, 0, 1, 0);
 	glCallList(this->getDL_AXIS2D_TOP());
+	glDisable(GL_LIGHTING);
+	// TODO: Aca dibujar lo que haya q dibujar
+	glEnable(GL_LIGHTING);
 	////////////////// Fin
 
 	////////////////// Panel 2D para la vista del perfil de altura
@@ -45,6 +52,9 @@ void Pantalla::actualizar(list<FiguraGeometrica*> figuras){
 	glLoadIdentity();
 	gluLookAt (0, 0, 0.5, 0, 0, 0, 0, 1, 0);
 	glCallList(this->getDL_AXIS2D_HEIGHT());
+	glDisable(GL_LIGHTING);
+	// TODO: Aca dibujar lo que haya q dibujar
+	glEnable(GL_LIGHTING);
 	////////////////// Fin
 
 	glutSwapBuffers();
@@ -139,7 +149,8 @@ void Pantalla::setAmbiente3D()
 
 void Pantalla::setAmbiente2DSuperior()
 {
-	glViewport (this->superior.getCentro().getX(), this->superior.getCentro().getY(), (GLsizei) this->superior.getBase(), (GLsizei) this->superior.getAltura());
+	Rectangulo* superior = IU::getInstancia()->getEditorSenderoPlantacion()->getMarco();
+	glViewport (superior->getCentro().getX(), superior->getCentro().getY(), (GLsizei) superior->getBase(), (GLsizei) superior->getAltura());
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
 	gluOrtho2D(-0.10, 1.05, -0.10, 1.05);
@@ -148,7 +159,8 @@ void Pantalla::setAmbiente2DSuperior()
 
 void Pantalla::setAmbiente2DInferior()
 {
-	glViewport (this->inferior.getCentro().getX(), this->inferior.getCentro().getY(), (GLsizei) this->inferior.getBase(), (GLsizei) this->inferior.getAltura());
+	Rectangulo* inferior = IU::getInstancia()->getEditorHoja()->getMarco();
+	glViewport (inferior->getCentro().getX(), inferior->getCentro().getY(), (GLsizei)inferior->getBase(), (GLsizei) inferior->getAltura());
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
 	gluOrtho2D(-0.10, 1.05, -0.10, 1.05);
@@ -156,16 +168,6 @@ void Pantalla::setAmbiente2DInferior()
 
 
 void Pantalla::configurarEscenario(){
-    Coordenadas coordenadas(this->getAncho()*0.70f,this->getAlto()*0.70f);
-    this->superior.setCentro(coordenadas);
-    this->superior.setBase(this->getAncho()*0.30f);
-    this->superior.setAltura(this->getAlto()*0.30f);
-    coordenadas.setX(this->getAncho()*0.70f);
-    coordenadas.setY(this->getAlto()*0.40f);
-    this->inferior.setCentro(coordenadas);
-    this->inferior.setBase(this->getAncho()*0.30f);
-    this->inferior.setAltura(this->getAlto()*0.30f);
-
     this->dl_handle = glGenLists(3);
 	glClearColor (0.02, 0.02, 0.04, 0.0);
     glShadeModel (GL_SMOOTH);

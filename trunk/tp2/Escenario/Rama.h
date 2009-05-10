@@ -8,7 +8,7 @@
 /**
  * Clase que representa la rama de un arbol
  */
-class Rama
+class Rama : public Dibujable
 {
     public:
         /**  Constructor

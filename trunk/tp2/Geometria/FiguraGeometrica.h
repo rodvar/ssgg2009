@@ -2,11 +2,12 @@
 #define FIGURAGEOMETRICA_H
 
 #include "Coordenadas.h"
+#include "../Visualizacion/Dibujable.h"
 #include "../Visualizacion/Color.h"
 
 #define INFINITO 10000000
 
-class FiguraGeometrica
+class FiguraGeometrica : public Dibujable
 {
     public:
         // Contructor: Crea con color de relleno por defecto NULL, y de borde Blanco

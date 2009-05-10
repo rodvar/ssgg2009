@@ -9,8 +9,20 @@
 class EditorSenderoPlantacion : public Editor
 {
     public:
-        EditorSenderoPlantacion();
+        EditorSenderoPlantacion(float ancho, float alto);
         virtual ~EditorSenderoPlantacion();
+
+        /**
+         * TODO :explicar
+         * @param coordenadas Las coordenadas del punto seleccionado
+         */
+        void procesarSeleccion(Coordenadas coordenadas);
+
+        /**
+         * TODO :explicar
+         */
+        void terminar();
+
     protected:
     private:
 };

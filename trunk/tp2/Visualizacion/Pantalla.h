@@ -1,8 +1,6 @@
 #ifndef PANTALLA_H
 #define PANTALLA_H
 
-#include <stdlib.h>
-#include <GL/glut.h>
 #include <list.h>
 #include "../Geometria/Rectangulo.h"
 #include "Luz.h"
@@ -39,8 +37,6 @@ class Pantalla
         bool grillaVisible() {return this->view_grid;}
         float getAncho() {return this->window_size[0];}
         float getAlto() {return this->window_size[1];}
-        Rectangulo getAmbiente2DSuperior() { return superior; }
-        Rectangulo getAmbiente2DInferior() { return inferior; }
 
         //setters
         void setEjesVisibles(bool b) { this->view_axis = b; this->forzarRedibujo();}
@@ -70,9 +66,6 @@ class Pantalla
         GLfloat window_size[2];
         bool view_grid;
         bool view_axis;
-        Rectangulo superior;
-        Rectangulo inferior;
-        Rectangulo central;
 
         // constructor
         Pantalla()

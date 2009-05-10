@@ -1,9 +1,9 @@
 #include "Editor.h"
 
-Editor::Editor()
+Editor::Editor(float ancho, float alto)
 {
-    this->marco.setBase(1);
-    this->marco.setAltura(1);
+    this->marco.setBase(ancho*0.30f);
+    this->marco.setAltura(alto*0.30f);
 }
 
 Editor::~Editor()
