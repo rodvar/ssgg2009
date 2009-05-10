@@ -47,6 +47,10 @@ void Pantalla::actualizar(list<FiguraGeometrica*> figuras){
 	glutSwapBuffers();
 }
 
+void Pantalla::forzarRedibujo(){
+    glutPostRedisplay();
+}
+
 void Pantalla::redimensionar (int w, int h){
    	Pantalla::getInstancia()->setAncho(w);
    	Pantalla::getInstancia()->setAlto(h);
