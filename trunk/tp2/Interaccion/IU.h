@@ -2,7 +2,7 @@
 #define IU_H
 
 #include "../Motor.h"
-#include "Pantalla.h"
+#include "../Visualizacion/Pantalla.h"
 #include "../Geometria/Coordenadas.h"
 #include "../Geometria/Curva.h"
 #include "../Geometria/Rectangulo.h"

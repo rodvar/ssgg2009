@@ -10,12 +10,9 @@ void IU::keyboard (unsigned char key, int x, int y){
          break;
       case 'g':
           Pantalla::getInstancia()->setGrillaVisible(!Pantalla::getInstancia()->grillaVisible());
-          glutPostRedisplay();
           break;
-
       case 'a':
           Pantalla::getInstancia()->setEjesVisibles(!Pantalla::getInstancia()->ejesVisibles());
-          glutPostRedisplay();
           break;
      default:
          break;

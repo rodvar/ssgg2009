@@ -43,8 +43,8 @@ class Pantalla
         Rectangulo getAmbiente2DInferior() { return inferior; }
 
         //setters
-        void setEjesVisibles(bool b) { this->view_axis = b;}
-        void setGrillaVisible(bool b) { this->view_grid = b;}
+        void setEjesVisibles(bool b) { this->view_axis = b; this->forzarRedibujo();}
+        void setGrillaVisible(bool b) { this->view_grid = b; this->forzarRedibujo();}
         void setAncho(const float ancho) { this->window_size[0] = ancho;}
         void setAlto(const float alto) { this->window_size[1] = alto;}
 
@@ -54,6 +54,9 @@ class Pantalla
 
         /** Actualiza la pantalla con los datos suministrados **/
         void actualizar(list<FiguraGeometrica*> figuras);
+
+        /** Fuerza a redibujar la pantalla **/
+        void forzarRedibujo();
 
         /** Redimensionar de pantalla **/
         static void redimensionar (int w, int h);
