@@ -1,9 +1,8 @@
 #include "Pantalla.h"
 #include "../Interaccion/IU.h"
-#include "../Escenario/Rama.h" // Para probar...
 
 
-void Pantalla::actualizar(list<FiguraGeometrica*> figuras){
+void Pantalla::actualizar(list<Dibujable*> escena3d, list<FiguraGeometrica*> editorSup, list<FiguraGeometrica*> editorInf){
     float* ojoCamara = this->camara.getOjo();
     float* sobreCamara = this->camara.getSobre();
     float* arribaCamara = this->camara.getArriba();
@@ -25,12 +24,11 @@ void Pantalla::actualizar(list<FiguraGeometrica*> figuras){
 		 glCallList(this->getDL_GRID());
 
     glDisable(GL_LIGHTING);
-    // Todo: Aca dibujar lo que haya que actualizar
-	Hoja* hoja = new Hoja();
-	Rama* rama = new Rama(*hoja,45);
-	rama->dibujar();
-	delete hoja;
-	delete rama;
+    list<Dibujable*>::iterator it3d = escena3d.begin();
+    while (it3d != escena3d.end()){
+        ((Dibujable*)*it3d)->dibujar();
+        it3d++;
+    }
 	glEnable(GL_LIGHTING);
     ////////////////// Fin
 
@@ -42,7 +40,11 @@ void Pantalla::actualizar(list<FiguraGeometrica*> figuras){
 	gluLookAt (0, 0, 0.5, 0, 0, 0, 0, 1, 0);
 	glCallList(this->getDL_AXIS2D_TOP());
 	glDisable(GL_LIGHTING);
-	// TODO: Aca dibujar lo que haya q dibujar
+	list<FiguraGeometrica*>::iterator it2dS = editorSup.begin();
+    while (it2dS != editorSup.end()){
+        ((FiguraGeometrica*)*it2dS)->dibujar();
+        it2dS++;
+    }
 	glEnable(GL_LIGHTING);
 	////////////////// Fin
 
@@ -53,11 +55,16 @@ void Pantalla::actualizar(list<FiguraGeometrica*> figuras){
 	gluLookAt (0, 0, 0.5, 0, 0, 0, 0, 1, 0);
 	glCallList(this->getDL_AXIS2D_HEIGHT());
 	glDisable(GL_LIGHTING);
-	// TODO: Aca dibujar lo que haya q dibujar
+	list<FiguraGeometrica*>::iterator it2dI = editorInf.begin();
+    while (it2dI != editorInf.end()){
+        ((FiguraGeometrica*)*it2dI)->dibujar();
+        it2dI++;
+    }
 	glEnable(GL_LIGHTING);
 	////////////////// Fin
 
 	glutSwapBuffers();
+	this->forzarRedibujo();
 }
 
 void Pantalla::forzarRedibujo(){

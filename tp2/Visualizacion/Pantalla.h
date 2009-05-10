@@ -49,7 +49,7 @@ class Pantalla
         void setRotacionEsfera(float rot) { this->rotate_sphere = rot; }
 
         /** Actualiza la pantalla con los datos suministrados **/
-        void actualizar(list<FiguraGeometrica*> figuras);
+        void actualizar(list<Dibujable*> escena3d, list<FiguraGeometrica*> editorSup, list<FiguraGeometrica*> editorInf);
 
         /** Fuerza a redibujar la pantalla **/
         void forzarRedibujo();
