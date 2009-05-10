@@ -150,7 +150,9 @@ void Pantalla::setAmbiente3D()
 void Pantalla::setAmbiente2DSuperior()
 {
 	Rectangulo* superior = IU::getInstancia()->getEditorSenderoPlantacion()->getMarco();
-	glViewport (superior->getCentro().getX(), superior->getCentro().getY(), (GLsizei) superior->getBase(), (GLsizei) superior->getAltura());
+	Coordenadas* no = superior->getVerticeNO();
+	glViewport (no->getX(), no->getY(), (GLsizei) superior->getBase(), (GLsizei) superior->getAltura());
+	delete no;
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
 	gluOrtho2D(-0.10, 1.05, -0.10, 1.05);
@@ -160,7 +162,9 @@ void Pantalla::setAmbiente2DSuperior()
 void Pantalla::setAmbiente2DInferior()
 {
 	Rectangulo* inferior = IU::getInstancia()->getEditorHoja()->getMarco();
-	glViewport (inferior->getCentro().getX(), inferior->getCentro().getY(), (GLsizei)inferior->getBase(), (GLsizei) inferior->getAltura());
+	Coordenadas* no = inferior->getVerticeNO();
+	glViewport (no->getX(), no->getY(), (GLsizei)inferior->getBase(), (GLsizei) inferior->getAltura());
+    delete no;
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
 	gluOrtho2D(-0.10, 1.05, -0.10, 1.05);
