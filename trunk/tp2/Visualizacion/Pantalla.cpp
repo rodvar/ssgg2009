@@ -1,12 +1,14 @@
 #include "Pantalla.h"
+#include "../Escenario/Rama.h"
 
 void Pantalla::actualizar(list<FiguraGeometrica*> figuras){
     float* ojoCamara = this->camara.getOjo();
     float* sobreCamara = this->camara.getSobre();
     float* arribaCamara = this->camara.getArriba();
+
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	///////////////////////////////////////////////////
-	// Escena 3D
+
+	////////////////// Escena 3D
 	Pantalla::getInstancia()->setAmbiente3D();
 
 	glMatrixMode(GL_MODELVIEW);
@@ -19,30 +21,31 @@ void Pantalla::actualizar(list<FiguraGeometrica*> figuras){
 
 	if (Pantalla::getInstancia()->grillaVisible())
 		 glCallList(this->getDL_GRID());
-	//
-	///////////////////////////////////////////////////
+
+    // Todo: Aca dibujar lo que haya que actualizar
+	Hoja* hoja = new Hoja();
+	Rama* rama = new Rama(*hoja,45);
+	rama->dibujar();
+	delete hoja;
+	delete rama;
+    ////////////////// Fin
 
 
-	///////////////////////////////////////////////////
-	// Panel 2D para la vista superior
+	////////////////// Panel 2D para la vista superior
 	Pantalla::getInstancia()->setAmbiente2DSuperior();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	gluLookAt (0, 0, 0.5, 0, 0, 0, 0, 1, 0);
 	glCallList(this->getDL_AXIS2D_TOP());
-	//
-	///////////////////////////////////////////////////
+	////////////////// Fin
 
-
-	///////////////////////////////////////////////////
-	// Panel 2D para la vista del perfil de altura
+	////////////////// Panel 2D para la vista del perfil de altura
 	Pantalla::getInstancia()->setAmbiente2DInferior();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	gluLookAt (0, 0, 0.5, 0, 0, 0, 0, 1, 0);
 	glCallList(this->getDL_AXIS2D_HEIGHT());
-	//
-	///////////////////////////////////////////////////
+	////////////////// Fin
 
 	glutSwapBuffers();
 }
