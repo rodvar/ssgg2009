@@ -1,4 +1,5 @@
 #include "IU.h"
+#include "../Geometria/Curva.h"
 
 void IU::keyboard (unsigned char key, int x, int y){
     switch (key) {
@@ -39,7 +40,7 @@ void IU::mouse(int boton, int estado, int x, int y){
     			c.setX(x);
     			c.setY(y);
     			c.setZ(0);
-    			IU::getInstancia()->addPuntoControlBSplines(c);
+    			IU::getInstancia()->getEditorSenderoPlantacion()->agregarPunto(c);
     			Circunferencia circ(2,new Coordenadas(x,y));
     			circ.setColorRelleno(new Color(1,1,1));
     			circ.dibujar();
@@ -53,16 +54,8 @@ void IU::mouse(int boton, int estado, int x, int y){
     }
 }
 
-void IU::addPuntoControlBSplines(Coordenadas coordenada) {
-	puntosControlBSplines.push_back(coordenada);
-}
-
-void IU::addPuntoControlBezier(Coordenadas coordenada) {
-	puntosControlBezier.push_back(coordenada);
-}
-
 void IU::dibujarFiguraBSplines() {
-	Curva curva(puntosControlBSplines);
+	Curva curva(this->editorSendero->getPuntosEdicion());
 	curva.dibujar();
 }
 void IU::OnIdle(){

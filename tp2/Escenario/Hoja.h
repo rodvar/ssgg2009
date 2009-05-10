@@ -6,7 +6,7 @@
 /**
  * Clase que modela la hoja de un arbol
  */
-class Hoja
+class Hoja : public Dibujable
 {
     public:
         /**   Constructor

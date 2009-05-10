@@ -3,11 +3,8 @@
 
 #include "../Motor.h"
 #include "../Visualizacion/Pantalla.h"
-#include "../Geometria/Coordenadas.h"
-#include "../Geometria/Curva.h"
-#include "../Geometria/Rectangulo.h"
-#include "../Geometria/Circunferencia.h"
-#include <list.h>
+#include "../Interaccion/EditorHoja.h"
+#include "../Interaccion/EditorSenderoPlantacion.h"
 
 /**
     Interfaz de Usuario: Clase que contiene toda la funcionalidad brindada al usuario
@@ -33,6 +30,9 @@ class IU
             delete (IU::getInstancia());
         }
 
+        Editor* getEditorSenderoPlantacion() { return this->editorSendero; }
+        Editor* getEditorHoja() { return this->editorHoja; }
+
         /** Manejo de eventos de teclado **/
         static void keyboard (unsigned char key, int x, int y);
         /** Manejo de eventos de mouse **/
@@ -43,14 +43,11 @@ class IU
         /** Dibuja la figura BSpline dentro del marco que le corresponde */
         void dibujarFiguraBSplines();
 
-        list<Coordenadas> getPuntosControlBSplines() { return puntosControlBSplines; }
-
     protected:
 
     private:
-
-    	list<Coordenadas> puntosControlBSplines;
-        list<Coordenadas> puntosControlBezier;
+        EditorHoja* editorHoja;
+        EditorSenderoPlantacion* editorSendero;
 
         void addPuntoControlBSplines(Coordenadas coordenada);
 
@@ -58,10 +55,15 @@ class IU
 
     	// Constructor
         IU(){
+            float ancho = Pantalla::getInstancia()->getAncho();
+            float alto = Pantalla::getInstancia()->getAlto();
+            this->editorHoja = new EditorHoja(ancho,alto);
+            this->editorSendero = new EditorSenderoPlantacion(ancho,alto);
         }
         //Destructor
         inline ~IU ( ){
-            //TODO
+            delete this->editorHoja;
+            delete this->editorSendero;
         }
 };
 
