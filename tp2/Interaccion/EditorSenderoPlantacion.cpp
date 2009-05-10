@@ -2,7 +2,7 @@
 
 EditorSenderoPlantacion::EditorSenderoPlantacion(float ancho, float alto) : Editor (ancho,alto)
 {
-    Coordenadas coordenadas(ancho*0.70f + this->marco.getBase()/2,alto*0.70f + this->marco.getAltura()/2);
+    Coordenadas coordenadas(ancho*0.70f + this->marco.getBase()/2,alto*0.40f + this->marco.getAltura()/2);
 	this->marco.setCentro(coordenadas);
 }
 
