@@ -14,13 +14,22 @@ class Coordenadas
         Coordenadas();
         Coordenadas(int x, int y);
         Coordenadas(int x, int y, int z);
+        Coordenadas(float x, float y);
+        Coordenadas(float x, float y, float z);
+        Coordenadas(double x, double y);
+        Coordenadas(double x, double y, double z);
         virtual ~Coordenadas();
-        int getX() { return x; }
+
         void setX(int val) { x = val; }
-        int getY() { return y; }
         void setY(int val) { y = val; }
-        int getZ() { return z; }
         void setZ(int val) { z = val; }
+
+        float getX() { return x; }
+        void setX(float val) { x = val; }
+        float getY() { return y; }
+        void setY(float val) { y = val; }
+        float getZ() { return z; }
+        void setZ(float val) { z = val; }
 
         /**
          * Devuelve una copia de las coordenadas
@@ -68,9 +77,9 @@ class Coordenadas
 
     protected:
     private:
-        int x;
-        int y;
-        int z;
+        float x;
+        float y;
+        float z;
 };
 
 #endif // COORDENADAS_H
