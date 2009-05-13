@@ -63,6 +63,10 @@ class Pantalla
         /** Redimensionar de pantalla **/
         static void redimensionar (int w, int h);
 
+        /** Aumenta y disminuye el zoom de la camara de la pantalla en 1 unidad **/
+        void aumentarZoom();
+        void disminuirZoom();
+
         /** Los siguientes metodos definen los extremos del SR del ViewPort 2D **/
         float getXMinViewport2D() { return XMIN_VP; }
         float getXMaxViewport2D() { return XMAX_VP; }

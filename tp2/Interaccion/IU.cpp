@@ -15,6 +15,12 @@ void IU::keyboard (unsigned char key, int x, int y){
       case 'a':
           Pantalla::getInstancia()->setEjesVisibles(!Pantalla::getInstancia()->ejesVisibles());
           break;
+      case '+':
+          Pantalla::getInstancia()->aumentarZoom();
+          break;
+      case '-':
+          Pantalla::getInstancia()->disminuirZoom();
+          break;
      default:
          break;
     }
