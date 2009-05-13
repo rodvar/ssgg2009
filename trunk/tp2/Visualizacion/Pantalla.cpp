@@ -151,7 +151,7 @@ void Pantalla::setAmbiente3D()
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
     // Primer parametro para modificar zoom camara
-    gluPerspective(60.0, (GLfloat) this->window_size[0]/(GLfloat) this->window_size[1], 0.10, 100.0);
+    gluPerspective(this->camara.getZoom(), (GLfloat) this->window_size[0]/(GLfloat) this->window_size[1], 0.10, 100.0);
 }
 
 void Pantalla::setAmbiente2DSuperior()
@@ -202,4 +202,16 @@ void Pantalla::configurarEscenario(){
 	glNewList(this->getDL_AXIS2D_HEIGHT(), GL_COMPILE);
 		this->dibujarEjesVista2DInferior();
 	glEndList();
+}
+
+void Pantalla::aumentarZoom(){
+    float zoom = this->camara.getZoom();
+    if (zoom > 0)
+        this->camara.setZoom(--zoom);
+}
+
+void Pantalla::disminuirZoom(){
+    float zoom = this->camara.getZoom();
+    if (zoom < MAX_ZOOM)
+        this->camara.setZoom(++zoom);
 }
