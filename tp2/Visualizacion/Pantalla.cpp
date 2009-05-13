@@ -162,7 +162,7 @@ void Pantalla::setAmbiente2DSuperior()
 	delete c;
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
-	gluOrtho2D(-0.10, 1.05, -0.10, 1.05);
+	gluOrtho2D(0.0, 1.0, -1.0, 1.0);
 
 }
 
@@ -174,7 +174,7 @@ void Pantalla::setAmbiente2DInferior()
     delete c;
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
-	gluOrtho2D(-0.10, 1.05, -0.10, 1.05);
+	gluOrtho2D(0.0, 1.0, -1.0, 1.0);
 }
 
 
