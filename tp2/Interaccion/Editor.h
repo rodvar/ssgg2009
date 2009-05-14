@@ -3,6 +3,9 @@
 
 #include "../Geometria/Rectangulo.h"
 #include <list>
+
+#define PJE_DIMENSIONES 0.30f
+
 using namespace std;
 
 /**
@@ -30,6 +33,11 @@ class Editor
          * Realiza el procesamiento correspondiente a la finalizacion de la edicion
          */
         virtual void terminar() = 0;
+
+        /**
+         * Redimensiona el editor con los parametros pasados
+         */
+        virtual void redimensionar(const float ancho, const float alto) = 0;
 
         void agregarPunto(Coordenadas coordenada) { this->puntosEdicion.push_back(coordenada); }
         list<Coordenadas> getPuntosEdicion() { return this->puntosEdicion; }

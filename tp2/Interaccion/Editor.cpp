@@ -2,8 +2,8 @@
 
 Editor::Editor(float ancho, float alto)
 {
-    this->marco.setBase(ancho*0.30f);
-    this->marco.setAltura(alto*0.30f);
+    this->marco.setBase(ancho*PJE_DIMENSIONES);
+    this->marco.setAltura(alto*PJE_DIMENSIONES);
 }
 
 Editor::~Editor()

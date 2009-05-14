@@ -6,12 +6,6 @@
 #include "Luz.h"
 #include "Camara.h"
 
-// Definicion del VIEWPORT 2D
-#define XMIN_VP 0.0
-#define XMAX_VP 1.0
-#define YMIN_VP -1.0
-#define YMAX_VP 1.0
-
 using namespace std;
 
 /**
@@ -66,12 +60,6 @@ class Pantalla
         /** Aumenta y disminuye el zoom de la camara de la pantalla en 1 unidad **/
         void aumentarZoom();
         void disminuirZoom();
-
-        /** Los siguientes metodos definen los extremos del SR del ViewPort 2D **/
-        float getXMinViewport2D() { return XMIN_VP; }
-        float getXMaxViewport2D() { return XMAX_VP; }
-        float getYMinViewport2D() { return YMIN_VP; }
-        float getYMaxViewport2D() { return YMAX_VP; }
 
     protected:
     private:
