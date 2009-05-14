@@ -3,6 +3,9 @@
 
 #include "Editor.h"
 
+#define PJE_ANCHO_S 0.68f
+#define PJE_ALTO_S  0.40f
+
 /**
  * Editor del sendero de plantacion del arbol
  */
@@ -22,6 +25,9 @@ class EditorSenderoPlantacion : public Editor
          * TODO :explicar
          */
         void terminar();
+
+        /** Redimensiona editor **/
+        void redimensionar(const float ancho, const float alto);
 
     protected:
     private:

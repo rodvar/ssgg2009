@@ -74,6 +74,8 @@ void Pantalla::forzarRedibujo(){
 void Pantalla::redimensionar (int w, int h){
    	Pantalla::getInstancia()->setAncho(w);
    	Pantalla::getInstancia()->setAlto(h);
+   	IU::getInstancia()->getEditorHoja()->redimensionar(w,h);
+   	IU::getInstancia()->getEditorSenderoPlantacion()->redimensionar(w,h);
 }
 
 void Pantalla::dibujarEjes()
@@ -158,11 +160,11 @@ void Pantalla::setAmbiente2DSuperior()
 {
 	Rectangulo* superior = IU::getInstancia()->getEditorSenderoPlantacion()->getMarco();
 	Coordenadas* c = superior->getVerticeSO();
-	glViewport (c->getX(), c->getY(), (GLsizei) superior->getBase(), (GLsizei) superior->getAltura());
+	glViewport (c->getX(), (this->getAlto() - c->getY()), (GLsizei) superior->getBase(), (GLsizei) superior->getAltura());
 	delete c;
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
-	gluOrtho2D(0.0, 1.0, -1.0, 1.0);
+	gluOrtho2D(0.0, 1.0, 0.0, 1.0);
 
 }
 
@@ -170,11 +172,11 @@ void Pantalla::setAmbiente2DInferior()
 {
 	Rectangulo* inferior = IU::getInstancia()->getEditorHoja()->getMarco();
 	Coordenadas* c = inferior->getVerticeSO();
-	glViewport (c->getX(), c->getY(), (GLsizei)inferior->getBase(), (GLsizei) inferior->getAltura());
+	glViewport (c->getX(), (this->getAlto() - c->getY()), (GLsizei)inferior->getBase(), (GLsizei) inferior->getAltura());
     delete c;
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
-	gluOrtho2D(0.0, 1.0, -1.0, 1.0);
+	gluOrtho2D(0.0, 1.0, 0.0, 1.0);
 }
 
 
