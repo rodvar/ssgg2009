@@ -13,7 +13,19 @@ Circunferencia::~Circunferencia()
 
 void Circunferencia::dibujar(){
     glColor3f(this->borde.getRojo(), this->borde.getVerde(), this->borde.getAzul());
-    this->dibujarBresenham();
+
+    float angle;
+    glDisable(GL_LIGHTING);
+    glBegin(GL_LINE_LOOP);
+    for(int i=0; i<100; i++) {
+		angle = i*2*M_PI/100;
+		glVertex3f(this->centro->getX() + (cos(angle) * this->radio), this->centro->getY() + (sin(angle) * this->radio), 0.0);
+		for(float j=0;j<this->radio;j=j+((float)this->radio/10)) {
+			glVertex3f(this->centro->getX() + (cos(angle) * j), this->centro->getY() + (sin(angle) * j), 0.0);
+		}
+	}
+    glEnd();
+    glEnable(GL_LIGHTING);
 }
 
 void Circunferencia::dibujarPunteado() {
@@ -21,29 +33,31 @@ void Circunferencia::dibujarPunteado() {
 }
 
 void Circunferencia::dibujarBresenham(){
-    int x, y, e;
-    unsigned int xCentro = this->centro->getX();
-    unsigned int yCentro = this->centro->getY();
-    x = floor(this->radio);
+    float x, y, e;
+    float xCentro = this->centro->getX();
+    float yCentro = this->centro->getY();
+    x = this->radio;
     y = 0;
     e = 0;
 
+    glDisable(GL_LIGHTING);
 	glBegin(GL_POINTS);
 
     while ( y <= x) {
-        glVertex2i(xCentro + x, yCentro + y ); glVertex2i(xCentro + y, yCentro + x );
-        glVertex2i(xCentro - x, yCentro + y ); glVertex2i(xCentro - y, yCentro + x );
-        glVertex2i(xCentro + x, yCentro - y ); glVertex2i(xCentro + y, yCentro - x );
-        glVertex2i(xCentro - x, yCentro - y ); glVertex2i(xCentro - y, yCentro - x );
-        e = e + 2*y + 1;
-        y++;
-        if ( 2*e > ( 2*x - 1)) {
-            x--;
-            e = e - 2*x + 1;
+        glVertex3f(xCentro + x, yCentro + y, 0); glVertex3f(xCentro + y, yCentro + x, 0);
+        glVertex3f(xCentro - x, yCentro + y, 0); glVertex3f(xCentro - y, yCentro + x, 0);
+        glVertex3f(xCentro + x, yCentro - y, 0); glVertex3f(xCentro + y, yCentro - x, 0);
+        glVertex3f(xCentro - x, yCentro - y, 0); glVertex3f(xCentro - y, yCentro - x, 0);
+        e = e + 2*y + 0.000976;
+        y=y+0.000976;
+        if ( 2*e > ( 2*x - 0.000976)) {
+        	x=x-0.000976;
+            e = e - 2*x + 0.000976;
         }
     }
 
     glEnd();
+    glEnable(GL_LIGHTING);
 }
 
 void Circunferencia::dibujarDDA() {

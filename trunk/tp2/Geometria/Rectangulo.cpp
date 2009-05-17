@@ -12,15 +12,13 @@ Rectangulo::Rectangulo(float base, float altura, Coordenadas* centro)
 Rectangulo::Rectangulo(){
     this->base = 0;
     this->altura = 0;
-    this->centro = NULL;
+    this->centro = new Coordenadas();
     this->rellenoParcialInferior = false;
 }
 
 Rectangulo::~Rectangulo()
 {
-	if(this->centro!=NULL) {
-		delete this->centro;
-	}
+	delete this->centro;
 }
 
 Coordenadas* Rectangulo::getVerticeNO(){

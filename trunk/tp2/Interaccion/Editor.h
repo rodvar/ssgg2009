@@ -45,6 +45,11 @@ class Editor
         /** Limpia la lista eliminando sus puntos **/
         void limpiar();
 
+        /** Realiza el mapeo de las coordenadas absolutas x,y al editor.
+         *  Si pertenecen al mismo, devuelve la transformacion de las coordenadas, sino devuelve NULL**/
+        Coordenadas* mapeo(int x, int y);
+
+
     protected:
         Rectangulo marco;
         list<Coordenadas*> puntosEdicion;

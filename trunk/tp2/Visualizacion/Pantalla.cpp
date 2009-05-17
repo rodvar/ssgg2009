@@ -17,6 +17,8 @@ void Pantalla::actualizar(list<Dibujable*> escena3d, list<Dibujable*> editorSup,
 	gluLookAt (ojoCamara[0], ojoCamara[1], ojoCamara[2], sobreCamara[0],
         sobreCamara[1], sobreCamara[2], arribaCamara[0], arribaCamara[1], arribaCamara[2]);
 
+	IU::getInstancia()->dibujarFiguraBSplines();
+
 	if (Pantalla::getInstancia()->ejesVisibles())
 		 glCallList(this->getDL_AXIS());
 
@@ -39,6 +41,9 @@ void Pantalla::actualizar(list<Dibujable*> escena3d, list<Dibujable*> editorSup,
 	glLoadIdentity();
 	gluLookAt (0, 0, 0.5, 0, 0, 0, 0, 1, 0);
 	glCallList(this->getDL_AXIS2D_TOP());
+
+	IU::getInstancia()->dibujarFiguraBSplines();
+
 	glDisable(GL_LIGHTING);
 	list<Dibujable*>::iterator it2dS = editorSup.begin();
     while (it2dS != editorSup.end()){
@@ -54,6 +59,9 @@ void Pantalla::actualizar(list<Dibujable*> escena3d, list<Dibujable*> editorSup,
 	glLoadIdentity();
 	gluLookAt (0, 0, 0.5, 0, 0, 0, 0, 1, 0);
 	glCallList(this->getDL_AXIS2D_HEIGHT());
+
+	IU::getInstancia()->dibujarFiguraBezier();
+
 	glDisable(GL_LIGHTING);
 	list<Dibujable*>::iterator it2dI = editorInf.begin();
     while (it2dI != editorInf.end()){

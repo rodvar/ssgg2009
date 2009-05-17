@@ -1,6 +1,7 @@
 #include "Curva.h"
 #include "Segmento.h"
 #include "Circunferencia.h"
+#include "../Interaccion/IU.h"
 
 Curva::Curva(list<Coordenadas*> puntosControl)
 {
@@ -13,7 +14,7 @@ Curva::~Curva()
 }
 
 void Curva::dibujar(){
-    this->dibujarBSplines();
+    this->dibujarBezier();
 }
 
 void Curva::dibujarPunteado(){
@@ -28,85 +29,203 @@ bool Curva::contiene(int x, int y){
     return false; //TODO Implementar
 }
 
-void Curva::dibujarBSplines(){
-    int n,t,i;
-    n=this->puntosControl.size();
-    t=4; // degree of polynomial = t-1
-    i=0;
+void Curva::dibujarBezier(){
+	int j=0;
 
-    wcPt3* control = (wcPt3*)calloc(this->puntosControl.size(), sizeof(wcPt3));
+    wcPt3* control = (wcPt3*)calloc(4, sizeof(wcPt3));
     Coordenadas* c;
-
     list<Coordenadas*>::iterator it = this->puntosControl.begin();
     while (it != this->puntosControl.end()){
         c = (Coordenadas*)*it;
-        control[i].x = c->getX();
-        control[i].y = c->getY();
-        control[i].z = c->getZ();
-        i++;it++;
-    }
 
-    int resolution = 10;  // how many points our in our output array
+		if(j==4) {
+			dibujarCurvaBezier4Puntos(control);
+			control[0].x = control[3].x;
+			control[0].y = control[3].y;
+			control[0].z = control[3].z;
+			j=1;
+		}
+
+        if(j<4) {
+			control[j].x = c->getX();
+			control[j].y = c->getY();
+			control[j].z = c->getZ();
+			j++;
+			it++;
+        }
+    }
+	if(j==4) {
+		dibujarCurvaBezier4Puntos(control);
+	}
+	free(control);
+}
+
+void Curva::dibujarCurvaBezier4Puntos(wcPt3 *control) {
+    int n,t,i;
+    n=3;
+    t=4; // degree of polynomial = t-1
+
+    int resolution = 100;  // how many points our in our output array
     wcPt3 *out_pts;
     out_pts = new wcPt3[resolution];
-
-    bspline(n, t, control, out_pts, resolution);
-    glColor3f(1.0, 1.0, 1.0);
-
+	Coordenadas* mapeo;
 	Circunferencia* circ;
-  	for (i=0; i<n; i++) {
-  		circ = new Circunferencia(0.01,new Coordenadas(control[i].x,control[i].y));
+	Segmento* segmento;
+
+    bezier(n, t, control, out_pts, resolution);
+
+	bool isFirstPoint = true;
+	float lastX=control[0].x;
+	float lastY=control[0].y;
+	for (i=0; i<=n; i++) {
+		glColor3f(0,0,0);
+		glBegin(GL_POINTS);
+		mapeo = IU::getInstancia()->getEditorHoja()->mapeo(control[i].x,control[i].y);
+		circ = new Circunferencia(0.01,new Coordenadas(mapeo->getX(),mapeo->getY()));
+		Color color(1,1,1);
+		circ->setColorBorde(color);
+		circ->dibujar();
+		if(!isFirstPoint) {
+			segmento = new Segmento(new Coordenadas(lastX,lastY),new Coordenadas(mapeo->getX(),mapeo->getY()));
+			Color color(1,1,1);
+			segmento->setColorBorde(color);
+			segmento->dibujarPunteado();
+			delete segmento;
+		} else {
+			isFirstPoint=false;
+		}
+		lastX=mapeo->getX();
+		lastY=mapeo->getY();
+		glEnd();
+		delete mapeo;
+		delete circ;
+	}
+
+	mapeo = IU::getInstancia()->getEditorHoja()->mapeo(out_pts[0].x,out_pts[0].y);
+	double anteriorX=mapeo->getX(), anteriorY=mapeo->getY();
+	delete mapeo;
+	for (i=0; i<resolution; i++) {
+		glDisable(GL_LIGHTING);
+		glBegin(GL_LINES);
+			glVertex3f(anteriorX, anteriorY, 0.0);
+			mapeo = IU::getInstancia()->getEditorHoja()->mapeo(out_pts[i].x,out_pts[i].y);
+			glVertex3f(mapeo->getX(), mapeo->getY(), 0.0);
+		glEnd();
+		glEnable(GL_LIGHTING);
+		anteriorX=mapeo->getX();
+		anteriorY=mapeo->getY();
+		delete mapeo;
+	}
+}
+
+void Curva::dibujarBSplines(){
+	int i;
+	int npts,k,p1;
+
+	npts = this->puntosControl.size();
+	k = 4;     /* fourth order */
+	p1 = npts*3-1;
+
+	float b[p1*3+1];  /* allows for up to 11  control vertices */
+	float p[(p1*3+1)*3];  /* allows for up to 100 points on curve */
+
+	for (i = 1; i <= 3*npts; i++){
+		b[i] = 0.;
+	}
+
+	for (i = 1; i <= 3*p1; i++){
+		p[i] = 0.;
+	}
+
+
+	i=1;
+    Coordenadas* c;
+    list<Coordenadas*>::iterator it = this->puntosControl.begin();
+    while (it != this->puntosControl.end()){
+        c = (Coordenadas*)*it;
+        b[i] = c->getX();
+        b[i+1] = c->getY();
+        b[i+2] = c->getZ();
+        i=i+3;it++;
+    }
+
+	bsplineu(npts,k,p1,b,p);
+
+	Coordenadas* mapeo;
+	Circunferencia* circ;
+	Segmento* segmento;
+	bool isFirstPoint = true;
+	float lastX=b[1];
+	float lastY=b[2];
+	for (i = 1; i <= 3*npts; i=i+3){
+		glColor3f(0,0,0);
+		glBegin(GL_POINTS);
+		mapeo = IU::getInstancia()->getEditorSenderoPlantacion()->mapeo(b[i],b[i+1]);
+  		circ = new Circunferencia(0.01,new Coordenadas(mapeo->getX(),mapeo->getY()));
   		Color color(1,1,1);
   		circ->setColorBorde(color);
   		circ->dibujar();
-        delete circ;
-  	}
+  		delete circ;
+  		if(!isFirstPoint) {
+  			segmento = new Segmento(new Coordenadas(lastX,lastY),new Coordenadas(mapeo->getX(),mapeo->getY()));
+  			Color color(1,1,1);
+  			segmento->setColorBorde(color);
+  			segmento->dibujarPunteado();
+  			delete segmento;
+  		} else {
+  			isFirstPoint=false;
+  		}
+  		lastX=mapeo->getX();
+  		lastY=mapeo->getY();
+		glEnd();
+		delete mapeo;
+	}
 
-  	double anteriorX=out_pts[0].x, anteriorY=out_pts[0].y;
-  	for (i=0; i<resolution; i++) {
+	mapeo = IU::getInstancia()->getEditorSenderoPlantacion()->mapeo(p[1],p[2]);
+  	double anteriorX=mapeo->getX(), anteriorY=mapeo->getY();
+  	delete mapeo;
+  	for (i = 1; i <= 3*p1; i=i+3){
   		glDisable(GL_LIGHTING);
   		glBegin(GL_LINES);
   			glVertex3f(anteriorX, anteriorY, 0.0);
-  			glVertex3f(out_pts[i].x, out_pts[i].y, 0.0);
+  			mapeo = IU::getInstancia()->getEditorSenderoPlantacion()->mapeo(p[i],p[i+1]);
+  			glVertex3f(mapeo->getX(), mapeo->getY(), 0.0);
   		glEnd();
   		glEnable(GL_LIGHTING);
-  		anteriorX=out_pts[i].x;
-  		anteriorY=out_pts[i].y;
+  		anteriorX=mapeo->getX();
+  		anteriorY=mapeo->getY();
+	  	delete mapeo;
   	}
-  	free(control);
 
+//	int m = 1000;
+//    wcPt3* curve = (wcPt3*)calloc(m,sizeof(wcPt3));
+//    wcPt3* control = (wcPt3*)calloc(this->puntosControl.size(), sizeof(wcPt3));
+//    Segmento* segmento;
+//    unsigned short i =0;
+//    Coordenadas* c;
+//    Coordenadas* desde;
+//    Coordenadas* hasta;
+//    list<Coordenadas*>::iterator it = this->puntosControl.begin();
+//    while (it != this->puntosControl.end()){
+//        c = (Coordenadas*)*it;
+//        control[i].x = c->getX();
+//        control[i].y = c->getY();
+//        control[i].z = c->getZ();
+//        i++;it++;
+//    }
+////    this->bezier(control, this->puntosControl.size(), m, curve);
+//    for (i =0; i < m; i+=2){
+//        desde = new Coordenadas(curve[i].x,curve[i].y,curve[i].z);
+//        hasta = new Coordenadas(curve[i+1].x,curve[i+1].y,curve[i+1].z);
+//        segmento = new Segmento(desde,hasta);
+//        segmento->dibujar();
+//        delete segmento;
+//    }
+//    //free(curve); // Revisar esto
+//    free(control);
 }
 
-void Curva::dibujarBezier(){
-    int m = 1000;
-    wcPt3* curve = (wcPt3*)calloc(m,sizeof(wcPt3));
-    wcPt3* control = (wcPt3*)calloc(this->puntosControl.size(), sizeof(wcPt3));
-    Segmento* segmento;
-    unsigned short i =0;
-    Coordenadas* c;
-    Coordenadas* desde;
-    Coordenadas* hasta;
-    list<Coordenadas*>::iterator it = this->puntosControl.begin();
-    while (it != this->puntosControl.end()){
-        c = (Coordenadas*)*it;
-        control[i].x = c->getX();
-        control[i].y = c->getY();
-        control[i].z = c->getZ();
-        i++;it++;
-    }
-    this->bezier(control, this->puntosControl.size(), m, curve);
-    for (i =0; i < m; i+=2){
-        desde = new Coordenadas(curve[i].x,curve[i].y,curve[i].z);
-        hasta = new Coordenadas(curve[i+1].x,curve[i+1].y,curve[i+1].z);
-        segmento = new Segmento(desde,hasta);
-        segmento->dibujar();
-        delete segmento;
-    }
-    //free(curve); // Revisar esto
-    free(control);
-}
-
-void Curva::bspline(int n, int t, wcPt3 *control, wcPt3 *output, int num_output) {
+void Curva::bezier(int n, int t, wcPt3 *control, wcPt3 *output, int num_output) {
 	int *u;
 	double increment,interval;
 	wcPt3 calcxyz;
@@ -125,9 +244,9 @@ void Curva::bspline(int n, int t, wcPt3 *control, wcPt3 *output, int num_output)
 		output[output_index].z = calcxyz.z;
 		interval = interval + increment;  // increment our parameter
 	}
-	output[num_output-1].x=control[n-1].x;   // put in the last point
-	output[num_output-1].y=control[n-1].y;
-	output[num_output-1].z=control[n-1].z;
+	output[num_output-1].x=control[n].x;   // put in the last point
+	output[num_output-1].y=control[n].y;
+	output[num_output-1].z=control[n].z;
 
 	delete u;
 }
@@ -200,42 +319,117 @@ void Curva::compute_point(int *u, int n, int t, double v, wcPt3 *control, wcPt3 
 	}
 }
 
-void Curva::computeCoefficients(int n, int* c){
-   int k, i;
-   for (k=0; k<=n; k++){
-      /* Compute n!/ (k!(n-k)!)*/
-      c[k] = 1;
-   for (i=n; i >= k + 1; i--)
-       c[k] *= i;
-    for(i=n-k; i>=2; i--)
-        c[k] /= i;
-   }
-}
 
-void Curva::computePoint(float u, wcPt3* pt,  int ncontrols, wcPt3* controls, int* c){
-     int k , n = ncontrols - 1;
-     float blend;
+void Curva::knotu(int n,int c,int x[]) {
+    int nplusc,nplus2,i;
 
-     pt->x = 0.0; pt->y = 0.0; pt->z = 0.0;
+	nplusc = n + c;
+	nplus2 = n + 2;
 
- /*Add in influence of each control point*/
-   for (k=0; k < ncontrols; k++) {
-      blend = c[k] * powf(u,k) * powf(1-u,n-k);
-      pt->x += controls[k].x * blend;
-      pt->y += controls[k].y * blend;
-      pt->z += controls[k].z * blend;
-    }
+	x[1] = 0;
+	for (i = 2; i <= nplusc; i++){
+	    x[i] = i-1;
+	}
 }
 
 
-void Curva::bezier(wcPt3* controls, int ncontrols, int m, wcPt3* curve)
-{
-   /* Allocate space for the coefficients */
-   int* c = (int*) malloc (ncontrols* sizeof (int));
-   int i;
+void Curva::basis(int c,float t,int npts,int x[],float n[]) {
+	int nplusc;
+	int i,k;
+	float d,e;
+	float temp[36*npts];
 
-   computeCoefficients (ncontrols-1, c);
-   for (i=0; i<= m ; i++)
-      computePoint ( i / (float) m, &curve[i], ncontrols, controls, c);
-   free (c);
+	nplusc = npts + c;
+
+	/* calculate the first order basis functions n[i][1]	*/
+
+	for (i = 1; i<= nplusc-1; i++){
+    	if (( t >= x[i]) && (t < x[i+1]))
+			temp[i] = 1;
+	    else
+			temp[i] = 0;
+	}
+
+	/* calculate the higher order basis functions */
+
+	for (k = 2; k <= c; k++){
+    	for (i = 1; i <= nplusc-k; i++){
+        	if (temp[i] != 0)    /* if the lower order basis function is zero skip the calculation */
+           		d = ((t-x[i])*temp[i])/(x[i+k-1]-x[i]);
+	        else
+				d = 0;
+
+    	    if (temp[i+1] != 0)     /* if the lower order basis function is zero skip the calculation */
+        		e = ((x[i+k]-t)*temp[i+1])/(x[i+k]-x[i+1]);
+	        else
+    			e = 0;
+
+    	    temp[i] = d + e;
+		}
+	}
+
+	if (t == (float)x[nplusc]){		/*    pick up last point	*/
+ 		temp[npts] = 1;
+	}
+
+	for (i = 1; i <= npts; i++) {
+    	n[i] = temp[i];
+	}
 }
+
+
+void Curva::bsplineu(int npts,int k,int p1, float b[], float p[]) {
+	int i,j,icount,jcount;
+	int i1;
+	int x[4*npts];		/* allows for 20 data points with basis function of order 5 */
+	int nplusc;
+
+	float step;
+	float t;
+	float nbasis[4*npts];
+	float temp;
+
+
+	nplusc = npts + k;
+
+	/*  zero and redimension the knot vector and the basis array */
+
+	for(i = 0; i <= npts; i++){
+		 nbasis[i] = 0.;
+	}
+
+	for(i = 0; i <= nplusc; i++){
+		 x[i] = 0.;
+		}
+
+	/* generate the uniform open knot vector */
+
+	knotu(npts,k,x);
+
+	icount = 0;
+
+	t = k-1; /* special parameter range for periodic basis functions */
+	step = ((float)((npts)-(k-1)))/((float)(p1-1));
+
+	for (i1 = 1; i1<= p1; i1++){
+		if ((float)(npts)- t < 5e-6){
+			t = (float)((npts));
+		}
+
+	    basis(k,t,npts,x,nbasis);      /* generate the basis function for this value of t */
+
+		for (j = 1; j <= 3; j++){      /* generate a point on the curve */
+			jcount = j;
+			p[icount+j] = 0.;
+
+			for (i = 1; i <= npts; i++){ /* Do local matrix multiplication */
+				temp = nbasis[i]*b[jcount];
+			    p[icount + j] = p[icount + j] + temp;
+				jcount = jcount + 3;
+			}
+		}
+    	icount = icount + 3;
+		t = t + step;
+	}
+}
+

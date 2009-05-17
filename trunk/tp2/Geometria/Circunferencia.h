@@ -19,8 +19,8 @@ public:
 
     virtual ~Circunferencia();
     float getRadio() { return radio; }
-    unsigned int getXCentro(){ return this->centro->getX(); }
-    unsigned int getYCentro(){ return this->centro->getY(); }
+    float getXCentro(){ return this->centro->getX(); }
+    float getYCentro(){ return this->centro->getY(); }
 
     /**
      * Calcula la coordenada x perteneciente a la circunferencia, correspondiente al Y pasado por parametro
