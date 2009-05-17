@@ -41,7 +41,9 @@ class Editor
 
         void agregarPunto(Coordenadas coordenada) { this->puntosEdicion.push_back(coordenada.copia()); }
         list<Coordenadas*> getPuntosEdicion() { return this->puntosEdicion; }
-        void limpiar() { this->puntosEdicion.clear(); }
+
+        /** Limpia la lista eliminando sus puntos **/
+        void limpiar();
 
     protected:
         Rectangulo marco;

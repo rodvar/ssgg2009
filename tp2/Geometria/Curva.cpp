@@ -1,7 +1,6 @@
 #include "Curva.h"
 #include "Segmento.h"
 #include "Circunferencia.h"
-#include <iostream.h>
 
 Curva::Curva(list<Coordenadas*> puntosControl)
 {
