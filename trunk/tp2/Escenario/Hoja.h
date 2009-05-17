@@ -10,14 +10,16 @@ class Hoja : public Dibujable
 {
     public:
         /**   Constructor
+         * @brief La hoja no se hace responsable por la eliminacion del modelado
          * @param modelado Es la curva que modela la hoja
          **/
-        Hoja(Curva* modelado);
+        Hoja(Curva* modelado, float orientacion);
         Hoja();
         virtual ~Hoja();
 
         // Permite obtener su modelado para su modificacion
         Curva* getModelado() { return this->modelado; }
+        float getOrientacion(){ return this->orientacion; }
         void setModelado(Curva* modelado) { this->modelado = modelado; }
 
         /**
@@ -30,6 +32,7 @@ class Hoja : public Dibujable
     private:
         Curva* modelado;
         Color color;
+        float orientacion;
 };
 
 #endif // HOJA_H

@@ -11,18 +11,17 @@
 class Rama : public Dibujable
 {
     public:
-        /**  Constructor
-         * @param hoja Es el modelo de hoja para las hojas de la rama
-         * @param orientacion Es la orientacion en grados medidos desde la perpendicular [-45,45]
+        /**  Constructor: Construye una rama de orientacion aleatoria con hojas de orientacion aleatoria
+         * @param modeladoHoja Es el modelo de hoja para las hojas de la rama
+         * @param orientacion Es la orientacion que se quiere para la rama respecto al eje Z [0,360)
+         * @param angulo Es la separacion con respecto al eje z [0,180]
          **/
-        Rama(Hoja hoja, const short orientacion);
+        Rama(Curva* modeladoHoja, float orientacion, float angulo);
 
         virtual ~Rama();
-        unsigned short int getOrientacionHojas() { return this->orientacionHojas; }
 
-        /** Setea la nueva orientacion verificando que se encuentre en el rango [-45,45]. Si no
-         * lo esta asigna 0**/
-        void setOrientacionHojas(const short int orientacion);
+        float getOrientacion() { return this->orientacion; }
+        float getAngulo() { return this->angulo; }
 
         /**
          * Dibuja una rama en el origen de coordenadas cartesianas, con su base en el plano
@@ -30,13 +29,17 @@ class Rama : public Dibujable
          */
         void dibujar();
 
-
-    protected:
     private:
         GLUquadricObj * qobj;
-        Hoja hojas[HOJAS_DEFECTO];
         Color color;
-        short int orientacionHojas;
+        float orientacion;
+        float angulo;
+        Hoja* hoja1;
+        Hoja* hoja2;
+        Hoja* hoja3;
+
+        //Calcula un numero aletorio de orientacion entre [-45,45] **/
+        float calcularOrientacionHoja();
 };
 
 #endif // RAMA_H

@@ -17,6 +17,7 @@ class Curva : public FiguraGeometrica
     public:
         /**
          * Constructor
+         * @brief La curva no se hace responsable por la eliminacion de los puntos de control
          * @param puntosControl Es la lista de puntos de control que definen la curva
          */
         Curva(list<Coordenadas*> puntosControl);

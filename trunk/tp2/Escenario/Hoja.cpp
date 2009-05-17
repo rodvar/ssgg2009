@@ -1,9 +1,11 @@
 #include "Hoja.h"
+#include "../Geometria/Rectangulo.h" // prueba
 
-Hoja::Hoja(Curva* modelado)
+Hoja::Hoja(Curva* modelado, float orientacion)
 {
     this->modelado = modelado;
     this->color.setVerde(1);
+    this->orientacion = orientacion;
 }
 
 Hoja::Hoja()
@@ -14,12 +16,16 @@ Hoja::Hoja()
 
 Hoja::~Hoja()
 {
-    if (this->modelado)
-        delete this->modelado;
+    /*if (this->modelado)
+        delete this->modelado;*/
 }
 
 void Hoja::dibujar(){
-    // TODO: Implementar
+    Rectangulo* rectangulo = new Rectangulo(2,2,new Coordenadas());
+    rectangulo->setColorBorde(this->color);
+    rectangulo->setColorRelleno(this->color);
+    rectangulo->dibujar();
+    delete rectangulo;
 }
 
 

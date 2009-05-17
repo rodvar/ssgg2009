@@ -21,6 +21,11 @@ void IU::keyboard (unsigned char key, int x, int y){
       case '-':
           Pantalla::getInstancia()->disminuirZoom();
           break;
+      case 'c':
+          Motor::getInstancia()->simularArboleda();
+          IU::getInstancia()->getEditorHoja()->terminar();
+          IU::getInstancia()->getEditorSenderoPlantacion()->terminar();
+          break;
      default:
          break;
     }
