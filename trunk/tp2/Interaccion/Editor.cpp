@@ -10,3 +10,12 @@ Editor::~Editor()
 {
     //dtor
 }
+
+void Editor::limpiar() {
+    list<Coordenadas*>::iterator it = this->puntosEdicion.begin();
+    while (it != this->puntosEdicion.end()){
+        delete *it;
+        it++;
+    }
+    this->puntosEdicion.clear();
+}
