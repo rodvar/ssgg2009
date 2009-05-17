@@ -16,18 +16,6 @@ void Motor::actualizar(){
 
     Pantalla::getInstancia()->actualizar(datos, sendero2d, hoja2d);
     this->limpiarBufferDatos();
-    list<Dibujable*>::iterator it2dS = sendero2d.begin();
-    while (it2dS != sendero2d.end()){
-        delete *it2dS;
-        it2dS++;
-    }
-    list<Dibujable*>::iterator it2dI = hoja2d.begin();
-    while (it2dI != hoja2d.end()){
-        delete *it2dI;
-        it2dI++;
-    }
-
-
 }
 
 void Motor::limpiarBufferDatos(){
