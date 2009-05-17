@@ -49,10 +49,8 @@ class Motor
          */
         void actualizar();
 
-        /**
-         * @return TRUE si esta en rango de trabajo, false en caso contrario
-         */
-        bool enRango(int x, int y);
+        /** En base a los editores, dibuja la arboleda 3d, reemplazando el dibujo actual**/
+        void simularArboleda();
 
     protected:
     private:

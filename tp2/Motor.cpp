@@ -1,21 +1,27 @@
 #include "Motor.h"
 #include "Visualizacion/Pantalla.h"
 #include "Interaccion/IU.h"
+#include "Escenario/Rama.h"
 
 void Motor::actualizar(){
-    list<Coordenadas*> listaCoordSendero = IU::getInstancia()->getEditorSenderoPlantacion()->getPuntosEdicion();
-    list<Coordenadas*> listaCoordHoja = IU::getInstancia()->getEditorHoja()->getPuntosEdicion();
+    list<Coordenadas*> puntosControlSendero = IU::getInstancia()->getEditorSenderoPlantacion()->getPuntosEdicion();
+    list<Coordenadas*> puntosControlHoja = IU::getInstancia()->getEditorHoja()->getPuntosEdicion();
     list<Dibujable*> sendero2d;
     list<Dibujable*> hoja2d;
 
-    sendero2d.insert(sendero2d.begin(),listaCoordSendero.begin(),listaCoordSendero.end());
-    hoja2d.insert(hoja2d.begin(),listaCoordHoja.begin(),listaCoordHoja.end());
+    sendero2d.insert(sendero2d.begin(),puntosControlSendero.begin(),puntosControlSendero.end());
+    hoja2d.insert(hoja2d.begin(),puntosControlHoja.begin(),puntosControlHoja.end());
 
-    // TOOO: Aca realiza la simulacion si corresponde, y siempre pasar lo que se tenga q dibujar
-    // al actualizador de Pantalla
+    Pantalla::getInstancia()->actualizar(this->datos, sendero2d, hoja2d);
+    //this->limpiarBufferDatos();
+}
 
-    Pantalla::getInstancia()->actualizar(datos, sendero2d, hoja2d);
+void Motor::simularArboleda(){
     this->limpiarBufferDatos();
+    Curva* curva = new Curva(IU::getInstancia()->getEditorHoja()->getPuntosEdicion());
+    // TOOO: Aca realiza la simulacion si corresponde
+    Rama* rama = new Rama(curva, 0, 0);
+    this->datos.push_back(rama);
 }
 
 void Motor::limpiarBufferDatos(){
@@ -25,8 +31,4 @@ void Motor::limpiarBufferDatos(){
         it++;
     }
     this->datos.clear();
-}
-
-bool Motor::enRango(int x, int y){
-    return true;
 }

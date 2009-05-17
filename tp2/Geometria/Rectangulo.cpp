@@ -104,44 +104,20 @@ void Rectangulo::dibujarPunteado() {
 }
 
 void Rectangulo::rellenar() {
-	glBegin(GL_POINTS);
-
-    if (this->esRellenable){
-        Scanline scanline;
-        dcPt *PolyVertices;
-        Coordenadas* verticeSO = this->getVerticeSO();
-        Coordenadas* verticeNO = this->getVerticeNO();
-        Coordenadas* verticeNE = this->getVerticeNE();
-        Coordenadas* verticeSE = this->getVerticeSE();
-        int cnt=3;
-        glColor3f(this->relleno.getRojo(), this->relleno.getVerde(), this->relleno.getAzul());
-
-        if(!this->rellenoParcialInferior) { // si relleno total
-            cnt++;
-            PolyVertices = (dcPt *)calloc(cnt, sizeof(dcPt));
-            PolyVertices[0].x = verticeSO->getX()+1; PolyVertices[0].y = verticeSO->getY()-1;
-            PolyVertices[1].x = verticeNO->getX()+1; PolyVertices[1].y = verticeNO->getY()+1;
-            PolyVertices[2].x = verticeNE->getX()-1; PolyVertices[2].y = verticeNE->getY()+1;
-            PolyVertices[3].x = verticeSE->getX()-1; PolyVertices[3].y = verticeSE->getY()-1;
-            scanline.scanFill(cnt,PolyVertices);
-            free(PolyVertices);
-        }
-        else{
-            PolyVertices = (dcPt *)calloc(cnt, sizeof(dcPt));
-            PolyVertices[0].x = verticeNE->getX()-1; PolyVertices[0].y = verticeNE->getY()+1;
-            PolyVertices[1].x = verticeSO->getX()+1; PolyVertices[1].y = verticeSO->getY()-1;
-            PolyVertices[2].x = verticeSE->getX()-1; PolyVertices[2].y = verticeSE->getY()-1;
-            scanline.scanFill(cnt,PolyVertices);
-            free(PolyVertices);
-        }
-		delete verticeNE;
-		delete verticeNO;
-		delete verticeSO;
-		delete verticeSE;
-
-    }
-
+    glColor3f(this->borde.getRojo(), this->borde.getVerde(), this->borde.getAzul());
+    Coordenadas* so = this->getVerticeSO();
+    Coordenadas* ne = this->getVerticeNE();
+    glDisable(GL_LIGHTING);
+    glBegin(GL_POLYGON);
+       glVertex3f(so->getX(), so->getY(), so->getZ());
+       glVertex3f(so->getX(), ne->getY(), so->getZ());
+       glVertex3f(ne->getX(), ne->getY(), so->getZ());
+       glVertex3f(ne->getX(), so->getY(), so->getZ());
+       glVertex3f(so->getX(), so->getY(), so->getZ()); // este esta el pedo?
     glEnd();
+    glEnable(GL_LIGHTING);
+    delete so;
+    delete ne;
 }
 
 bool Rectangulo::contiene(int x, int y){
