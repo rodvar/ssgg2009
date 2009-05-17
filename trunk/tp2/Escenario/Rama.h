@@ -13,15 +13,18 @@ class Rama : public Dibujable
     public:
         /**  Constructor: Construye una rama de orientacion aleatoria con hojas de orientacion aleatoria
          * @param modeladoHoja Es el modelo de hoja para las hojas de la rama
-         * @param orientacion Es la orientacion que se quiere para la rama respecto al eje Z [0,360)
-         * @param angulo Es la separacion con respecto al eje z [0,180]
          **/
-        Rama(Curva* modeladoHoja, float orientacion, float angulo);
+        Rama(Curva* modeladoHoja);
 
         virtual ~Rama();
 
-        float getOrientacion() { return this->orientacion; }
-        float getAngulo() { return this->angulo; }
+        Rama* getRamaSecundaria1(){return this->ramaSecundaria1;}
+        Rama* getRamaSecundaria2(){return this->ramaSecundaria2;}
+        Rama* getRamaSecundaria3(){return this->ramaSecundaria3;}
+        // crea las 3 ramas secundarias
+        void ramificar();
+        // destruye las 3 ramas secundarias
+        void desRamificar();
 
         /**
          * Dibuja una rama en el origen de coordenadas cartesianas, con su base en el plano
@@ -32,8 +35,10 @@ class Rama : public Dibujable
     private:
         GLUquadricObj * qobj;
         Color color;
-        float orientacion;
-        float angulo;
+        Curva* modeladoHoja;
+        Rama* ramaSecundaria1;
+        Rama* ramaSecundaria2;
+        Rama* ramaSecundaria3;
         Hoja* hoja1;
         Hoja* hoja2;
         Hoja* hoja3;

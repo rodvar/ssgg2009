@@ -1,7 +1,7 @@
 #include "Motor.h"
 #include "Visualizacion/Pantalla.h"
 #include "Interaccion/IU.h"
-#include "Escenario/Rama.h"
+#include "Escenario/Arbol.h"
 
 void Motor::actualizar(){
     list<Coordenadas*> puntosControlSendero = IU::getInstancia()->getEditorSenderoPlantacion()->getPuntosEdicion();
@@ -18,10 +18,8 @@ void Motor::actualizar(){
 
 void Motor::simularArboleda(){
     this->limpiarBufferDatos();
-    Curva* curva = new Curva(IU::getInstancia()->getEditorHoja()->getPuntosEdicion());
-    // TOOO: Aca realiza la simulacion si corresponde
-    Rama* rama = new Rama(curva, 0, 0);
-    this->datos.push_back(rama);
+    Arbol* arbol = new Arbol(new Curva(IU::getInstancia()->getEditorHoja()->getPuntosEdicion()), this->nivelesArbol);
+    this->datos.push_back(arbol);
 }
 
 void Motor::limpiarBufferDatos(){
