@@ -2,13 +2,14 @@
 #define COORDENADAS_H
 
 #include "GL/glut.h"
+#include "../Visualizacion/Dibujable.h"
 #include <math.h>
 
 /**
  * Clase que representa Coordenadas cartesianas
  */
 
-class Coordenadas
+class Coordenadas : public Dibujable
 {
     public:
         Coordenadas();
@@ -30,6 +31,11 @@ class Coordenadas
         void setY(float val) { y = val; }
         float getZ() { return z; }
         void setZ(float val) { z = val; }
+
+        /**
+         * Dibuja la coordenada como una circunferencia rellena de radio 5
+         */
+        void dibujar();
 
         /**
          * Devuelve una copia de las coordenadas

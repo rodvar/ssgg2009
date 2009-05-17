@@ -2,13 +2,18 @@
 #include "Segmento.h"
 #include "Circunferencia.h"
 
-Curva::Curva(list<Coordenadas> puntosControl)
+Curva::Curva(list<Coordenadas*> puntosControl)
 {
     this->puntosControl = puntosControl;
 }
 
 Curva::~Curva()
 {
+    list<Coordenadas*>::iterator it = this->puntosControl.begin();
+    while (it != this->puntosControl.end()){
+        delete *it;
+        it++;
+    }
     this->puntosControl.clear();
 }
 
@@ -35,14 +40,14 @@ void Curva::dibujarBSplines(){
     i=0;
 
     wcPt3* control = (wcPt3*)calloc(this->puntosControl.size(), sizeof(wcPt3));
-    Coordenadas c;
+    Coordenadas* c;
 
-    list<Coordenadas>::iterator it = this->puntosControl.begin();
+    list<Coordenadas*>::iterator it = this->puntosControl.begin();
     while (it != this->puntosControl.end()){
-        c = (Coordenadas)*it;
-        control[i].x = c.getX();
-        control[i].y = c.getY();
-        control[i].z = c.getZ();
+        c = (Coordenadas*)*it;
+        control[i].x = c->getX();
+        control[i].y = c->getY();
+        control[i].z = c->getZ();
         i++;it++;
     }
 
@@ -83,15 +88,15 @@ void Curva::dibujarBezier(){
     wcPt3* control = (wcPt3*)calloc(this->puntosControl.size(), sizeof(wcPt3));
     Segmento* segmento;
     unsigned short i =0;
-    Coordenadas c;
+    Coordenadas* c;
     Coordenadas* desde;
     Coordenadas* hasta;
-    list<Coordenadas>::iterator it = this->puntosControl.begin();
+    list<Coordenadas*>::iterator it = this->puntosControl.begin();
     while (it != this->puntosControl.end()){
-        c = (Coordenadas)*it;
-        control[i].x = c.getX();
-        control[i].y = c.getY();
-        control[i].z = c.getZ();
+        c = (Coordenadas*)*it;
+        control[i].x = c->getX();
+        control[i].y = c->getY();
+        control[i].z = c->getZ();
         i++;it++;
     }
     this->bezier(control, this->puntosControl.size(), m, curve);

@@ -35,12 +35,12 @@ double Segmento::longitud(){
 }
 
 void Segmento::dibujar(){
-    glColor3f(this->borde->getRojo(), this->borde->getVerde(), this->borde->getAzul());
+    glColor3f(this->borde.getRojo(), this->borde.getVerde(), this->borde.getAzul());
     this->dibujarBresenham();
 }
 
 void Segmento::dibujarPunteado() {
-    glColor3f(this->borde->getRojo(), this->borde->getVerde(), this->borde->getAzul());
+    glColor3f(this->borde.getRojo(), this->borde.getVerde(), this->borde.getAzul());
     this->dibujarBresenhamPunteado();
 }
 

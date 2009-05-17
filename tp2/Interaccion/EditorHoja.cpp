@@ -2,8 +2,9 @@
 
 EditorHoja::EditorHoja(float ancho, float alto):Editor(ancho,alto)
 {
-    Coordenadas coordenadas(ancho*PJE_ANCHO_H + this->marco.getBase()/2,alto*PJE_ALTO_H - this->marco.getAltura()/2);
-    this->marco.setCentro(coordenadas);
+    Coordenadas* coordenadas = new Coordenadas(ancho*PJE_ANCHO_H + this->marco.getBase()/2,alto*PJE_ALTO_H - this->marco.getAltura()/2);
+    this->marco.setCentro(*coordenadas);
+    delete coordenadas;
 }
 
 EditorHoja::~EditorHoja()

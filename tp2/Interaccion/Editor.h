@@ -39,13 +39,13 @@ class Editor
          */
         virtual void redimensionar(const float ancho, const float alto) = 0;
 
-        void agregarPunto(Coordenadas coordenada) { this->puntosEdicion.push_back(coordenada); }
-        list<Coordenadas> getPuntosEdicion() { return this->puntosEdicion; }
+        void agregarPunto(Coordenadas coordenada) { this->puntosEdicion.push_back(coordenada.copia()); }
+        list<Coordenadas*> getPuntosEdicion() { return this->puntosEdicion; }
         void limpiar() { this->puntosEdicion.clear(); }
 
     protected:
         Rectangulo marco;
-        list<Coordenadas> puntosEdicion;
+        list<Coordenadas*> puntosEdicion;
 
 };
 

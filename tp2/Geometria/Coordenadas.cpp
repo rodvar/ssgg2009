@@ -1,4 +1,5 @@
 #include "Coordenadas.h"
+#include "Circunferencia.h"
 
 Coordenadas::Coordenadas() { this->x = 0; this->y = 0; this->z = 0; }
 
@@ -55,4 +56,11 @@ double Coordenadas::distancia (Coordenadas hasta){
 
 bool Coordenadas::operator == (Coordenadas coordenadas){
     return ((this->x == coordenadas.getX()) && (this->y == coordenadas.getY()));
+}
+
+void Coordenadas::dibujar(){
+    Circunferencia c(5,this->copia());
+    c.setColorBorde(this->borde);
+    c.setColorRelleno(this->borde);
+    c.dibujar();
 }

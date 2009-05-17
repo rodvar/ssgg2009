@@ -62,15 +62,15 @@ void Rectangulo::setCentro(Coordenadas centro) {
 }
 
 void Rectangulo::dibujar(){
-    glColor3f(this->borde->getRojo(), this->borde->getVerde(), this->borde->getAzul());
+    glColor3f(this->borde.getRojo(), this->borde.getVerde(), this->borde.getAzul());
     Segmento* baseSur = new Segmento(this->getVerticeSO(), this->getVerticeSE());
     Segmento* baseNorte = new Segmento(this->getVerticeNE(), this->getVerticeNO());
     Segmento* alturaOeste = new Segmento(this->getVerticeNO(), this->getVerticeSO());
     Segmento* alturaEste = new Segmento(this->getVerticeSE(), this->getVerticeNE());
-    baseSur->setColorBorde(this->borde->copia());
-    baseNorte->setColorBorde(this->borde->copia());
-    alturaEste->setColorBorde(this->borde->copia());
-    alturaOeste->setColorBorde(this->borde->copia());
+    baseSur->setColorBorde(this->borde);
+    baseNorte->setColorBorde(this->borde);
+    alturaEste->setColorBorde(this->borde);
+    alturaOeste->setColorBorde(this->borde);
     baseSur->dibujar();
     alturaEste->dibujar();
     baseNorte->dibujar();
@@ -83,15 +83,15 @@ void Rectangulo::dibujar(){
 }
 
 void Rectangulo::dibujarPunteado() {
-    glColor3f(this->borde->getRojo(), this->borde->getVerde(), this->borde->getAzul());
+    glColor3f(this->borde.getRojo(), this->borde.getVerde(), this->borde.getAzul());
     Segmento* baseSur = new Segmento(this->getVerticeSO(), this->getVerticeSE());
     Segmento* baseNorte = new Segmento(this->getVerticeNE(), this->getVerticeNO());
     Segmento* alturaOeste = new Segmento(this->getVerticeNO(), this->getVerticeSO());
     Segmento* alturaEste = new Segmento(this->getVerticeSE(), this->getVerticeNE());
-    baseSur->setColorBorde(this->borde->copia());
-    baseNorte->setColorBorde(this->borde->copia());
-    alturaEste->setColorBorde(this->borde->copia());
-    alturaOeste->setColorBorde(this->borde->copia());
+    baseSur->setColorBorde(this->borde);
+    baseNorte->setColorBorde(this->borde);
+    alturaEste->setColorBorde(this->borde);
+    alturaOeste->setColorBorde(this->borde);
     baseSur->dibujarPunteado();
     alturaEste->dibujarPunteado();
     baseNorte->dibujarPunteado();
@@ -106,7 +106,7 @@ void Rectangulo::dibujarPunteado() {
 void Rectangulo::rellenar() {
 	glBegin(GL_POINTS);
 
-    if (this->relleno){
+    if (this->esRellenable){
         Scanline scanline;
         dcPt *PolyVertices;
         Coordenadas* verticeSO = this->getVerticeSO();
@@ -114,7 +114,7 @@ void Rectangulo::rellenar() {
         Coordenadas* verticeNE = this->getVerticeNE();
         Coordenadas* verticeSE = this->getVerticeSE();
         int cnt=3;
-        glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
+        glColor3f(this->relleno.getRojo(), this->relleno.getVerde(), this->relleno.getAzul());
 
         if(!this->rellenoParcialInferior) { // si relleno total
             cnt++;

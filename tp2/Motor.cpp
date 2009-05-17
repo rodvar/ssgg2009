@@ -3,25 +3,25 @@
 #include "Interaccion/IU.h"
 
 void Motor::actualizar(){
-    list<Dibujable*> escena3d;
-    list<FiguraGeometrica*> sendero2d;
-    list<FiguraGeometrica*> hoja2d;
+    list<Coordenadas*> listaCoordSendero = IU::getInstancia()->getEditorSenderoPlantacion()->getPuntosEdicion();
+    list<Coordenadas*> listaCoordHoja = IU::getInstancia()->getEditorHoja()->getPuntosEdicion();
+    list<Dibujable*> sendero2d;
+    list<Dibujable*> hoja2d;
 
+    sendero2d.insert(sendero2d.begin(),listaCoordSendero.begin(),listaCoordSendero.end());
+    hoja2d.insert(hoja2d.begin(),listaCoordHoja.begin(),listaCoordHoja.end());
 
     // TOOO: Aca realiza la simulacion si corresponde, y siempre pasar lo que se tenga q dibujar
     // al actualizador de Pantalla
-    Pantalla::getInstancia()->actualizar(escena3d, sendero2d, hoja2d);
-    list<Dibujable*>::iterator it3d = escena3d.begin();
-    while (it3d != escena3d.end()){
-        delete *it3d;
-        it3d++;
-    }
-    list<FiguraGeometrica*>::iterator it2dS = sendero2d.begin();
+
+    Pantalla::getInstancia()->actualizar(datos, sendero2d, hoja2d);
+    this->limpiarBufferDatos();
+    list<Dibujable*>::iterator it2dS = sendero2d.begin();
     while (it2dS != sendero2d.end()){
         delete *it2dS;
         it2dS++;
     }
-    list<FiguraGeometrica*>::iterator it2dI = hoja2d.begin();
+    list<Dibujable*>::iterator it2dI = hoja2d.begin();
     while (it2dI != hoja2d.end()){
         delete *it2dI;
         it2dI++;
@@ -31,9 +31,9 @@ void Motor::actualizar(){
 }
 
 void Motor::limpiarBufferDatos(){
-    list<FiguraGeometrica*>::iterator it=this->datos.begin() ;
+    list<Dibujable*>::iterator it=this->datos.begin() ;
     while(it != this->datos.end()){
-        delete ((FiguraGeometrica*)*it);
+        delete *it;
         it++;
     }
     this->datos.clear();
