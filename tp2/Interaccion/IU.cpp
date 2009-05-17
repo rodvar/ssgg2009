@@ -15,6 +15,12 @@ void IU::keyboard (unsigned char key, int x, int y){
       case 'a':
           Pantalla::getInstancia()->setEjesVisibles(!Pantalla::getInstancia()->ejesVisibles());
           break;
+      case 'x':
+          IU::getInstancia()->editorHoja->limpiar();
+          break;
+      case 'z':
+          IU::getInstancia()->editorSendero->limpiar();
+          break;
       case '+':
           Pantalla::getInstancia()->aumentarZoom();
           break;
@@ -36,18 +42,38 @@ void IU::keyboard (unsigned char key, int x, int y){
  * estado GLUT_UP or GLUT_DOWN
 */
 void IU::mouse(int boton, int estado, int x, int y){
-    /*if (IU::getInstancia()->getEditorHoja()->getMarco()->contiene(x,y)){
-        cout << "CLICK EN EDITOR DE HOJA!" << endl;
+	if(boton==GLUT_LEFT_BUTTON && estado==GLUT_UP) {
+		if(IU::getInstancia()->getEditorHoja()->getMarco()->contiene(x,y)) {
+			Coordenadas c;
+			c.setX(x);
+			c.setY(y);
+			c.setZ(0);
+			IU::getInstancia()->getEditorHoja()->agregarPunto(c);
+		} else if(IU::getInstancia()->getEditorSenderoPlantacion()->getMarco()->contiene(x,y)) {
+			Coordenadas c;
+			c.setX(x);
+			c.setY(y);
+			c.setZ(0);
+			IU::getInstancia()->getEditorSenderoPlantacion()->agregarPunto(c);
+		}
     }
-    if (IU::getInstancia()->getEditorSenderoPlantacion()->getMarco()->contiene(x,y)){
-        cout << "CLICK EN EDITOR DE SENDERO!" << endl;
-    }*/
+
+}
+
+void IU::dibujarFiguraBezier() {
+	if(this->editorHoja->getPuntosEdicion().size()>3) {
+		Curva curva(this->editorHoja->getPuntosEdicion());
+		curva.dibujarBezier();
+	}
 }
 
 void IU::dibujarFiguraBSplines() {
-	Curva curva(this->editorSendero->getPuntosEdicion());
-	curva.dibujar();
+	if(this->editorSendero->getPuntosEdicion().size()>3) {
+		Curva curva(this->editorSendero->getPuntosEdicion());
+		curva.dibujarBSplines();
+	}
 }
+
 void IU::OnIdle(){
     float rotacion = Pantalla::getInstancia()->getRotacionEsfera();
     rotacion += 0.1;

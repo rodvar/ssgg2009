@@ -46,12 +46,14 @@ void Segmento::dibujar(){
 }
 
 void Segmento::dibujarPunteado() {
-    glColor3f(this->borde.getRojo(), this->borde.getVerde(), this->borde.getAzul());
     glEnable(GL_LINE_STIPPLE);
-        glLineStipple (0x5555,1);
-        this->dibujar();
+    glLineStipple (4, 0xAAAA);
+    glColor3f(1,1,1);
+    glBegin (GL_LINES);
+		glVertex3f(this->desde->getX(), this->desde->getY(), this->desde->getZ());
+		glVertex3f(this->hasta->getX(), this->hasta->getY(), this->hasta->getZ());
+    glEnd();
     glDisable(GL_LINE_STIPPLE);
-    // TODO : Implementar
 }
 
 void Segmento::rellenar() {
