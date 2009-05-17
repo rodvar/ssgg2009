@@ -6,10 +6,10 @@
 #define DDA 'D'
 
 #include <stdlib.h>
-#include "Geometria/Circunferencia.h"
-#include "Geometria/Segmento.h"
-#include "Geometria/Triangulo.h"
-#include <list.h>
+#include <list>
+#include "Visualizacion/Dibujable.h"
+
+using namespace std;
 
 /**
  * Motor del sistema. Realiza el procesamiento de datos y los despliega en la vista
@@ -56,7 +56,7 @@ class Motor
 
     protected:
     private:
-        list<FiguraGeometrica*> datos;
+        list<Dibujable*> datos;
         // Parametros de la aplicacion
         unsigned short int nivelesArbol; // Nivel de recursividad de dibujo del arbol
         unsigned short int pasoTramoBSpline; // cada cuanto tomo un punto del tramo
@@ -75,9 +75,9 @@ class Motor
 
         //Destructor
         inline ~Motor ( ){
-            list<FiguraGeometrica*>::iterator it=this->datos.begin() ;
+            list<Dibujable*>::iterator it=this->datos.begin() ;
             while(it != this->datos.end()){
-                delete ((FiguraGeometrica*)*it);
+                delete *it;
                 it++;
             }
             this->datos.clear();

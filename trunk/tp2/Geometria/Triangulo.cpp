@@ -20,9 +20,9 @@ void Triangulo::dibujar(){
     Segmento* segmentoAB = new Segmento(this->verticeA->copia(), this->verticeB->copia());
     Segmento* segmentoBC = new Segmento(this->verticeB->copia(), this->verticeC->copia());
     Segmento* segmentoCA = new Segmento(this->verticeC->copia(), this->verticeA->copia());
-    segmentoAB->setColorBorde(this->borde->copia());
-    segmentoBC->setColorBorde(this->borde->copia());
-    segmentoCA->setColorBorde(this->borde->copia());
+    segmentoAB->setColorBorde(this->borde);
+    segmentoBC->setColorBorde(this->borde);
+    segmentoCA->setColorBorde(this->borde);
     segmentoAB->dibujar();
     segmentoBC->dibujar();
     segmentoCA->dibujar();
@@ -37,7 +37,7 @@ void Triangulo::dibujarPunteado() {
 }
 
 void Triangulo::rellenar() {
-    if (this->relleno){
+    if (this->esRellenable){
         Scanline scanline;
         int cnt=3;
 
@@ -48,7 +48,7 @@ void Triangulo::rellenar() {
         PolyVertices[1].x = this->verticeB->getX(); PolyVertices[1].y = this->verticeB->getY();
         PolyVertices[2].x = this->verticeC->getX(); PolyVertices[2].y = this->verticeC->getY();
 
-        glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
+        glColor3f(this->relleno.getRojo(), this->relleno.getVerde(), this->relleno.getAzul());
         scanline.scanFill(cnt,PolyVertices);
 
         delete PolyVertices;

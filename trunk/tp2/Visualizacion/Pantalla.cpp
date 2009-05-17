@@ -2,7 +2,7 @@
 #include "../Interaccion/IU.h"
 
 
-void Pantalla::actualizar(list<Dibujable*> escena3d, list<FiguraGeometrica*> editorSup, list<FiguraGeometrica*> editorInf){
+void Pantalla::actualizar(list<Dibujable*> escena3d, list<Dibujable*> editorSup, list<Dibujable*> editorInf){
     float* ojoCamara = this->camara.getOjo();
     float* sobreCamara = this->camara.getSobre();
     float* arribaCamara = this->camara.getArriba();
@@ -40,9 +40,9 @@ void Pantalla::actualizar(list<Dibujable*> escena3d, list<FiguraGeometrica*> edi
 	gluLookAt (0, 0, 0.5, 0, 0, 0, 0, 1, 0);
 	glCallList(this->getDL_AXIS2D_TOP());
 	glDisable(GL_LIGHTING);
-	list<FiguraGeometrica*>::iterator it2dS = editorSup.begin();
+	list<Dibujable*>::iterator it2dS = editorSup.begin();
     while (it2dS != editorSup.end()){
-        ((FiguraGeometrica*)*it2dS)->dibujar();
+        ((Dibujable*)*it2dS)->dibujar();
         it2dS++;
     }
 	glEnable(GL_LIGHTING);
@@ -55,9 +55,9 @@ void Pantalla::actualizar(list<Dibujable*> escena3d, list<FiguraGeometrica*> edi
 	gluLookAt (0, 0, 0.5, 0, 0, 0, 0, 1, 0);
 	glCallList(this->getDL_AXIS2D_HEIGHT());
 	glDisable(GL_LIGHTING);
-	list<FiguraGeometrica*>::iterator it2dI = editorInf.begin();
+	list<Dibujable*>::iterator it2dI = editorInf.begin();
     while (it2dI != editorInf.end()){
-        ((FiguraGeometrica*)*it2dI)->dibujar();
+        ((Dibujable*)*it2dI)->dibujar();
         it2dI++;
     }
 	glEnable(GL_LIGHTING);

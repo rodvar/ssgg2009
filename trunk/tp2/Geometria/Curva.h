@@ -2,7 +2,8 @@
 #define CURVA_H
 
 #include "FiguraGeometrica.h"
-#include <list.h>
+#include <list>
+using namespace std;
 
 
 typedef struct tdcPt3 {
@@ -18,9 +19,9 @@ class Curva : public FiguraGeometrica
          * Constructor
          * @param puntosControl Es la lista de puntos de control que definen la curva
          */
-        Curva(list<Coordenadas> puntosControl);
+        Curva(list<Coordenadas*> puntosControl);
         virtual ~Curva();
-        list<Coordenadas> getPuntosControl() { return this->puntosControl; }
+        list<Coordenadas*> getPuntosControl() { return this->puntosControl; }
 
         void dibujar();
         void dibujarPunteado();
@@ -29,7 +30,7 @@ class Curva : public FiguraGeometrica
 
     protected:
     private:
-        list<Coordenadas> puntosControl;
+        list<Coordenadas*> puntosControl;
 
         // Dibuja segun algoritmo de Bezier
         void dibujarBezier();

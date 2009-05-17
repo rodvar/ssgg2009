@@ -1,7 +1,7 @@
 #ifndef PANTALLA_H
 #define PANTALLA_H
 
-#include <list.h>
+#include <list>
 #include "../Geometria/Rectangulo.h"
 #include "Luz.h"
 #include "Camara.h"
@@ -49,7 +49,7 @@ class Pantalla
         void setRotacionEsfera(float rot) { this->rotate_sphere = rot; }
 
         /** Actualiza la pantalla con los datos suministrados **/
-        void actualizar(list<Dibujable*> escena3d, list<FiguraGeometrica*> editorSup, list<FiguraGeometrica*> editorInf);
+        void actualizar(list<Dibujable*> escena3d, list<Dibujable*> editorSup, list<Dibujable*> editorInf);
 
         /** Fuerza a redibujar la pantalla **/
         void forzarRedibujo();

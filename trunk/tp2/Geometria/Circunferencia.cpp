@@ -12,7 +12,7 @@ Circunferencia::~Circunferencia()
 }
 
 void Circunferencia::dibujar(){
-    glColor3f(this->borde->getRojo(), this->borde->getVerde(), this->borde->getAzul());
+    glColor3f(this->borde.getRojo(), this->borde.getVerde(), this->borde.getAzul());
     this->dibujarBresenham();
 }
 
@@ -84,8 +84,8 @@ void Circunferencia::dibujarDDA() {
 void Circunferencia::rellenar() {
 	glBegin(GL_POINTS);
 
-    if (this->relleno){
-        glColor3f(this->relleno->getRojo(), this->relleno->getVerde(), this->relleno->getAzul());
+    if (this->esRellenable){
+        glColor3f(this->relleno.getRojo(), this->relleno.getVerde(), this->relleno.getAzul());
 
     }
 
