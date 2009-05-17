@@ -7,9 +7,9 @@ using namespace std;
 
 
 typedef struct tdcPt3 {
-    int x;
-    int y;
-    int z;
+    float x;
+    float y;
+    float z;
 } wcPt3;
 
 class Curva : public FiguraGeometrica

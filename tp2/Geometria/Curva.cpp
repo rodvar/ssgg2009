@@ -1,6 +1,7 @@
 #include "Curva.h"
 #include "Segmento.h"
 #include "Circunferencia.h"
+#include <iostream.h>
 
 Curva::Curva(list<Coordenadas*> puntosControl)
 {
@@ -9,11 +10,6 @@ Curva::Curva(list<Coordenadas*> puntosControl)
 
 Curva::~Curva()
 {
-    list<Coordenadas*>::iterator it = this->puntosControl.begin();
-    while (it != this->puntosControl.end()){
-        delete *it;
-        it++;
-    }
     this->puntosControl.clear();
 }
 
@@ -51,7 +47,7 @@ void Curva::dibujarBSplines(){
         i++;it++;
     }
 
-    int resolution = 1000;  // how many points our in our output array
+    int resolution = 10;  // how many points our in our output array
     wcPt3 *out_pts;
     out_pts = new wcPt3[resolution];
 
@@ -59,24 +55,24 @@ void Curva::dibujarBSplines(){
     glColor3f(1.0, 1.0, 1.0);
 
 	Circunferencia* circ;
-  	for (i=0; i<=n; i++) {
-  		circ = new Circunferencia(2,new Coordenadas(control[i].x,control[i].y));
+  	for (i=0; i<n; i++) {
+  		circ = new Circunferencia(0.01,new Coordenadas(control[i].x,control[i].y));
+  		Color color(1,1,1);
+  		circ->setColorBorde(color);
   		circ->dibujar();
         delete circ;
   	}
 
-  	circ = new Circunferencia(0,new Coordenadas(control[0].x,control[0].y));
-  	circ->dibujar();
-  	delete circ;
-
   	double anteriorX=out_pts[0].x, anteriorY=out_pts[0].y;
-  	Segmento* segmento;
   	for (i=0; i<resolution; i++) {
-  		segmento = new Segmento(new Coordenadas(anteriorX,anteriorY),new Coordenadas(out_pts[i].x,out_pts[i].y));
-  		segmento->dibujar();
+  		glDisable(GL_LIGHTING);
+  		glBegin(GL_LINES);
+  			glVertex3f(anteriorX, anteriorY, 0.0);
+  			glVertex3f(out_pts[i].x, out_pts[i].y, 0.0);
+  		glEnd();
+  		glEnable(GL_LIGHTING);
   		anteriorX=out_pts[i].x;
   		anteriorY=out_pts[i].y;
-  		delete segmento;
   	}
   	free(control);
 
@@ -130,9 +126,9 @@ void Curva::bspline(int n, int t, wcPt3 *control, wcPt3 *output, int num_output)
 		output[output_index].z = calcxyz.z;
 		interval = interval + increment;  // increment our parameter
 	}
-	output[num_output-1].x=control[n].x;   // put in the last point
-	output[num_output-1].y=control[n].y;
-	output[num_output-1].z=control[n].z;
+	output[num_output-1].x=control[n-1].x;   // put in the last point
+	output[num_output-1].y=control[n-1].y;
+	output[num_output-1].z=control[n-1].z;
 
 	delete u;
 }
