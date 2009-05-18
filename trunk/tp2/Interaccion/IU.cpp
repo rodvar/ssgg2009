@@ -3,37 +3,37 @@
 
 void IU::keyboard (unsigned char key, int x, int y){
     switch (key) {
-      case 0x1b: // ESC
-         Motor::limpiar();
-         Pantalla::limpiar();
-         IU::limpiar();
-         exit (0);
-         break;
-      case 'g':
-          Pantalla::getInstancia()->setGrillaVisible(!Pantalla::getInstancia()->grillaVisible());
-          break;
-      case 'a':
-          Pantalla::getInstancia()->setEjesVisibles(!Pantalla::getInstancia()->ejesVisibles());
-          break;
-      case 'x':
-          IU::getInstancia()->editorHoja->limpiar();
-          break;
-      case 'z':
-          IU::getInstancia()->editorSendero->limpiar();
-          break;
-      case '+':
-          Pantalla::getInstancia()->aumentarZoom();
-          break;
-      case '-':
-          Pantalla::getInstancia()->disminuirZoom();
-          break;
-      case 'c':
-          Motor::getInstancia()->simularArboleda();
-          IU::getInstancia()->getEditorHoja()->terminar();
-          IU::getInstancia()->getEditorSenderoPlantacion()->terminar();
-          break;
-     default:
-         break;
+        case 0x1b: // ESC
+            Motor::limpiar();
+            Pantalla::limpiar();
+            IU::limpiar();
+            exit (0);
+            break;
+        case 'm':
+            Pantalla::getInstancia()->setGrillaVisible(!Pantalla::getInstancia()->grillaVisible());
+            break;
+        case 'e':
+            Pantalla::getInstancia()->setEjesVisibles(!Pantalla::getInstancia()->ejesVisibles());
+            break;
+        case 'x':
+            IU::getInstancia()->editorHoja->limpiar();
+            break;
+        case 'z':
+            IU::getInstancia()->editorSendero->limpiar();
+            break;
+        case 'g':
+            Motor::getInstancia()->simularArboleda();
+            IU::getInstancia()->getEditorHoja()->terminar();
+            IU::getInstancia()->getEditorSenderoPlantacion()->terminar();
+            break;
+        case '+':
+            Pantalla::getInstancia()->aumentarZoom();
+            break;
+        case '-':
+            Pantalla::getInstancia()->disminuirZoom();
+            break;
+        default:
+            break;
     }
 }
 
