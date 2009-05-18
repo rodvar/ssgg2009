@@ -4,6 +4,9 @@ Arbol::Arbol(Curva* modeladoHoja, const unsigned short int niveles){
     this->niveles = niveles;
     this->raiz = new Rama(modeladoHoja);
     this->crearArbol(this->raiz);
+    this->nivelIzq = 0;
+    this->nivelCtr = 0;
+    this->nivelDer = 0;
 }
 
 Arbol::~Arbol(){
@@ -20,7 +23,7 @@ void Arbol::dibujar(){
 void Arbol::dibujarRecursivo(Rama* raiz, int tipo){
     if (raiz){
         switch (tipo){
-            case -1:// IZQ
+            case -1:// nivelIzq
                 glPushMatrix();
                     glTranslatef(0,0,1);
                     glRotatef(-45,0,1,0);
@@ -32,7 +35,7 @@ void Arbol::dibujarRecursivo(Rama* raiz, int tipo){
                     this->dibujarRecursivo(raiz->getRamaSecundaria3(), 1);
                 glPopMatrix();
                 break;
-            case 0: // CTRO
+            case 0: // nivelCtrO
                 glPushMatrix();
                     glTranslatef(0,0,1);
                     glRotatef(-45,1,0,0);
@@ -44,7 +47,7 @@ void Arbol::dibujarRecursivo(Rama* raiz, int tipo){
                     this->dibujarRecursivo(raiz->getRamaSecundaria3(), 1);
                 glPopMatrix();
                 break;
-            case 1: //DER
+            case 1: //nivelDer
                 glPushMatrix();
                     glTranslatef(0,0,1);
                     glRotatef(-45,0,-1,0);
@@ -61,23 +64,20 @@ void Arbol::dibujarRecursivo(Rama* raiz, int tipo){
 }
 
 void Arbol::crearArbol(Rama* raiz){
-    static int izq = 0;
-    static int ctr = 0;
-    static int der = 0;
     if (raiz){
-        if ((izq < this->niveles) && (ctr < this->niveles) && (der < this->niveles)){
+        if ((nivelIzq < this->niveles) && (nivelCtr < this->niveles) && (nivelDer < this->niveles)){
             raiz->ramificar();
-            izq++;
+            this->nivelIzq++;
             this->crearArbol(raiz->getRamaSecundaria1());
-            ctr++;
+            this->nivelCtr++;
             this->crearArbol(raiz->getRamaSecundaria2());
-            der++;
+            this->nivelDer++;
             this->crearArbol(raiz->getRamaSecundaria3());
         }
         else{
-            if (izq < this->niveles) izq = 0;
-            if (ctr < this->niveles) ctr = 0;
-            if (der < this->niveles) der = 0;
+            if (this->nivelIzq < this->niveles) nivelIzq = 0;
+            if (this->nivelCtr < this->niveles) nivelCtr = 0;
+            if (this->nivelDer < this->niveles) nivelDer = 0;
         }
     }
 }

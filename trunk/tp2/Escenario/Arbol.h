@@ -20,6 +20,9 @@ class Arbol : public Dibujable{
         void dibujar();
 
     private:
+        int nivelIzq;
+        int nivelCtr;
+        int nivelDer;
         Rama* raiz;
         unsigned short int niveles;
 
