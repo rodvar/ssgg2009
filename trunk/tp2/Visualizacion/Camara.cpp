@@ -10,7 +10,7 @@ Camara::Camara(){
     this->up[0]  = 0.0;
     this->up[1]  = 0.0;
     this->up[2]  = 1.0;
-    this->zoom = 60.0;
+    this->zoom = 30.0;
 }
 
 Camara::~Camara()

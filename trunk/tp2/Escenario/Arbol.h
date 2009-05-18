@@ -24,10 +24,10 @@ class Arbol : public Dibujable{
         unsigned short int niveles;
 
         // crea el arbol
-        Rama* crearArbol(Rama* raiz);
+        void crearArbol(Rama* raiz);
 
         //Dibuja el arbol el forma recursiva a partir de la raiz pasada por parametro
-        void dibujarRecursivo(Rama* raiz);
+        void dibujarRecursivo(Rama* raiz, int tipo);
 
 };
 

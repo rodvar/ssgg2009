@@ -3,12 +3,7 @@
 Arbol::Arbol(Curva* modeladoHoja, const unsigned short int niveles){
     this->niveles = niveles;
     this->raiz = new Rama(modeladoHoja);
-    this->raiz->ramificar();
-    for (unsigned short int i = 1; i < this->niveles; i++){
-        this->raiz->getRamaSecundaria1()->ramificar();
-        this->raiz->getRamaSecundaria2()->ramificar();
-        this->raiz->getRamaSecundaria3()->ramificar();
-    }
+    this->crearArbol(this->raiz);
 }
 
 Arbol::~Arbol(){
@@ -17,117 +12,72 @@ Arbol::~Arbol(){
 
 void Arbol::dibujar(){
     this->raiz->dibujar();
-    this->dibujarRecursivo(this->raiz);
+    this->dibujarRecursivo(this->raiz->getRamaSecundaria1(),-1);
+    this->dibujarRecursivo(this->raiz->getRamaSecundaria1(),0);
+    this->dibujarRecursivo(this->raiz->getRamaSecundaria1(),1);
 }
 
-void Arbol::dibujarRecursivo(Rama* raiz){
+void Arbol::dibujarRecursivo(Rama* raiz, int tipo){
     if (raiz){
-        glPushMatrix();
-            glTranslatef(0,0,1);
-            glRotatef(-45,0,1,0);
-            glRotatef(180,0,0,1);
-            glScalef(0.75,0.75,0.75);
-            raiz->dibujar();
-            this->dibujarRecursivo(raiz->getRamaSecundaria1());
-            this->dibujarRecursivo(raiz->getRamaSecundaria2());
-            this->dibujarRecursivo(raiz->getRamaSecundaria3());
-        glPopMatrix();
-    }
-
-    /*
-
-    if (i == 0){
-        this->rama->dibujar();
-        this->dibujarRecursivo(i + 1,0);
-    }
-    else if (i < this->niveles){
-        // ramificacion 1
-        glPushMatrix();
-            glTranslatef(0,0,1);
-            glRotatef(-45,0,1,0);
-            glRotatef(180,0,0,1);
-            glScalef(0.75,0.75,0.75);
-            this->ramas[i]->dibujar();
-            if (secundarias < 3)
-                this->dibujarRecursivo(i,secundarias+1);
-            else
-                secundarias = 0;
-        glPopMatrix();
-
-        // ramificacion 2
-        glPushMatrix();
-            glTranslatef(0,0,1);
-            glRotatef(-45,0,1,0);
-            glRotatef(180,0,0,1);
-            glScalef(0.75,0.75,0.75);
-            this->ramas[i]->dibujar();
-            if (secundarias < 3)
-                this->dibujarRecursivo(i,secundarias+1);
-            else
-                secundarias = 0;
-        glPopMatrix();
-
-        // ramificacion 3
-        glPushMatrix();
-            glTranslatef(0,0,1);
-            glRotatef(-45,0,1,0);
-            glRotatef(180,0,0,1);
-            glScalef(0.75,0.75,0.75);
-            this->ramas[i]->dibujar();
-            if (secundarias < 3)
-                this->dibujarRecursivo(i,secundarias+1);
-            else
-                secundarias = 0;
-        glPopMatrix();
-
-
-
-
-*/
-
-
-        /*
-
-        glPushMatrix();
-            glTranslatef(0,0,1);
-            glRotatef(this->ramas[i]->getAngulo(),0,1,0);
-            glRotatef(this->ramas[i]->getOrientacion(),0,0,1);
-            glScalef(0.75,0.75,0.75);
-            this->ramas[i]->dibujar();
-
-            //Ramas secundarias
-            glPushMatrix();
-                glRotatef(this->ramas[i]->getAngulo(),0,1,0);
-                glScalef(0.75,0.75,0.75);
+        switch (tipo){
+            case -1:// IZQ
                 glPushMatrix();
                     glTranslatef(0,0,1);
-                    this->ramas[i]->dibujar();
+                    glRotatef(-45,0,1,0);
+                    glRotatef(180,0,0,1);
+                    glScalef(0.75,0.75,0.75);
+                    raiz->dibujar();
+                    this->dibujarRecursivo(raiz->getRamaSecundaria1(), -1);
+                    this->dibujarRecursivo(raiz->getRamaSecundaria2(), 0);
+                    this->dibujarRecursivo(raiz->getRamaSecundaria3(), 1);
                 glPopMatrix();
+                break;
+            case 0: // CTRO
                 glPushMatrix();
-                    glTranslatef(0,0,0.66);
-                    this->ramas[i]->dibujar();
+                    glTranslatef(0,0,1);
+                    glRotatef(-45,1,0,0);
+                    glRotatef(180,0,0,1);
+                    glScalef(0.75,0.75,0.75);
+                    raiz->dibujar();
+                    this->dibujarRecursivo(raiz->getRamaSecundaria1(), -1);
+                    this->dibujarRecursivo(raiz->getRamaSecundaria2(), 0);
+                    this->dibujarRecursivo(raiz->getRamaSecundaria3(), 1);
                 glPopMatrix();
+                break;
+            case 1: //DER
                 glPushMatrix();
-                    glTranslatef(0,0,0.33);
-                    this->ramas[i]->dibujar();
+                    glTranslatef(0,0,1);
+                    glRotatef(-45,0,-1,0);
+                    glRotatef(180,0,0,1);
+                    glScalef(0.75,0.75,0.75);
+                    raiz->dibujar();
+                    this->dibujarRecursivo(raiz->getRamaSecundaria1(), -1);
+                    this->dibujarRecursivo(raiz->getRamaSecundaria2(), 0);
+                    this->dibujarRecursivo(raiz->getRamaSecundaria3(), 1);
                 glPopMatrix();
-            glPopMatrix();
-            this->dibujarRecursivo(i + 1);
-        glPopMatrix();
-        */
+                break;
+        }
+    }
 }
 
-Rama* Arbol::crearArbol(Rama* raiz){
-    static int i = 0;
+void Arbol::crearArbol(Rama* raiz){
+    static int izq = 0;
+    static int ctr = 0;
+    static int der = 0;
     if (raiz){
-        i++;
-        if (i < this->niveles){
+        if ((izq < this->niveles) && (ctr < this->niveles) && (der < this->niveles)){
             raiz->ramificar();
+            izq++;
             this->crearArbol(raiz->getRamaSecundaria1());
+            ctr++;
             this->crearArbol(raiz->getRamaSecundaria2());
+            der++;
             this->crearArbol(raiz->getRamaSecundaria3());
         }
-        else
-            i = 0;
+        else{
+            if (izq < this->niveles) izq = 0;
+            if (ctr < this->niveles) ctr = 0;
+            if (der < this->niveles) der = 0;
+        }
     }
 }
