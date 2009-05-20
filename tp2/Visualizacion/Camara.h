@@ -19,6 +19,8 @@ class Camara
         float getZoom() { return this->zoom; }
         //setters
         void setZoom(float zoom) { this->zoom = zoom; }
+        //setters : permite variar la posicion de la camara en los parametros x,y
+        void setPosicion(float x, float y){ this->eye[0] = x; this->eye[1] = y; }
 
     protected:
     private:
