@@ -174,6 +174,7 @@ void Pantalla::setAmbiente2DSuperior()
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
 	gluOrtho2D(0.0, 1.0, 0.0, 1.0);
+	this->modo = BSPLINE;
 
 }
 
@@ -186,6 +187,7 @@ void Pantalla::setAmbiente2DInferior()
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
 	gluOrtho2D(0.0, 1.0, 0.0, 1.0);
+	this->modo = BEZIER;
 }
 
 

@@ -14,7 +14,10 @@ Curva::~Curva()
 }
 
 void Curva::dibujar(){
-    this->dibujarBezier();
+    if (Pantalla::getInstancia()->getModo() == BEZIER)
+        this->dibujarBezier();
+    else
+        this->dibujarBSplines();
 }
 
 void Curva::dibujarPunteado(){
