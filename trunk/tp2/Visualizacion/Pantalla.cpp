@@ -1,7 +1,6 @@
 #include "Pantalla.h"
 #include "../Interaccion/IU.h"
 
-
 void Pantalla::actualizar(list<Dibujable*> escena3d, list<Dibujable*> editorSup, list<Dibujable*> editorInf){
     float* ojoCamara = this->camara.getOjo();
     float* sobreCamara = this->camara.getSobre();
@@ -16,6 +15,8 @@ void Pantalla::actualizar(list<Dibujable*> escena3d, list<Dibujable*> editorSup,
 	glLoadIdentity();
 	gluLookAt (ojoCamara[0], ojoCamara[1], ojoCamara[2], sobreCamara[0],
         sobreCamara[1], sobreCamara[2], arribaCamara[0], arribaCamara[1], arribaCamara[2]);
+    glRotatef(this->rotacionY, -1, 1, 0); //rotacion en y
+    glRotatef(this->rotacionX,  0, 0, 1); // rotacion en x
 
 	IU::getInstancia()->dibujarFiguraBSplines();
 
@@ -224,4 +225,20 @@ void Pantalla::disminuirZoom(){
     float zoom = this->camara.getZoom();
     if (zoom < MAX_ZOOM)
         this->camara.setZoom(++zoom);
+}
+
+void Pantalla::calcularRotacionCamara(int x, int y){
+    static int ultimoX = 0;
+    static int ultimoY = 0;
+
+    int deltaX = x - ultimoX;
+    int deltaY = y - ultimoY;
+
+    if (deltaX > 0) this->rotacionX += 0.50;
+    if (deltaX < 0) this->rotacionX += -0.50;
+    if (deltaY > 0) this->rotacionY += 0.50;
+    if (deltaY < 0) this->rotacionY += -0.50;
+
+    ultimoX = x;
+    ultimoY = y;
 }
