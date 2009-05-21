@@ -81,11 +81,9 @@ void Curva::dibujarCurvaBezier4Puntos(wcPt3 *control) {
 	float lastX=control[0].x;
 	float lastY=control[0].y;
 	for (i=0; i<=n; i++) {
-		glColor3f(0,0,0);
-		glBegin(GL_POINTS);
 		mapeo = IU::getInstancia()->getEditorHoja()->mapeo(control[i].x,control[i].y);
 		circ = new Circunferencia(0.01,new Coordenadas(mapeo->getX(),mapeo->getY()));
-		Color color(1,1,1);
+		Color color(0.5,0.5,0.5);
 		circ->setColorBorde(color);
 		circ->dibujar();
 		if(!isFirstPoint) {
@@ -99,7 +97,6 @@ void Curva::dibujarCurvaBezier4Puntos(wcPt3 *control) {
 		}
 		lastX=mapeo->getX();
 		lastY=mapeo->getY();
-		glEnd();
 		delete mapeo;
 		delete circ;
 	}

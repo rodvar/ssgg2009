@@ -18,7 +18,7 @@ void Motor::actualizar(){
 
 void Motor::simularArboleda(){
     this->limpiarBufferDatos();
-    Arbol* arbol = new Arbol(new Curva(IU::getInstancia()->getEditorHoja()->getPuntosEdicion()), this->nivelesArbol);
+    Arbol* arbol = new Arbol(IU::getInstancia()->getEditorHoja()->generarCurva(), this->nivelesArbol);
     this->datos.push_back(arbol);
 }
 

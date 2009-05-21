@@ -48,6 +48,9 @@ class Motor
         /** En base a los editores, dibuja la arboleda 3d, reemplazando el dibujo actual**/
         void simularArboleda();
 
+        // Elimina todos los objetos para dibujar en la lista de datos
+        void limpiarBufferDatos();
+
     protected:
     private:
         list<Dibujable*> datos;
@@ -60,7 +63,7 @@ class Motor
 
         // Constructor
         Motor (){
-            this->nivelesArbol = 4;
+            this->nivelesArbol = 1;
             this->pasoTramoBSpline = 10;
             this->pasoTramoBezier = 10;
             this->arbolesTramoBSpline = 4;
@@ -77,8 +80,6 @@ class Motor
             this->datos.clear();
         }
 
-        // Elimina todos los objetos para dibujar en la lista de datos
-        void limpiarBufferDatos();
 };
 
 #endif // MOTOR_H
