@@ -9,28 +9,31 @@ void IU::keyboard (unsigned char key, int x, int y){
             IU::limpiar();
             exit (0);
             break;
-        case 'm':
+        case 'm':// matriz
             Pantalla::getInstancia()->setGrillaVisible(!Pantalla::getInstancia()->grillaVisible());
             break;
-        case 'e':
+        case 'e':// ejes
             Pantalla::getInstancia()->setEjesVisibles(!Pantalla::getInstancia()->ejesVisibles());
             break;
-        case 'x':
+        case 'x':// limpiar editor hoja
             IU::getInstancia()->editorHoja->limpiar();
             break;
-        case 'z':
+        case 'z':// limpiar editor sendero
             IU::getInstancia()->editorSendero->limpiar();
             break;
-        case 'g':
-            Motor::getInstancia()->simularArboleda();
+        case 'g':// go -> simulacion arboleda
             IU::getInstancia()->getEditorHoja()->terminar();
             IU::getInstancia()->getEditorSenderoPlantacion()->terminar();
+            Motor::getInstancia()->simularArboleda();
             break;
-        case '+':
+        case '+':// +zoom
             Pantalla::getInstancia()->aumentarZoom();
             break;
-        case '-':
+        case '-':// -zomm
             Pantalla::getInstancia()->disminuirZoom();
+            break;
+        case 'n':// end para indicar el fin de la edicion de la hoja
+            IU::getInstancia()->editorHoja->terminar();
             break;
         default:
             break;

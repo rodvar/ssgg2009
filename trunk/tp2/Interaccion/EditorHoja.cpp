@@ -17,7 +17,12 @@ void EditorHoja::procesarSeleccion(Coordenadas coordenadas){
 }
 
 void EditorHoja::terminar(){
-    //TODO: Implementame!
+    unsigned int cantidadElementos = this->puntosEdicion.size();
+    if ( cantidadElementos == 4)
+        cantidadElementos = 4;
+    for (unsigned short int i = 0; i < cantidadElementos; i++)
+        this->puntosEdicion.push_back(((Coordenadas*)*this->puntosEdicion.begin())->copia());
+    this->editando = false;
 }
 
 void EditorHoja::redimensionar(const float ancho, const float alto){

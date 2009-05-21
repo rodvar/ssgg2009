@@ -22,7 +22,7 @@ class EditorHoja : public Editor
         void procesarSeleccion(Coordenadas coordenadas);
 
         /**
-         * TODO :explicar
+         * Cierra la curva
          */
         void terminar();
 
