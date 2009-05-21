@@ -6,6 +6,11 @@
 #include "Luz.h"
 #include "Camara.h"
 
+// Modos de sistema de dibujo
+#define BEZIER 'B'
+#define BSPLINE 'S'
+
+
 using namespace std;
 
 /**
@@ -48,6 +53,10 @@ class Pantalla
         float getRotacionEsfera() { return this->rotate_sphere;}
         void setRotacionEsfera(float rot) { this->rotate_sphere = rot; }
 
+        // modos de dibujo de curvas
+        char getModo() { return this->modo; }
+        void setModo(const char modo) { this->modo = modo; }
+
         /** Actualiza la pantalla con los datos suministrados **/
         void actualizar(list<Dibujable*> escena3d, list<Dibujable*> editorSup, list<Dibujable*> editorInf);
 
@@ -75,6 +84,7 @@ class Pantalla
         bool view_axis;
         float rotacionX;
         float rotacionY;
+        char modo; // Bezier o Bspline para e ldibujado de curvas
 
         // constructor
         Pantalla()
@@ -92,6 +102,7 @@ class Pantalla
             this->color_esfera[2] = 0.2f;
             this->color_esfera[3] = 1.0f;
             this->rotate_sphere = 0;
+            this->modo = BEZIER;
         }
         // destructor
         inline ~Pantalla()

@@ -1,10 +1,6 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
-// Modos de sistema
-#define BRESENHAM 'B'
-#define DDA 'D'
-
 #include <stdlib.h>
 #include <list>
 #include "Visualizacion/Dibujable.h"
