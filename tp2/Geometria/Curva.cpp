@@ -25,7 +25,12 @@ void Curva::dibujarPunteado(){
 }
 
 void Curva::rellenar(){
-    //TODO Implementar
+    list<Coordenadas*>::iterator it = this->puntosControl.begin();
+    glBegin(GL_TRIANGLE_FAN);     	// draw triangle
+        glColor3f(this->relleno.getRojo(),this->relleno.getVerde(),this->relleno.getAzul());                	// set color to red
+        while (it != this->puntosControl.end())
+            glVertex3f(((Coordenadas*)*it)->getX(), ((Coordenadas*)*it)->getY(), ((Coordenadas*)*it)->getZ());
+    glEnd();
 }
 
 bool Curva::contiene(int x, int y){
