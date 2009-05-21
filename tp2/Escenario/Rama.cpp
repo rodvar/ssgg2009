@@ -52,21 +52,24 @@ void Rama::dibujar(){
         gluCylinder(qobj, 1, 1, 1, 100, 100);
     glPopMatrix();
     glPushMatrix();
-        glTranslatef(0,0.3,1.4);
+        glTranslatef(-0.15,-0.15,1.2);
         glRotatef(this->hoja1->getOrientacion(),1,1,0);
-        glScalef(0.125,0.125,1);
+        glRotatef(this->hoja1->getOrientacion(), 0, 0, 1); // rotacion en x
+        glScalef(0.5,0.5,1);
         this->hoja1->dibujar();
     glPopMatrix();
     glPushMatrix();
-        glTranslatef(0.3,0,1.2);
-        glRotatef(this->hoja1->getOrientacion(),1,1,0);
-        glScalef(0.125,0.125,1);
+        glTranslatef(-0.15,-0.15,0.9);
+        glRotatef(this->hoja2->getOrientacion(),1,1,0);
+        glRotatef(this->hoja2->getOrientacion(), 0, 0, 1); // rotacion en x
+        glScalef(0.5,0.5,1);
         this->hoja2->dibujar();
     glPopMatrix();
     glPushMatrix();
-        glTranslatef(0,0.3,1.0);
-        glRotatef(this->hoja1->getOrientacion(),1,1,0);
-        glScalef(0.125,0.125,1);
+        glTranslatef(-0.15,-0.15,0.7);
+        glRotatef(this->hoja3->getOrientacion(),1,1,0);
+        glRotatef(this->hoja3->getOrientacion(), 0, 0, 1); // rotacion en x
+        glScalef(0.5,0.5,1);
         this->hoja3->dibujar();
     glPopMatrix();
 

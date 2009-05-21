@@ -1,10 +1,11 @@
 #include "Hoja.h"
-#include "../Geometria/Rectangulo.h" // prueba
 
 Hoja::Hoja(Curva* modelado, float orientacion)
 {
     this->modelado = modelado;
     this->color.setVerde(1);
+    this->modelado->setColorBorde(this->color);
+    this->modelado->setColorRelleno(this->color);
     this->orientacion = orientacion;
 }
 
@@ -21,11 +22,9 @@ Hoja::~Hoja()
 }
 
 void Hoja::dibujar(){
-    Rectangulo* rectangulo = new Rectangulo(2,2,new Coordenadas());
-    rectangulo->setColorBorde(this->color);
-    rectangulo->setColorRelleno(this->color);
-    rectangulo->dibujar();
-    delete rectangulo;
+    // El metodo dibujarBezier esta dibujando cosas q son del editor!!!
+    glColor3f(this->color.getRojo(), this->color.getVerde(), this->color.getAzul());
+    this->modelado->dibujarBezier();
 }
 
 
