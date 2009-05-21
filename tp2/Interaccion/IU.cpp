@@ -21,6 +21,11 @@ void IU::keyboard (unsigned char key, int x, int y){
         case 'z':// limpiar editor sendero
             IU::getInstancia()->editorSendero->limpiar();
             break;
+        case 'c':// limpiar todo
+            IU::getInstancia()->editorHoja->limpiar();
+            IU::getInstancia()->editorSendero->limpiar();
+            Motor::getInstancia()->limpiarBufferDatos();
+            break;
         case 'g':// go -> simulacion arboleda
             IU::getInstancia()->getEditorHoja()->terminar();
             IU::getInstancia()->getEditorSenderoPlantacion()->terminar();
