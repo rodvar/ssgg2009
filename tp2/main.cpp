@@ -21,6 +21,7 @@ int main(int argc, char** argv)
    glutReshapeFunc(Pantalla::redimensionar);
    glutKeyboardFunc(IU::keyboard);
    glutMouseFunc(IU::mouse);
+   glutMotionFunc(IU::mousePressed);
    glutIdleFunc(IU::OnIdle);
    glutMainLoop();
    return 0;

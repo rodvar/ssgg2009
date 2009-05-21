@@ -61,6 +61,9 @@ class Pantalla
         void aumentarZoom();
         void disminuirZoom();
 
+        /** Calcula y ejecuta la rotacion de camara **/
+        void calcularRotacionCamara(int x, int y);
+
     protected:
     private:
         Luz luz;
@@ -70,12 +73,16 @@ class Pantalla
         GLfloat window_size[2];
         bool view_grid;
         bool view_axis;
+        float rotacionX;
+        float rotacionY;
 
         // constructor
         Pantalla()
         {
             this->view_grid = true;
             this->view_axis = true;
+            this->rotacionX = 0;
+            this->rotacionY = 0;
             this->window_size[0]=1024;
             this->window_size[1]=768;
             this->configurarEscenario();

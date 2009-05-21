@@ -42,7 +42,7 @@ void IU::keyboard (unsigned char key, int x, int y){
  * estado GLUT_UP or GLUT_DOWN
 */
 void IU::mouse(int boton, int estado, int x, int y){
-	if(boton==GLUT_LEFT_BUTTON && estado==GLUT_UP) {
+	if(boton==GLUT_LEFT_BUTTON && estado==GLUT_DOWN) {
 		if(IU::getInstancia()->getEditorHoja()->getMarco()->contiene(x,y)) {
 			Coordenadas c;
 			c.setX(x);
@@ -58,6 +58,12 @@ void IU::mouse(int boton, int estado, int x, int y){
 		}
     }
 
+}
+
+void IU::mousePressed(int x,int y){
+    if (!(IU::getInstancia()->getEditorHoja()->getMarco()->contiene(x,y)) &&
+        !(IU::getInstancia()->getEditorSenderoPlantacion()->getMarco()->contiene(x,y)))
+        Pantalla::getInstancia()->calcularRotacionCamara(x,y);
 }
 
 void IU::dibujarFiguraBezier() {
