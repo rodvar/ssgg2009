@@ -132,34 +132,6 @@ void Curva::dibujarBSplines(){
 	bsplineu(npts,k,p1,b,p);
 
 	Coordenadas* mapeo;
-//	Circunferencia* circ;
-//	Segmento* segmento;
-//	bool isFirstPoint = true;
-//	float lastX=b[1];
-//	float lastY=b[2];
-//	for (i = 1; i <= 3*npts; i=i+3){
-//		glColor3f(0,0,0);
-//		glBegin(GL_POINTS);
-//		mapeo = IU::getInstancia()->getEditorSenderoPlantacion()->mapeo(b[i],b[i+1]);
-//  		circ = new Circunferencia(0.01,new Coordenadas(mapeo->getX(),mapeo->getY()));
-//  		Color color(1,1,1);
-//  		circ->setColorBorde(color);
-//  		circ->dibujar();
-//  		delete circ;
-//  		if(!isFirstPoint) {
-//  			segmento = new Segmento(new Coordenadas(lastX,lastY),new Coordenadas(mapeo->getX(),mapeo->getY()));
-//  			Color color(1,1,1);
-//  			segmento->setColorBorde(color);
-//  			segmento->dibujarPunteado();
-//  			delete segmento;
-//  		} else {
-//  			isFirstPoint=false;
-//  		}
-//  		lastX=mapeo->getX();
-//  		lastY=mapeo->getY();
-//		glEnd();
-//		delete mapeo;
-//	}
 
 	mapeo = IU::getInstancia()->getEditorSenderoPlantacion()->mapeo(p[1],p[2]);
   	double anteriorX=mapeo->getX(), anteriorY=mapeo->getY();
