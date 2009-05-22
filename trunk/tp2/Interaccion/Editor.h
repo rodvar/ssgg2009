@@ -45,7 +45,7 @@ class Editor
          */
         virtual void dibujar() = 0;
 
-        void agregarPunto(Coordenadas coordenada) { this->puntosEdicion.push_back(coordenada.copia()); }
+        void agregarPunto(Coordenadas coordenada);
         list<Coordenadas*> getPuntosEdicion() { return this->puntosEdicion; }
 
         /**

@@ -77,34 +77,8 @@ void Curva::dibujarCurvaBezier4Puntos(wcPt3 *control) {
     wcPt3 *out_pts;
     out_pts = new wcPt3[resolution];
 	Coordenadas* mapeo;
-	Circunferencia* circ;
-	Segmento* segmento;
 
-    bezier(n, t, control, out_pts, resolution);
-
-	bool isFirstPoint = true;
-	float lastX=control[0].x;
-	float lastY=control[0].y;
-	for (i=0; i<=n; i++) {
-		mapeo = IU::getInstancia()->getEditorHoja()->mapeo(control[i].x,control[i].y);
-		circ = new Circunferencia(0.01,new Coordenadas(mapeo->getX(),mapeo->getY()));
-		Color color(0.5,0.5,0.5);
-		circ->setColorBorde(color);
-		circ->dibujar();
-		if(!isFirstPoint) {
-			segmento = new Segmento(new Coordenadas(lastX,lastY),new Coordenadas(mapeo->getX(),mapeo->getY()));
-			Color color(1,1,1);
-			segmento->setColorBorde(color);
-			segmento->dibujarPunteado();
-			delete segmento;
-		} else {
-			isFirstPoint=false;
-		}
-		lastX=mapeo->getX();
-		lastY=mapeo->getY();
-		delete mapeo;
-		delete circ;
-	}
+    this->bezier(n, t, control, out_pts, resolution);
 
 	mapeo = IU::getInstancia()->getEditorHoja()->mapeo(out_pts[0].x,out_pts[0].y);
 	double anteriorX=mapeo->getX(), anteriorY=mapeo->getY();
