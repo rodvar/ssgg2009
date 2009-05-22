@@ -36,6 +36,8 @@ class EditorSenderoPlantacion : public Editor
 
     protected:
     private:
+    	void dibujarLineasControl();
+    	void dibujarPuntoControl(Coordenadas* c);
 };
 
 #endif // EDITORSENDEROPLANTACION_H
