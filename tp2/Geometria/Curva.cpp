@@ -2,6 +2,7 @@
 #include "Segmento.h"
 #include "Circunferencia.h"
 #include "../Interaccion/IU.h"
+#include "../Motor.h"
 
 Curva::Curva(list<Coordenadas*> puntosControl)
 {
@@ -26,14 +27,10 @@ void Curva::dibujarPunteado(){
 
 void Curva::rellenar(){
     list<Coordenadas*>::iterator it = this->puntosControl.begin();
-    Coordenadas* punto;
-    glBegin(GL_TRIANGLE_FAN);
-        while (it != this->puntosControl.end()){
-            punto = IU::getInstancia()->getEditorHoja()->mapeo(((Coordenadas*) *it)->getX(), ((Coordenadas*) *it)->getY());
-            glVertex3f(punto->getX(), punto->getY(), punto->getZ());
-            delete punto;
-            it++;
-        }
+    glBegin(GL_TRIANGLE_FAN);     	// draw triangle
+        glColor3f(this->relleno.getRojo(),this->relleno.getVerde(),this->relleno.getAzul());                	// set color to red
+        while (it != this->puntosControl.end())
+            glVertex3f(((Coordenadas*)*it)->getX(), ((Coordenadas*)*it)->getY(), ((Coordenadas*)*it)->getZ());
     glEnd();
 }
 
@@ -136,6 +133,8 @@ void Curva::dibujarBSplines(){
 
 	Coordenadas* mapeo;
 
+	bool hayArboles = Motor::getInstancia()->hayArbolesPlantados();
+
 	unsigned short int cantidadArboles = Motor::getInstancia()->getArbolesTramoBSpline();
 	int distancia = ceil(p1/cantidadArboles);
 	int contador;
@@ -155,13 +154,13 @@ void Curva::dibujarBSplines(){
 		anteriorY=mapeo->getY();
 		delete mapeo;
 
-		if(i==1 || contador==distancia) {
-			Motor::getInstancia()->plantarArbol(new Coordenadas(p[i],p[i+1]));
-//			Circunferencia* ci = new Circunferencia(0.01,new Coordenadas(anteriorX,anteriorY));
-//			Color color(1,1,1);
-//			ci->setColorBorde(color);
-//			ci->dibujar();
-//			delete ci;
+		if((i==1 || contador==distancia) && !hayArboles) {
+			Motor::getInstancia()->plantarArbol(new Coordenadas(anteriorX,anteriorY));
+			Circunferencia* ci = new Circunferencia(0.01,new Coordenadas(anteriorX,anteriorY));
+			Color color(1,1,1);
+			ci->setColorBorde(color);
+			ci->dibujar();
+			delete ci;
 			contador=0;
 		}
 		contador++;
