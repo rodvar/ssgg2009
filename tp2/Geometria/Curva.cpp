@@ -105,8 +105,9 @@ void Curva::dibujarBSplines(){
 	k = 4;     /* fourth order */
 	p1 = npts*3-1;
 
-	float b[p1*3+1];  /* allows for up to 11  control vertices */
-	float p[(p1*3+1)*3];  /* allows for up to 100 points on curve */
+	float b[3*p1 + 1];  /* allows for up to 11  control vertices */
+	float p[2*p1 + 4];  /* allows for up to 100 points on curve */
+	//float p[40];
 
 	for (i = 1; i <= 3*npts; i++){
 		b[i] = 0.;
@@ -131,34 +132,34 @@ void Curva::dibujarBSplines(){
 	bsplineu(npts,k,p1,b,p);
 
 	Coordenadas* mapeo;
-	Circunferencia* circ;
-	Segmento* segmento;
-	bool isFirstPoint = true;
-	float lastX=b[1];
-	float lastY=b[2];
-	for (i = 1; i <= 3*npts; i=i+3){
-		glColor3f(0,0,0);
-		glBegin(GL_POINTS);
-		mapeo = IU::getInstancia()->getEditorSenderoPlantacion()->mapeo(b[i],b[i+1]);
-  		circ = new Circunferencia(0.01,new Coordenadas(mapeo->getX(),mapeo->getY()));
-  		Color color(1,1,1);
-  		circ->setColorBorde(color);
-  		circ->dibujar();
-  		delete circ;
-  		if(!isFirstPoint) {
-  			segmento = new Segmento(new Coordenadas(lastX,lastY),new Coordenadas(mapeo->getX(),mapeo->getY()));
-  			Color color(1,1,1);
-  			segmento->setColorBorde(color);
-  			segmento->dibujarPunteado();
-  			delete segmento;
-  		} else {
-  			isFirstPoint=false;
-  		}
-  		lastX=mapeo->getX();
-  		lastY=mapeo->getY();
-		glEnd();
-		delete mapeo;
-	}
+//	Circunferencia* circ;
+//	Segmento* segmento;
+//	bool isFirstPoint = true;
+//	float lastX=b[1];
+//	float lastY=b[2];
+//	for (i = 1; i <= 3*npts; i=i+3){
+//		glColor3f(0,0,0);
+//		glBegin(GL_POINTS);
+//		mapeo = IU::getInstancia()->getEditorSenderoPlantacion()->mapeo(b[i],b[i+1]);
+//  		circ = new Circunferencia(0.01,new Coordenadas(mapeo->getX(),mapeo->getY()));
+//  		Color color(1,1,1);
+//  		circ->setColorBorde(color);
+//  		circ->dibujar();
+//  		delete circ;
+//  		if(!isFirstPoint) {
+//  			segmento = new Segmento(new Coordenadas(lastX,lastY),new Coordenadas(mapeo->getX(),mapeo->getY()));
+//  			Color color(1,1,1);
+//  			segmento->setColorBorde(color);
+//  			segmento->dibujarPunteado();
+//  			delete segmento;
+//  		} else {
+//  			isFirstPoint=false;
+//  		}
+//  		lastX=mapeo->getX();
+//  		lastY=mapeo->getY();
+//		glEnd();
+//		delete mapeo;
+//	}
 
 	mapeo = IU::getInstancia()->getEditorSenderoPlantacion()->mapeo(p[1],p[2]);
   	double anteriorX=mapeo->getX(), anteriorY=mapeo->getY();
@@ -175,33 +176,6 @@ void Curva::dibujarBSplines(){
   		anteriorY=mapeo->getY();
 	  	delete mapeo;
   	}
-
-//	int m = 1000;
-//    wcPt3* curve = (wcPt3*)calloc(m,sizeof(wcPt3));
-//    wcPt3* control = (wcPt3*)calloc(this->puntosControl.size(), sizeof(wcPt3));
-//    Segmento* segmento;
-//    unsigned short i =0;
-//    Coordenadas* c;
-//    Coordenadas* desde;
-//    Coordenadas* hasta;
-//    list<Coordenadas*>::iterator it = this->puntosControl.begin();
-//    while (it != this->puntosControl.end()){
-//        c = (Coordenadas*)*it;
-//        control[i].x = c->getX();
-//        control[i].y = c->getY();
-//        control[i].z = c->getZ();
-//        i++;it++;
-//    }
-////    this->bezier(control, this->puntosControl.size(), m, curve);
-//    for (i =0; i < m; i+=2){
-//        desde = new Coordenadas(curve[i].x,curve[i].y,curve[i].z);
-//        hasta = new Coordenadas(curve[i+1].x,curve[i+1].y,curve[i+1].z);
-//        segmento = new Segmento(desde,hasta);
-//        segmento->dibujar();
-//        delete segmento;
-//    }
-//    //free(curve); // Revisar esto
-//    free(control);
 }
 
 void Curva::bezier(int n, int t, wcPt3 *control, wcPt3 *output, int num_output) {
