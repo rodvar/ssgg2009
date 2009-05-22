@@ -45,6 +45,12 @@ void EditorHoja::dibujar(){
 	}
 	punto = (Coordenadas*) *it;
     it++;
+    if (this->puntosEdicion.size() == 1) {
+        mapeadoD = this->mapeo(punto->getX(),punto->getY());
+        mapeadoD->setColorBorde(gris);
+        mapeadoD->setColorRelleno(gris);
+        mapeadoD->dibujar();
+    }
     while ( it != this->puntosEdicion.end()){
         mapeadoD = this->mapeo(punto->getX(),punto->getY());
         mapeadoH = this->mapeo(((Coordenadas*)*it)->getX(),((Coordenadas*)*it)->getY());
