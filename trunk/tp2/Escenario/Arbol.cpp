@@ -21,6 +21,7 @@ void Arbol::dibujar(){
     this->dibujarRecursivo(this->raiz->getRamaSecundaria1(),-1);
     this->dibujarRecursivo(this->raiz->getRamaSecundaria1(),0);
     this->dibujarRecursivo(this->raiz->getRamaSecundaria1(),1);
+	glTranslatef(-this->posicion->getX(),-this->posicion->getY(),0);
 }
 
 void Arbol::dibujarRecursivo(Rama* raiz, int tipo){

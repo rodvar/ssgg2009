@@ -55,6 +55,9 @@ class Motor
         // Agrega una nueva coordenada en la cual debe aparece un arbol
         void plantarArbol(Coordenadas* c) { this->semillas.push_back(c); }
 
+        // Indica si ya hay arboles plantados
+        bool hayArbolesPlantados() { return this->semillas.size()>0; }
+
     protected:
     private:
         list<Dibujable*> datos;
@@ -69,7 +72,7 @@ class Motor
         // Constructor
         Motor (){
             this->nivelesArbol = 1;
-            this->pasoTramoBSpline = 8;
+            this->pasoTramoBSpline = 12;
             this->pasoTramoBezier = 10;
             this->arbolesTramoBSpline = 4;
             this->semillas.clear();
@@ -84,11 +87,16 @@ class Motor
                 it++;
             }
             this->datos.clear();
+            list<Coordenadas*>::iterator it2=this->semillas.begin() ;
+            while(it2 != this->semillas.end()){
+                delete *it2;
+                it2++;
+            }
             this->semillas.clear();
         }
 
         /** Mapeo de las coordenadas del viewport a la escena 3d */
-        Coordenadas* mapeo(int x, int y);
+        Coordenadas* mapeo(float x, float y);
 
 };
 

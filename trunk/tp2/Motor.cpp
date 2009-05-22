@@ -35,6 +35,12 @@ void Motor::simularArboleda(){
     	it++;
     }
 
+    list<Coordenadas*>::iterator it2=this->semillas.begin() ;
+    while(it2 != this->semillas.end()){
+        delete *it2;
+        it2++;
+    }
+    this->semillas.clear();
 //    Arbol* arbol = new Arbol(IU::getInstancia()->getEditorHoja()->generarCurva(), this->nivelesArbol,new Coordenadas(1,1));
 //    this->datos.push_back(arbol);
 }
@@ -46,9 +52,9 @@ void Motor::limpiarBufferDatos(){
         it++;
     }
     this->datos.clear();
+
 }
 
-Coordenadas* Motor::mapeo(int x, int y) {
-	Coordenadas* mapeo = IU::getInstancia()->getEditorSenderoPlantacion()->mapeo(x,y);
-	return new Coordenadas(mapeo->getX()*10,mapeo->getY()*10);
+Coordenadas* Motor::mapeo(float x, float y) {
+	return new Coordenadas(x*10,y*10);
 }
