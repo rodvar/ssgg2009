@@ -11,6 +11,10 @@ Editor::~Editor()
     //dtor
 }
 
+void Editor::agregarPunto(Coordenadas coordenadas){
+    this->puntosEdicion.push_back(coordenadas.copia());
+}
+
 void Editor::limpiar() {
     list<Coordenadas*>::iterator it = this->puntosEdicion.begin();
     while (it != this->puntosEdicion.end()){

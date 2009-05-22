@@ -59,7 +59,7 @@ bool Coordenadas::operator == (Coordenadas coordenadas){
 }
 
 void Coordenadas::dibujar(){
-    Circunferencia* c = new Circunferencia(5,this->copia());
+    Circunferencia* c = new Circunferencia(0.01,this->copia());
     c->setColorBorde(this->borde);
     c->setColorRelleno(this->borde);
     c->dibujar();
