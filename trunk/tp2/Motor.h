@@ -84,12 +84,6 @@ class Motor
                 it++;
             }
             this->datos.clear();
-
-            list<Coordenadas*>::iterator it2=this->semillas.begin() ;
-            while(it2 != this->semillas.end()){
-                delete *it;
-                it2++;
-            }
             this->semillas.clear();
         }
 
