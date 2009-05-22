@@ -12,6 +12,7 @@ Arbol::Arbol(Curva* modeladoHoja, const unsigned short int niveles, Coordenadas*
 
 Arbol::~Arbol(){
     delete this->raiz;
+    delete this->posicion;
 }
 
 void Arbol::dibujar(){
