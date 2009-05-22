@@ -32,13 +32,13 @@ class Motor
         }
 
         /** Devuelve el nivel de recursividad al dibujar el arbol **/
-        unsigned short int getNivelesArbol();
+        unsigned short int getNivelesArbol() { return this->nivelesArbol; }
         /** Devuelve el paso al dibujar cada tramo con BSpline **/
-        unsigned short int getPasoTramoBSpline();
+        unsigned short int getPasoTramoBSpline() { return this->pasoTramoBSpline; }
         /** Devuelve el paso al dibujar cada tramo con Bezier **/
-        unsigned short int getPasoTramoBezier();
+        unsigned short int getPasoTramoBezier() { return this->pasoTramoBezier; }
         /** Devuelve la cantidad de arboles que hay q dibujar en el sendero de plantacion **/
-        unsigned short int getArbolesTramoBSpline();
+        unsigned short int getArbolesTramoBSpline() { return this->arbolesTramoBSpline; }
 
         /**
          * Realiza los cambios pertinentes en los datos, y los pasa a la Pantalla
