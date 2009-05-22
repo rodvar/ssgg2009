@@ -161,6 +161,7 @@ void Pantalla::setAmbiente3D()
     glLoadIdentity ();
     // Primer parametro para modificar zoom camara
     gluPerspective(this->camara.getZoom(), (GLfloat) this->window_size[0]/(GLfloat) this->window_size[1], 0.10, 100.0);
+    this->modo = BSPLINE;
 }
 
 void Pantalla::setAmbiente2DSuperior()

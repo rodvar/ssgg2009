@@ -2,7 +2,6 @@
 #include "Segmento.h"
 #include "Circunferencia.h"
 #include "../Interaccion/IU.h"
-#include "../Motor.h"
 
 Curva::Curva(list<Coordenadas*> puntosControl)
 {
@@ -27,10 +26,14 @@ void Curva::dibujarPunteado(){
 
 void Curva::rellenar(){
     list<Coordenadas*>::iterator it = this->puntosControl.begin();
-    glBegin(GL_TRIANGLE_FAN);     	// draw triangle
-        glColor3f(this->relleno.getRojo(),this->relleno.getVerde(),this->relleno.getAzul());                	// set color to red
-        while (it != this->puntosControl.end())
-            glVertex3f(((Coordenadas*)*it)->getX(), ((Coordenadas*)*it)->getY(), ((Coordenadas*)*it)->getZ());
+    Coordenadas* punto;
+    glBegin(GL_TRIANGLE_FAN);
+        while (it != this->puntosControl.end()){
+            punto = IU::getInstancia()->getEditorHoja()->mapeo(((Coordenadas*) *it)->getX(), ((Coordenadas*) *it)->getY());
+            glVertex3f(punto->getX(), punto->getY(), punto->getZ());
+            delete punto;
+            it++;
+        }
     glEnd();
 }
 
