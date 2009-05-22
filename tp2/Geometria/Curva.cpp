@@ -2,6 +2,7 @@
 #include "Segmento.h"
 #include "Circunferencia.h"
 #include "../Interaccion/IU.h"
+#include "../Motor.h"
 
 Curva::Curva(list<Coordenadas*> puntosControl)
 {
@@ -103,10 +104,10 @@ void Curva::dibujarBSplines(){
 
 	npts = this->puntosControl.size();
 	k = 4;     /* fourth order */
-	p1 = npts*3-1;
+	p1 = Motor::getInstancia()->getPasoTramoBSpline();
 
-	float b[3*p1 + 1];  /* allows for up to 11  control vertices */
-	float p[2*p1 + 4];  /* allows for up to 100 points on curve */
+	float b[3*npts + 1];  /* allows for up to 11  control vertices */
+	float p[9*npts + 4];  /* allows for up to 100 points on curve */
 	//float p[40];
 
 	for (i = 1; i <= 3*npts; i++){
@@ -136,18 +137,28 @@ void Curva::dibujarBSplines(){
 	mapeo = IU::getInstancia()->getEditorSenderoPlantacion()->mapeo(p[1],p[2]);
   	double anteriorX=mapeo->getX(), anteriorY=mapeo->getY();
   	delete mapeo;
+
+//  	Circunferencia* circ;
   	for (i = 1; i <= 3*p1; i=i+3){
-  		glDisable(GL_LIGHTING);
-  		glBegin(GL_LINES);
-  			glVertex3f(anteriorX, anteriorY, 0.0);
-  			mapeo = IU::getInstancia()->getEditorSenderoPlantacion()->mapeo(p[i],p[i+1]);
-  			glVertex3f(mapeo->getX(), mapeo->getY(), 0.0);
-  		glEnd();
-  		glEnable(GL_LIGHTING);
-  		anteriorX=mapeo->getX();
-  		anteriorY=mapeo->getY();
-	  	delete mapeo;
+		glDisable(GL_LIGHTING);
+		glBegin(GL_LINES);
+			glVertex3f(anteriorX, anteriorY, 0.0);
+			mapeo = IU::getInstancia()->getEditorSenderoPlantacion()->mapeo(p[i],p[i+1]);
+			glVertex3f(mapeo->getX(), mapeo->getY(), 0.0);
+		glEnd();
+		glEnable(GL_LIGHTING);
+
+		anteriorX=mapeo->getX();
+		anteriorY=mapeo->getY();
+		delete mapeo;
+
+//		circ = new Circunferencia(0.01,new Coordenadas(anteriorX,anteriorY));
+//		Color color2(1,1,1);
+//		circ->setColorBorde(color2);
+//		circ->dibujar();
+//		delete circ;
   	}
+
 }
 
 void Curva::bezier(int n, int t, wcPt3 *control, wcPt3 *output, int num_output) {
