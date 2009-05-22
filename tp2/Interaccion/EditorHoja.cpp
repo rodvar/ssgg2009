@@ -38,29 +38,27 @@ void EditorHoja::dibujar(){
     Coordenadas* punto;
     Coordenadas* mapeadoD;
     Coordenadas* mapeadoH;
-    bool par = false;
+    Color gris(0.5,0.5,0.5);
     if(this->puntosEdicion.size()>3) {
 		Curva curva(this->puntosEdicion);
 		curva.dibujarBezier();
-        Color gris(0.5,0.5,0.5);
-		punto = (Coordenadas*) *it;
-		it++;
-		while ( it != this->puntosEdicion.end()){
-		    mapeadoD = this->mapeo(punto->getX(),punto->getY());
-		    mapeadoH = this->mapeo(((Coordenadas*)*it)->getX(),((Coordenadas*)*it)->getY());
-		    mapeadoD->setColorBorde(gris);
-		    mapeadoD->setColorRelleno(gris);
-		    mapeadoH->setColorBorde(gris);
-		    mapeadoH->setColorRelleno(gris);
-		    mapeadoD->dibujar();
-		    mapeadoH->dibujar();
-		    segmento = new Segmento(mapeadoD,mapeadoH);
-		    segmento->dibujarPunteado();
-		    delete segmento;
-		    punto = (Coordenadas*) *it;
-		    punto->dibujar();
-		    par = !par;
-		    it++;
-		}
 	}
+	punto = (Coordenadas*) *it;
+    it++;
+    while ( it != this->puntosEdicion.end()){
+        mapeadoD = this->mapeo(punto->getX(),punto->getY());
+        mapeadoH = this->mapeo(((Coordenadas*)*it)->getX(),((Coordenadas*)*it)->getY());
+        mapeadoD->setColorBorde(gris);
+        mapeadoD->setColorRelleno(gris);
+        mapeadoH->setColorBorde(gris);
+        mapeadoH->setColorRelleno(gris);
+        mapeadoD->dibujar();
+        mapeadoH->dibujar();
+        segmento = new Segmento(mapeadoD,mapeadoH);
+        segmento->dibujarPunteado();
+        delete segmento;
+        punto = (Coordenadas*) *it;
+        punto->dibujar();
+        it++;
+    }
 }
