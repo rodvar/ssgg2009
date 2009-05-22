@@ -18,8 +18,6 @@ void Pantalla::actualizar(list<Dibujable*> escena3d, list<Dibujable*> editorSup,
     glRotatef(this->rotacionY, -1, 1, 0); //rotacion en y
     glRotatef(this->rotacionX,  0, 0, 1); // rotacion en x
 
-	IU::getInstancia()->getEditorSenderoPlantacion()->dibujar();
-
 	if (Pantalla::getInstancia()->ejesVisibles())
 		 glCallList(this->getDL_AXIS());
 

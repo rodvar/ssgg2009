@@ -18,6 +18,13 @@ void Motor::actualizar(){
 
 void Motor::simularArboleda(){
     this->limpiarBufferDatos();
+
+    /* TODO: Aca agregar al buffer
+       1- El sendero de plantacion (curva)
+       2- Los arboles que haya que plantar
+    */
+    this->datos.push_back(IU::getInstancia()->getEditorSenderoPlantacion()->generarCurva());
+
     Arbol* arbol = new Arbol(IU::getInstancia()->getEditorHoja()->generarCurva(), this->nivelesArbol);
     this->datos.push_back(arbol);
 }
