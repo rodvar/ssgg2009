@@ -121,7 +121,6 @@ void Curva::dibujarBSplines(){
 		p[i] = 0.;
 	}
 
-
 	i=1;
     Coordenadas* c;
     list<Coordenadas*>::iterator it = this->puntosControl.begin();
@@ -137,12 +136,13 @@ void Curva::dibujarBSplines(){
 
 	Coordenadas* mapeo;
 
+	unsigned short int cantidadArboles = Motor::getInstancia()->getArbolesTramoBSpline();
+	int distancia = ceil(p1/cantidadArboles);
+	int contador;
 	mapeo = IU::getInstancia()->getEditorSenderoPlantacion()->mapeo(p[1],p[2]);
   	double anteriorX=mapeo->getX(), anteriorY=mapeo->getY();
   	delete mapeo;
-
-//  	Circunferencia* circ;
-  	for (i = 1; i <= 3*p1; i=i+3){
+  	for (i = 1; i <= 3*p1; i=i+3) {
 		glDisable(GL_LIGHTING);
 		glBegin(GL_LINES);
 			glVertex3f(anteriorX, anteriorY, 0.0);
@@ -155,11 +155,16 @@ void Curva::dibujarBSplines(){
 		anteriorY=mapeo->getY();
 		delete mapeo;
 
-//		circ = new Circunferencia(0.01,new Coordenadas(anteriorX,anteriorY));
-//		Color color2(1,1,1);
-//		circ->setColorBorde(color2);
-//		circ->dibujar();
-//		delete circ;
+		if(i==1 || contador==distancia) {
+			Motor::getInstancia()->plantarArbol(new Coordenadas(p[i],p[i+1]));
+//			Circunferencia* ci = new Circunferencia(0.01,new Coordenadas(anteriorX,anteriorY));
+//			Color color(1,1,1);
+//			ci->setColorBorde(color);
+//			ci->dibujar();
+//			delete ci;
+			contador=0;
+		}
+		contador++;
   	}
 
 }

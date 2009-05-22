@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <list>
 #include "Visualizacion/Dibujable.h"
+#include "Geometria/Coordenadas.h"
 
 using namespace std;
 
@@ -51,6 +52,9 @@ class Motor
         // Elimina todos los objetos para dibujar en la lista de datos
         void limpiarBufferDatos();
 
+        // Agrega una nueva coordenada en la cual debe aparece un arbol
+        void plantarArbol(Coordenadas* c) { this->semillas.push_back(c); }
+
     protected:
     private:
         list<Dibujable*> datos;
@@ -59,14 +63,16 @@ class Motor
         unsigned short int pasoTramoBSpline; // cada cuanto tomo un punto del tramo
         unsigned short int pasoTramoBezier; // idem para Bezier
         unsigned short int arbolesTramoBSpline;// La cantidad de arboles por tramo
+        list<Coordenadas*> semillas;// Coordenadas en las cuales se va a plantar cada arbol
 
 
         // Constructor
         Motor (){
             this->nivelesArbol = 1;
-            this->pasoTramoBSpline = 10;
+            this->pasoTramoBSpline = 8;
             this->pasoTramoBezier = 10;
             this->arbolesTramoBSpline = 4;
+            this->semillas.clear();
             this->datos.clear();
         }
 
@@ -78,7 +84,17 @@ class Motor
                 it++;
             }
             this->datos.clear();
+
+            list<Coordenadas*>::iterator it2=this->semillas.begin() ;
+            while(it2 != this->semillas.end()){
+                delete *it;
+                it2++;
+            }
+            this->semillas.clear();
         }
+
+        /** Mapeo de las coordenadas del viewport a la escena 3d */
+        Coordenadas* mapeo(int x, int y);
 
 };
 

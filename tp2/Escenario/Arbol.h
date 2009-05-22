@@ -10,7 +10,7 @@ class Arbol : public Dibujable{
          * @param modeladoHoja Es el modelo de hoja para las hojas de la rama
          * @param niveles Cantidad de ramas del arbol
          **/
-        Arbol(Curva* modeladoHoja, const unsigned short int niveles);
+        Arbol(Curva* modeladoHoja, const unsigned short int niveles, Coordenadas* p);
 
         virtual ~Arbol();
 
@@ -19,12 +19,16 @@ class Arbol : public Dibujable{
          */
         void dibujar();
 
+        /** Devuelve la ubicacion del arbol */
+        Coordenadas* getPosicion() { return this->posicion; }
+
     private:
         int nivelIzq;
         int nivelCtr;
         int nivelDer;
         Rama* raiz;
         unsigned short int niveles;
+        Coordenadas* posicion;
 
         // crea el arbol
         void crearArbol(Rama* raiz);
