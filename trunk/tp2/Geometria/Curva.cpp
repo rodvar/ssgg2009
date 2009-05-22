@@ -73,7 +73,7 @@ void Curva::dibujarCurvaBezier4Puntos(wcPt3 *control) {
     n=3;
     t=4; // degree of polynomial = t-1
 
-    int resolution = 100;  // how many points our in our output array
+    int resolution = Motor::getInstancia()->getPasoTramoBezier();  // how many points our in our output array
     wcPt3 *out_pts;
     out_pts = new wcPt3[resolution];
 	Coordenadas* mapeo;
