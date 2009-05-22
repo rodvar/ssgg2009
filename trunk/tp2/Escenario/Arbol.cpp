@@ -1,12 +1,13 @@
 #include "Arbol.h"
 
-Arbol::Arbol(Curva* modeladoHoja, const unsigned short int niveles){
+Arbol::Arbol(Curva* modeladoHoja, const unsigned short int niveles, Coordenadas* p){
     this->niveles = niveles;
     this->raiz = new Rama(modeladoHoja);
     this->crearArbol(this->raiz);
     this->nivelIzq = 0;
     this->nivelCtr = 0;
     this->nivelDer = 0;
+    this->posicion = p;
 }
 
 Arbol::~Arbol(){
@@ -14,6 +15,7 @@ Arbol::~Arbol(){
 }
 
 void Arbol::dibujar(){
+	glTranslatef(this->posicion->getX(),this->posicion->getY(),0);
     this->raiz->dibujar();
     this->dibujarRecursivo(this->raiz->getRamaSecundaria1(),-1);
     this->dibujarRecursivo(this->raiz->getRamaSecundaria1(),0);
