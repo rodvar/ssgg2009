@@ -31,6 +31,11 @@ class EditorHoja : public Editor
          */
         void redimensionar(const float ancho, const float alto);
 
+        /**
+         * Dibuja todo lo relacionado al editor
+         */
+        void dibujar();
+
     protected:
     private:
 };

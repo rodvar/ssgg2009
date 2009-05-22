@@ -18,7 +18,7 @@ void Pantalla::actualizar(list<Dibujable*> escena3d, list<Dibujable*> editorSup,
     glRotatef(this->rotacionY, -1, 1, 0); //rotacion en y
     glRotatef(this->rotacionX,  0, 0, 1); // rotacion en x
 
-	IU::getInstancia()->dibujarFiguraBSplines();
+	IU::getInstancia()->getEditorSenderoPlantacion()->dibujar();
 
 	if (Pantalla::getInstancia()->ejesVisibles())
 		 glCallList(this->getDL_AXIS());
@@ -43,7 +43,7 @@ void Pantalla::actualizar(list<Dibujable*> escena3d, list<Dibujable*> editorSup,
 	gluLookAt (0, 0, 0.5, 0, 0, 0, 0, 1, 0);
 	glCallList(this->getDL_AXIS2D_TOP());
 
-	IU::getInstancia()->dibujarFiguraBSplines();
+	IU::getInstancia()->getEditorSenderoPlantacion()->dibujar();
 
 	glDisable(GL_LIGHTING);
 	list<Dibujable*>::iterator it2dS = editorSup.begin();
@@ -61,7 +61,7 @@ void Pantalla::actualizar(list<Dibujable*> escena3d, list<Dibujable*> editorSup,
 	gluLookAt (0, 0, 0.5, 0, 0, 0, 0, 1, 0);
 	glCallList(this->getDL_AXIS2D_HEIGHT());
 
-	IU::getInstancia()->dibujarFiguraBezier();
+	IU::getInstancia()->getEditorHoja()->dibujar();
 
 	glDisable(GL_LIGHTING);
 	list<Dibujable*>::iterator it2dI = editorInf.begin();
