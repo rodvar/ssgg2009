@@ -41,12 +41,6 @@ class IU
         /** OnIdle **/
         static void OnIdle();
 
-        /** Dibuja la figura Bezier dentro del marco que le corresponde */
-        void dibujarFiguraBezier();
-
-        /** Dibuja la figura BSplines dentro del marco que le corresponde */
-        void dibujarFiguraBSplines();
-
     protected:
 
     private:

@@ -27,3 +27,10 @@ void EditorSenderoPlantacion::redimensionar(const float ancho, const float alto)
     this->marco.setBase(ancho*PJE_DIMENSIONES);
     this->marco.setAltura(alto*PJE_DIMENSIONES);
 }
+
+void EditorSenderoPlantacion::dibujar(){
+    if(this->puntosEdicion.size()>3) {
+		Curva curva(this->puntosEdicion);
+		curva.dibujarBSplines();
+    }
+}

@@ -74,20 +74,6 @@ void IU::mousePressed(int x,int y){
         Pantalla::getInstancia()->calcularRotacionCamara(x,y);
 }
 
-void IU::dibujarFiguraBezier() {
-	if(this->editorHoja->getPuntosEdicion().size()>3) {
-		Curva curva(this->editorHoja->getPuntosEdicion());
-		curva.dibujarBezier();
-	}
-}
-
-void IU::dibujarFiguraBSplines() {
-	if(this->editorSendero->getPuntosEdicion().size()>3) {
-		Curva curva(this->editorSendero->getPuntosEdicion());
-		curva.dibujarBSplines();
-	}
-}
-
 void IU::OnIdle(){
     float rotacion = Pantalla::getInstancia()->getRotacionEsfera();
     rotacion += 0.1;

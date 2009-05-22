@@ -2,6 +2,7 @@
 #define EDITOR_H
 
 #include "../Geometria/Rectangulo.h"
+#include "../Geometria/Curva.h"
 #include <list>
 
 #define PJE_DIMENSIONES 0.30f
@@ -39,8 +40,18 @@ class Editor
          */
         virtual void redimensionar(const float ancho, const float alto) = 0;
 
+        /**
+         * Dibuja el editor
+         */
+        virtual void dibujar() = 0;
+
         void agregarPunto(Coordenadas coordenada) { this->puntosEdicion.push_back(coordenada.copia()); }
         list<Coordenadas*> getPuntosEdicion() { return this->puntosEdicion; }
+
+        /**
+         * Genera una curva con los datos actuales. Se debe liberar la memoria luego de usarla
+         */
+        Curva* generarCurva() { return new Curva(this->puntosEdicion); }
 
         /** Limpia la lista eliminando sus puntos **/
         void limpiar();

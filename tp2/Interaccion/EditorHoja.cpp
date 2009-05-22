@@ -22,7 +22,6 @@ void EditorHoja::terminar(){
         cantidadElementos = 4;
     for (unsigned short int i = 0; i < cantidadElementos; i++)
         this->puntosEdicion.push_back(((Coordenadas*)*this->puntosEdicion.begin())->copia());
-    this->editando = false;
 }
 
 void EditorHoja::redimensionar(const float ancho, const float alto){
@@ -30,4 +29,11 @@ void EditorHoja::redimensionar(const float ancho, const float alto){
     this->marco.setCentro(coordenadas);
     this->marco.setBase(ancho*PJE_DIMENSIONES);
     this->marco.setAltura(alto*PJE_DIMENSIONES);
+}
+
+void EditorHoja::dibujar(){
+    if(this->puntosEdicion.size()>3) {
+		Curva curva(this->puntosEdicion);
+		curva.dibujarBezier();
+	}
 }
