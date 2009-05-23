@@ -16,12 +16,14 @@ Arbol::~Arbol(){
 }
 
 void Arbol::dibujar(){
-	glTranslatef(this->posicion->getX(),this->posicion->getY(),0);
-    this->raiz->dibujar();
-    this->dibujarRecursivo(this->raiz->getRamaSecundaria1(),-1);
-    this->dibujarRecursivo(this->raiz->getRamaSecundaria1(),0);
-    this->dibujarRecursivo(this->raiz->getRamaSecundaria1(),1);
-	glTranslatef(-this->posicion->getX(),-this->posicion->getY(),0);
+	glPushMatrix();
+		glTranslatef(this->posicion->getX(),this->posicion->getY(),0);
+		this->raiz->dibujar();
+	    this->dibujarRecursivo(this->raiz->getRamaSecundaria1(),-1);
+	    this->dibujarRecursivo(this->raiz->getRamaSecundaria1(),0);
+	    this->dibujarRecursivo(this->raiz->getRamaSecundaria1(),1);
+	glPopMatrix();
+	//glTranslatef(-this->posicion->getX(),-this->posicion->getY(),0);
 }
 
 void Arbol::dibujarRecursivo(Rama* raiz, int tipo){

@@ -24,7 +24,7 @@ Hoja::~Hoja()
 void Hoja::dibujar(){
     // El metodo dibujarBezier esta dibujando cosas q son del editor!!!
     glColor3f(this->color.getRojo(), this->color.getVerde(), this->color.getAzul());
-    this->modelado->dibujarBezier();
+    //this->modelado->dibujarBezier();
     this->modelado->rellenar();
 }
 
