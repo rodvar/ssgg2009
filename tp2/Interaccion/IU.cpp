@@ -30,6 +30,8 @@ void IU::keyboard (unsigned char key, int x, int y){
             IU::getInstancia()->getEditorHoja()->terminar();
             IU::getInstancia()->getEditorSenderoPlantacion()->terminar();
             Motor::getInstancia()->simularArboleda();
+//            IU::getInstancia()->getEditorHoja()->limpiar();
+//            IU::getInstancia()->getEditorSenderoPlantacion()->limpiar();
             break;
         case '+':// +zoom
             Pantalla::getInstancia()->aumentarZoom();

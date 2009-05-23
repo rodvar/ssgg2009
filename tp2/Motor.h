@@ -71,10 +71,10 @@ class Motor
 
         // Constructor
         Motor (){
-            this->nivelesArbol = 1;
-            this->pasoTramoBSpline = 12;
+            this->nivelesArbol = 5;
+            this->pasoTramoBSpline = 15;
             this->pasoTramoBezier = 10;
-            this->arbolesTramoBSpline = 4;
+            this->arbolesTramoBSpline = 1;
             this->semillas.clear();
             this->datos.clear();
         }

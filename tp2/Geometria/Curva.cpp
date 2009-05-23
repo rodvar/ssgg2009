@@ -27,10 +27,15 @@ void Curva::dibujarPunteado(){
 
 void Curva::rellenar(){
     list<Coordenadas*>::iterator it = this->puntosControl.begin();
+    Coordenadas* punto;
     glBegin(GL_TRIANGLE_FAN);     	// draw triangle
         glColor3f(this->relleno.getRojo(),this->relleno.getVerde(),this->relleno.getAzul());                	// set color to red
-        while (it != this->puntosControl.end())
-            glVertex3f(((Coordenadas*)*it)->getX(), ((Coordenadas*)*it)->getY(), ((Coordenadas*)*it)->getZ());
+        while (it != this->puntosControl.end()) {
+        	punto = IU::getInstancia()->getEditorHoja()->mapeo(((Coordenadas*)*it)->getX(),((Coordenadas*)*it)->getY());
+            glVertex3f(punto->getX(), punto->getY(), punto->getZ());
+            delete punto;
+            it++;
+        }
     glEnd();
 }
 
@@ -106,8 +111,8 @@ void Curva::dibujarBSplines(){
 	k = 4;     /* fourth order */
 	p1 = Motor::getInstancia()->getPasoTramoBSpline();
 
-	float b[3*npts + 1];  /* allows for up to 11  control vertices */
-	float p[9*npts + 4];  /* allows for up to 100 points on curve */
+	float b[5*npts + 1];  /* allows for up to 11  control vertices */
+	float p[14*npts + 4];  /* allows for up to 100 points on curve */
 	//float p[40];
 
 	for (i = 1; i <= 3*npts; i++){

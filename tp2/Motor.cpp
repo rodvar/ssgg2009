@@ -23,13 +23,14 @@ void Motor::simularArboleda(){
        1- El sendero de plantacion (curva)
        2- Los arboles que haya que plantar
     */
-    this->datos.push_back(IU::getInstancia()->getEditorSenderoPlantacion()->generarCurva());
+    Curva* curva = IU::getInstancia()->getEditorSenderoPlantacion()->generarCurva();
+//    this->datos.push_back(curva);
 
     Coordenadas* c;
     list<Coordenadas*>::iterator it=this->semillas.begin() ;
     while(it != this->semillas.end()){
     	c = (Coordenadas*)*it;
-		Arbol* arbol = new Arbol(IU::getInstancia()->getEditorHoja()->generarCurva(),
+		Arbol* arbol = new Arbol(curva,
 				this->nivelesArbol, this->mapeo(c->getX(),c->getY()));
 		this->datos.push_back(arbol);
     	it++;

@@ -7,9 +7,10 @@ Rama::Rama(Curva* modeladoHoja)
     this->color.setVerde(0.25f);
     this->qobj = gluNewQuadric(); // crea un objeto cuadrático
     this->modeladoHoja = modeladoHoja;
-    this->hoja1 = new Hoja(modeladoHoja,this->calcularOrientacionHoja());
-    this->hoja2 = new Hoja(modeladoHoja,this->calcularOrientacionHoja());
-    this->hoja3 = new Hoja(modeladoHoja,this->calcularOrientacionHoja());
+    float orientacion = this->calcularOrientacionHoja();
+    this->hoja1 = new Hoja(modeladoHoja,orientacion);
+    this->hoja2 = new Hoja(modeladoHoja,orientacion);
+    this->hoja3 = new Hoja(modeladoHoja,orientacion);
     this->ramaSecundaria1 = NULL;
     this->ramaSecundaria2 = NULL;
     this->ramaSecundaria3 = NULL;
@@ -43,7 +44,10 @@ void Rama::desRamificar(){
 
 void Rama::dibujar(){
     // Cilindro unitario
-    glDisable(GL_LIGHTING);
+    float separacionX = -0.40;
+    float separacionY = -0.80;
+	float z = .8;
+	glDisable(GL_LIGHTING);
     glColor3f(this->color.getRojo(), this->color.getVerde(), this->color.getAzul());
 
     glPushMatrix(); // Cilindro
@@ -52,21 +56,21 @@ void Rama::dibujar(){
         gluCylinder(qobj, 1, 1, 1, 100, 100);
     glPopMatrix();
     glPushMatrix();
-        glTranslatef(-0.15,-0.15,1.2);
+        glTranslatef(separacionX,separacionY+0.2,1.2*z);
         glRotatef(this->hoja1->getOrientacion(),1,1,0);
         glRotatef(this->hoja1->getOrientacion(), 0, 0, 1); // rotacion en x
         glScalef(0.5,0.5,1);
         this->hoja1->dibujar();
     glPopMatrix();
     glPushMatrix();
-        glTranslatef(-0.15,-0.15,0.9);
+        glTranslatef(separacionX+0.4,separacionY-0.2,0.9*z);
         glRotatef(this->hoja2->getOrientacion(),1,1,0);
         glRotatef(this->hoja2->getOrientacion(), 0, 0, 1); // rotacion en x
         glScalef(0.5,0.5,1);
         this->hoja2->dibujar();
     glPopMatrix();
     glPushMatrix();
-        glTranslatef(-0.15,-0.15,0.7);
+        glTranslatef(separacionX,separacionY-0.1,0.7*z);
         glRotatef(this->hoja3->getOrientacion(),1,1,0);
         glRotatef(this->hoja3->getOrientacion(), 0, 0, 1); // rotacion en x
         glScalef(0.5,0.5,1);
@@ -81,5 +85,5 @@ float Rama::calcularOrientacionHoja(){
     float orientacion = rand() % 181;
     if (orientacion > 45)
         orientacion = 45 - orientacion;
-    return orientacion;
+    return 0;
 }
