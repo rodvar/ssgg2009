@@ -29,16 +29,54 @@ void OpenGLHelper::dibujarCurva(std::list<Coordenadas> discretizacion){
     glEnd();
 }
 
-void OpenGLHelper::dibujarCircunferencia(const float radio, const float precision){
+void OpenGLHelper::dibujarCircunferencia(const float radio, const float paso){
     float x,y;
     glBegin(GL_LINE_STRIP);
-    for(float alfa = 0.0f; alfa < (2 * GL_PI); alfa += precision){
+    for(float alfa = 0.0f; alfa < (2 * GL_PI); alfa += paso){
         x = radio * cos(alfa);
         y = radio * sin(alfa);
         glVertex3f(x,y,0.0f);
     }
     glEnd();
+}
 
+void OpenGLHelper::dibujarAbanico(const float radio, const float paso){
+    unsigned short int tamano = (int)((2 * GL_PI)/paso + 1);
+    Coordenadas puntos[tamano];
+    discretizarCurva(puntos, radio, paso);
+
+    glBegin(GL_LINE_STRIP);
+        for (int j =0; j < tamano; j++){
+            glVertex3f(0.0f, 0.0f, 0.0f);
+            glVertex3f(puntos[j].getX(), puntos[j].getY(), 0.0f);
+
+            glVertex3f(puntos[j].getX(), puntos[j].getY(), 0.0f);
+            if (j < tamano-1)
+                glVertex3f(puntos[j+1].getX(), puntos[j+1].getY(), 0.0f);
+            else
+                glVertex3f(puntos[0].getX(), puntos[0].getY(), 0.0f);
+        }
+    glEnd();
+}
+
+void OpenGLHelper::dibujarBarandal(const float radio, const float paso, const float alto){
+    // TODO: ESTO VA EN EL FARO!!! Atomizar operacion basica para lograrlo
+    unsigned short int tamano = (int)((2 * GL_PI)/paso + 1);
+    Coordenadas puntos[tamano];
+    discretizarCurva(puntos, radio, paso);
+
+    glBegin(GL_LINE_STRIP);
+        for (int j =0; j < tamano; j++){
+            glVertex3f(0.0f, 0.0f, 0.0f);
+            glVertex3f(puntos[j].getX(), puntos[j].getY(), 0.0f);
+
+            glVertex3f(puntos[j].getX(), puntos[j].getY(), 0.0f);
+            if (j < tamano-1)
+                glVertex3f(puntos[j+1].getX(), puntos[j+1].getY(), 0.0f);
+            else
+                glVertex3f(puntos[0].getX(), puntos[0].getY(), 0.0f);
+        }
+    glEnd();
 }
 
 void OpenGLHelper::dibujarEjes()
@@ -86,4 +124,15 @@ bool OpenGLHelper::mostrarError(){
     if (error != GL_NO_ERROR)
         std::cout << gluErrorString(error) << std::endl;
     return (error != GL_NO_ERROR);
+}
+
+// private
+void OpenGLHelper::discretizarCurva(Coordenadas* vector, const float radio, const float paso){
+    Coordenadas punto;
+    unsigned short int i = 0;
+    for(float alfa = 0.0f; alfa < (2 * GL_PI); alfa += paso){
+        punto.setX((float)(radio * cos(alfa)));
+        punto.setY((float)(radio * sin(alfa)));
+        vector[i++] = punto;
+    }
 }
