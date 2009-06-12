@@ -1,4 +1,5 @@
 #include "Visualizacion/OpenGLHelper.h"
+#include "Escena/Faro.h"
 
 
 // Variables que controlan la ubicación de la cámara en la Escena 3D
@@ -100,17 +101,8 @@ void display(void)
 	// Tengo que tener calculados todos los puntos de control de ambas curvas
     // tomar de a pares en un GL_QUAD_STRIP
 
-    OpenGLHelper::dibujarCircunferencia(1.0f,0.125f);
-
-    std::list<Coordenadas> lista = curve();
-    int precision = 20;
-    for (int i = 0; i < precision ; i++){
-        glPushMatrix();
-            glRotatef(i*360.0/precision,0,0,1);
-            OpenGLHelper::dibujarCurva(lista);
-        glPopMatrix();
-    }
-
+    Faro faro(1,5);
+    faro.dibujar();
 
 	////////////////
 	glutSwapBuffers();
@@ -123,7 +115,23 @@ void reshape (int w, int h)
 }
 
 void mouse (int button, int status, int x, int y){
-    // TODO: movimiento mueve camara
+    // TODO
+}
+
+void mousePressed(int x,int y){
+    static int ultimoX = 0;
+    static int ultimoY = 0;
+
+    int deltaX = x - ultimoX;
+    int deltaY = y - ultimoY;
+
+    if (deltaX > 0) anguloAlfa += 0.50;
+    if (deltaX < 0) anguloAlfa += -0.50;
+    if (deltaY > 0) anguloFi += 0.50;
+    if (deltaY < 0) anguloFi += -0.50;
+
+    ultimoX = x;
+    ultimoY = y;
 }
 
 void keyboard (unsigned char key, int x, int y){
@@ -146,19 +154,6 @@ void keyboard (unsigned char key, int x, int y){
         case '-':
             zoom++;
             break;
-        case '6':
-            anguloAlfa--;
-            break;
-        case '4':
-            anguloAlfa++;
-            break;
-        case '8':
-            anguloFi--;
-            break;
-        case '2':
-            anguloFi++;
-            break;
-
         default:
             break;
     }
@@ -201,6 +196,7 @@ int main(int argc, char** argv){
    glutReshapeFunc(reshape);
    glutKeyboardFunc(keyboard);
    glutMouseFunc(mouse);
+   glutMotionFunc(mousePressed);
    glutIdleFunc(OnIdle);
    glutMainLoop();
    return 0;
