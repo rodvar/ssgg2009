@@ -180,7 +180,7 @@ void init(void)
 		OpenGLHelper::dibujarGrillaXY();
 	glEndList();
 
-	/** TODO: Aca crear una DL con el FARO (sin foco), otra con la ISLA **/
+	/** TODO: Aca crear una DL con la ISLA y otra con el mar (si no se puede usar la grilla..) **/
 }
 
 int main(int argc, char** argv){
