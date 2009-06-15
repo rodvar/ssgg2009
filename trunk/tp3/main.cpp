@@ -148,7 +148,7 @@ void init(void)
     float light_position[3] = {10.0f, 10.0f, 8.0f};
 	dl_handle = glGenLists(3);
 
-	glClearColor (0.02, 0.02, 0.04, 0.0);
+	glClearColor (155.0f/256.0f, 196.0f/256.0f, 226.0f/256.0f, 0.0f);
     glShadeModel (GL_SMOOTH);
     glEnable(GL_DEPTH_TEST);
     // glLightModel q onda??
