@@ -1,7 +1,6 @@
 #include "Visualizacion/OpenGLHelper.h"
 #include "Escena/Faro.h"
 
-
 // Variables que controlan la ubicación de la cámara en la Escena 3D
 float eye[3] = {15.0, 15.0, 5.0};
 float at[3]  = { 0.0,  0.0, 0.0};
@@ -10,19 +9,7 @@ float zoom = 30.0;
 float anguloAlfa = 0.0;
 float anguloFi = 0.0;
 
-// Variables asociadas a única fuente de luz de la escena
-float light_color[4] = {1.0f, 1.0f, 1.0f, 1.0f};
-float light_position[3] = {10.0f, 10.0f, 8.0f};
-float light_ambient[4] = {0.05f, 0.05f, 0.05f, 1.0f};
-
-// Color de la esfera en movimiento dentro de la escena
-float color_esfera[4] = {0.5f, 0.5f, 0.2f, 1.0f};
-
-// Variable asociada al movimiento de rotación de la esfera alrededor del eje Z
-float rotate_sphere = 0;
-
 // Variables de control
-bool view_grid = true;
 bool view_axis = true;
 
 
@@ -30,8 +17,8 @@ bool view_axis = true;
 GLuint dl_handle;
 #define DL_AXIS (dl_handle+0)
 #define DL_GRID (dl_handle+1)
-#define DL_AXIS2D_TOP (dl_handle+2)
-#define DL_AXIS2D_HEIGHT (dl_handle+3)
+#define DL_FARO (dl_handle+2)
+#define DL_ISLA (dl_handle+3)
 
 // Tamaño de la ventana
 GLfloat window_size[2];
@@ -49,10 +36,7 @@ GLfloat window_size[2];
 #define HEIGHT_VIEW_H		((int)((float)W_HEIGHT*0.30f))
 
 
-void OnIdle (void)
-{
-	rotate_sphere += 0.1;
-	if(rotate_sphere > 360.0) rotate_sphere = 0.0;
+void OnIdle (void){
     glutPostRedisplay();
 }
 
@@ -92,19 +76,16 @@ void display(void)
 	Set3DEnv();
 	if (view_axis)
 		 glCallList(DL_AXIS);
-	if (view_grid)
-		 glCallList(DL_GRID);
+	glCallList(DL_GRID);
 	//
 	///////////////////////////////////////////////////
 	// DIBUJAR --> usar DL al mango!!!! //
-
+    glCallList(DL_FARO);
 	// Tengo que tener calculados todos los puntos de control de ambas curvas
     // tomar de a pares en un GL_QUAD_STRIP
-
-    Faro faro(1,5);
-    faro.dibujar();
-
 	////////////////
+
+
 	glutSwapBuffers();
 }
 
@@ -139,11 +120,11 @@ void keyboard (unsigned char key, int x, int y){
         case 0x1b: //ESC
             exit (0);
             break;
-        case 'g':
+        /*case 'g':
             view_grid = !view_grid;
             glutPostRedisplay();
             break;
-
+        */
         case 'a':
             view_axis = !view_axis;
             glutPostRedisplay();
@@ -161,26 +142,39 @@ void keyboard (unsigned char key, int x, int y){
 
 void init(void)
 {
+    // Variables asociadas a única fuente de luz de la escena
+    float light_color[4] = {1.0f, 1.0f, 1.0f, 1.0f};
+    float light_ambient[4] = {0.05f, 0.05f, 0.05f, 1.0f}; //intensidad
+    float light_position[3] = {10.0f, 10.0f, 8.0f};
 	dl_handle = glGenLists(3);
 
 	glClearColor (0.02, 0.02, 0.04, 0.0);
     glShadeModel (GL_SMOOTH);
     glEnable(GL_DEPTH_TEST);
+    // glLightModel q onda??
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_color);
     glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
     glLightfv(GL_LIGHT0, GL_POSITION, light_position);
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHTING);
+    glEnable(GL_COLOR_MATERIAL);
 
 	// Generación de las Display Lists
 	glNewList(DL_AXIS, GL_COMPILE);
-		OpenGLHelper::dibujarEjes();
+		OpenGLHelper::dibujarEjes();//Ejes
 	glEndList();
 	glNewList(DL_GRID, GL_COMPILE);
-		OpenGLHelper::dibujarGrillaXY();
+		OpenGLHelper::dibujarGrillaXY(); // Mar
 	glEndList();
-
-	/** TODO: Aca crear una DL con la ISLA y otra con el mar (si no se puede usar la grilla..) **/
+	glNewList(DL_FARO, GL_COMPILE); // Faro
+        Faro faro(1,5);
+        glPushMatrix();
+            glTranslatef(1,1,0);
+            glScalef(0.5f,0.5f,0.5f);
+            faro.dibujar();
+        glPopMatrix();
+    glEndList();
+	/** TODO: Aca crear una DL con la ISLA ¿y otra con el cielo? **/
 }
 
 int main(int argc, char** argv){
