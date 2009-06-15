@@ -4,9 +4,7 @@
 #include <list>
 #include <string>
 #include "GL/glut.h"
-#include "../Escena/Coordenadas.h"
-
-#define GL_PI 3.14159265359f
+#include "../Geometria/Matematica.h"
 
 /**
  * @brief Esta clase funciona como wrapper de la libreria grafica OpenGL. Su funcionalidad
@@ -25,30 +23,51 @@ class OpenGLHelper
         static void dibujarRecta(const float longitud);
 
         /**
+         * @brief Dibuja un cuadrado con todos sus vertices positivos, y uno de ellos
+         *        centrado en el origen. La base queda siempre apoyada contra el eje X
+         * @param lado La longitud del lado del cuadrado
+         */
+        static void dibujarRectangulo(const float base, const float altura);
+
+        /**
+         * @brief LLama a dibujar Rectangulo con los lados iguales
+         * @see OpenGLHelper::dibujarRectangulo
+         */
+        static void dibujarCuadrado(const float lado);
+
+        /**
          * @brief Dibuja la curva uniendo sus puntos discretos con GL_LINE_STRIP
          */
         static void dibujarCurva(std::list<Coordenadas> discretizacion);
 
         /**
-         * @brief Dibuja una circunferencia en el origen con el radio especificado
+         * @brief Dibuja una circunferencia unitaria en el origen
          * @param paso Es el paso de discretizacion medido en radianes (menor a 2PI)
          */
-        static void dibujarCircunferencia(const float radio, const float paso);
+        static void dibujarCircunferencia(const float paso);
 
         /**
-         * @brief Dibuja un abanico abierto de par en par
-         * @param radio El radio max del abanico
-         * @param paso el ancho maximo de sus hastas en radianes
+         * @see OpenGLHelper::dibujarCircuenferencia
+         * @brief Idem dibujarCircunferencia pero pinta la superficie que encierra
          */
-        static void dibujarAbanico(const float radio, const float paso);
+        static void dibujarCirculo(const float paso);
 
         /**
-         * @brief Dibuja un barandal de proteccion en forma de abanico
-         * @param radio El radio max del abanico
-         * @param paso el ancho maximo de sus hastas en radianes
-         * @param alto La altura de la baranda
+         * @brief Dibuja un cilindro unitario en el origen con la precision dada
          */
-        static void dibujarBarandal(const float radio, const float paso, const float alto);
+        static void dibujarCilindro(const float precision);
+
+        /**
+         * @brief Dibuja un abanico unitario abierto de par en par
+         * @param paso el ancho maximo de sus hastas en radianes
+         */
+        static void dibujarAbanico(const float paso);
+
+        /**
+         * @brief Dibuja la forma del clasico juego de parque de diversiones con medidas unitarias
+         * @param precision La cantidad de gajos que se quieren
+         */
+        static void dibujarSamba(const float precision);
 
         /**
          * Dibuja los ejes cartesianos x,y,z
@@ -67,11 +86,6 @@ class OpenGLHelper
         static bool mostrarError();
 
     private:
-        /**
-         * Carga el vector c con los puntos resultantes de la discretizacion de una curva
-         * de radio, usando paso para la misma
-         */
-        static void discretizarCurva(Coordenadas* vector, const float radio, const float paso);
 };
 
 #endif // OPENGLHELPER_H
