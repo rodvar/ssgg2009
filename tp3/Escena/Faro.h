@@ -3,29 +3,39 @@
 
 #include "../Visualizacion/Dibujable.h"
 
-#define ANCHO 1.0f
+#define PRECISION_CABINA 17
 
 /**
- * Representa un faro que ilumina el mar de noche para que la isla sea visible. Su Foco gira
- * segun la orientacion del faro a cada instante
+ * Representa la construccion Faro que sostiene el Foco que ilumina el mar de noche.
  */
 class Faro : public Dibujable
 {
     public:
         /**
          * @brief Construye el faro y queda listo para poder dibujarse, proporcional a su altura
-         * @param velocidadGiro Es la variacion que hace en grados para cada render
          * @param altura Es la altura del faro medida en pixeles
          */
-        Faro(const double velocidadGiro, const double altura);
+        Faro(const float altura);
         ~Faro();
+
+        /**
+         * @brief Devuelve la altura (posicion Z) donde se debe ubicar el foco luminoso
+         * @post Luego hay q aplicarle las mismas operaciones que al Faro
+         */
+        static float getAlturaFoco();
+
+        /**
+         * @brief Devuelve la distancia entre el piso y el techo de la Cabina donde se ubica el foco
+         * @post Luego hay q aplicarle las mismas operaciones que al Faro
+         */
+        static float getLargoCabina();
 
         /* Dibuja el faro en el origen de coordenadas*/
         void dibujar();
     private:
-        double velocidadGiro; // deltaAngulo que rota a cada insante la lente del faro
         double altura;
-        double orientacion; // angulo respecto eje x a donde mira el faro
+        float radioMin;
+        float radioMax;
 
         /* Dibuja el cuerpo del faro como una superficie de revolucion */
         void dibujarColumna();
