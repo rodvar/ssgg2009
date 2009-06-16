@@ -36,7 +36,7 @@ throw(std::runtime_error){
 	}
 }
 /*----------------------------------------------------------------------------------*/
-std::vector<Coordenadas> CalculadorBspline::calculateCurvePoints() {
+std::vector<Coordenadas> CalculadorBspline::calcularPuntos() {
 
 	return curvePoints ;
 }
