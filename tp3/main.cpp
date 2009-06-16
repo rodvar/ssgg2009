@@ -1,5 +1,6 @@
 #include "Visualizacion/OpenGLHelper.h"
 #include "Escena/Faro.h"
+#include "Escena/Isla.h"
 
 // Variables que controlan la ubicación de la cámara en la Escena 3D
 float eye[3] = {15.0, 15.0, 5.0};
@@ -79,12 +80,11 @@ void display(void)
 	glCallList(DL_GRID);
 	//
 	///////////////////////////////////////////////////
-	// DIBUJAR --> usar DL al mango!!!! //
+	// DIBUJAR //
     glCallList(DL_FARO);
-	// Tengo que tener calculados todos los puntos de control de ambas curvas
-    // tomar de a pares en un GL_QUAD_STRIP
-	////////////////
+    glCallList(DL_ISLA);
 
+	// TODO: Aca dibujar el foco del faro segun angulo de rotacion, con su iluminacion
 
 	glutSwapBuffers();
 }
@@ -167,14 +167,17 @@ void init(void)
 		OpenGLHelper::dibujarGrillaXY(); // Mar
 	glEndList();
 	glNewList(DL_FARO, GL_COMPILE); // Faro
-        Faro faro(1,5);
+        Faro faro(5);
         glPushMatrix();
-            glTranslatef(1,1,0);
-            glScalef(0.5f,0.5f,0.5f);
+            glTranslatef(1,1,0); // Esto va a cambiar cuando este la isla
+            glScalef(0.5f,0.5f,0.5f); // esto tambien
             faro.dibujar();
         glPopMatrix();
     glEndList();
-	/** TODO: Aca crear una DL con la ISLA ¿y otra con el cielo? **/
+    glNewList(DL_ISLA, GL_COMPILE); // Isla
+        Isla isla(10.0f);
+        isla.dibujar();
+    glEndList();
 }
 
 int main(int argc, char** argv){
