@@ -42,7 +42,7 @@ class CalculadorBspline : public CalculadorCurva
          * @brief Obtenie el conjunto de puntos resultado que está almacenado internamente.
          * @return Vector con los puntos de la curva calculados.
          */
-        std::vector<Coordenadas> calculateCurvePoints();
+        std::vector<Coordenadas> calcularPuntos();
 
         /**
          * @brief Obtiende un conjunto de puntos que está almacenado internamente, representa
