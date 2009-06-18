@@ -154,6 +154,12 @@ void OpenGLHelper::dibujarGrillaXY()
 	glEnable(GL_LIGHTING);
 }
 
+void OpenGLHelper::cambiarModoPoligonos(){
+    static GLenum mode = GL_FILL;
+    (mode == GL_FILL) ? mode = GL_LINE : mode = GL_FILL;
+    glPolygonMode( GL_FRONT_AND_BACK, mode);
+}
+
 bool OpenGLHelper::mostrarError(){
     GLenum error = glGetError();
     if (error != GL_NO_ERROR)

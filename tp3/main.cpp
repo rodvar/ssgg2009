@@ -36,6 +36,25 @@ GLfloat window_size[2];
 #define HEIGHT_VIEW_POSY	((int)((float)W_HEIGHT*0.40f))
 #define HEIGHT_VIEW_H		((int)((float)W_HEIGHT*0.30f))
 
+void recalcularDisplayLists(){
+    glDeleteLists(dl_handle,3);
+    dl_handle = glGenLists(3);
+    glNewList(DL_GRID, GL_COMPILE);
+		OpenGLHelper::dibujarGrillaXY(); // Mar
+	glEndList();
+	glNewList(DL_FARO, GL_COMPILE); // Faro
+        Faro faro(5);
+        glPushMatrix();
+            glTranslatef(1,1,0); // Esto va a cambiar cuando este la isla
+            glScalef(0.5f,0.5f,0.5f); // esto tambien
+            faro.dibujar();
+        glPopMatrix();
+    glEndList();
+    glNewList(DL_ISLA, GL_COMPILE); // Isla
+        Isla isla(10.0f);
+        isla.dibujar();
+    glEndList();
+}
 
 void OnIdle (void){
     glutPostRedisplay();
@@ -54,19 +73,6 @@ void Set3DEnv()
 	gluLookAt (eye[0], eye[1], eye[2], at[0], at[1], at[2], up[0], up[1], up[2]);
 	glRotatef(anguloAlfa,0,0,1);
 	glRotatef(anguloFi,-1,1,0);
-}
-
-// Devuelve los puntos de control de la curva
-std::list<Coordenadas> curve(){
-    std::list<Coordenadas> lista;
-    Coordenadas c;
-    c.setX(1);
-    c.setY(0);
-    for(int i= 0; i < 10; i++){
-        c.setZ(i);
-        lista.insert(lista.end(),c);
-    }
-    return lista;
 }
 
 void display(void)
@@ -129,6 +135,11 @@ void keyboard (unsigned char key, int x, int y){
             view_axis = !view_axis;
             glutPostRedisplay();
             break;
+        case 'm':
+            OpenGLHelper::cambiarModoPoligonos();
+            recalcularDisplayLists();
+            glutPostRedisplay();
+            break;
         case '+':
             zoom--;
             break;
@@ -151,6 +162,7 @@ void init(void)
 	glClearColor (155.0f/256.0f, 196.0f/256.0f, 226.0f/256.0f, 0.0f);
     glShadeModel (GL_SMOOTH);
     glEnable(GL_DEPTH_TEST);
+
     // glLightModel q onda??
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_color);
     glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
@@ -160,24 +172,7 @@ void init(void)
     glEnable(GL_COLOR_MATERIAL);
 
 	// Generación de las Display Lists
-	glNewList(DL_AXIS, GL_COMPILE);
-		OpenGLHelper::dibujarEjes();//Ejes
-	glEndList();
-	glNewList(DL_GRID, GL_COMPILE);
-		OpenGLHelper::dibujarGrillaXY(); // Mar
-	glEndList();
-	glNewList(DL_FARO, GL_COMPILE); // Faro
-        Faro faro(5);
-        glPushMatrix();
-            glTranslatef(1,1,0); // Esto va a cambiar cuando este la isla
-            glScalef(0.5f,0.5f,0.5f); // esto tambien
-            faro.dibujar();
-        glPopMatrix();
-    glEndList();
-    glNewList(DL_ISLA, GL_COMPILE); // Isla
-        Isla isla(10.0f);
-        isla.dibujar();
-    glEndList();
+	recalcularDisplayLists();
 }
 
 int main(int argc, char** argv){
