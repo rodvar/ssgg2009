@@ -80,6 +80,11 @@ class OpenGLHelper
         static void dibujarGrillaXY();
 
         /**
+         * Hace el switch entre modo SOLIDO y modo "ALAMBRE" para el dibujado de poligonos
+         */
+        static void cambiarModoPoligonos();
+
+        /**
          * @brief Muestra si hubo algun error en el pipeline grafico por pantalla
          * @return true si hubo error, false en caso contrario
          */
