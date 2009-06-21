@@ -2,7 +2,7 @@
 #include "Escena/Faro.h"
 #include "Escena/Isla.h"
 
-// Variables que controlan la ubicación de la cámara en la Escena 3D
+// Variables que controlan la ubicaciï¿½n de la cï¿½mara en la Escena 3D
 float eye[3] = {15.0, 15.0, 5.0};
 float at[3]  = { 0.0,  0.0, 0.0};
 float up[3]  = { 0.0,  0.0, 1.0};
@@ -20,8 +20,9 @@ GLuint dl_handle;
 #define DL_GRID (dl_handle+1)
 #define DL_FARO (dl_handle+2)
 #define DL_ISLA (dl_handle+3)
+//#define DL_OTHER (dl_handle+4)
 
-// Tamaño de la ventana
+// Tamaï¿½o de la ventana
 GLfloat window_size[2];
 #define W_WIDTH window_size[0]
 #define W_HEIGHT window_size[1]
@@ -51,9 +52,37 @@ void recalcularDisplayLists(){
         glPopMatrix();
     glEndList();
     glNewList(DL_ISLA, GL_COMPILE); // Isla
-        Isla isla(10.0f);
+        Isla isla(1.5f);
         isla.dibujar();
     glEndList();
+//    glNewList(DL_OTHER, GL_COMPILE); // Isla
+//		GLfloat mat_specular[] = { 3000.0, 3000.0, 3000.0, 3000.0 };
+//		GLfloat mat_shininess[] = { 100.0 };
+//		GLfloat mat_surface[] = { 1.0, 1.0, 0.0, 0.0 };
+//
+//		GLfloat white_light[] = { 1.0, 1.0, 1.0, 1.0 };
+//		GLfloat light_position0[] = { 1.0, 1.0, 1.0, 0.0 };
+//		GLfloat light_position1[] = { -1.0, -1.0, 1.0, 0.0 };
+//		glClearColor (0.5, 0.5, 0.5, 0.0);
+//		glShadeModel (GL_SMOOTH);
+//
+//		glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+//		glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+//		glMaterialfv(GL_FRONT, GL_AMBIENT, mat_surface);
+//
+//		glLightfv(GL_LIGHT0, GL_POSITION, light_position0);
+//		glLightfv(GL_LIGHT0, GL_DIFFUSE, white_light);
+//		glLightfv(GL_LIGHT0, GL_SPECULAR, white_light);
+//		glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
+//		glLightfv(GL_LIGHT1, GL_DIFFUSE, white_light);
+//		glLightfv(GL_LIGHT1, GL_SPECULAR, white_light);
+//
+//		glRotatef(90,1,0,0);
+//		glTranslatef(1,3,1);
+//
+//		glutSolidTeapot(0.5);
+//    glEndList();
+
 }
 
 void OnIdle (void){
@@ -89,6 +118,7 @@ void display(void)
 	// DIBUJAR //
     glCallList(DL_FARO);
     glCallList(DL_ISLA);
+//    glCallList(DL_OTHER);
 
 	// TODO: Aca dibujar el foco del faro segun angulo de rotacion, con su iluminacion
 
@@ -153,7 +183,7 @@ void keyboard (unsigned char key, int x, int y){
 
 void init(void)
 {
-    // Variables asociadas a única fuente de luz de la escena
+    // Variables asociadas a ï¿½nica fuente de luz de la escena
     float light_color[4] = {1.0f, 1.0f, 1.0f, 1.0f};
     float light_ambient[4] = {0.05f, 0.05f, 0.05f, 1.0f}; //intensidad
     float light_position[3] = {10.0f, 10.0f, 8.0f};
@@ -171,7 +201,7 @@ void init(void)
     glEnable(GL_LIGHTING);
     glEnable(GL_COLOR_MATERIAL);
 
-	// Generación de las Display Lists
+	// Generaciï¿½n de las Display Lists
 	recalcularDisplayLists();
 }
 
