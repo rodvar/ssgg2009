@@ -141,8 +141,8 @@ void OpenGLHelper::dibujarGrillaXY()
 {
 	int i;
 	glDisable(GL_LIGHTING);
-	glColor3f(0.15, 0.1, 0.1);
-	glBegin(GL_LINES);
+	glColor3f(0.27, 0.44, 0.76);
+	glBegin(GL_QUADS);
 	for(i=-20; i<21; i++)
 	{
 		glVertex3f(i, -20.0, 0.0);
