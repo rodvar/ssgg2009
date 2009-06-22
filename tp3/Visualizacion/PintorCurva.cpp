@@ -24,17 +24,17 @@ void PintorCurva::pintarGajo(std::vector<Coordenadas> &puntosA, std::vector<Coor
     Coordenadas suma;
     double angulo;
     if (puntosA.size() == puntosB.size()){
-        glBegin(GL_TRIANGLE_STRIP);
-            for(unsigned int i=0; i<puntosA.size(); i++){
-                suma = puntosA[i] + puntosB[i];
-                angulo = puntosA[i].angulo(puntosB[i]);
-                normal1 = Matematica::calcularNormal(suma,-angulo);
-                normal2 = Matematica::calcularNormal(suma,angulo);
-                glNormal3f(normal1.getX(),normal1.getY(),normal1.getZ());
-                glVertex3f(puntosA[i].getX(), puntosA[i].getY(), puntosA[i].getZ());
-                glNormal3f(normal2.getX(),normal2.getY(),normal2.getZ());
-                glVertex3f(puntosB[i].getX(), puntosB[i].getY(), puntosB[i].getZ());
-            }
+        glBegin(GL_QUAD_STRIP);
+		for(unsigned int i=0; i<puntosA.size(); i++){
+			suma = puntosA[i] + puntosB[i];
+			angulo = puntosA[i].angulo(puntosB[i]);
+			normal1 = Matematica::calcularNormal(suma,-angulo);
+			normal2 = Matematica::calcularNormal(suma,angulo);
+			glNormal3f(normal1.getX(),normal1.getY(),normal1.getZ());
+			glVertex3f(puntosA[i].getX(), puntosA[i].getY(), puntosA[i].getZ());
+			glNormal3f(normal2.getX(),normal2.getY(),normal2.getZ());
+			glVertex3f(puntosB[i].getX(), puntosB[i].getY(), puntosB[i].getZ());
+		}
         glEnd();
     }
 }
