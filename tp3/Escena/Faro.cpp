@@ -51,6 +51,8 @@ void Faro::dibujarColumna(){
     float inclinacionInterna = atan(this->altura/0.25f*this->radioMax);
     float base = this->radioMax*sin(DOSPI/precision);
     float altura = this->altura/sin(inclinacionInterna);
+    Coordenadas normalCorridaMenos = Matematica::calcularNormal(Coordenadas(1,0,0),-deltaAlfa);
+    Coordenadas normalCorrida = Matematica::calcularNormal(Coordenadas(1,0,0),deltaAlfa);
 
     glColor3f(0.35f,0.60f,0.65f);
     OpenGLHelper::dibujarCirculo(0.125f); //Cic inferior
@@ -58,14 +60,16 @@ void Faro::dibujarColumna(){
         glPushMatrix();
             glRotatef(i*deltaAlfa,0,0,1);
             glPushMatrix();// Base
-                glTranslatef(this->radioMax,0.0f,0.0f);
+                glTranslatef(this->radioMax,NULO,NULO);
                 glRotated(90.0f-Matematica::anguloGrados(inclinacionInterna),0,-1,0);
+                glTranslatef(NULO,-base/2,NULO);
                 glBegin(GL_QUADS);
-                    glNormal3f(1,0,0);
-                    glVertex3f(0.0f,-base/2,0.0f);
-                    glVertex3f(0.0f,base/2,0.0f);
-                    glVertex3f(0.0f,base/2,altura);
-                    glVertex3f(0.0f,-base/2,altura);
+                    glNormal3f(normalCorridaMenos.getX(),normalCorridaMenos.getY(),normalCorridaMenos.getZ());
+                    glVertex3f(NULO, NULO,NULO);
+                    glVertex3f(NULO,NULO,altura);
+                    glNormal3f(normalCorrida.getX(),normalCorrida.getY(),normalCorrida.getZ());
+                    glVertex3f(NULO,base,altura);
+                    glVertex3f(NULO,base,NULO);
                 glEnd();
             glPopMatrix();
         glPopMatrix();
