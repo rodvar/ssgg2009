@@ -12,12 +12,8 @@
 class CalculadorBspline : public CalculadorCurva
 {
 	private:
-		/** Almacena el parámetro del archivo, que informa la cantidad de árboles por segmento */
-		unsigned int treesPerSegment ;
 		/** Almacena los puntos totales de toda la curva, que es unión de varias BSpline */
 		std::vector<Coordenadas> curvePoints ;
-		/** Almacena los puntos donde van ubicados los árboles */
-		std::vector<Coordenadas> treePoints ;
 
     public:
 
