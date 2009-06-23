@@ -139,17 +139,36 @@ void OpenGLHelper::dibujarEjes()
 
 void OpenGLHelper::dibujarGrillaXY()
 {
-	int i;
+	int i,j;
 	glDisable(GL_LIGHTING);
 	glColor3f(0.27, 0.44, 0.76);
-	glBegin(GL_QUADS);
-	for(i=-20; i<21; i++)
-	{
-		glVertex3f(i, -20.0, 0.0);
-		glVertex3f(i,  20.0, 0.0);
-		glVertex3f(-20.0, i, 0.0);
-		glVertex3f( 20.0, i, 0.0);
-	}
+	glBegin(GL_QUAD_STRIP);
+//	for(i=-20; i<21; i++) {
+//		glVertex3f(i, -20.0, 0.0);
+//		glVertex3f(i,  20.0, 0.0);
+//		glVertex3f(-20.0, i, 0.0);
+//		glVertex3f( 20.0, i, 0.0);
+//	}
+	bool switchear = true;
+		for(i=-20;i<21;i++) {
+			if(switchear) {
+				for(j=-20;j<21;j++) {
+					glVertex3f(i,j,0.0);
+					glVertex3f(i+1,j,0.0);
+					glVertex3f(i,j+1,0.0);
+					glVertex3f(i+1,j+1,0.0);
+				}
+				switchear=false;
+			} else {
+				for(j=20;j>=-20;j--) {
+					glVertex3f(i,j,0.0);
+					glVertex3f(i+1,j,0.0);
+					glVertex3f(i,j+1,0.0);
+					glVertex3f(i+1,j+1,0.0);
+				}
+				switchear=true;
+			}
+		}
 	glEnd();
 	glEnable(GL_LIGHTING);
 }

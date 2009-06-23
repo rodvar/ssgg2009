@@ -39,6 +39,11 @@ void Isla::dibujar(){
 		}
 		pintor.pintarGajo(puntosDesde,puntosHasta);
     }
+    glBegin(GL_TRIANGLE_FAN);
+		for(unsigned int i=0;i<puntosHasta.size();i++) {
+			glVertex3f(puntosHasta[i].getX(),puntosHasta[i].getY(),puntosHasta[i].getZ());
+		}
+    glEnd();
     glPopMatrix();
 }
 
