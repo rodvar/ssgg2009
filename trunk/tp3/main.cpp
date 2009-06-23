@@ -40,6 +40,9 @@ GLfloat window_size[2];
 void recalcularDisplayLists(){
     glDeleteLists(dl_handle,3);
     dl_handle = glGenLists(3);
+    glNewList(DL_AXIS, GL_COMPILE);
+		OpenGLHelper::dibujarEjes();
+	glEndList();
     glNewList(DL_GRID, GL_COMPILE);
 		OpenGLHelper::dibujarGrillaXY(); // Mar
 	glEndList();
@@ -55,34 +58,6 @@ void recalcularDisplayLists(){
         Isla isla(1.5f);
         isla.dibujar();
     glEndList();
-//    glNewList(DL_OTHER, GL_COMPILE); // Isla
-//		GLfloat mat_specular[] = { 3000.0, 3000.0, 3000.0, 3000.0 };
-//		GLfloat mat_shininess[] = { 100.0 };
-//		GLfloat mat_surface[] = { 1.0, 1.0, 0.0, 0.0 };
-//
-//		GLfloat white_light[] = { 1.0, 1.0, 1.0, 1.0 };
-//		GLfloat light_position0[] = { 1.0, 1.0, 1.0, 0.0 };
-//		GLfloat light_position1[] = { -1.0, -1.0, 1.0, 0.0 };
-//		glClearColor (0.5, 0.5, 0.5, 0.0);
-//		glShadeModel (GL_SMOOTH);
-//
-//		glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-//		glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
-//		glMaterialfv(GL_FRONT, GL_AMBIENT, mat_surface);
-//
-//		glLightfv(GL_LIGHT0, GL_POSITION, light_position0);
-//		glLightfv(GL_LIGHT0, GL_DIFFUSE, white_light);
-//		glLightfv(GL_LIGHT0, GL_SPECULAR, white_light);
-//		glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
-//		glLightfv(GL_LIGHT1, GL_DIFFUSE, white_light);
-//		glLightfv(GL_LIGHT1, GL_SPECULAR, white_light);
-//
-//		glRotatef(90,1,0,0);
-//		glTranslatef(1,3,1);
-//
-//		glutSolidTeapot(0.5);
-//    glEndList();
-
 }
 
 void OnIdle (void){
@@ -112,13 +87,12 @@ void display(void)
 	Set3DEnv();
 	if (view_axis)
 		 glCallList(DL_AXIS);
-	glCallList(DL_GRID);
+	//glCallList(DL_GRID); TODO : ESTA COLGANDO TODO!!
 	//
 	///////////////////////////////////////////////////
 	// DIBUJAR //
     glCallList(DL_FARO);
     glCallList(DL_ISLA);
-//    glCallList(DL_OTHER);
 
 	// TODO: Aca dibujar el foco del faro segun angulo de rotacion, con su iluminacion
 
@@ -201,7 +175,7 @@ void init(void)
     glEnable(GL_LIGHTING);
     glEnable(GL_COLOR_MATERIAL);
 
-	// Generaci�n de las Display Lists
+	// Generacion de las Display Lists
 	recalcularDisplayLists();
 }
 
