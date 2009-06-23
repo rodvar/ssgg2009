@@ -1,14 +1,13 @@
 #include "CalculadorBspline.h"
 /*----------------------------------------------------------------------------------*/
-CalculadorBspline::CalculadorBspline(unsigned int nroCurvePoints):CalculadorCurva(nroCurvePoints),treesPerSegment(3)
+CalculadorBspline::CalculadorBspline(unsigned int nroCurvePoints):CalculadorCurva(nroCurvePoints)
 {
 
 }
 /*----------------------------------------------------------------------------------*/
 CalculadorBspline::CalculadorBspline(unsigned int nroCurvePoints,
 	std::vector<Coordenadas>& pC) throw(std::runtime_error)
-:CalculadorCurva(nroCurvePoints,pC),
-treesPerSegment(3)
+:CalculadorCurva(nroCurvePoints,pC)
 {
 	if(pC.size() < 4) {
 		throw std::runtime_error("Error al construir BSpline. El vector de puntos de "
@@ -41,22 +40,9 @@ std::vector<Coordenadas> CalculadorBspline::calcularPuntos() {
 	return curvePoints ;
 }
 /*----------------------------------------------------------------------------------*/
-std::vector<Coordenadas> CalculadorBspline::calculateTreePoints() {
-	return treePoints ;
-}
-/*----------------------------------------------------------------------------------*/
-void CalculadorBspline::setTreesPerSegment(unsigned int number) {
-	this->treesPerSegment = number ;
-}
-/*----------------------------------------------------------------------------------*/
-unsigned int CalculadorBspline::getTreesPerSegment() const {
-	return treesPerSegment ;
-}
-/*----------------------------------------------------------------------------------*/
 void CalculadorBspline::loadCurvePointsVector() {
 	/* reseteo los vectores de puntos de curva y árboles */
 	curvePoints.clear() ;
-	treePoints.clear() ;
 
 	/* Defino array de cuatro puntos para ir cargando los temporales desde el vector
 	 * de puntos de control, e incrementándolos.*/
@@ -71,7 +57,6 @@ void CalculadorBspline::loadCurvePointsVector() {
 		temporal[2] = control_points[cpindex+2] ;
 		temporal[3] = control_points[cpindex+3] ;
 		this->loadSegmentPoints(temporal,true) ; /* cargo puntos curva */
-		this->loadSegmentPoints(temporal,false) ; /* cargo puntos árboles */
 	}
 
 }
@@ -79,19 +64,11 @@ void CalculadorBspline::loadCurvePointsVector() {
 void CalculadorBspline::loadSegmentPoints(std::vector<Coordenadas>& temp,
 		bool curve) {
 
-	int cantidadDePuntos ;
-	if(curve) {
-		cantidadDePuntos = numberOfCurvePoints ;
-	}
-	else {
-		cantidadDePuntos = treesPerSegment ;
-	}
-
 	/* utilizo el parámetro de la cantidad de puntos(temporal) para mover el "u" */
-	for(int i=0 ; i<cantidadDePuntos ; ++i) {
+	for(int i=0 ; i<numberOfCurvePoints ; ++i) {
 
 		/* obtengo el "u" segun el valor de i */
-		double u = (double)i / (cantidadDePuntos-1) ;
+		double u = (double)i / (numberOfCurvePoints-1) ;
 		/* obtengo el valor invertido de "u" */
 		double ut = 1 - u ;
 
@@ -110,13 +87,7 @@ void CalculadorBspline::loadSegmentPoints(std::vector<Coordenadas>& temp,
 		punto.setZ(N0 * temp[0].getZ() + N1 * temp[1].getZ()
 										+ N2 * temp[2].getZ() + N3 * temp[3].getZ() );
 
-		/* agrego el punto al vector, depende si es para los árboles o para la curva */
-		if(curve) {
-			curvePoints.push_back(punto) ;
-		}
-		else {
-			treePoints.push_back(punto) ;
-		}
+		curvePoints.push_back(punto) ;
 
 	}
 

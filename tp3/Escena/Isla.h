@@ -27,8 +27,9 @@ class Isla : public Dibujable
 
         /* Genera los puntos de control de la curva Base Bspline en los niveles primarios */
         std::vector<Coordenadas> generarCurvaNivel0();
-        /* misma curva levemente rotaada y elevada en z*/
-        std::vector<Coordenadas> generarCurvaNivel1();
+
+        void escalarPunto(Coordenadas& punto);
+        void rotarPunto(Coordenadas& punto, float angulo);
 };
 
 #endif // ISLA_H
