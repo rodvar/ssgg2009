@@ -13,6 +13,8 @@ float anguloFi = 0.0;
 // Variables de control
 bool view_axis = true;
 
+// Altura base del faro
+#define ALTURA_FARO 5
 
 // Handle para el control de las Display Lists
 GLuint dl_handle;
@@ -47,7 +49,7 @@ void recalcularDisplayLists(){
 		OpenGLHelper::dibujarGrillaXY(); // Mar
 	glEndList();
 	glNewList(DL_FARO, GL_COMPILE); // Faro
-        Faro faro(5);
+        Faro faro(ALTURA_FARO);
         glPushMatrix();
             glTranslatef(1,1,0); // Esto va a cambiar cuando este la isla
             glScalef(0.5f,0.5f,0.5f); // esto tambien
@@ -87,15 +89,17 @@ void display(void)
 	Set3DEnv();
 	if (view_axis)
 		 glCallList(DL_AXIS);
-	//glCallList(DL_GRID); TODO : ESTA COLGANDO TODO!!
+	//glCallList(DL_GRID); // -->> TODO: Esto cuelga todo nic!!!
 	//
 	///////////////////////////////////////////////////
 	// DIBUJAR //
     glCallList(DL_FARO);
     glCallList(DL_ISLA);
-
-	// TODO: Aca dibujar el foco del faro segun angulo de rotacion, con su iluminacion
-
+    glPushMatrix();
+        glTranslatef(1,1,0); // Esto va a cambiar cuando este la isla
+        glScalef(0.5f,0.5f,0.5f); // esto tambien
+        Faro::iluminar(ALTURA_FARO);
+    glPopMatrix();
 	glutSwapBuffers();
 }
 
@@ -161,10 +165,12 @@ void init(void)
     float light_color[4] = {1.0f, 1.0f, 1.0f, 1.0f};
     float light_ambient[4] = {0.05f, 0.05f, 0.05f, 1.0f}; //intensidad
     float light_position[3] = {10.0f, 10.0f, 8.0f};
+    float material[3] = {1.0f,1.0f,1.0f};
 	dl_handle = glGenLists(3);
 
 	glClearColor (155.0f/256.0f, 196.0f/256.0f, 226.0f/256.0f, 0.0f);
     glShadeModel (GL_SMOOTH);
+    //glMaterialfv(GL_FRONT, GL_SPECULAR,material); NICO INVESTIGA ESTO!
     glEnable(GL_DEPTH_TEST);
 
     // glLightModel q onda??

@@ -21,6 +21,24 @@ float Faro::getLargoCabina(){
     return (0.75f*UNITARIO*sin(DOSPI/PRECISION_CABINA));
 }
 
+
+void Faro::iluminar(const float altura){
+    int precision = 30;
+    static int rotacionZ = NULO;
+    float z = altura +getAlturaFoco();
+    float largo = getLargoCabina()*2;
+    glColor3f(UNITARIO,UNITARIO,UNITARIO);
+    glPushMatrix();
+        glTranslatef(0,0,z);
+        glRotatef(++rotacionZ,NULO,NULO,UNITARIO);
+        glRotatef(95,NULO,UNITARIO,NULO);
+        glScalef(largo,largo,largo/2);
+        OpenGLHelper::dibujarSamba(precision);
+    glPopMatrix();
+    if (rotacionZ == 360)
+        rotacionZ = 0;
+}
+
 void Faro::dibujar(){
     this->dibujarColumna();
     this->dibujarCabina();

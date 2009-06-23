@@ -30,6 +30,12 @@ class Faro : public Dibujable
          */
         static float getLargoCabina();
 
+        /**
+         * @brief Dibuja el foco luminoso del faro y lo rota en cada llamada
+         * @param altura La altura del faro
+         */
+        static void iluminar(const float altura);
+
         /* Dibuja el faro en el origen de coordenadas*/
         void dibujar();
     private:
