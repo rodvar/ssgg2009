@@ -6,7 +6,7 @@
 float eye[3] = {15.0, 15.0, 5.0};
 float at[3]  = { 0.0,  0.0, 0.0};
 float up[3]  = { 0.0,  0.0, 1.0};
-float zoom = 30.0;
+float zoom = 45.0;
 float anguloAlfa = 0.0;
 float anguloFi = 0.0;
 
@@ -14,7 +14,7 @@ float anguloFi = 0.0;
 bool view_axis = true;
 
 // Altura base del faro
-#define ALTURA_FARO 5
+#define ALTURA_FARO 9
 
 // Handle para el control de las Display Lists
 GLuint dl_handle;
@@ -89,7 +89,7 @@ void display(void)
 	Set3DEnv();
 	if (view_axis)
 		 glCallList(DL_AXIS);
-	//glCallList(DL_GRID); // -->> TODO: Esto cuelga todo nic!!!
+	glCallList(DL_GRID); // -->> TODO: Esto cuelga todo nic!!!
 	//
 	///////////////////////////////////////////////////
 	// DIBUJAR //
