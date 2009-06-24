@@ -159,12 +159,35 @@ void keyboard (unsigned char key, int x, int y){
     }
 }
 
-void init(void)
-{
-    // Variables asociadas a �nica fuente de luz de la escena
+void generarLuzAmbiente(){
     float light_color[4] = {1.0f, 1.0f, 1.0f, 1.0f};
     float light_ambient[4] = {0.05f, 0.05f, 0.05f, 1.0f}; //intensidad
     float light_position[3] = {10.0f, 10.0f, 8.0f};
+    float light_position1[3] = {10.0f, -10.0f, 8.0f};
+    float light_position2[3] = {-10.0f, -10.0f, 8.0f};
+    float light_position3[3] = {-10.0f, 10.0f, 8.0f};
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_color);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+    glEnable(GL_LIGHT0);
+//    glLightfv(GL_LIGHT1, GL_DIFFUSE, light_color);
+//    glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
+//    glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
+//    glEnable(GL_LIGHT1);
+//    glLightfv(GL_LIGHT2, GL_DIFFUSE, light_color);
+//    glLightfv(GL_LIGHT2, GL_AMBIENT, light_ambient);
+//    glLightfv(GL_LIGHT2, GL_POSITION, light_position2);
+//    glEnable(GL_LIGHT2);
+//    glLightfv(GL_LIGHT3, GL_DIFFUSE, light_color);
+//    glLightfv(GL_LIGHT3, GL_AMBIENT, light_ambient);
+//    glLightfv(GL_LIGHT3, GL_POSITION, light_position3);
+//    glEnable(GL_LIGHT3);
+}
+
+void init(void)
+{
+    // Variables asociadas a �nica fuente de luz de la escena
+
     float material[3] = {1.0f,1.0f,1.0f};
 	dl_handle = glGenLists(3);
 
@@ -174,10 +197,7 @@ void init(void)
     glEnable(GL_DEPTH_TEST);
 
     // glLightModel q onda??
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_color);
-    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-    glEnable(GL_LIGHT0);
+    generarLuzAmbiente();
     glEnable(GL_LIGHTING);
     glEnable(GL_COLOR_MATERIAL);
 

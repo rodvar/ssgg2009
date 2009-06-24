@@ -140,15 +140,8 @@ void OpenGLHelper::dibujarEjes()
 void OpenGLHelper::dibujarGrillaXY()
 {
 	int i,j;
-	glDisable(GL_LIGHTING);
 	glColor3f(0.27, 0.44, 0.76);
 	glBegin(GL_QUAD_STRIP);
-//	for(i=-20; i<21; i++) {
-//		glVertex3f(i, -20.0, 0.0);
-//		glVertex3f(i,  20.0, 0.0);
-//		glVertex3f(-20.0, i, 0.0);
-//		glVertex3f( 20.0, i, 0.0);
-//	}
 	bool switchear = true;
 		for(i=-20;i<21;i++) {
 			if(switchear) {
@@ -170,7 +163,6 @@ void OpenGLHelper::dibujarGrillaXY()
 			}
 		}
 	glEnd();
-	glEnable(GL_LIGHTING);
 }
 
 void OpenGLHelper::cambiarModoPoligonos(){
