@@ -14,7 +14,7 @@ float anguloFi = 0.0;
 bool view_axis = true;
 
 // Altura base del faro
-#define ALTURA_FARO 8
+#define ALTURA_FARO 9
 
 // Handle para el control de las Display Lists
 GLuint dl_handle;
