@@ -7,9 +7,9 @@ void Matematica::escalarPunto(Coordenadas &punto, float ex, float ey, float ez){
 }
 
 Coordenadas Matematica::calcularNormal(float anguloAlfa, float anguloFi){
-    anguloRadianes(anguloAlfa);
-    anguloRadianes(anguloFi);
-    Coordenadas normal(cos(anguloAlfa), sin(anguloAlfa), cos(anguloFi));
+    float alfa = anguloRadianes(anguloAlfa);
+    float fi = anguloRadianes(anguloFi);
+    Coordenadas normal(cos(alfa), sin(alfa), cos(fi));
     normalizar(normal);
     return normal;
 }
@@ -40,6 +40,13 @@ Coordenadas Matematica::rotar(Coordenadas direccion, float deltaAlfaXY){
     float deltaRad = Matematica::anguloRadianes(deltaAlfaXY);
     float radio = calcularNorma(direccion);
     return Coordenadas(radio*(float)cos(deltaRad),radio*(float)sin(deltaRad), radio*direccion.getZ());
+}
+
+Coordenadas Matematica::rotar(Coordenadas direccion, float alfa,float fi){
+    float radio = calcularNorma(direccion);
+    alfa = anguloRadianes(alfa);
+    fi = anguloRadianes(fi);
+    return Coordenadas(radio*cos(alfa)*sin(fi), radio*sin(alfa)*sin(fi), radio*cos(fi));
 }
 
 float Matematica::anguloRadianes(const float anguloGrados){
