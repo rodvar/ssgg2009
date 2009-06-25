@@ -65,6 +65,11 @@ class Matematica
         static Coordenadas rotar(Coordenadas direccion, float deltaAlfaXY);
 
         /**
+         * @return el punto rotado por coordenadas esfericas SIN normalizar
+         */
+        static Coordenadas rotar(Coordenadas direccion, float alfa,float fi);
+
+        /**
          * @brief Calcula la norma tomando las coordenadas pasadas como una direccion
          */
         static float calcularNorma(Coordenadas direccion);
