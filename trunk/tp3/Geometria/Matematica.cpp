@@ -1,13 +1,9 @@
 #include "Matematica.h"
 
-Matematica::Matematica()
-{
-    //ctor
-}
-
-Matematica::~Matematica()
-{
-    //dtor
+void Matematica::escalarPunto(Coordenadas &punto, float ex, float ey, float ez){
+    punto.setX(ex*punto.getX());
+    punto.setY(ey*punto.getY());
+    punto.setZ(ez*punto.getZ());
 }
 
 Coordenadas Matematica::calcularNormal(float anguloAlfa, float anguloFi){
@@ -25,11 +21,25 @@ Coordenadas Matematica::calcularNormal(Coordenadas direccion, float deltaAlfaXY)
     return resultante;
 }
 
+Coordenadas Matematica::calcularNormal(Coordenadas a, Coordenadas b){
+    Coordenadas n = productoVectorial(a,b);
+    Coordenadas c = b - a;
+    c = productoVectorial(c,n);
+    normalizar(c);
+    return c;
+}
+
+Coordenadas Matematica::productoVectorial(Coordenadas a, Coordenadas b){
+    float x = a.getY() * b.getZ() - a.getZ() * b.getY();
+    float y = a.getZ() * b.getX() - a.getX() * b.getZ();
+    float z = a.getX() * b.getY() - a.getY() * b.getX();
+    return Coordenadas(x,y,z);
+}
+
 Coordenadas Matematica::rotar(Coordenadas direccion, float deltaAlfaXY){
     float deltaRad = Matematica::anguloRadianes(deltaAlfaXY);
     float radio = calcularNorma(direccion);
-    Coordenadas dirRotada(radio*(float)cos(deltaRad),radio*(float)sin(deltaRad), radio*direccion.getZ());
-    return dirRotada;
+    return Coordenadas(radio*(float)cos(deltaRad),radio*(float)sin(deltaRad), radio*direccion.getZ());
 }
 
 float Matematica::anguloRadianes(const float anguloGrados){
