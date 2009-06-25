@@ -14,7 +14,7 @@ float anguloFi = 0.0;
 bool view_axis = true;
 
 // Altura base del faro
-#define ALTURA_FARO 9
+#define ALTURA_FARO 8
 
 // Handle para el control de las Display Lists
 GLuint dl_handle;
@@ -96,8 +96,8 @@ void display(void)
     glCallList(DL_FARO);
     glCallList(DL_ISLA);
     glPushMatrix();
-        glTranslatef(1,1,0); // Esto va a cambiar cuando este la isla
-        glScalef(0.5f,0.5f,0.5f); // esto tambien
+//        glTranslatef(1,1,0); // Esto va a cambiar cuando este la isla
+//        glScalef(0.5f,0.5f,0.5f); // esto tambien
         Faro::iluminar(ALTURA_FARO);
     glPopMatrix();
 	glutSwapBuffers();
