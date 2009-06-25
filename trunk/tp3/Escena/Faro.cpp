@@ -92,7 +92,7 @@ void Faro::dibujarColumna(){
 void Faro::dibujarCabina(){
     int precision = PRECISION_CABINA;
     float deltaAlfa = 360.0f/precision;
-    float largoBarrote = 0.75f*this->radioMax*sin(DOSPI/precision);//this->radioMax/4;
+    float largoBarrote = 0.50f*this->radioMax*sin(DOSPI/precision);
     float largo = this->altura*largoBarrote;
 
     glColor3f(1,0,0);
@@ -138,7 +138,7 @@ void Faro::dibujarSombrero(){
     PintorCurva pintor;
     std::vector<Coordenadas> puntosDesde;
     std::vector<Coordenadas> puntosHasta;
-    float posicionZ = this->altura*(1+ 0.75f*this->radioMax*sin(DOSPI/precision));
+    float posicionZ = this->altura*(this->radioMax+ 0.50f*this->radioMax*sin(DOSPI/precision));
     float radio = 0.75f*this->radioMax;
     float paso = PI/5; //rad
 
