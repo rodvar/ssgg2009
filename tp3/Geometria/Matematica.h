@@ -19,6 +19,11 @@ class Matematica
         ~Matematica();
 
         /**
+         * @brief Escala el punto segun los factores ex, ey y ez
+         */
+        static void escalarPunto(Coordenadas &punto, float ex, float ey, float ez);
+
+        /**
          * @return La normal saliente la esfera unitaria en las coordenadas dadas
          * @param anguloAlfa Es el angulo direccional en el plano xy medido desde eje x en grados
          * @param anguloFi Es el angulo direccional en el plano xz medido desde eje z en grados
@@ -33,6 +38,17 @@ class Matematica
          * @param deltaAlfaXY La variacion de angulo grados
          */
         static Coordenadas calcularNormal(Coordenadas direccion, float deltaAlfaXY);
+
+        /**
+         * @brief Aproxima la normal como la perpendicular al segmento que forman ambos puntos
+         *        tomada desde el punto medio de ambos
+         */
+        static Coordenadas calcularNormal(Coordenadas a, Coordenadas b);
+
+        /**
+         * @return El resultado de A x B
+         */
+        static Coordenadas productoVectorial(Coordenadas a, Coordenadas b);
 
         /**
          * Carga el vector c con los puntos resultantes de la discretizacion de una curva
