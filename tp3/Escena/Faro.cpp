@@ -35,21 +35,25 @@ void Faro::iluminar(const float altura){
         glScalef(largo,largo,largo/2);
         OpenGLHelper::dibujarSamba(precision);
 	glPopMatrix();
-    glPushMatrix();
+	glPushMatrix();
 		glTranslatef(NULO,NULO,z);
-		glRotatef(rotacionZ,NULO,NULO,UNITARIO);
 
-        GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-        GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-        GLfloat light_position[] = { 0.0, 0.0, 8.0, 1.0 };
-        GLfloat light_direction[] = { -1.0, -1.0, -1.0 };
+        Coordenadas c = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,145);
 
-        glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-        glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
-        glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-        glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 15.0);
-        glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, light_direction);
-	glPopMatrix();
+        GLfloat light_diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+        GLfloat light_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+        GLfloat light_position[] = { 0.0f, 0.0f, 8.0f, 1.0f };
+        GLfloat light_direction[] = { c.getX(), c.getY(), c.getZ() };
+
+        glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
+        glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
+        glLightfv(GL_LIGHT1, GL_POSITION, light_position);
+        glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 15.0);
+        glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light_direction);
+
+        glEnable(GL_LIGHT1);
+
+    glPopMatrix();
 
     if (rotacionZ == 360)
         rotacionZ = 0;

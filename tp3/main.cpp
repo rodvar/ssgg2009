@@ -163,9 +163,9 @@ void generarLuzAmbiente(){
     float light_color[4] = {1.0f, 1.0f, 1.0f, 1.0f};
     float light_ambient[4] = {0.05f, 0.05f, 0.05f, 1.0f}; //intensidad
     float light_position[3] = {10.0f, 10.0f, 8.0f};
-    float light_position1[3] = {10.0f, -10.0f, 8.0f};
-    float light_position2[3] = {-10.0f, -10.0f, 8.0f};
-    float light_position3[3] = {-10.0f, 10.0f, 8.0f};
+//    float light_position1[3] = {10.0f, -10.0f, 8.0f};
+//    float light_position2[3] = {-10.0f, -10.0f, 8.0f};
+//    float light_position3[3] = {-10.0f, 10.0f, 8.0f};
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_color);
     glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
     glLightfv(GL_LIGHT0, GL_POSITION, light_position);
@@ -197,7 +197,7 @@ void init(void)
     glEnable(GL_DEPTH_TEST);
 
     // glLightModel q onda??
-    generarLuzAmbiente();
+//    generarLuzAmbiente();
     glEnable(GL_LIGHTING);
     glEnable(GL_COLOR_MATERIAL);
 

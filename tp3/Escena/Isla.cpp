@@ -28,7 +28,7 @@ void Isla::dibujar(){
     glPushMatrix();
     glColor3f(0.8,0.72,0.62);
     for(float z = NULO; z <= 5; z++){
-    	float angulo = rand()%8;
+    	float angulo = z+1;
 		for(unsigned int i=0;i<puntosDesde.size();i++) {
 			puntosDesde[i].setX(puntosHasta[i].getX());
 			puntosDesde[i].setY(puntosHasta[i].getY());
