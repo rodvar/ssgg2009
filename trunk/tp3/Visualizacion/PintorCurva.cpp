@@ -18,6 +18,15 @@ void PintorCurva::pintar(std::vector<Coordenadas> &curvePoints)
     glEnd();
 }
 
+void PintorCurva::pintarSuperficie(std::vector<Coordenadas> &puntos){
+    glBegin(GL_TRIANGLE_FAN);
+        glVertex3f(NULO,NULO,NULO);
+		for(unsigned int i=0;i<puntos.size();i++) {
+			glVertex3f(puntos[i].getX(),puntos[i].getY(),puntos[i].getZ());
+		}
+    glEnd();
+}
+
 void PintorCurva::pintarGajo(std::vector<Coordenadas> &puntosA, std::vector<Coordenadas> &puntosB){
     Coordenadas normal1;
     Coordenadas normal2;
