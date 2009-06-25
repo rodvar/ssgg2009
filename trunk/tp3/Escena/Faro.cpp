@@ -25,31 +25,33 @@ float Faro::getLargoCabina(){
 void Faro::iluminar(const float altura){
     int precision = 30;
     static int rotacionZ = NULO;
-    float z = altura +getAlturaFoco();
+//    float z = altura + getAlturaFoco();
     float largo = getLargoCabina()*2;
     glColor3f(UNITARIO,UNITARIO,UNITARIO);
     glPushMatrix();
-        glTranslatef(0,0,z);
+		glTranslatef(1.0f,1.0f,getAlturaFoco()+4);
+		glScalef(0.5f,0.5f,0.5f);
         glRotatef(++rotacionZ,NULO,NULO,UNITARIO);
-        glRotatef(95,NULO,UNITARIO,NULO);
+        glRotatef(85,NULO,UNITARIO,NULO);
         glScalef(largo,largo,largo/2);
         OpenGLHelper::dibujarSamba(precision);
-	glPopMatrix();
-	glPushMatrix();
-		glTranslatef(NULO,NULO,z);
 
-        Coordenadas c = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,145);
+        Coordenadas c = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,160);
 
         GLfloat light_diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
         GLfloat light_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-        GLfloat light_position[] = { 0.0f, 0.0f, 8.0f, 1.0f };
+        GLfloat light_position[] = { 1.0f, 1.0f, getAlturaFoco()+4, 1.0f };
         GLfloat light_direction[] = { c.getX(), c.getY(), c.getZ() };
+        GLfloat mat_emissive[] = { 0.2f, 0.1f, 0.1f, 0.0f }; //Color del brillo especular
 
         glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
         glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
         glLightfv(GL_LIGHT1, GL_POSITION, light_position);
         glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 15.0);
         glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light_direction);
+        glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 7.0f);
+
+        glMaterialfv(GL_FRONT, GL_EMISSION, mat_emissive);
 
         glEnable(GL_LIGHT1);
 

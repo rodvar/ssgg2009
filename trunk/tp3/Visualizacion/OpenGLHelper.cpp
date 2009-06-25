@@ -146,17 +146,25 @@ void OpenGLHelper::dibujarGrillaXY()
 		for(i=-20;i<21;i++) {
 			if(switchear) {
 				for(j=-20;j<21;j++) {
+					glNormal3f(0.0f,0.0f,1.0f);
 					glVertex3f(i,j,0.0);
+					glNormal3f(0.0f,0.0f,1.0f);
 					glVertex3f(i+1,j,0.0);
+					glNormal3f(0.0f,0.0f,1.0f);
 					glVertex3f(i,j+1,0.0);
+					glNormal3f(0.0f,0.0f,1.0f);
 					glVertex3f(i+1,j+1,0.0);
 				}
 				switchear=false;
 			} else {
 				for(j=20;j>=-20;j--) {
+					glNormal3f(0.0f,0.0f,1.0f);
 					glVertex3f(i,j,0.0);
+					glNormal3f(0.0f,0.0f,1.0f);
 					glVertex3f(i+1,j,0.0);
+					glNormal3f(0.0f,0.0f,1.0f);
 					glVertex3f(i,j+1,0.0);
+					glNormal3f(0.0f,0.0f,1.0f);
 					glVertex3f(i+1,j+1,0.0);
 				}
 				switchear=true;
