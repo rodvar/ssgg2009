@@ -34,8 +34,9 @@ class PintorCurva
          *        puntosA debe corresponder a la curva que se dibuja antes que la de puntosB
          * @pre Ambas curvas deben tener la misma cantidad de puntos
          * @param puntosA,puntosB Los puntos de las curvas A y B
+         * @param referencia Es el punto respecto al cual se debe medir la normal a las superficies
          */
-        void pintarGajo(std::vector<Coordenadas> &puntosA, std::vector<Coordenadas> &puntosB);
+        void pintarGajo(std::vector<Coordenadas> &puntosA, std::vector<Coordenadas> &puntosB, Coordenadas referencia);
 
         /**
          * @brief Pinta los puntos de control.
