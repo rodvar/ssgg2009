@@ -30,25 +30,27 @@ void Faro::iluminar(const float altura){
     glColor3f(UNITARIO,UNITARIO,UNITARIO);
     glPushMatrix();
 		glTranslatef(NULO,NULO,getAlturaFoco());
+//		glTranslatef(NULO,NULO,getAlturaFoco());
 		glScalef(0.5f,0.5f,0.5f);
         glRotatef(++rotacionZ,NULO,NULO,UNITARIO);
-        glRotatef(85,NULO,UNITARIO,NULO);
+        glRotatef(65,NULO,UNITARIO,NULO);
         glScalef(largo,largo,largo/2);
         OpenGLHelper::dibujarSamba(precision);
 
+//        Coordenadas c = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,150);
         /*OpenGLHelper::setMaterialEspejado();//Vidrio del foco de iluminacion
         glPushMatrix();
             OpenGLHelper::dibujarCirculo(precision);
         glPopMatrix();
         OpenGLHelper::setMaterialStd();*/
 
-        Coordenadas c = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,160);
+        Coordenadas c = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,165);
 
         GLfloat light_diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
         GLfloat light_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-        GLfloat light_position[] = { 1.0f, 1.0f, getAlturaFoco()+4, 1.0f };
+        GLfloat light_position[] = { 0.0f, 0.0f, getAlturaFoco(), 1.0f };
         GLfloat light_direction[] = { c.getX(), c.getY(), c.getZ() };
-        GLfloat mat_emissive[] = { 0.2f, 0.1f, 0.1f, 0.0f }; //Color del brillo especular
+//        GLfloat mat_emissive[] = { 0.2f, 0.1f, 0.1f, 0.0f }; //Color del brillo especular
 
         glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
         glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
@@ -57,7 +59,7 @@ void Faro::iluminar(const float altura){
         glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light_direction);
         glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 7.0f);
 
-        glMaterialfv(GL_FRONT, GL_EMISSION, mat_emissive);
+//        glMaterialfv(GL_FRONT, GL_EMISSION, mat_emissive);
 
         glEnable(GL_LIGHT1);
 

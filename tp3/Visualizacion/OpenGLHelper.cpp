@@ -137,23 +137,30 @@ void OpenGLHelper::dibujarEjes()
 	glEnable(GL_LIGHTING);
 }
 
+void glVertex3fSoftNormal ( float x, float y, float z )
+{
+  const float len = sqrt ( ( x * x ) + ( y * y ) + ( z * z ) );
+  glNormal3f ( x / len, y / len, z / len );
+  glVertex3f ( x, y, z );
+}
+
 void OpenGLHelper::dibujarGrillaXY()
 {
 	int i,j;
 	glColor3f(0.27, 0.44, 0.76);
-	glBegin(GL_QUAD_STRIP);
-	bool switchear = true;
+	glBegin(GL_QUADS);
+		bool switchear = true;
 		for(i=-20;i<21;i++) {
 			if(switchear) {
 				for(j=-20;j<21;j++) {
 					glNormal3f(0.0f,0.0f,1.0f);
 					glVertex3f(i,j,0.0);
 					glNormal3f(0.0f,0.0f,1.0f);
-					glVertex3f(i+1,j,0.0);
-					glNormal3f(0.0f,0.0f,1.0f);
 					glVertex3f(i,j+1,0.0);
 					glNormal3f(0.0f,0.0f,1.0f);
 					glVertex3f(i+1,j+1,0.0);
+					glNormal3f(0.0f,0.0f,1.0f);
+					glVertex3f(i+1,j,0.0);
 				}
 				switchear=false;
 			} else {
@@ -161,11 +168,11 @@ void OpenGLHelper::dibujarGrillaXY()
 					glNormal3f(0.0f,0.0f,1.0f);
 					glVertex3f(i,j,0.0);
 					glNormal3f(0.0f,0.0f,1.0f);
-					glVertex3f(i+1,j,0.0);
-					glNormal3f(0.0f,0.0f,1.0f);
 					glVertex3f(i,j+1,0.0);
 					glNormal3f(0.0f,0.0f,1.0f);
 					glVertex3f(i+1,j+1,0.0);
+					glNormal3f(0.0f,0.0f,1.0f);
+					glVertex3f(i+1,j,0.0);
 				}
 				switchear=true;
 			}
