@@ -46,6 +46,11 @@ class Matematica
         static Coordenadas calcularNormal(Coordenadas a, Coordenadas b);
 
         /**
+         * @brief Calcula la normal con respecto a una referencia pasada por paraemtro
+         */
+        static Coordenadas calcularNormalReferencia(Coordenadas a, Coordenadas referencia);
+
+        /**
          * @return El resultado de A x B
          */
         static Coordenadas productoVectorial(Coordenadas a, Coordenadas b);
