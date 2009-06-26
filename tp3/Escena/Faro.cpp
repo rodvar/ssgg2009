@@ -29,7 +29,7 @@ void Faro::iluminar(const float altura){
     float largo = getLargoCabina()*2;
     glColor3f(UNITARIO,UNITARIO,UNITARIO);
     glPushMatrix();
-		glTranslatef(1.0f,1.0f,getAlturaFoco()+4);
+		glTranslatef(NULO,NULO,getAlturaFoco()+4);
 		glScalef(0.5f,0.5f,0.5f);
         glRotatef(++rotacionZ,NULO,NULO,UNITARIO);
         glRotatef(85,NULO,UNITARIO,NULO);
