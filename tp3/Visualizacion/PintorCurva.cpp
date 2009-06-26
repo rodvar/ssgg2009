@@ -20,7 +20,7 @@ void PintorCurva::pintar(std::vector<Coordenadas> &curvePoints)
 
 void PintorCurva::pintarSuperficie(std::vector<Coordenadas> &puntos){
     glBegin(GL_TRIANGLE_FAN);
-        glVertex3f(NULO,NULO,NULO);
+        glVertex3f(NULO,NULO,puntos[0].getZ());
 		for(unsigned int i=0;i<puntos.size();i++) {
 			glVertex3f(puntos[i].getX(),puntos[i].getY(),puntos[i].getZ());
 		}
