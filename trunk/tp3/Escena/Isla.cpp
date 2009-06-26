@@ -32,7 +32,7 @@ void Isla::dibujar(){
 			rotarPunto(puntosHasta[i], angulo);// TODO: Esto esta rotando??
 			puntosHasta[i].setZ(puntosHasta[i].getZ()+z/10);
 		}
-		pintor.pintarGajo(puntosDesde,puntosHasta);
+		pintor.pintarGajo(puntosDesde,puntosHasta,Coordenadas());
     }
     pintor.pintarSuperficie(puntosHasta);
     glPopMatrix();

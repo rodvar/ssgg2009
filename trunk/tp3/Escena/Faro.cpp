@@ -76,7 +76,7 @@ void Faro::dibujarColumna(){
     Coordenadas normalCorridaMenos = Matematica::calcularNormal(Coordenadas(1,0,0),-deltaAlfa);
     Coordenadas normalCorrida = Matematica::calcularNormal(Coordenadas(1,0,0),deltaAlfa);
 
-    glColor3f(0.35f,0.60f,0.65f);
+    glColor3f(0.25f,0.25f,0.25f);
     OpenGLHelper::dibujarCirculo(0.125f); //Cic inferior
     for (int i = 0; i < precision ; i++){
         glPushMatrix();
@@ -117,7 +117,7 @@ void Faro::dibujarCabina(){
     float largoBarrote = 0.50f*this->radioMax*sin(DOSPI/precision);
     float largo = this->altura*largoBarrote;
 
-    glColor3f(1,0,0);
+    glColor3f(0.25f,0.25f,0.25f);
     for (int i = 0; i < precision ; i++){
         // Barrotes de soporte
         glPushMatrix();
@@ -164,7 +164,7 @@ void Faro::dibujarSombrero(){
     float radio = 0.75f*this->radioMax;
     float paso = PI/5; //rad
 
-    glColor3f(1.0f, 0.0f,0.0f);
+    glColor3f(0.59f, 0.29f,0.0f);
     glPushMatrix();
         glTranslatef(NULO,NULO,posicionZ);
         //piso
@@ -191,7 +191,7 @@ void Faro::dibujarSombrero(){
                 glTranslatef(NULO,NULO, 0.30f);
                 glRotatef(alfa, NULO, NULO, UNITARIO);
                 glScalef(UNITARIO,UNITARIO,0.50f);
-                pintor.pintarGajo(puntosDesde,puntosHasta);
+                pintor.pintarGajo(puntosDesde,puntosHasta, Coordenadas(NULO,NULO,posicionZ));
             glPopMatrix();
         }
     glPopMatrix();
