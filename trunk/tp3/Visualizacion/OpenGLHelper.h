@@ -85,6 +85,16 @@ class OpenGLHelper
         static void cambiarModoPoligonos();
 
         /**
+         * Configura el pipeline grafico para dibujar materiales translucidos
+         */
+        static void setMaterialEspejado();
+
+        /**
+         * Setea la configuracion estandart de materiales
+         */
+        static void setMaterialStd();
+
+        /**
          * @brief Muestra si hubo algun error en el pipeline grafico por pantalla
          * @return true si hubo error, false en caso contrario
          */
