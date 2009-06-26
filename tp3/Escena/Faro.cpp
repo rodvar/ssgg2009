@@ -14,7 +14,7 @@ Faro::~Faro(){}
 
 float Faro::getAlturaFoco(){
     float largoBarrote = 0.75f*UNITARIO*sin(DOSPI/PRECISION_CABINA);
-    return (0.75f*UNITARIO + largoBarrote/2);
+    return ((0.75f*UNITARIO + largoBarrote/2) + 4.20f);
 }
 
 float Faro::getLargoCabina(){
@@ -29,12 +29,18 @@ void Faro::iluminar(const float altura){
     float largo = getLargoCabina()*2;
     glColor3f(UNITARIO,UNITARIO,UNITARIO);
     glPushMatrix();
-		glTranslatef(NULO,NULO,getAlturaFoco()+4);
+		glTranslatef(NULO,NULO,getAlturaFoco());
 		glScalef(0.5f,0.5f,0.5f);
         glRotatef(++rotacionZ,NULO,NULO,UNITARIO);
         glRotatef(85,NULO,UNITARIO,NULO);
         glScalef(largo,largo,largo/2);
         OpenGLHelper::dibujarSamba(precision);
+
+        /*OpenGLHelper::setMaterialEspejado();//Vidrio del foco de iluminacion
+        glPushMatrix();
+            OpenGLHelper::dibujarCirculo(precision);
+        glPopMatrix();
+        OpenGLHelper::setMaterialStd();*/
 
         Coordenadas c = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,160);
 
