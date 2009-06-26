@@ -179,6 +179,24 @@ void OpenGLHelper::cambiarModoPoligonos(){
     glPolygonMode( GL_FRONT_AND_BACK, mode);
 }
 
+void OpenGLHelper::setMaterialEspejado(){
+    glEnable (GL_BLEND);
+    glDepthMask (GL_FALSE);
+    glBlendFunc (GL_ONE, GL_ONE);
+    GLfloat mat_shininess[] = { 70.0 };
+    GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+    glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+}
+
+void OpenGLHelper::setMaterialStd(){
+    GLfloat material[4] = {1.0f,1.0f,1.0f,1.0f};
+    GLfloat mat_shininess[] = { 0.0f };
+    glDisable(GL_BLEND);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE,material);
+    glMaterialfv(GL_FRONT, GL_SHININESS,mat_shininess);
+}
+
 bool OpenGLHelper::mostrarError(){
     GLenum error = glGetError();
     if (error != GL_NO_ERROR)

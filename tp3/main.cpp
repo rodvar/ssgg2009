@@ -187,19 +187,18 @@ void generarLuzAmbiente(){
 void init(void)
 {
     // Variables asociadas a �nica fuente de luz de la escena
-
-    float material[3] = {1.0f,1.0f,1.0f};
 	dl_handle = glGenLists(3);
 
 	glClearColor (155.0f/256.0f, 196.0f/256.0f, 226.0f/256.0f, 0.0f);
     glShadeModel (GL_SMOOTH);
-    //glMaterialfv(GL_FRONT, GL_SPECULAR,material); NICO INVESTIGA ESTO!
     glEnable(GL_DEPTH_TEST);
 
-    // glLightModel q onda??
-//    generarLuzAmbiente();
     glEnable(GL_LIGHTING);
     glEnable(GL_COLOR_MATERIAL);
+    OpenGLHelper::setMaterialStd();
+
+    // glLightModel q onda??
+    // generarLuzAmbiente();
 
 	// Generacion de las Display Lists
 	recalcularDisplayLists();
