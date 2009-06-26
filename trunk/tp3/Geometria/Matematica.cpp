@@ -29,6 +29,12 @@ Coordenadas Matematica::calcularNormal(Coordenadas a, Coordenadas b){
     return c;
 }
 
+Coordenadas Matematica::calcularNormalReferencia(Coordenadas a, Coordenadas referencia){
+    Coordenadas normal = a - referencia;
+    normalizar(normal);
+    return normal;
+}
+
 Coordenadas Matematica::productoVectorial(Coordenadas a, Coordenadas b){
     float x = a.getY() * b.getZ() - a.getZ() * b.getY();
     float y = a.getZ() * b.getX() - a.getX() * b.getZ();
