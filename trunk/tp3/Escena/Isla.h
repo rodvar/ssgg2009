@@ -18,7 +18,9 @@ class Isla : public Dibujable
         Isla(const float altura);
         ~Isla();
 
-        /** Dibuja la isla como una superficie de acumulacion- **/
+        /** Dibuja la isla como una superficie de acumulacion a partir de una curva de
+         * nivel 0 que rodea el origen de coordenadas
+        **/
         void dibujar();
 
     private:
@@ -28,7 +30,6 @@ class Isla : public Dibujable
         /* Genera los puntos de control de la curva Base Bspline en los niveles primarios */
         std::vector<Coordenadas> generarCurvaNivel0();
 
-        void escalarPunto(Coordenadas& punto);
         void rotarPunto(Coordenadas& punto, float angulo);
 };
 

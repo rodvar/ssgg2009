@@ -15,12 +15,7 @@ Isla::~Isla()
     //dtor
 }
 
-//		glTranslatef(NULO,NULO, z);
-//		glRotatef(this->angulo, NULO, NULO, UNITARIO);
-//		glScalef((this->altura-z)/this->altura,(this->altura-z)/this->altura,UNITARIO);
 void Isla::dibujar(){
-//    float precisionZ = 10.0f;
-//    float deltaZ = this->altura/ precisionZ;
     PintorCurva pintor;
     std::vector<Coordenadas> puntosDesde = this->generarCurvaNivel0();
     std::vector<Coordenadas> puntosHasta = puntosDesde;
@@ -33,23 +28,14 @@ void Isla::dibujar(){
 			puntosDesde[i].setX(puntosHasta[i].getX());
 			puntosDesde[i].setY(puntosHasta[i].getY());
 			puntosDesde[i].setZ(puntosHasta[i].getZ());
-			escalarPunto(puntosHasta[i]);
-			rotarPunto(puntosHasta[i], angulo);
+			Matematica::escalarPunto(puntosHasta[i],0.95,0.90,UNITARIO);
+			rotarPunto(puntosHasta[i], angulo);// TODO: Esto esta rotando??
 			puntosHasta[i].setZ(puntosHasta[i].getZ()+z/10);
 		}
 		pintor.pintarGajo(puntosDesde,puntosHasta);
     }
-    glBegin(GL_TRIANGLE_FAN);
-		for(unsigned int i=0;i<puntosHasta.size();i++) {
-			glVertex3f(puntosHasta[i].getX(),puntosHasta[i].getY(),puntosHasta[i].getZ());
-		}
-    glEnd();
+    pintor.pintarSuperficie(puntosHasta);
     glPopMatrix();
-}
-
-void Isla::escalarPunto(Coordenadas& punto) {
-	punto.setX(punto.getX()*0.95);
-	punto.setY(punto.getY()*0.90);
 }
 
 void Isla::rotarPunto(Coordenadas& punto, float angulo) {
@@ -59,7 +45,7 @@ void Isla::rotarPunto(Coordenadas& punto, float angulo) {
 }
 
 std::vector<Coordenadas> Isla::generarCurvaNivel0(){
-    CalculadorBspline bspline(26);
+    CalculadorBspline bspline(4);
     std::vector<Coordenadas> puntos;
 	puntos.push_back(Coordenadas(0.0f,8.0f,0.0f));
     puntos.push_back(Coordenadas(4.0f,9.0f,0.0f));
