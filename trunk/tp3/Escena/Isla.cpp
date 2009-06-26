@@ -76,36 +76,3 @@ std::vector<Coordenadas> Isla::generarCurvaNivel0(){
     bspline.setControlPoints(puntos);
     return bspline.calcularPuntos();
 }
-
-//std::vector<Coordenadas> Isla::generarCurvaNivel1(){
-//    CalculadorBspline bspline(26);
-//    std::vector<Coordenadas> puntos;
-//    puntos.push_back(Coordenadas(0.0f,7.0f,0.15f));
-//    puntos.push_back(Coordenadas(3.0f,8.0f,0.15f));
-//    puntos.push_back(Coordenadas(4.0f,7.0f,0.15f));
-//    puntos.push_back(Coordenadas(3.0f,3.0f,0.15f));
-//    puntos.push_back(Coordenadas(8.0f,4.0f,0.15f));
-//    puntos.push_back(Coordenadas(9.0f,2.0f,0.15f));
-//    puntos.push_back(Coordenadas(6.0f,0.0f,0.15f));
-//    puntos.push_back(Coordenadas(6.0f,-2.0f,0.15f));
-//    puntos.push_back(Coordenadas(10.0f,-3.0f,0.15f));
-//    puntos.push_back(Coordenadas(7.0f,-5.0f,0.15f));
-//    puntos.push_back(Coordenadas(4.0f,-3.0f,0.15f));
-//    puntos.push_back(Coordenadas(2.0f,-4.0f,0.15f));
-//    puntos.push_back(Coordenadas(0.0f,-7.0f,0.15f));
-//    puntos.push_back(Coordenadas(-3.0f,-7.0f,0.15f));
-//    puntos.push_back(Coordenadas(-4.0f,-3.0f,0.15f));
-//    puntos.push_back(Coordenadas(-7.0f,-3.0f,0.15f));
-//    puntos.push_back(Coordenadas(-9.0f,-3.0f,0.15f));
-//    puntos.push_back(Coordenadas(-7.0f,-1.0f,0.15f));
-//    puntos.push_back(Coordenadas(-7.0f,1.0f,0.15f));
-//    puntos.push_back(Coordenadas(-5.0f,2.0f,0.15f));
-//    puntos.push_back(Coordenadas(-6.0f,4.0f,0.15f));
-//    puntos.push_back(Coordenadas(-5.0f,6.0f,0.15f));
-//    puntos.push_back(Coordenadas(-4.0f,8.0f,0.15f));
-//    puntos.push_back(Coordenadas(0.0f,7.0f,0.15f));
-//    puntos.push_back(Coordenadas(3.0f,8.0f,0.15f));
-//    puntos.push_back(Coordenadas(4.0f,7.0f,0.15f));
-//    bspline.setControlPoints(puntos);
-//    return bspline.calcularPuntos();
-//}

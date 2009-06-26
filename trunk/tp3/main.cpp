@@ -57,7 +57,10 @@ void recalcularDisplayLists(){
     glEndList();
     glNewList(DL_ISLA, GL_COMPILE); // Isla
         Isla isla(1.5f);
-        isla.dibujar();
+        glPushMatrix();
+            glTranslatef(NULO,NULO,0.001f);
+            isla.dibujar();
+        glPopMatrix();
     glEndList();
 }
 
