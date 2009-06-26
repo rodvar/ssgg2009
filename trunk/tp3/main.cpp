@@ -76,8 +76,8 @@ void Set3DEnv()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	gluLookAt (eye[0], eye[1], eye[2], at[0], at[1], at[2], up[0], up[1], up[2]);
-	glRotatef(anguloAlfa,0,0,1);
 	glRotatef(anguloFi,-1,1,0);
+	glRotatef(anguloAlfa,0,0,1);
 }
 
 void display(void)
