@@ -58,7 +58,7 @@ void recalcularDisplayLists(){
     glNewList(DL_ISLA, GL_COMPILE); // Isla
         Isla isla(1.5f);
         glPushMatrix();
-            glTranslatef(NULO,NULO,0.001f);
+            glTranslatef(NULO,NULO,0.1f);
             isla.dibujar();
         glPopMatrix();
     glEndList();
@@ -149,6 +149,12 @@ void keyboard (unsigned char key, int x, int y){
         case '-':
             zoom++;
             break;
+        case 'l':
+        	at[2] = at[2]+1;
+        	break;
+        case 'k':
+			at[2] = at[2]-1;
+			break;
         default:
             break;
     }

@@ -55,9 +55,9 @@ void Faro::iluminar(const float altura){
         glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
         glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
         glLightfv(GL_LIGHT1, GL_POSITION, light_position);
-        glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 15.0);
+        glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 45.0);
         glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light_direction);
-        glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 7.0f);
+        glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 30.0f);
 
 //        glMaterialfv(GL_FRONT, GL_EMISSION, mat_emissive);
 
@@ -76,7 +76,7 @@ void Faro::dibujar(){
 }
 
 void Faro::dibujarColumna(){
-    int precision = 30;
+    int precision = 10;
     float deltaAlfa = 360.0f/precision;
     float inclinacionInterna = atan(this->altura/0.25f*this->radioMax);
     float base = this->radioMax*sin(DOSPI/precision);

@@ -150,9 +150,9 @@ void OpenGLHelper::dibujarGrillaXY()
 	glColor3f(0.27, 0.44, 0.76);
 	glBegin(GL_QUADS);
 		bool switchear = true;
-		for(i=-20;i<21;i++) {
+		for(i=-200;i<210;i++) {
 			if(switchear) {
-				for(j=-20;j<21;j++) {
+				for(j=-200;j<210;j++) {
 					glNormal3f(0.0f,0.0f,1.0f);
 					glVertex3f(i,j,0.0);
 					glNormal3f(0.0f,0.0f,1.0f);
@@ -164,7 +164,7 @@ void OpenGLHelper::dibujarGrillaXY()
 				}
 				switchear=false;
 			} else {
-				for(j=20;j>=-20;j--) {
+				for(j=200;j>=-200;j--) {
 					glNormal3f(0.0f,0.0f,1.0f);
 					glVertex3f(i,j,0.0);
 					glNormal3f(0.0f,0.0f,1.0f);
