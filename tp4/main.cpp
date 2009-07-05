@@ -14,6 +14,7 @@ float anguloFi = 0.0;
 
 // Variables de control
 bool view_axis = false;
+bool esDia = true;
 
 // Altura base del faro
 #define ALTURA_FARO 9
@@ -145,6 +146,15 @@ void keyboard (unsigned char key, int x, int y){
         case '6':
         case '7':
             OpenGLLighter::switchIluminador(atoi((const char*)&key));
+            break;
+        case 'i': //Cambia de dia a noche y viceversa
+            if (esDia)
+                OpenGLLighter::generarLuzAmbienteNocturna();
+            else
+                OpenGLLighter::generarLuzAmbienteDiurna();
+            OpenGLLighter::switchIluminador(LUZ_FARO);
+            esDia = !esDia;
+            glutPostRedisplay();
             break;
         case 'a':
             view_axis = !view_axis;
