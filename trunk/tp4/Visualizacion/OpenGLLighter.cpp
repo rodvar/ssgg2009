@@ -106,7 +106,38 @@ void OpenGLLighter::generarLuzAmbiente(){
 }
 
 void OpenGLLighter::generarLuzAmbienteDiurna(){
-    // TODO: Implementar
+
+    GLfloat light_color[4] = {0.05f, 0.05f, 0.05f, 1.0f};
+    GLfloat sol_color[4] = {1.0f, 1.0f, 0.80f, 1.0f};
+    GLfloat light_ambient[4] = {0.05f, 0.05f, 0.05f, 1.0f}; //intensidad
+    GLfloat light_position0[4] = {100.0f, 100.0f, 100.0f, 1.0f};
+    GLfloat light_position1[4] = {-100.0f, 100.0f, 100.0f, 1.0f};
+    GLfloat light_position2[4] = {-100.0f, -100.0f, 100.0f, 1.0f};
+    GLfloat light_position3[4] = {100.0f, -100.0f, 100.0f, 1.0f};
+    GLfloat sol_position[4] = {0.0f, 0.0f, 100.0f, 1.0f};
+
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_color);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT0, GL_POSITION, light_position0);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, light_color);
+    glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
+    glLightfv(GL_LIGHT2, GL_DIFFUSE, light_color);
+    glLightfv(GL_LIGHT2, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT2, GL_POSITION, light_position2);
+    glLightfv(GL_LIGHT3, GL_DIFFUSE, light_color);
+    glLightfv(GL_LIGHT3, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT3, GL_POSITION, light_position3);
+    //Sol
+    glLightfv(GL_LIGHT7,GL_DIFFUSE,sol_color);
+    glLightfv(GL_LIGHT7, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT7, GL_POSITION, sol_position);
+
+    glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHT1);
+    glEnable(GL_LIGHT2);
+    glEnable(GL_LIGHT3);
+    glEnable(GL_LIGHT7);
 }
 void OpenGLLighter::generarLuzAmbienteNocturna(){
     // TODO: Implementar
