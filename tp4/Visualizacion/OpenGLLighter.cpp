@@ -81,10 +81,10 @@ void OpenGLLighter::generarLuzAmbiente(){
     // Le pongo max intensidad difusa para que se note dsede donde viene la luz ambiente
     GLfloat light_color[4] = {1.0f, 1.0f, 1.0f, 1.0f};
     GLfloat light_ambient[4] = {0.05f, 0.05f, 0.05f, 1.0f}; //intensidad
-    GLfloat light_position0[4] = {10.0f, 10.0f, 10.0f, -10.0f};
-    GLfloat light_position1[4] = {-10.0f, 10.0f, 10.0f, -10.0f};
-    GLfloat light_position2[4] = {-10.0f, -10.0f, 10.0f, -10.0f};
-    GLfloat light_position3[4] = {10.0f, -10.0f, 10.0f, -10.0f};
+    GLfloat light_position0[4] = {100.0f, 100.0f, 100.0f, 1.0f};
+    GLfloat light_position1[4] = {-100.0f, 100.0f, 100.0f, 1.0f};
+    GLfloat light_position2[4] = {-100.0f, -100.0f, 100.0f, 1.0f};
+    GLfloat light_position3[4] = {100.0f, -100.0f, 100.0f, 1.0f};
 
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_color);
     glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
