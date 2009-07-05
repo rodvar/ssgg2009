@@ -51,16 +51,14 @@ void Faro::iluminar(const float altura){
         GLfloat light_direction[] = { c.getX(), c.getY(), c.getZ() };
 //        GLfloat mat_emissive[] = { 0.2f, 0.1f, 0.1f, 0.0f }; //Color del brillo especular
 
-        glLightfv(GL_LIGHT1, GL_DIFFUSE, light_diffuse);
-        glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
-        glLightfv(GL_LIGHT1, GL_POSITION, light_position);
-        glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 45.0);
-        glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, light_direction);
-        glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 30.0f);
+        glLightfv(GL_LIGHT4, GL_DIFFUSE, light_diffuse);
+        glLightfv(GL_LIGHT4, GL_SPECULAR, light_specular);
+        glLightfv(GL_LIGHT4, GL_POSITION, light_position);
+        glLightf(GL_LIGHT4, GL_SPOT_CUTOFF, 45.0);
+        glLightfv(GL_LIGHT4, GL_SPOT_DIRECTION, light_direction);
+        glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 30.0f);
 
 //        glMaterialfv(GL_FRONT, GL_EMISSION, mat_emissive);
-
-        glEnable(GL_LIGHT1);
 
     glPopMatrix();
 

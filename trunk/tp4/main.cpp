@@ -1,4 +1,6 @@
 #include "Visualizacion/OpenGLHelper.h"
+#include "Visualizacion/OpenGLLighter.h"
+#include "Visualizacion/OpenGLSurfacer.h"
 #include "Escena/Faro.h"
 #include "Escena/Isla.h"
 
@@ -134,6 +136,16 @@ void keyboard (unsigned char key, int x, int y){
         case 0x1b: //ESC
             exit (0);
             break;
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+            OpenGLLighter::switchIluminador(atoi((const char*)&key));
+            break;
         case 'a':
             view_axis = !view_axis;
             glutPostRedisplay();
@@ -160,16 +172,6 @@ void keyboard (unsigned char key, int x, int y){
     }
 }
 
-void generarLuzAmbiente(){
-    float light_color[4] = {1.0f, 1.0f, 1.0f, 1.0f};
-    float light_ambient[4] = {0.05f, 0.05f, 0.05f, 1.0f}; //intensidad
-    float light_position[3] = {10.0f, 10.0f, 8.0f};
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_color);
-    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-    glEnable(GL_LIGHT0);
-}
-
 void init(void)
 {
     // Variables asociadas a �nica fuente de luz de la escena
@@ -181,10 +183,9 @@ void init(void)
 
     glEnable(GL_LIGHTING);
     glEnable(GL_COLOR_MATERIAL);
-    OpenGLHelper::setMaterialStd();
 
-    // glLightModel q onda??
-    generarLuzAmbiente();
+    OpenGLSurfacer::setPorDefecto();
+    OpenGLLighter::generarLuzAmbiente();
 
 	// Generacion de las Display Lists
 	recalcularDisplayLists();
