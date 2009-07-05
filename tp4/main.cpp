@@ -185,7 +185,7 @@ void init(void)
     glEnable(GL_COLOR_MATERIAL);
 
     OpenGLSurfacer::setPorDefecto();
-    OpenGLLighter::generarLuzAmbiente();
+    OpenGLLighter::generarLuzAmbienteDiurna();
 
 	// Generacion de las Display Lists
 	recalcularDisplayLists();

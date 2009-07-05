@@ -10,8 +10,10 @@
 class OpenGLSurfacer
 {
     public:
-        /* Valores posibles: [0,128] ; asociado al cosN(alfa)*/
-        static void setFactorFocalizacion(const float n) { OpenGLSurfacer::n=n; }
+        /** Esto configura como se reparte el brillo en una superficie
+         * @param n Valores posibles [0-128]
+         */
+        static void setFactorFocalizacion(const float n);
 
         /**
          * Configura el pipeline grafico con los valores por defecto de materiales
@@ -19,14 +21,14 @@ class OpenGLSurfacer
         static void setPorDefecto();
 
         /**
+         * Configura el material con un efecto de brillo como el de un metal
+         */
+        static void setMetal();
+
+        /**
          * Configura el material como translucido, util para dibujar vidio por ej
          */
         static void setTranslucido();
-
-
-
-    private:
-        static GLint n;
 };
 
 #endif // OPENGLSURFACER_H
