@@ -36,7 +36,7 @@ void OpenGLLighter::switchIluminador(const int i){
     static bool prendido4=false;
     static bool prendido5=false;
     static bool prendido6=false;
-    static bool prendido7=false;
+    static bool prendido7=true;
 
     switch (i){
         case 0:
@@ -106,32 +106,38 @@ void OpenGLLighter::generarLuzAmbiente(){
 }
 
 void OpenGLLighter::generarLuzAmbienteDiurna(){
-
+    GLfloat light_specular[4] = {0.0f, 0.0f, 0.0f, 1.0f};
     GLfloat light_color[4] = {0.05f, 0.05f, 0.05f, 1.0f};
-    GLfloat sol_color[4] = {1.0f, 1.0f, 0.80f, 1.0f};
     GLfloat light_ambient[4] = {0.05f, 0.05f, 0.05f, 1.0f}; //intensidad
-    GLfloat light_position0[4] = {100.0f, 100.0f, 100.0f, 1.0f};
-    GLfloat light_position1[4] = {-100.0f, 100.0f, 100.0f, 1.0f};
-    GLfloat light_position2[4] = {-100.0f, -100.0f, 100.0f, 1.0f};
-    GLfloat light_position3[4] = {100.0f, -100.0f, 100.0f, 1.0f};
-    GLfloat sol_position[4] = {0.0f, 0.0f, 100.0f, 1.0f};
+    GLfloat light_position0[4] = {200.0f, 200.0f, 1.0f, 1.0f};
+    GLfloat light_position1[4] = {-200.0f, 200.0f, 1.0f, 1.0f};
+    GLfloat light_position2[4] = {-200.0f, -200.0f, 1.0f, 1.0f};
+    GLfloat light_position3[4] = {200.0f, -200.0f, 1.0f, 1.0f};
+    GLfloat sol_color[4] = {1.0f, 1.0f, 0.80f, 1.0f};
+    GLfloat sol_ambient[4] = {0.1f, 0.1f, 0.1f, 1.0f}; //intensidad
+    GLfloat sol_position[4] = {0.0f, 0.0f, 10.0f, 0.0f}; // Luz del sol direccional
 
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_color);
     glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
     glLightfv(GL_LIGHT0, GL_POSITION, light_position0);
     glLightfv(GL_LIGHT1, GL_DIFFUSE, light_color);
     glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
     glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
     glLightfv(GL_LIGHT2, GL_DIFFUSE, light_color);
     glLightfv(GL_LIGHT2, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT2, GL_SPECULAR, light_specular);
     glLightfv(GL_LIGHT2, GL_POSITION, light_position2);
     glLightfv(GL_LIGHT3, GL_DIFFUSE, light_color);
     glLightfv(GL_LIGHT3, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT3, GL_SPECULAR, light_specular);
     glLightfv(GL_LIGHT3, GL_POSITION, light_position3);
     //Sol
     glLightfv(GL_LIGHT7,GL_DIFFUSE,sol_color);
-    glLightfv(GL_LIGHT7, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT7, GL_AMBIENT, sol_ambient);
     glLightfv(GL_LIGHT7, GL_POSITION, sol_position);
+    glLightfv(GL_LIGHT7, GL_SPECULAR, light_specular);
 
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHT1);
@@ -139,22 +145,58 @@ void OpenGLLighter::generarLuzAmbienteDiurna(){
     glEnable(GL_LIGHT3);
     glEnable(GL_LIGHT7);
 }
+
 void OpenGLLighter::generarLuzAmbienteNocturna(){
-    // TODO: Implementar
+    GLfloat light_specular[4] = {0.0f, 0.0f, 0.0f, 1.0f};
+    GLfloat light_color[4] = {0.2f*0.27f, 0.2f*0.44f, 0.2f*0.76f, 1.0f};
+    GLfloat light_ambient[4] = {0.01f, 0.01f, 0.01f, 1.0f}; //intensidad
+    GLfloat light_position0[4] = {200.0f, 200.0f, 1.0f, 1.0f};
+    GLfloat light_position1[4] = {-200.0f, 200.0f, 1.0f, 1.0f};
+    GLfloat light_position2[4] = {-200.0f, -200.0f, 1.0f, 1.0f};
+    GLfloat light_position3[4] = {200.0f, -200.0f, 1.0f, 1.0f};
+    GLfloat luna_color[4] = {1.0f, 1.0f, 1.0f, 1.0f};
+    GLfloat luna_ambient[4] = {0.0f, 0.0f, 0.0f, 1.0f}; //intensidad
+    GLfloat luna_position[4] = {0.0f, 0.0f, 10.0f, 0.0f}; // Luz del sol direccional
+    GLfloat luna_specular[4] = {1.0f, 1.0f, 1.0f, 1.0f}; // Luz del sol direccional
+
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_color);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+    glLightfv(GL_LIGHT0, GL_POSITION, light_position0);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, light_color);
+    glLightfv(GL_LIGHT1, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT1, GL_SPECULAR, light_specular);
+    glLightfv(GL_LIGHT1, GL_POSITION, light_position1);
+    glLightfv(GL_LIGHT2, GL_DIFFUSE, light_color);
+    glLightfv(GL_LIGHT2, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT2, GL_SPECULAR, light_specular);
+    glLightfv(GL_LIGHT2, GL_POSITION, light_position2);
+    glLightfv(GL_LIGHT3, GL_DIFFUSE, light_color);
+    glLightfv(GL_LIGHT3, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT3, GL_SPECULAR, light_specular);
+    glLightfv(GL_LIGHT3, GL_POSITION, light_position3);
+    //Sol
+    glLightfv(GL_LIGHT7,GL_DIFFUSE,luna_color);
+    glLightfv(GL_LIGHT7, GL_AMBIENT, luna_ambient);
+    glLightfv(GL_LIGHT7, GL_POSITION, luna_position);
+    glLightfv(GL_LIGHT7, GL_SPECULAR, luna_specular);
+
+    glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHT1);
+    glEnable(GL_LIGHT2);
+    glEnable(GL_LIGHT3);
+    glEnable(GL_LIGHT7);
 }
 
 void OpenGLLighter::generarLuzSpot(){
+    //TODO: Modificar y Utilizar para la unica luz spot de la escena
     GLfloat n = 30.0;
     GLfloat cutoff = 45;
     GLfloat light_ambient[4] = {0.2f, 0.2f, 0.2f, 1.0f};
     GLfloat light_color1[4] = {1.0f, 1.0f, 1.0f, 1.0f};
-    //GLfloat light_color2[4] = {1.0f, 0.0f, 1.0f, 1.0f};
     GLfloat light_specular1[4] = {1.0f, 1.0f, 1.0f, 1.0f}; //intensidad
-    //GLfloat light_specular2[4] = {1.0f, 1.0f, 1.0f, 1.0f}; //intensidad
     GLfloat light_position1[4] = {0.0f, 3.0f, 0.0f,1.0f};
-    //GLfloat light_position2[4] = {-10.0f, -10.0f, 0.0f,1.0f};
     GLfloat light_direccion1[4] = {0, -1, 0.0f, 1.0f};
-    //GLfloat light_direccion2[4] = {1, 1, 0.0f, 1.0f};
 
     glLightfv(GL_LIGHT4, GL_SPOT_EXPONENT,&n);
     glLightfv(GL_LIGHT4, GL_SPOT_CUTOFF,&cutoff);
@@ -163,12 +205,4 @@ void OpenGLLighter::generarLuzSpot(){
     glLightfv(GL_LIGHT4, GL_DIFFUSE, light_color1);
     glLightfv(GL_LIGHT4, GL_SPECULAR, light_specular1);
     glLightfv(GL_LIGHT4, GL_POSITION, light_position1);
-/*
-    glLightfv(GL_LIGHT5, GL_SPOT_EXPONENT,&n);
-    glLightfv(GL_LIGHT5, GL_SPOT_CUTOFF,&cutoff);
-    glLightfv(GL_LIGHT5, GL_SPOT_DIRECTION, light_direccion2);
-    glLightfv(GL_LIGHT4, GL_AMBIENT, light_ambient);
-    glLightfv(GL_LIGHT5, GL_DIFFUSE, light_color2);
-    glLightfv(GL_LIGHT5, GL_SPECULAR, light_specular2);
-    glLightfv(GL_LIGHT5, GL_POSITION, light_position2);*/
 }

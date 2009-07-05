@@ -146,37 +146,16 @@ void glVertex3fSoftNormal ( float x, float y, float z )
 
 void OpenGLHelper::dibujarGrillaXY()
 {
-	int i,j;
 	glColor3f(0.27, 0.44, 0.76);
 	glBegin(GL_QUADS);
-		bool switchear = true;
-		for(i=-200;i<210;i++) {
-			if(switchear) {
-				for(j=-200;j<210;j++) {
-					glNormal3f(0.0f,0.0f,1.0f);
-					glVertex3f(i,j,0.0);
-					glNormal3f(0.0f,0.0f,1.0f);
-					glVertex3f(i,j+1,0.0);
-					glNormal3f(0.0f,0.0f,1.0f);
-					glVertex3f(i+1,j+1,0.0);
-					glNormal3f(0.0f,0.0f,1.0f);
-					glVertex3f(i+1,j,0.0);
-				}
-				switchear=false;
-			} else {
-				for(j=200;j>=-200;j--) {
-					glNormal3f(0.0f,0.0f,1.0f);
-					glVertex3f(i,j,0.0);
-					glNormal3f(0.0f,0.0f,1.0f);
-					glVertex3f(i,j+1,0.0);
-					glNormal3f(0.0f,0.0f,1.0f);
-					glVertex3f(i+1,j+1,0.0);
-					glNormal3f(0.0f,0.0f,1.0f);
-					glVertex3f(i+1,j,0.0);
-				}
-				switchear=true;
-			}
-		}
+        for(int i=-200; i<=200; i++){
+            for(int j=-200; j<=200; j++){
+                glVertex3i(j, i ,0.0f);
+                glVertex3i(j+1 , i ,0.0f);
+                glVertex3i(j+1 , i+1 ,0.0f);
+                glVertex3i(j , i+1,0.0f);
+            }
+        }
 	glEnd();
 }
 

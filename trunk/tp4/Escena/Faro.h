@@ -3,6 +3,7 @@
 
 #include "../Visualizacion/Dibujable.h"
 
+#define LUZ_FARO 4
 #define PRECISION_COLUMNA 20.0
 #define PRECISION_CABINA ((int)((float)PRECISION_COLUMNA*17.0f/20.0f))
 
