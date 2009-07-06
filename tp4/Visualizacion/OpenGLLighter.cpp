@@ -156,8 +156,8 @@ void OpenGLLighter::generarLuzAmbienteNocturna(){
     GLfloat light_position3[4] = {200.0f, -200.0f, 1.0f, 1.0f};
     GLfloat luna_color[4] = {1.0f, 1.0f, 1.0f, 1.0f};
     GLfloat luna_ambient[4] = {0.0f, 0.0f, 0.0f, 1.0f}; //intensidad
-    GLfloat luna_position[4] = {0.0f, 0.0f, 10.0f, 0.0f}; // Luz del sol direccional
-    GLfloat luna_specular[4] = {1.0f, 1.0f, 1.0f, 1.0f}; // Luz del sol direccional
+    GLfloat luna_position[4] = {-60.0, -50.0, 7.0, 0.0f}; // Luz de luna
+    GLfloat luna_specular[4] = {1.0f, 1.0f, 1.0f, 1.0f}; //
 
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_color);
     glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
@@ -175,7 +175,7 @@ void OpenGLLighter::generarLuzAmbienteNocturna(){
     glLightfv(GL_LIGHT3, GL_AMBIENT, light_ambient);
     glLightfv(GL_LIGHT3, GL_SPECULAR, light_specular);
     glLightfv(GL_LIGHT3, GL_POSITION, light_position3);
-    //Sol
+    //Luna
     glLightfv(GL_LIGHT7,GL_DIFFUSE,luna_color);
     glLightfv(GL_LIGHT7, GL_AMBIENT, luna_ambient);
     glLightfv(GL_LIGHT7, GL_POSITION, luna_position);

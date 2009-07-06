@@ -94,10 +94,19 @@ void display(void)
 	Set3DEnv();
 	if (view_axis)
 		 glCallList(DL_AXIS);
-	glCallList(DL_GRID); // -->> TODO: Esto cuelga todo nic!!!
+	glCallList(DL_GRID);
 	//
 	///////////////////////////////////////////////////
 	// DIBUJAR //
+	if (!esDia){// dibujar luna
+        glPushMatrix();
+            glTranslatef (-60.0f, -50.0f, 7.0f);
+            OpenGLSurfacer::setLuna();
+            glutSolidSphere(1.0f, 16, 16);
+            OpenGLSurfacer::setPorDefecto();
+        glPopMatrix();
+	}
+
     glCallList(DL_FARO);
     glCallList(DL_ISLA);
     glPushMatrix();
