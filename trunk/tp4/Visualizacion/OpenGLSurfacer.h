@@ -26,6 +26,11 @@ class OpenGLSurfacer
         static void setMetal();
 
         /**
+         * Configura el material como si fuera la luna (material emisivo y con defectos
+         */
+        static void setLuna();
+
+        /**
          * Configura el material como translucido, util para dibujar vidio por ej
          */
         static void setTranslucido();

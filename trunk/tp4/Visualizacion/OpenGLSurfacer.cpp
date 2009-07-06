@@ -30,6 +30,19 @@ void OpenGLSurfacer::setMetal(){
 
 }
 
+void OpenGLSurfacer::setLuna(){
+    GLfloat no_mat[] = { 0.0, 0.0, 0.0, 1.0 };
+    GLfloat mat_diffuse[] = { 0.1, 0.5, 0.8, 1.0 };
+    GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+    GLfloat no_shininess[] = { 0.0 };
+    GLfloat mat_emission[] = {1.0, 1.0, 1.0, 0.0};
+    glMaterialfv(GL_FRONT, GL_AMBIENT, no_mat);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+    glMaterialfv(GL_FRONT, GL_SHININESS, no_shininess);
+    glMaterialfv(GL_FRONT, GL_EMISSION, mat_emission);
+}
+
 void OpenGLSurfacer::setTranslucido(){
     glEnable (GL_BLEND);
     glDepthMask (GL_FALSE);
