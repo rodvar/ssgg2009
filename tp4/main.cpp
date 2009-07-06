@@ -1,18 +1,12 @@
 #include "Visualizacion/OpenGLHelper.h"
 #include "Visualizacion/OpenGLLighter.h"
 #include "Visualizacion/OpenGLSurfacer.h"
+#include "Visualizacion/Camara.h"
 #include "Escena/Faro.h"
 #include "Escena/Isla.h"
 
-// Variables que controlan la ubicaci�n de la c�mara en la Escena 3D
-float eye[3] = {15.0, 15.0, 5.0};
-float at[3]  = { 0.0,  0.0, 0.0};
-float up[3]  = { 0.0,  0.0, 1.0};
-float zoom = 45.0;
-float anguloAlfa = 0.0;
-float anguloFi = 0.0;
-
 // Variables de control
+Camara camara;
 bool view_axis = false;
 bool esDia = true;
 
@@ -54,7 +48,7 @@ void recalcularDisplayLists(){
 	glNewList(DL_FARO, GL_COMPILE); // Faro
         Faro faro(ALTURA_FARO);
         glPushMatrix();
-            glScalef(0.5f,0.5f,0.5f); // esto tambien
+            glScalef(0.5f,0.5f,0.5f);
             faro.dibujar();
         glPopMatrix();
     glEndList();
@@ -77,13 +71,8 @@ void Set3DEnv()
     glMatrixMode (GL_PROJECTION);
     glLoadIdentity ();
     // Params: angulo de apertura de la lente / relacionHorizoVert / distancia min y max para q salga un obj
-    gluPerspective(zoom, (GLfloat) W_WIDTH/(GLfloat) W_HEIGHT, 0.10, 100.0);
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluLookAt (eye[0], eye[1], eye[2], at[0], at[1], at[2], up[0], up[1], up[2]);
-	glRotatef(anguloFi,-1,1,0);
-	glRotatef(anguloAlfa,0,0,1);
+    gluPerspective(camara.getZoom(), (GLfloat) W_WIDTH/(GLfloat) W_HEIGHT, 0.10, 100.0);
+    camara.preparar();
 }
 
 void display(void)
@@ -132,10 +121,10 @@ void mousePressed(int x,int y){
     int deltaX = x - ultimoX;
     int deltaY = y - ultimoY;
 
-    if (deltaX > 0) anguloAlfa += 0.50;
-    if (deltaX < 0) anguloAlfa += -0.50;
-    if (deltaY > 0) anguloFi += 0.50;
-    if (deltaY < 0) anguloFi += -0.50;
+    if (deltaX > 0) camara.incrementarRotacionXY(0.50f);
+    if (deltaX < 0) camara.incrementarRotacionXY(-0.50f);
+    if (deltaY > 0) camara.incrementarRotacionZ(0.50f);
+    if (deltaY < 0) camara.incrementarRotacionZ(-0.50f);
 
     ultimoX = x;
     ultimoY = y;
@@ -175,16 +164,16 @@ void keyboard (unsigned char key, int x, int y){
             glutPostRedisplay();
             break;
         case '+':
-            zoom--;
+            camara.incrementarZoom(-1);
             break;
         case '-':
-            zoom++;
+            camara.incrementarZoom(1);
             break;
         case 'l':
-        	at[2] = at[2]+1;
+        	camara.incrementarZVer(1);
         	break;
         case 'k':
-			at[2] = at[2]-1;
+			camara.incrementarZVer(-1);
 			break;
         default:
             break;
