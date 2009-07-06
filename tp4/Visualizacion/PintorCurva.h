@@ -27,7 +27,7 @@ class PintorCurva
          * @brief Pinta la superficie que forma el contorno de la curva cerrada pasada
          * @param puntos Los puntos que delimitan la curva cerrada
          */
-        void pintarSuperficie(std::vector<Coordenadas> &puntos);
+        void pintarSuperficie(std::vector<Coordenadas> &puntos, Coordenadas referencia);
 
         /**
          * @brief Dibuja la superficie que encierran ambas curvas. Toma como normal la perpendicular

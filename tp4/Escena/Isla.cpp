@@ -34,7 +34,7 @@ void Isla::dibujar(){
 		}
 		pintor.pintarGajo(puntosDesde,puntosHasta,Coordenadas());
     }
-    pintor.pintarSuperficie(puntosHasta);
+    pintor.pintarSuperficie(puntosHasta,Coordenadas());
     glPopMatrix();
 }
 
