@@ -1,19 +1,9 @@
 #include "OpenGLHelper.h"
 #include <iostream>
 
-OpenGLHelper::OpenGLHelper()
-{
-    //ctor
-}
-
-OpenGLHelper::~OpenGLHelper()
-{
-    //dtor
-}
-
-
 void OpenGLHelper::dibujarRecta(float longitud){
     glBegin(GL_LINES);
+        glNormal3f(NULO,NULO,UNITARIO);
         glVertex3f(0.0f,0.0f,0.0f);
         glVertex3f(0.0f,0.0f,longitud);
     glEnd();
@@ -21,6 +11,7 @@ void OpenGLHelper::dibujarRecta(float longitud){
 
 void OpenGLHelper::dibujarRectangulo(const float base, const float altura){
     glBegin(GL_QUADS);
+        glNormal3f(NULO,NULO,UNITARIO);
         glVertex3f(0.0f,0.0f,0.0f);
         glVertex3f(base,0.0f,0.0f);
         glVertex3f(base,altura,0.0f);
@@ -42,10 +33,10 @@ void OpenGLHelper::dibujarCurva(std::list<Coordenadas> discretizacion){
     glEnd();
 }
 
-void OpenGLHelper::dibujarCircunferencia(const float paso){
-    float radio = 1.0f;
+void OpenGLHelper::dibujarCircunferencia(const float paso,const float radio){
     float x,y;
     glBegin(GL_LINE_STRIP);
+        glNormal3f(NULO,NULO,UNITARIO);
         for(float alfa = 0.0f; alfa < DOSPI; alfa += paso){
             x = radio * cos(alfa);
             y = radio * sin(alfa);
@@ -54,10 +45,10 @@ void OpenGLHelper::dibujarCircunferencia(const float paso){
     glEnd();
 }
 
-void OpenGLHelper::dibujarCirculo(const float paso){
-    float radio = 1.0f;
+void OpenGLHelper::dibujarCirculo(const float paso, const float radio){
     float x,y;
     glBegin(GL_TRIANGLE_FAN);
+        glNormal3f(NULO,NULO,UNITARIO);
         glVertex3f(0.0f,0.0f,0.0f);
         for(float alfa = 0.0f; alfa < DOSPI; alfa += paso){
             x = radio * cos(alfa);
@@ -68,31 +59,35 @@ void OpenGLHelper::dibujarCirculo(const float paso){
     glEnd();
 }
 
-void OpenGLHelper::dibujarCilindro(const float precision){
+void OpenGLHelper::dibujarCilindro(const float precision,const float radioBase,
+                                    const float radioTapa, const float altura){
     GLUquadricObj* quadric = gluNewQuadric();
-    gluCylinder(quadric, UNITARIO, UNITARIO, UNITARIO , precision, precision);
+    gluCylinder(quadric, radioBase, radioTapa, altura , precision, precision);
     gluDeleteQuadric(quadric);
 }
 
-void OpenGLHelper::dibujarAbanico(const float paso){
-    const float radio = UNITARIO;
+void OpenGLHelper::dibujarAbanico(const float paso, const float radio){
     unsigned short int tamano = (int)(DOSPI/paso + 1);
     Coordenadas puntos[tamano];
+    Coordenadas norma;
     Matematica::discretizarCircunferencia(puntos, radio, paso, NULO);
 
     glBegin(GL_TRIANGLE_FAN);
+        glNormal3f(NULO,NULO,UNITARIO);
         glVertex3f(0.0f,0.0f,0.0f);
-        for (int j =0; j < tamano; j++)
+        for (int j =0; j < tamano; j++){
+            norma = puntos[j];
+            Matematica::normalizar(norma);
+            glNormal3f(norma.getX(),norma.getY(),norma.getZ());
             glVertex3f(puntos[j].getX(), puntos[j].getY(), 0.0f);
+        }
         glVertex3f(puntos[0].getX(), puntos[0].getY(), 0.0f);
     glEnd();
 }
 
-void OpenGLHelper::dibujarSamba(const float precision){
+void OpenGLHelper::dibujarSamba(const float precision, const float radio, const float altura){
     float deltaAlfa = 360.0f/precision;
     float base = sin(DOSPI/precision);
-    float radio = 1.0f;
-    float altura = 1.0f;
     Coordenadas normal1 = Matematica::calcularNormal(Coordenadas(1,0,0),-deltaAlfa);
     Coordenadas normal2 = Matematica::calcularNormal(Coordenadas(1,0,0),deltaAlfa);
 
@@ -110,7 +105,7 @@ void OpenGLHelper::dibujarSamba(const float precision){
         glPopMatrix();
     }
     glPushMatrix();
-        OpenGLHelper::dibujarAbanico(0.20f*radio);
+        OpenGLHelper::dibujarAbanico(0.20f*radio,UNITARIO);
     glPopMatrix();
 }
 
@@ -137,17 +132,11 @@ void OpenGLHelper::dibujarEjes()
 	glEnable(GL_LIGHTING);
 }
 
-void glVertex3fSoftNormal ( float x, float y, float z )
-{
-  const float len = sqrt ( ( x * x ) + ( y * y ) + ( z * z ) );
-  glNormal3f ( x / len, y / len, z / len );
-  glVertex3f ( x, y, z );
-}
-
 void OpenGLHelper::dibujarGrillaXY()
 {
 	glColor3f(0.27, 0.44, 0.76);
 	glBegin(GL_QUADS);
+        glNormal3f(NULO,NULO,UNITARIO);
         for(int i=-200; i<=200; i++){
             for(int j=-200; j<=200; j++){
                 glVertex3i(j, i ,0.0f);
@@ -163,24 +152,6 @@ void OpenGLHelper::cambiarModoPoligonos(){
     static GLenum mode = GL_FILL;
     (mode == GL_FILL) ? mode = GL_LINE : mode = GL_FILL;
     glPolygonMode( GL_FRONT_AND_BACK, mode);
-}
-
-void OpenGLHelper::setMaterialEspejado(){
-    glEnable (GL_BLEND);
-    glDepthMask (GL_FALSE);
-    glBlendFunc (GL_ONE, GL_ONE);
-    GLfloat mat_shininess[] = { 70.0 };
-    GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-    glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
-}
-
-void OpenGLHelper::setMaterialStd(){
-    GLfloat material[4] = {1.0f,1.0f,1.0f,1.0f};
-    GLfloat mat_shininess[] = { 0.0f };
-    glDisable(GL_BLEND);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE,material);
-    glMaterialfv(GL_FRONT, GL_SHININESS,mat_shininess);
 }
 
 bool OpenGLHelper::mostrarError(){
