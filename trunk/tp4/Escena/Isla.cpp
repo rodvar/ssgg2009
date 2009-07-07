@@ -19,18 +19,20 @@ void Isla::dibujar(){
     PintorCurva pintor;
     std::vector<Coordenadas> puntosDesde = this->generarCurvaNivel0();
     std::vector<Coordenadas> puntosHasta = puntosDesde;
+    int pasoZ = 6;
+    float angulo;
 
     glPushMatrix();
     glColor3f(0.8,0.72,0.62);
-    for(float z = NULO; z <= 5; z++){
-    	float angulo = z+1;
+    for(float z = NULO; z <= this->altura; z+=this->altura/pasoZ){
+    	angulo = 1.0f+z;
 		for(unsigned int i=0;i<puntosDesde.size();i++) {
 			puntosDesde[i].setX(puntosHasta[i].getX());
 			puntosDesde[i].setY(puntosHasta[i].getY());
 			puntosDesde[i].setZ(puntosHasta[i].getZ());
 			Matematica::escalarPunto(puntosHasta[i],0.95,0.90,UNITARIO);
-			rotarPunto(puntosHasta[i], angulo);// TODO: Esto esta rotando??
-			puntosHasta[i].setZ(puntosHasta[i].getZ()+z/10);
+			rotarPunto(puntosHasta[i], angulo);
+			puntosHasta[i].setZ(puntosHasta[i].getZ()+z);
 		}
 		pintor.pintarGajo(puntosDesde,puntosHasta,Coordenadas());
     }

@@ -5,6 +5,7 @@ Camara::Camara()
 {
     this->setVistaStd();
     this->zoom = 45.0;
+    this->rotacionDesdeOjo = false;
 }
 
 void Camara::incrementarRotacionXY(const float incremento){
@@ -43,8 +44,19 @@ void Camara::preparar(){
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	gluLookAt (eye[0], eye[1], eye[2], at[0], at[1], at[2], up[0], up[1], up[2]);
+
+    /*
+    glRotated(roll, 0.0, 0.0, 1.0);
+      glRotated(pitch, 0.0, 1.0, 0.0);  probar esto
+      glRotated(heading, 1.0, 0.0, 0.0);
+    */
+	if (this->rotacionDesdeOjo)
+        glTranslated(eye[0], eye[1], eye[2]);
+    // TODO: Calcular el ejeRotacion de acuerdo a la posicion del ojo!!! :)
 	glRotatef(anguloZ,ejeRotacionZ[0],ejeRotacionZ[1],ejeRotacionZ[2]);
 	glRotatef(anguloXY,ejeRotacionXY[0],ejeRotacionXY[1],ejeRotacionXY[2]);
+	if (this->rotacionDesdeOjo)
+        glTranslated(-eye[0], -eye[1], -eye[2]);
 }
 
 void Camara::setVistaStd(){
@@ -65,10 +77,14 @@ void Camara::setVistaStd(){
     this->ejeRotacionZ[2] = 0;
     this->anguloXY = 0.0;
     this->anguloZ = 0.0;
+    this->rotacionDesdeOjo = false;
 }
 
 void Camara::setVistaBalconFaro(){
     // TODO
+    this->anguloXY = 0.0;
+    this->anguloZ = 0.0;
+    this->rotacionDesdeOjo = true;
 }
 
 void Camara::setVistaBaseIsla(){
@@ -82,7 +98,6 @@ void Camara::setVistaBaseIsla(){
     this->up[0] = 0.0f;
     this->up[1] = 0.0f;
     this->up[2] = 1.0f;
-    // TODO: revisar, no gira bien
     this->ejeRotacionXY[0] = posicion[0];
     this->ejeRotacionXY[1] = posicion[1];
     this->ejeRotacionXY[2] = posicion[2];
@@ -91,11 +106,12 @@ void Camara::setVistaBaseIsla(){
     this->ejeRotacionZ[2] = posicion[2];
     this->anguloXY = 0.0;
     this->anguloZ = 0.0;
+    this->rotacionDesdeOjo = true;
 }
 
 void Camara::setVistaAguaLejos(){
     this->eye[0] = 60.0f;
-    this->eye[1] = 0.0f;
+    this->eye[1] = 60.0f;
     this->eye[2] = 0.5f;
     this->at[0] = 0.0f;
     this->at[1] = 0.0f;
@@ -111,4 +127,5 @@ void Camara::setVistaAguaLejos(){
     this->ejeRotacionZ[2] = 0;
     this->anguloXY = 0.0;
     this->anguloZ = 0.0;
+    this->rotacionDesdeOjo = false;
 }
