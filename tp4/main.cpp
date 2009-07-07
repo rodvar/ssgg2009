@@ -11,7 +11,9 @@ bool view_axis = false;
 bool esDia = true;
 
 // Altura base del faro
-#define ALTURA_FARO 9
+#define ALTURA_FARO         5.00f
+#define ALTURA_CLAVADO_FARO 0.75f
+#define ALTURA_ISLA         0.30f
 
 // Handle para el control de las Display Lists
 GLuint dl_handle;
@@ -36,29 +38,32 @@ GLfloat window_size[2];
 #define HEIGHT_VIEW_POSY	((int)((float)W_HEIGHT*0.40f))
 #define HEIGHT_VIEW_H		((int)((float)W_HEIGHT*0.30f))
 
+/* Activa el NORMALIZE de OpenGL solo para las DisplayList */
 void recalcularDisplayLists(){
-    glDeleteLists(dl_handle,3);
-    dl_handle = glGenLists(3);
-    glNewList(DL_AXIS, GL_COMPILE);
-		OpenGLHelper::dibujarEjes();
-	glEndList();
-    glNewList(DL_GRID, GL_COMPILE);
-		OpenGLHelper::dibujarGrillaXY(); // Mar
-	glEndList();
-	glNewList(DL_FARO, GL_COMPILE); // Faro
-        Faro faro(ALTURA_FARO);
-        glPushMatrix();
-            glScalef(0.5f,0.5f,0.5f);
-            faro.dibujar();
-        glPopMatrix();
-    glEndList();
-    glNewList(DL_ISLA, GL_COMPILE); // Isla
-        Isla isla(1.5f);
-        glPushMatrix();
-            glTranslatef(NULO,NULO,0.1f);
-            isla.dibujar();
-        glPopMatrix();
-    glEndList();
+    glEnable(GL_NORMALIZE);
+        glDeleteLists(dl_handle,3);
+        dl_handle = glGenLists(3);
+        glNewList(DL_AXIS, GL_COMPILE);
+            OpenGLHelper::dibujarEjes();
+        glEndList();
+        glNewList(DL_GRID, GL_COMPILE);
+            OpenGLHelper::dibujarGrillaXY(); // Mar
+        glEndList();
+        glNewList(DL_FARO, GL_COMPILE); // Faro
+            Faro faro(ALTURA_FARO);
+            glPushMatrix();
+                glTranslatef(NULO,NULO,ALTURA_CLAVADO_FARO);
+                faro.dibujar();
+            glPopMatrix();
+        glEndList();
+        glNewList(DL_ISLA, GL_COMPILE); // Isla
+            Isla isla(ALTURA_ISLA);
+            glPushMatrix();
+                glTranslatef(NULO,NULO,0.1f); //correccion evita mescla texturas
+                isla.dibujar();
+            glPopMatrix();
+        glEndList();
+    glDisable(GL_NORMALIZE);
 }
 
 void OnIdle (void){
@@ -99,6 +104,7 @@ void display(void)
     glCallList(DL_FARO);
     glCallList(DL_ISLA);
     glPushMatrix();
+        glTranslatef(NULO,NULO,ALTURA_CLAVADO_FARO);
         Faro::iluminar(ALTURA_FARO);
     glPopMatrix();
 	glutSwapBuffers();

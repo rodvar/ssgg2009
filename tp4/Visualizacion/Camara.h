@@ -47,6 +47,7 @@ class Camara
 
     private:
         // Variables que controlan la ubicaci�n de la c�mara en la Escena 3D
+        bool rotacionDesdeOjo; // True si rota alrededor del ojo, false para rotar respecto "at"
         float eye[3];
         float at[3];
         float up[3];

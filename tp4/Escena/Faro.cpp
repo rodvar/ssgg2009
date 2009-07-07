@@ -1,5 +1,6 @@
 #include "Faro.h"
 #include "../Visualizacion/OpenGLHelper.h"
+#include "../Visualizacion/OpenGLSurfacer.h"
 #include "../Visualizacion/PintorCurva.h"
 #include "../Geometria/CalculadorBezier.h"
 
@@ -37,11 +38,11 @@ void Faro::iluminar(const float altura){
         OpenGLHelper::dibujarSamba(PRECISION_COLUMNA);
 
 //        Coordenadas c = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,150);
-        /*OpenGLHelper::setMaterialEspejado();//Vidrio del foco de iluminacion
+        OpenGLSurfacer::setTranslucido();//Vidrio del foco de iluminacion
         glPushMatrix();
-            OpenGLHelper::dibujarCirculo(precision);
+            OpenGLHelper::dibujarCirculo(10);
         glPopMatrix();
-        OpenGLHelper::setMaterialStd();*/
+        OpenGLSurfacer::setPorDefecto();
 
         Coordenadas c = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,135);
 
