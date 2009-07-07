@@ -34,17 +34,12 @@ class Faro : public Dibujable
 
         /**
          * @brief Dibuja el foco luminoso del faro y lo rota en cada llamada
-         * @param altura La altura del faro
          */
-        static void iluminar(const float altura);
+        static void iluminar();
 
         /* Dibuja el faro en el origen de coordenadas*/
         void dibujar();
     private:
-        double altura;
-        float radioMin;
-        float radioMax;
-
         /* Dibuja el cuerpo del faro como una superficie de revolucion */
         void dibujarColumna();
         /* Dibuja la cabina concibiendo esta como el ventanal + el foco emisor de luz
@@ -52,6 +47,11 @@ class Faro : public Dibujable
         void dibujarCabina();
         /* Dibuja el sombrero que cerra la cabeza del faro usando superficies de revolucion y acumulacion*/
         void dibujarSombrero();
+
+
+        static float altura;
+        float radioMin;
+        float radioMax;
 
 };
 
