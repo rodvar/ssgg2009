@@ -25,15 +25,33 @@ class Camara
         void incrementarZVer(const float incremento);
 
         /**
-         * Configura la camara para tomar imagenes de acuerdo a los parametros actuales
+         * @brief Configura la camara para tomar imagenes de acuerdo a los parametros actuales
          */
         void preparar();
+
+        /**
+         * @brief Cambia entre las 4 vistas posibles:
+            0- VistaAerea
+            1- BalconFaro
+            2- BaseIsla
+            3- AguaLejos
+         */
+        void switchVista();
+
+    private:
+        /* Setters para las 4 configuraciones de vista*/
+        void setVistaStd();
+        void setVistaBalconFaro();
+        void setVistaBaseIsla();
+        void setVistaAguaLejos();
 
     private:
         // Variables que controlan la ubicaci�n de la c�mara en la Escena 3D
         float eye[3];
         float at[3];
         float up[3];
+        float ejeRotacionXY[3];
+        float ejeRotacionZ[3];
         float zoom;
         float anguloXY;
         float anguloZ;

@@ -145,6 +145,9 @@ void keyboard (unsigned char key, int x, int y){
         case '7':
             OpenGLLighter::switchIluminador(atoi((const char*)&key));
             break;
+        case 'c':
+            camara.switchVista();
+            break;
         case 'i': //Cambia de dia a noche y viceversa
             if (esDia)
                 OpenGLLighter::generarLuzAmbienteNocturna();
