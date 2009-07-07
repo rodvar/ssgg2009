@@ -60,6 +60,20 @@ void Faro::iluminar(){
 
     glPopMatrix();
 
+    OpenGLSurfacer::setTranslucido();
+    GLUquadric* quadric = gluNewQuadric();
+    gluQuadricTexture(quadric, true);
+    glPushMatrix();
+		glTranslatef(NULO,NULO,getAlturaFoco());
+		glRotatef(rotacionZ,NULO,NULO,UNITARIO);
+		glRotatef(110,NULO,-UNITARIO,NULO);
+		glPushMatrix();
+			gluCylinder(quadric, 0, 3, 30, 20, 20);
+		glPopMatrix();
+	glPopMatrix();
+	gluDeleteQuadric(quadric);
+	OpenGLSurfacer::setPorDefecto();
+
     if (rotacionZ == 360)
         rotacionZ = 0;
 }
