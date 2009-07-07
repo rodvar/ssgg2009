@@ -105,7 +105,7 @@ void display(void)
     glCallList(DL_ISLA);
     glPushMatrix();
         glTranslatef(NULO,NULO,ALTURA_CLAVADO_FARO);
-        Faro::iluminar(ALTURA_FARO);
+        Faro::iluminar();
     glPopMatrix();
 	glutSwapBuffers();
 }

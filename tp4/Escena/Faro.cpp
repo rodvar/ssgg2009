@@ -4,6 +4,8 @@
 #include "../Visualizacion/PintorCurva.h"
 #include "../Geometria/CalculadorBezier.h"
 
+float Faro::altura = UNITARIO;
+
 Faro::Faro(const float altura)
 {
     this->altura = altura;
@@ -15,7 +17,7 @@ Faro::~Faro(){}
 
 float Faro::getAlturaFoco(){
     float largoBarrote = 0.75f*UNITARIO*sin(DOSPI/PRECISION_CABINA);
-    return ((0.75f*UNITARIO + largoBarrote/2) + 4.20f);
+    return (1.10f*altura + largoBarrote/2);
 }
 
 float Faro::getLargoCabina(){
@@ -23,34 +25,31 @@ float Faro::getLargoCabina(){
 }
 
 
-void Faro::iluminar(const float altura){
+void Faro::iluminar(){
     static int rotacionZ = NULO;
 //    float z = altura + getAlturaFoco();
     float largo = getLargoCabina()*2;
+    Coordenadas direccionIluminada;
+
     glColor3f(UNITARIO,UNITARIO,UNITARIO);
     glPushMatrix();
 		glTranslatef(NULO,NULO,getAlturaFoco());
-//		glTranslatef(NULO,NULO,getAlturaFoco());
 		glScalef(0.5f,0.5f,0.5f);
         glRotatef(++rotacionZ,NULO,NULO,UNITARIO);
         glRotatef(95,NULO,UNITARIO,NULO);
         glScalef(largo,largo,largo/2);
         OpenGLHelper::dibujarSamba(PRECISION_COLUMNA);
 
-//        Coordenadas c = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,150);
         OpenGLSurfacer::setTranslucido();//Vidrio del foco de iluminacion
-        glPushMatrix();
-            OpenGLHelper::dibujarCirculo(10);
-        glPopMatrix();
+        OpenGLHelper::dibujarCirculo(10);
         OpenGLSurfacer::setPorDefecto();
 
-        Coordenadas c = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,135);
+        direccionIluminada = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,135);
 
         GLfloat light_diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
         GLfloat light_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
         GLfloat light_position[] = { 0.05f, 0.05f, getAlturaFoco()-0.05f, 1.0f };
-        GLfloat light_direction[] = { c.getX(), c.getY(), c.getZ() };
-//        GLfloat mat_emissive[] = { 0.2f, 0.1f, 0.1f, 0.0f }; //Color del brillo especular
+        GLfloat light_direction[] = { direccionIluminada.getX(), direccionIluminada.getY(), direccionIluminada.getZ() };
 
         glLightfv(GL_LIGHT4, GL_DIFFUSE, light_diffuse);
         glLightfv(GL_LIGHT4, GL_SPECULAR, light_specular);
@@ -58,8 +57,6 @@ void Faro::iluminar(const float altura){
         glLightf(GL_LIGHT4, GL_SPOT_CUTOFF, 45.0);
         glLightfv(GL_LIGHT4, GL_SPOT_DIRECTION, light_direction);
         glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 30.0f);
-
-//        glMaterialfv(GL_FRONT, GL_EMISSION, mat_emissive);
 
     glPopMatrix();
 
