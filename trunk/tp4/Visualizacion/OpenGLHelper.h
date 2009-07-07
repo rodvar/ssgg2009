@@ -7,16 +7,14 @@
 #include "../Geometria/Matematica.h"
 
 /**
- * @brief Esta clase funciona como wrapper de la libreria grafica OpenGL. Su funcionalidad
- * es bridar 'primitivas' sencillas que permitan modelar dibujos complejos. Todos los dibujos
- * se realizan con centro en el origen
+ * @brief Esta clase funciona como wrapper de la libreria grafica OpenGL(extension GLUT)
+ * Su funcionalidad es bridar 'primitivas' sencillas que permitan modelar dibujos complejos.
+ * Todos los dibujos se realizan con base en el origen. La normal es siempre Z+ a menos que
+ * se especifique una.
  */
 class OpenGLHelper
 {
     public:
-        OpenGLHelper();
-        ~OpenGLHelper();
-
         /**
          * @brief Dibuja una recta desde el punto (0,0,0) hasta el punto (0,0,longitud)
          */
@@ -43,31 +41,36 @@ class OpenGLHelper
         /**
          * @brief Dibuja una circunferencia unitaria en el origen
          * @param paso Es el paso de discretizacion medido en radianes (menor a 2PI)
+         * @param radio El radio del a circunferencia
          */
-        static void dibujarCircunferencia(const float paso);
+        static void dibujarCircunferencia(const float paso, const float radio);
 
         /**
          * @see OpenGLHelper::dibujarCircuenferencia
          * @brief Idem dibujarCircunferencia pero pinta la superficie que encierra
          */
-        static void dibujarCirculo(const float paso);
+        static void dibujarCirculo(const float paso, const float radio);
 
         /**
-         * @brief Dibuja un cilindro unitario en el origen con la precision dada
+         * @brief Dibuja un cilindro unitario con base en el origen con la precision dada
          */
-        static void dibujarCilindro(const float precision);
+        static void dibujarCilindro(const float precision, const float radioBase,
+                                        const float radioTapa, const float altura);
 
         /**
          * @brief Dibuja un abanico unitario abierto de par en par
          * @param paso el ancho maximo de sus hastas en radianes
+         * @param radio El radio maximo del abanico
          */
-        static void dibujarAbanico(const float paso);
+        static void dibujarAbanico(const float paso, const float radio);
 
         /**
          * @brief Dibuja la forma del clasico juego de parque de diversiones con medidas unitarias
+         *        Las normales son todas salientes, y en la interseccion el promedio
          * @param precision La cantidad de gajos que se quieren
+         * @param radio El radio maximo del abanico
          */
-        static void dibujarSamba(const float precision);
+        static void dibujarSamba(const float precision, const float radio, const float altura);
 
         /**
          * Dibuja los ejes cartesianos x,y,z
@@ -83,16 +86,6 @@ class OpenGLHelper
          * Hace el switch entre modo SOLIDO y modo "ALAMBRE" para el dibujado de poligonos
          */
         static void cambiarModoPoligonos();
-
-        /**
-         * Configura el pipeline grafico para dibujar materiales translucidos
-         */
-        static void setMaterialEspejado();
-
-        /**
-         * Setea la configuracion estandart de materiales
-         */
-        static void setMaterialStd();
 
         /**
          * @brief Muestra si hubo algun error en el pipeline grafico por pantalla
