@@ -73,7 +73,7 @@ void OpenGLHelper::dibujarAbanico(const float paso, const float radio){
     Matematica::discretizarCircunferencia(puntos, radio, paso, NULO);
 
     glBegin(GL_TRIANGLE_FAN);
-        glNormal3f(NULO,NULO,UNITARIO);
+        glNormal3f(NULO,NULO,-UNITARIO);
         glVertex3f(0.0f,0.0f,0.0f);
         for (int j =0; j < tamano; j++){
             norma = puntos[j];
@@ -105,7 +105,7 @@ void OpenGLHelper::dibujarSamba(const float precision, const float radio, const 
         glPopMatrix();
     }
     glPushMatrix();
-        OpenGLHelper::dibujarAbanico(0.20f*radio,UNITARIO);
+        OpenGLHelper::dibujarAbanico(0.25*radio,radio);
     glPopMatrix();
 }
 
