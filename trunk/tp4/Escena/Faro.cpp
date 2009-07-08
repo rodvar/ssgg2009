@@ -26,22 +26,20 @@ float Faro::getLargoCabina(){
 
 
 void Faro::iluminar(){
-    static int rotacionZ = NULO;
+    static int rotacionZ = 180;
 //    float z = altura + getAlturaFoco();
-    float largo = getLargoCabina()*2;
+//    float largo = getLargoCabina()*2;
     Coordenadas direccionIluminada;
 
     glColor3f(UNITARIO,UNITARIO,UNITARIO);
     glPushMatrix();
 		glTranslatef(NULO,NULO,getAlturaFoco());
-		glScalef(0.5f,0.5f,0.5f);
         glRotatef(++rotacionZ,NULO,NULO,UNITARIO);
-        glRotatef(95,NULO,UNITARIO,NULO);
-        glScalef(largo,largo,largo/2);
-        OpenGLHelper::dibujarSamba(PRECISION_COLUMNA,UNITARIO,UNITARIO);
+        glRotatef(-95,NULO,UNITARIO,NULO);
 
+        OpenGLHelper::dibujarSamba(PRECISION_COLUMNA,UNITARIO/3,UNITARIO/3);
         OpenGLSurfacer::setTranslucido();//Vidrio del foco de iluminacion
-        OpenGLHelper::dibujarCirculo(10,UNITARIO);
+			OpenGLHelper::dibujarCirculo(10,UNITARIO/5);
         OpenGLSurfacer::setPorDefecto();
 
         direccionIluminada = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,135);
@@ -61,17 +59,12 @@ void Faro::iluminar(){
     glPopMatrix();
 
     OpenGLSurfacer::setTranslucido();
-    GLUquadric* quadric = gluNewQuadric();
-    gluQuadricTexture(quadric, true);
     glPushMatrix();
 		glTranslatef(NULO,NULO,getAlturaFoco());
 		glRotatef(rotacionZ,NULO,NULO,UNITARIO);
 		glRotatef(110,NULO,-UNITARIO,NULO);
-		glPushMatrix();
-			gluCylinder(quadric, 0, 3, 30, 20, 20);
-		glPopMatrix();
+		OpenGLHelper::dibujarCilindro(20, 0, 3, 30);
 	glPopMatrix();
-	gluDeleteQuadric(quadric);
 	OpenGLSurfacer::setPorDefecto();
 
     if (rotacionZ == 360)
