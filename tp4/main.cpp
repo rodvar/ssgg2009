@@ -18,10 +18,9 @@ bool esDia = true;
 // Handle para el control de las Display Lists
 GLuint dl_handle;
 #define DL_AXIS (dl_handle+0)
-#define DL_GRID (dl_handle+1)
+#define DL_DOME (dl_handle+1)
 #define DL_FARO (dl_handle+2)
 #define DL_ISLA (dl_handle+3)
-//#define DL_OTHER (dl_handle+4)
 
 // Tama�o de la ventana
 GLfloat window_size[2];
@@ -40,14 +39,14 @@ GLfloat window_size[2];
 
 /* Activa el NORMALIZE de OpenGL solo para las DisplayList */
 void recalcularDisplayLists(){
-    glEnable(GL_NORMALIZE);
+    //glEnable(GL_NORMALIZE);
         glDeleteLists(dl_handle,3);
         dl_handle = glGenLists(3);
         glNewList(DL_AXIS, GL_COMPILE);
             OpenGLHelper::dibujarEjes();
         glEndList();
-        glNewList(DL_GRID, GL_COMPILE);
-            OpenGLHelper::dibujarGrillaXY(); // Mar
+        glNewList(DL_DOME, GL_COMPILE);
+            // TODO: Aca crear un domo y dibujarlo como se hace con el faro :)
         glEndList();
         glNewList(DL_FARO, GL_COMPILE); // Faro
             Faro faro(ALTURA_FARO);
@@ -63,7 +62,7 @@ void recalcularDisplayLists(){
                 isla.dibujar();
             glPopMatrix();
         glEndList();
-    glDisable(GL_NORMALIZE);
+    //glDisable(GL_NORMALIZE);
 }
 
 void OnIdle (void){
@@ -83,15 +82,15 @@ void Set3DEnv()
 void display(void)
 {
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	///////////////////////////////////////////////////
-	// Escena 3D
 	Set3DEnv();
+
+	glCallList(DL_DOME);
+
+	// TODO: Aca dibujar el mar en su estado actual
+
 	if (view_axis)
 		 glCallList(DL_AXIS);
-	glCallList(DL_GRID);
-	//
-	///////////////////////////////////////////////////
-	// DIBUJAR //
+
 	if (!esDia){// dibujar luna
         glPushMatrix();
             glTranslatef (-60.0f, -50.0f, 7.0f);
