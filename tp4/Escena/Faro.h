@@ -40,6 +40,12 @@ class Faro : public Dibujable
         static float getLargoBarroteCabina();
 
         /**
+         * @brief Devuelve la distancia al centro del faro desde donde se ubica un observador
+         * @post Luego hay q aplicarle las mismas operaciones que al Faro
+         */
+        static float getDistanciaVistaStd();
+
+        /**
          * @brief Dibuja el foco luminoso del faro y lo rota en cada llamada
          */
         static void iluminar();

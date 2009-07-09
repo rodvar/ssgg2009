@@ -1,4 +1,5 @@
 #include "Camara.h"
+#include "../Escena/Faro.h"
 #include <GL/glut.h>
 
 Camara::Camara()
@@ -81,14 +82,30 @@ void Camara::setVistaStd(){
 }
 
 void Camara::setVistaBalconFaro(){
-    // TODO
+    float radio = Faro::getDistanciaVistaStd();
+    float posicion[3] = {radio, radio, Faro::getAlturaFoco()+0.5f};
+    this->eye[0] = posicion[0];
+    this->eye[1] = posicion[1];
+    this->eye[2] = posicion[2];
+    this->at[0] = -10*posicion[0];
+    this->at[1] = 10*posicion[1];
+    this->at[2] = 0.0f;
+    this->up[0] = 0.0f;
+    this->up[1] = 0.0f;
+    this->up[2] = 1.0f;
+    this->ejeRotacionXY[0] = 0;
+    this->ejeRotacionXY[1] = 0;
+    this->ejeRotacionXY[2] = 1;
+    this->ejeRotacionZ[0] = 1;
+    this->ejeRotacionZ[1] = 1;
+    this->ejeRotacionZ[2] = 0;
     this->anguloXY = 0.0;
     this->anguloZ = 0.0;
     this->rotacionDesdeOjo = true;
 }
 
 void Camara::setVistaBaseIsla(){
-    float posicion[3] = {1.0f,0.0f,3.0f };
+    float posicion[3] = {2.0f,0.0f,3.0f };
     this->eye[0] = posicion[0];
     this->eye[1] = posicion[1];
     this->eye[2] = posicion[2];
@@ -98,12 +115,12 @@ void Camara::setVistaBaseIsla(){
     this->up[0] = 0.0f;
     this->up[1] = 0.0f;
     this->up[2] = 1.0f;
-    this->ejeRotacionXY[0] = posicion[0];
-    this->ejeRotacionXY[1] = posicion[1];
-    this->ejeRotacionXY[2] = posicion[2];
-    this->ejeRotacionZ[0] = -posicion[0]; //invierto xy
-    this->ejeRotacionZ[1] = posicion[1];
-    this->ejeRotacionZ[2] = posicion[2];
+    this->ejeRotacionXY[0] = 0;
+    this->ejeRotacionXY[1] = 0;
+    this->ejeRotacionXY[2] = 1;
+    this->ejeRotacionZ[0] = 1;
+    this->ejeRotacionZ[1] = 1;
+    this->ejeRotacionZ[2] = 0;
     this->anguloXY = 0.0;
     this->anguloZ = 0.0;
     this->rotacionDesdeOjo = true;
