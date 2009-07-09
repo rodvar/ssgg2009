@@ -44,11 +44,11 @@ void Faro::iluminar(bool apagado){
     glPushMatrix();
 		glTranslatef(NULO,NULO,alturaFoco);
         glRotatef(++rotacionZ,NULO,NULO,UNITARIO);
-        glRotatef(-95,NULO,UNITARIO,NULO);
+        glRotatef(-102,NULO,UNITARIO,NULO);
 
         OpenGLHelper::dibujarSamba(PRECISION_COLUMNA,radio,altura);
         OpenGLSurfacer::setTranslucido(); // vidrio del foco
-        glColor4f(1,1,1,0.1);
+        glColor4f(0.25f,0.25f,0.25f,0.1);
         glPushMatrix();
             glTranslatef(0,0,altura);
             OpenGLHelper::dibujarCirculo(Matematica::anguloRadianes(10),radio);
@@ -61,26 +61,22 @@ void Faro::iluminar(bool apagado){
         GLfloat light_specular[] = { UNITARIO, UNITARIO, UNITARIO, UNITARIO };
         GLfloat light_position[] = { 0.05f, 0.05f, (alturaFoco-0.05f), UNITARIO };
         GLfloat light_direction[] = { direccionIluminada.getX(), direccionIluminada.getY(), direccionIluminada.getZ() };
-
+        // TODO: Nic fijate aca de solo dejar las cosas que varian en el tiempo, el resto
+        // se podria poner en la configuracion del a GL_LIGHT4 en el OpenGLLighter ;)
         glLightfv(GL_LIGHT4, GL_DIFFUSE, light_diffuse);
         glLightfv(GL_LIGHT4, GL_SPECULAR, light_specular);
         glLightfv(GL_LIGHT4, GL_POSITION, light_position);
         glLightf(GL_LIGHT4, GL_SPOT_CUTOFF, 45.0);
         glLightfv(GL_LIGHT4, GL_SPOT_DIRECTION, light_direction);
         glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 3.0f);
-    glPopMatrix();
 
-    if (!apagado){
-        OpenGLSurfacer::setTranslucido();
-        glColor4f(0.5,0.5,0.3,0.1);// amarillento clarito
-        glPushMatrix();
-            glTranslatef(NULO,NULO,getAlturaFoco());
-            glRotatef(rotacionZ,NULO,NULO,UNITARIO);
-            glRotatef(110,NULO,-UNITARIO,NULO);
-            OpenGLHelper::dibujarCilindro(20, 0, 3, 30);
-        glPopMatrix();
-        OpenGLSurfacer::setPorDefecto();
-    }
+        if (!apagado){
+            OpenGLSurfacer::setTranslucido();
+            glColor4f(0.5,0.5,0.3,0.1);// amarillento clarito
+            OpenGLHelper::dibujarCilindro(20, radio, 2*radio, 30);
+            OpenGLSurfacer::setPorDefecto();
+        }
+    glPopMatrix();
     if (rotacionZ == 360)
         rotacionZ = 0;
 }
