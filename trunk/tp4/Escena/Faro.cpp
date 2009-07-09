@@ -29,6 +29,9 @@ float Faro::getLargoBarroteCabina(){
     return (radioMax*sin(DOSPI/PRECISION_CABINA));
 }
 
+float Faro::getDistanciaVistaStd(){
+    return radioMin-0.05f;
+}
 
 void Faro::iluminar(){
     static int rotacionZ = 180;
