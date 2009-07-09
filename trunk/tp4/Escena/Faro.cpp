@@ -5,30 +5,33 @@
 #include "../Geometria/CalculadorBezier.h"
 
 float Faro::altura = UNITARIO;
+float Faro::radioMax = UNITARIO;
+float Faro::radioMin = UNITARIO;
 
 Faro::Faro(const float altura)
 {
     this->altura = altura;
-    this->radioMax = UNITARIO;
-    this->radioMin = 0.75f*this->radioMax;
+    this->radioMax = altura/5;
+    this->radioMin = PORCENTAJE_ESCALA*this->radioMax;
 }
 
 Faro::~Faro(){}
 
-float Faro::getAlturaFoco(){
-    float largoBarrote = 0.75f*UNITARIO*sin(DOSPI/PRECISION_CABINA);
-    return (1.10f*altura + largoBarrote/2);
+float Faro::getAlturaFoco(){;
+    return (PORCENTAJE_ESCALA*altura + getLargoCabina()/2 + 0.20f);
 }
 
 float Faro::getLargoCabina(){
-    return (0.75f*UNITARIO*sin(DOSPI/PRECISION_CABINA));
+    return (0.50f*altura*getLargoBarroteCabina()/PORCENTAJE_ESCALA);
+}
+
+float Faro::getLargoBarroteCabina(){
+    return (radioMax*sin(DOSPI/PRECISION_CABINA));
 }
 
 
 void Faro::iluminar(){
     static int rotacionZ = 180;
-//    float z = altura + getAlturaFoco();
-//    float largo = getLargoCabina()*2;
     Coordenadas direccionIluminada;
 
     glColor3f(UNITARIO,UNITARIO,UNITARIO);
@@ -44,9 +47,9 @@ void Faro::iluminar(){
 
         direccionIluminada = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,135);
 
-        GLfloat light_diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-        GLfloat light_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-        GLfloat light_position[] = { 0.05f, 0.05f, getAlturaFoco()-0.05f, 1.0f };
+        GLfloat light_diffuse[] = { UNITARIO, UNITARIO, UNITARIO, UNITARIO };
+        GLfloat light_specular[] = { UNITARIO, UNITARIO, UNITARIO, UNITARIO };
+        GLfloat light_position[] = { 0.05f, 0.05f, getAlturaFoco()-0.05f, UNITARIO };
         GLfloat light_direction[] = { direccionIluminada.getX(), direccionIluminada.getY(), direccionIluminada.getZ() };
 
         glLightfv(GL_LIGHT4, GL_DIFFUSE, light_diffuse);
@@ -54,8 +57,7 @@ void Faro::iluminar(){
         glLightfv(GL_LIGHT4, GL_POSITION, light_position);
         glLightf(GL_LIGHT4, GL_SPOT_CUTOFF, 45.0);
         glLightfv(GL_LIGHT4, GL_SPOT_DIRECTION, light_direction);
-        glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 30.0f);
-
+        glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 3.0f);
     glPopMatrix();
 
     OpenGLSurfacer::setTranslucido();
@@ -78,108 +80,69 @@ void Faro::dibujar(){
 }
 
 void Faro::dibujarColumna(){
-    float deltaAlfa = 360.0f/PRECISION_COLUMNA;
-    float inclinacionInterna = atan(this->altura/0.25f*this->radioMax);
-    float base = this->radioMax*sin(DOSPI/PRECISION_COLUMNA);
-    float altura = this->altura/sin(inclinacionInterna);
-    Coordenadas normalCorridaMenos = Matematica::calcularNormal(Coordenadas(1,0,0),-deltaAlfa);
-    Coordenadas normalCorrida = Matematica::calcularNormal(Coordenadas(1,0,0),deltaAlfa);
+    float altura = PORCENTAJE_ESCALA * this->altura;
 
-    glColor3f(0.25f,0.25f,0.25f);
-    OpenGLHelper::dibujarCirculo(0.125f,UNITARIO); //Cic inferior
-    for (int i = 0; i < PRECISION_COLUMNA ; i++){
-        glPushMatrix();
-            glRotatef(i*deltaAlfa,0,0,1);
-            glPushMatrix();// Base
-                glTranslatef(this->radioMax,NULO,NULO);
-                glRotated(90.0f-Matematica::anguloGrados(inclinacionInterna),0,-1,0);
-                glTranslatef(NULO,-base/2,NULO);
-                glBegin(GL_QUADS);
-                    glNormal3f(normalCorridaMenos.getX(),normalCorridaMenos.getY(),normalCorridaMenos.getZ());
-                    glVertex3f(NULO, NULO,NULO);
-                    glVertex3f(NULO,NULO,altura);
-                    glNormal3f(normalCorrida.getX(),normalCorrida.getY(),normalCorrida.getZ());
-                    glVertex3f(NULO,base,altura);
-                    glVertex3f(NULO,base,NULO);
-                glEnd();
-            glPopMatrix();
-        glPopMatrix();
-    }
-    //Dibujar Barandal
+    glColor3f(0.75f,0.75f,0.8f);
+    OpenGLHelper::dibujarCilindro(PRECISION_COLUMNA,this->radioMax, this->radioMin, altura);
     glPushMatrix();
-        glTranslatef(0.0f,0.0f,this->altura);
-        glPushMatrix();
-            glScalef(0.75f,0.75f,1.0f);
-            OpenGLHelper::dibujarCirculo(0.125f,UNITARIO);//Circ superior
-            OpenGLHelper::dibujarAbanico(0.125f,UNITARIO);
-        glPopMatrix();
-        glPushMatrix();
-            glScalef(1.0f,1.0f,0.30f);
-            OpenGLHelper::dibujarSamba(PRECISION_COLUMNA,UNITARIO,UNITARIO);
-        glPopMatrix();
+        glTranslatef(0,0,altura);
+        OpenGLHelper::dibujarSamba(PRECISION_COLUMNA,this->radioMax, 0.30f*this->radioMax);
     glPopMatrix();
 }
 
 void Faro::dibujarCabina(){
     float deltaAlfa = 360.0f/PRECISION_CABINA;
-    float largoBarrote = getLargoCabina();
-    float largo = 0.50f*this->altura*largoBarrote/0.75f;
+    float largoBarrote = getLargoBarroteCabina();
+    float largo = 0.50f*this->altura*largoBarrote/PORCENTAJE_ESCALA;
+    float altura = PORCENTAJE_ESCALA*this->altura;
 
-    glColor3f(0.25f,0.25f,0.25f);
+    glColor3f(0.50f,0.50f,0.50f);
     for (int i = 0; i < PRECISION_CABINA ; i++){
         // Barrotes de soporte
         glPushMatrix();
             glRotatef(i*deltaAlfa,0,0,1);
             glPushMatrix();
                 glRotatef(i*deltaAlfa,0,0,1);
-                glTranslatef(0.75f*this->radioMax,largoBarrote/2,this->altura);
+                glTranslatef(PORCENTAJE_ESCALA*this->radioMax,largoBarrote/2,altura);
                 glRotatef(90,1,0,0);
-                glScalef(0.01f,0.01f,largoBarrote);
-                OpenGLHelper::dibujarCilindro(PRECISION_CABINA/2,UNITARIO,UNITARIO,UNITARIO);
+                OpenGLHelper::dibujarCilindro(PRECISION_CABINA/2,0.01f,0.01f,largoBarrote);
             glPopMatrix();
             glPushMatrix();
                 glRotatef(i*deltaAlfa,0,0,1);
-                glTranslatef(0.75f*this->radioMax,largoBarrote/2,this->altura+largo);
+                glTranslatef(PORCENTAJE_ESCALA*this->radioMax,largoBarrote/2,altura+largo);
                 glRotatef(90,1,0,0);
-                glScalef(0.01f,0.01f,largoBarrote);
-                OpenGLHelper::dibujarCilindro(PRECISION_CABINA/2,UNITARIO,UNITARIO,UNITARIO);
+                OpenGLHelper::dibujarCilindro(PRECISION_CABINA/2,0.01f,0.01f,largoBarrote);
             glPopMatrix();
             // Barrotes soporta ventana
             glPushMatrix();
                 glRotatef(i*deltaAlfa,0,0,1);
-                glTranslatef(0.75f*this->radioMax,largoBarrote/2,this->altura);
-                glScalef(0.01f,0.01f,largo);
-                OpenGLHelper::dibujarCilindro(PRECISION_CABINA/2,UNITARIO,UNITARIO,UNITARIO);
+                glTranslatef(PORCENTAJE_ESCALA*this->radioMax,largoBarrote/2,altura);
+                OpenGLHelper::dibujarCilindro(PRECISION_CABINA/2,0.01f,0.01f,largo);
             glPopMatrix();
             // Barrotes de soporte de los anteriores
             glPushMatrix();
-                glTranslatef(0.75f*this->radioMax,largoBarrote/2,this->altura + 0.75f*largo);
+                glTranslatef(PORCENTAJE_ESCALA*this->radioMax,largoBarrote/2,altura + PORCENTAJE_ESCALA*largo);
                 glRotatef(90,1,0,0);
-                glScalef(0.01f,0.01f,largoBarrote);
-                OpenGLHelper::dibujarCilindro(PRECISION_CABINA/2,UNITARIO,UNITARIO,UNITARIO);
+                OpenGLHelper::dibujarCilindro(PRECISION_CABINA/2,0.01f,0.01f,largoBarrote);
             glPopMatrix();
         glPopMatrix();
     }
 }
 
 void Faro::dibujarSombrero(){
-    int precision = 17;
     CalculadorBezier bezier(8);
     PintorCurva pintor;
     std::vector<Coordenadas> puntosDesde;
     std::vector<Coordenadas> puntosHasta;
-    float posicionZ = this->altura*(this->radioMax+ 0.50f*this->radioMax*sin(DOSPI/precision));
-    float radio = 0.75f*this->radioMax;
+    float posicionZ = PORCENTAJE_ESCALA*this->altura + getLargoCabina();
+    float radio = (this->radioMax + this->radioMin)/2;
     float paso = PI/5; //rad
 
-    glColor3f(0.59f, 0.29f,0.0f);
+    glColor3f(0.50f,0.25f,0.25f);
     glPushMatrix();
         glTranslatef(NULO,NULO,posicionZ);
         //piso
-        glPushMatrix();
-            glScalef(this->radioMin,this->radioMin,0.30f);
-            OpenGLHelper::dibujarSamba(precision,UNITARIO,UNITARIO);
-        glPopMatrix();
+        OpenGLHelper::dibujarSamba(PRECISION_CABINA,this->radioMin,0.30f*this->radioMax);
         //tapa
         puntosDesde.push_back(Coordenadas(radio,NULO,NULO));
         puntosDesde.push_back(Coordenadas(radio*(float)cos(MEDIOPI/3),NULO,radio*(float)sin(MEDIOPI/3)));
@@ -194,7 +157,7 @@ void Faro::dibujarSombrero(){
         puntosHasta.push_back(Coordenadas(NULO,NULO,radio));
         bezier.setControlPoints(puntosHasta);
         puntosHasta = bezier.calcularPuntos();
-        for (float alfa = 0.0f; alfa < 360; alfa += 18){
+        for (float alfa = NULO; alfa < 360; alfa += 18){
             glPushMatrix();
                 glTranslatef(NULO,NULO, 0.30f);
                 glRotatef(alfa, NULO, NULO, UNITARIO);

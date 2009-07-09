@@ -24,6 +24,11 @@ class Matematica
         static void escalarPunto(Coordenadas &punto, float ex, float ey, float ez);
 
         /**
+         * @brief obtiene la direccion media entre los vectores y la normaliza
+         */
+        static Coordenadas calcularNormalMedia(Coordenadas dir1, Coordenadas dir2);
+
+        /**
          * @return La normal saliente la esfera unitaria en las coordenadas dadas
          * @param anguloAlfa Es el angulo direccional en el plano xy medido desde eje x en grados
          * @param anguloFi Es el angulo direccional en el plano xz medido desde eje z en grados

@@ -67,7 +67,7 @@ void OpenGLHelper::dibujarCilindro(const float precision,const float radioBase,
 }
 
 void OpenGLHelper::dibujarAbanico(const float paso, const float radio){
-    unsigned short int tamano = (int)(DOSPI/paso + 1);
+    unsigned short int tamano = (int)(DOSPI/paso);
     Coordenadas puntos[tamano];
     Coordenadas norma;
     Matematica::discretizarCircunferencia(puntos, radio, paso, NULO);
@@ -87,25 +87,41 @@ void OpenGLHelper::dibujarAbanico(const float paso, const float radio){
 
 void OpenGLHelper::dibujarSamba(const float precision, const float radio, const float altura){
     float deltaAlfa = 360.0f/precision;
-    float base = sin(DOSPI/precision);
-    Coordenadas normal1 = Matematica::calcularNormal(Coordenadas(1,0,0),-deltaAlfa);
-    Coordenadas normal2 = Matematica::calcularNormal(Coordenadas(1,0,0),deltaAlfa);
-
+    float radioExtendido = 1.1f*radio;
+    Coordenadas proxPuntoCirc= Matematica::rotar(Coordenadas(radio,NULO,NULO),deltaAlfa);
+    Coordenadas proxPuntoCircExt= Matematica::rotar(Coordenadas(radioExtendido,NULO,NULO),deltaAlfa);
+    Coordenadas normal = Matematica::calcularNormal(Coordenadas(1,0,0),deltaAlfa);
     for (int i = 0; i < precision ; i++){
         glPushMatrix();
             glRotatef(i*deltaAlfa,0,0,1);
             glBegin(GL_QUADS);// Baranda
-                glNormal3f(normal1.getX(),normal1.getY(),normal1.getZ()); // Asegura sup suave
-                glVertex3f(radio,-base/2,0.0f);
-                glVertex3f(radio,-base/2,altura);
-                glNormal3f(normal2.getX(),normal2.getY(),normal2.getZ()); // Asegura sup suave
-                glVertex3f(radio,base/2,altura);
-                glVertex3f(radio,base/2,0.0f);
+                glNormal3f(-1,0,0);
+                glVertex3f(radio,0.0f,0.0f);
+                glVertex3f(radio,0.0f,altura);
+                glNormal3f(-normal.getX(),normal.getY(),normal.getZ()); // Asegura sup suave
+                glVertex3f(proxPuntoCirc.getX(),proxPuntoCirc.getY(),altura);
+                glVertex3f(proxPuntoCirc.getX(),proxPuntoCirc.getY(),NULO);
+                //idem para la extension
+                glNormal3f(1,0,0);
+                glVertex3f(radioExtendido,0.0f,0.0f);
+                glVertex3f(radioExtendido,0.0f,altura);
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ()); // Asegura sup suave
+                glVertex3f(proxPuntoCircExt.getX(),proxPuntoCircExt.getY(),altura);
+                glVertex3f(proxPuntoCircExt.getX(),proxPuntoCircExt.getY(),NULO);
+                //Le pongo la tapa
+                glNormal3f(-UNITARIO,NULO,NULO);
+                glVertex3f(radio,0.0f,altura);
+                glNormal3f(-normal.getX(),normal.getY(),normal.getZ());
+                glVertex3f(proxPuntoCirc.getX(),proxPuntoCirc.getY(),altura);
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+                glVertex3f(proxPuntoCircExt.getX(),proxPuntoCircExt.getY(),altura);
+                glNormal3f(UNITARIO,NULO,NULO);
+                glVertex3f(radioExtendido,0.0f,altura);
             glEnd();
         glPopMatrix();
     }
     glPushMatrix();
-        OpenGLHelper::dibujarAbanico(0.25*radio,radio);
+        OpenGLHelper::dibujarAbanico(Matematica::anguloRadianes(deltaAlfa),radioExtendido);
     glPopMatrix();
 }
 
