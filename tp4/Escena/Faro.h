@@ -6,6 +6,7 @@
 #define LUZ_FARO 4
 #define PRECISION_COLUMNA 20.0
 #define PRECISION_CABINA ((int)((float)PRECISION_COLUMNA*17.0f/20.0f))
+#define PORCENTAJE_ESCALA 0.75f
 
 /**
  * Representa la construccion Faro que sostiene el Foco que ilumina el mar de noche.
@@ -33,6 +34,12 @@ class Faro : public Dibujable
         static float getLargoCabina();
 
         /**
+         * @brief Devuelve el largo de los barrotes de la cabina
+         * @post Luego hay q aplicarle las mismas operaciones que al Faro
+         */
+        static float getLargoBarroteCabina();
+
+        /**
          * @brief Dibuja el foco luminoso del faro y lo rota en cada llamada
          */
         static void iluminar();
@@ -50,8 +57,8 @@ class Faro : public Dibujable
 
 
         static float altura;
-        float radioMin;
-        float radioMax;
+        static float radioMin;
+        static float radioMax;
 
 };
 

@@ -6,6 +6,15 @@ void Matematica::escalarPunto(Coordenadas &punto, float ex, float ey, float ez){
     punto.setZ(ez*punto.getZ());
 }
 
+Coordenadas Matematica::calcularNormalMedia(Coordenadas dir1, Coordenadas dir2){
+    Coordenadas retorno = dir1+dir2;
+    retorno.setX(retorno.getX()/2);
+    retorno.setY(retorno.getY()/2);
+    retorno.setZ(retorno.getZ()/2);
+    normalizar(retorno);
+    return retorno;
+}
+
 Coordenadas Matematica::calcularNormal(float anguloAlfa, float anguloFi){
     float alfa = anguloRadianes(anguloAlfa);
     float fi = anguloRadianes(anguloFi);
