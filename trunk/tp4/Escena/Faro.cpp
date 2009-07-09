@@ -33,26 +33,33 @@ float Faro::getDistanciaVistaStd(){
     return radioMin-0.05f;
 }
 
-void Faro::iluminar(){
+void Faro::iluminar(bool apagado){
     static int rotacionZ = 180;
+    static float altura = UNITARIO/5; // Se hacen static para q no se recalcule todo el tiempo
+    static float radio = UNITARIO/3;
+    static float alturaFoco = getAlturaFoco();
     Coordenadas direccionIluminada;
 
     glColor3f(UNITARIO,UNITARIO,UNITARIO);
     glPushMatrix();
-		glTranslatef(NULO,NULO,getAlturaFoco());
+		glTranslatef(NULO,NULO,alturaFoco);
         glRotatef(++rotacionZ,NULO,NULO,UNITARIO);
         glRotatef(-95,NULO,UNITARIO,NULO);
 
-        OpenGLHelper::dibujarSamba(PRECISION_COLUMNA,UNITARIO/3,UNITARIO/3);
-        OpenGLSurfacer::setTranslucido();//Vidrio del foco de iluminacion
-			OpenGLHelper::dibujarCirculo(10,UNITARIO/5);
+        OpenGLHelper::dibujarSamba(PRECISION_COLUMNA,radio,altura);
+        OpenGLSurfacer::setTranslucido(); // vidrio del foco
+        glColor4f(1,1,1,0.1);
+        glPushMatrix();
+            glTranslatef(0,0,altura);
+            OpenGLHelper::dibujarCirculo(Matematica::anguloRadianes(10),radio);
+        glPopMatrix();
         OpenGLSurfacer::setPorDefecto();
 
         direccionIluminada = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,135);
 
         GLfloat light_diffuse[] = { UNITARIO, UNITARIO, UNITARIO, UNITARIO };
         GLfloat light_specular[] = { UNITARIO, UNITARIO, UNITARIO, UNITARIO };
-        GLfloat light_position[] = { 0.05f, 0.05f, getAlturaFoco()-0.05f, UNITARIO };
+        GLfloat light_position[] = { 0.05f, 0.05f, (alturaFoco-0.05f), UNITARIO };
         GLfloat light_direction[] = { direccionIluminada.getX(), direccionIluminada.getY(), direccionIluminada.getZ() };
 
         glLightfv(GL_LIGHT4, GL_DIFFUSE, light_diffuse);
@@ -63,15 +70,17 @@ void Faro::iluminar(){
         glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 3.0f);
     glPopMatrix();
 
-    OpenGLSurfacer::setTranslucido();
-    glPushMatrix();
-		glTranslatef(NULO,NULO,getAlturaFoco());
-		glRotatef(rotacionZ,NULO,NULO,UNITARIO);
-		glRotatef(110,NULO,-UNITARIO,NULO);
-		OpenGLHelper::dibujarCilindro(20, 0, 3, 30);
-	glPopMatrix();
-	OpenGLSurfacer::setPorDefecto();
-
+    if (!apagado){
+        OpenGLSurfacer::setTranslucido();
+        glColor4f(0.5,0.5,0.3,0.1);// amarillento clarito
+        glPushMatrix();
+            glTranslatef(NULO,NULO,getAlturaFoco());
+            glRotatef(rotacionZ,NULO,NULO,UNITARIO);
+            glRotatef(110,NULO,-UNITARIO,NULO);
+            OpenGLHelper::dibujarCilindro(20, 0, 3, 30);
+        glPopMatrix();
+        OpenGLSurfacer::setPorDefecto();
+    }
     if (rotacionZ == 360)
         rotacionZ = 0;
 }

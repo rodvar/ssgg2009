@@ -104,7 +104,7 @@ void display(void)
     glCallList(DL_ISLA);
     glPushMatrix();
         glTranslatef(NULO,NULO,ALTURA_CLAVADO_FARO);
-        Faro::iluminar();
+        Faro::iluminar(esDia);
     glPopMatrix();
 	glutSwapBuffers();
 }
@@ -144,7 +144,7 @@ void keyboard (unsigned char key, int x, int y){
         case '1':
         case '2':
         case '3':
-        case '4':
+        //case '4': Se evita que se pueda controlar la luz del faro
         case '5':
         case '6':
         case '7':
