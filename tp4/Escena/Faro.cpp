@@ -18,7 +18,7 @@ Faro::Faro(const float altura)
 Faro::~Faro(){}
 
 float Faro::getAlturaFoco(){;
-    return (PORCENTAJE_ESCALA*altura + getLargoCabina()/2 + 0.20f);
+    return (PORCENTAJE_ESCALA*altura + getLargoCabina()/2+0.15f);
 }
 
 float Faro::getLargoCabina(){
@@ -26,7 +26,7 @@ float Faro::getLargoCabina(){
 }
 
 float Faro::getLargoBarroteCabina(){
-    return (radioMax*sin(DOSPI/PRECISION_CABINA));
+    return (radioMax*sin(DOSPI/PRECISION_COLUMNA));
 }
 
 float Faro::getDistanciaVistaStd(){
@@ -101,29 +101,26 @@ void Faro::dibujarColumna(){
 void Faro::dibujarCabina(){
     float deltaAlfa = 360.0f/PRECISION_CABINA;
     float largoBarrote = getLargoBarroteCabina();
-    float largo = 0.50f*this->altura*largoBarrote/PORCENTAJE_ESCALA;
+    float largo = largoBarrote*3.33f;
     float altura = PORCENTAJE_ESCALA*this->altura;
 
     glColor3f(0.50f,0.50f,0.50f);
     for (int i = 0; i < PRECISION_CABINA ; i++){
-        // Barrotes de soporte
+        // Barrotes de soporte piso / techo
         glPushMatrix();
             glRotatef(i*deltaAlfa,0,0,1);
             glPushMatrix();
-                glRotatef(i*deltaAlfa,0,0,1);
-                glTranslatef(PORCENTAJE_ESCALA*this->radioMax,largoBarrote/2,altura);
+                glTranslatef(PORCENTAJE_ESCALA*this->radioMax,largoBarrote/2,altura+0.01f);
                 glRotatef(90,1,0,0);
                 OpenGLHelper::dibujarCilindro(PRECISION_CABINA/2,0.01f,0.01f,largoBarrote);
             glPopMatrix();
             glPushMatrix();
-                glRotatef(i*deltaAlfa,0,0,1);
                 glTranslatef(PORCENTAJE_ESCALA*this->radioMax,largoBarrote/2,altura+largo);
                 glRotatef(90,1,0,0);
                 OpenGLHelper::dibujarCilindro(PRECISION_CABINA/2,0.01f,0.01f,largoBarrote);
             glPopMatrix();
-            // Barrotes soporta ventana
+            // Barrotes soporta ventana verticales y ventanas
             glPushMatrix();
-                glRotatef(i*deltaAlfa,0,0,1);
                 glTranslatef(PORCENTAJE_ESCALA*this->radioMax,largoBarrote/2,altura);
                 OpenGLHelper::dibujarCilindro(PRECISION_CABINA/2,0.01f,0.01f,largo);
             glPopMatrix();
@@ -133,6 +130,16 @@ void Faro::dibujarCabina(){
                 glRotatef(90,1,0,0);
                 OpenGLHelper::dibujarCilindro(PRECISION_CABINA/2,0.01f,0.01f,largoBarrote);
             glPopMatrix();
+            // Vidrios
+            OpenGLSurfacer::setTranslucido(); // vidrio del foco
+            glColor4f(0.15f,0.15f,0.15f,0.1);
+            glPushMatrix();
+                glTranslatef(PORCENTAJE_ESCALA*this->radioMax-0.01,largoBarrote/2,altura);
+                glRotatef(110,0,0,1);
+                glRotatef(90,1,0,0);
+                OpenGLHelper::dibujarRectangulo(largoBarrote-0.03f,largo);
+            glPopMatrix();
+            OpenGLSurfacer::setPorDefecto();
         glPopMatrix();
     }
 }
