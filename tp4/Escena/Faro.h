@@ -47,8 +47,9 @@ class Faro : public Dibujable
 
         /**
          * @brief Dibuja el foco luminoso del faro y lo rota en cada llamada
+         * @param True si el foco debe estar apagado, false encaso contrario
          */
-        static void iluminar();
+        static void iluminar(bool apagado);
 
         /* Dibuja el faro en el origen de coordenadas*/
         void dibujar();
