@@ -4,6 +4,7 @@
 #include "Visualizacion/Camara.h"
 #include "Escena/Faro.h"
 #include "Escena/Isla.h"
+#include "Escena/Domo.h"
 
 // Variables de control
 Camara camara;
@@ -14,6 +15,7 @@ bool esDia = true;
 #define ALTURA_FARO         5.00f
 #define ALTURA_CLAVADO_FARO 0.75f
 #define ALTURA_ISLA         0.30f
+#define LADO_DOMO           70
 
 // Handle para el control de las Display Lists
 GLuint dl_handle;
@@ -46,7 +48,11 @@ void recalcularDisplayLists(){
             OpenGLHelper::dibujarEjes();
         glEndList();
         glNewList(DL_DOME, GL_COMPILE);
-            // TODO: Aca crear un domo y dibujarlo como se hace con el faro :)
+			Domo domo(LADO_DOMO);
+			glPushMatrix();
+				glTranslatef(-LADO_DOMO/2,-LADO_DOMO/2,LADO_DOMO-1);
+				domo.dibujar();
+			glPopMatrix();
         glEndList();
         glNewList(DL_FARO, GL_COMPILE); // Faro
             Faro faro(ALTURA_FARO);
