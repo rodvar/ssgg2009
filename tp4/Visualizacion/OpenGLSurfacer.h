@@ -31,6 +31,11 @@ class OpenGLSurfacer
         static void setLuna();
 
         /**
+         * Configura el material para que refleje / refracte la luz como agua salada
+         */
+        static void setAguaSalada();
+
+        /**
          * Configura el material como translucido, util para dibujar vidio por ej
          */
         static void setTranslucido();

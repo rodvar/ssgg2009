@@ -148,22 +148,6 @@ void OpenGLHelper::dibujarEjes()
 	glEnable(GL_LIGHTING);
 }
 
-void OpenGLHelper::dibujarGrillaXY()
-{
-	glColor3f(0.27, 0.44, 0.76);
-	glBegin(GL_QUADS);
-        glNormal3f(NULO,NULO,UNITARIO);
-        for(int i=-200; i<=200; i++){
-            for(int j=-200; j<=200; j++){
-                glVertex3i(j, i ,0.0f);
-                glVertex3i(j+1 , i ,0.0f);
-                glVertex3i(j+1 , i+1 ,0.0f);
-                glVertex3i(j , i+1,0.0f);
-            }
-        }
-	glEnd();
-}
-
 void OpenGLHelper::cambiarModoPoligonos(){
     static GLenum mode = GL_FILL;
     (mode == GL_FILL) ? mode = GL_LINE : mode = GL_FILL;

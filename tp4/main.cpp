@@ -4,10 +4,13 @@
 #include "Visualizacion/Camara.h"
 #include "Escena/Faro.h"
 #include "Escena/Isla.h"
+#include "Escena/Mar.h"
 #include "Escena/Domo.h"
 
-// Variables de control
+// Objetos unicos
 Camara camara;
+Mar mar(100,0.50);
+// Variables de control
 bool view_axis = false;
 bool esDia = true;
 
@@ -15,7 +18,7 @@ bool esDia = true;
 #define ALTURA_FARO         5.00f
 #define ALTURA_CLAVADO_FARO 0.75f
 #define ALTURA_ISLA         0.30f
-#define LADO_DOMO           70
+#define LADO_DOMO           100
 
 // Handle para el control de las Display Lists
 GLuint dl_handle;
@@ -92,7 +95,7 @@ void display(void)
 
 	glCallList(DL_DOME);
 
-	// TODO: Aca dibujar el mar en su estado actual
+	mar.dibujar();
 
 	if (view_axis)
 		 glCallList(DL_AXIS);
@@ -188,6 +191,9 @@ void keyboard (unsigned char key, int x, int y){
         	break;
         case 'k':
 			camara.incrementarZVer(-1);
+			break;
+        case 'p':
+			mar.switchCalmoInquieto();
 			break;
         default:
             break;
