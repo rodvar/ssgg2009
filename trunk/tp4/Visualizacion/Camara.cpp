@@ -127,8 +127,8 @@ void Camara::setVistaBaseIsla(){
 }
 
 void Camara::setVistaAguaLejos(){
-    this->eye[0] = 60.0f;
-    this->eye[1] = 60.0f;
+    this->eye[0] = 49.00f;
+    this->eye[1] = 0.00f;
     this->eye[2] = 0.5f;
     this->at[0] = 0.0f;
     this->at[1] = 0.0f;

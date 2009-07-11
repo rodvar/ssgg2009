@@ -102,7 +102,7 @@ void display(void)
 
 	if (!esDia){// dibujar luna
         glPushMatrix();
-            glTranslatef (-60.0f, -50.0f, 7.0f);
+            glTranslatef (-50.0f, -10.0f, 10.0f);
             OpenGLSurfacer::setLuna();
             glutSolidSphere(1.0f, 16, 16);
             OpenGLSurfacer::setPorDefecto();
