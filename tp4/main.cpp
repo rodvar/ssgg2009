@@ -215,6 +215,9 @@ void init(void)
     OpenGLSurfacer::setPorDefecto();
     OpenGLLighter::generarLuzAmbienteDiurna();
 
+    mar.definirZonaProfunda(ISLA_MIN_X,ISLA_MAX_X,ISLA_MIN_Y,ISLA_MAX_Y);
+    mar.generar();
+
 	// Generacion de las Display Lists
 	recalcularDisplayLists();
 }
