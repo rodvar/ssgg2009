@@ -5,6 +5,12 @@
 #include "../Geometria/Coordenadas.h"
 #include <vector>
 
+// Valores que delimitan ancho de la isla
+#define ISLA_MAX_X 14.0f
+#define ISLA_MIN_X -9.0f
+#define ISLA_MAX_Y 9.0f
+#define ISLA_MIN_Y -9.0f
+
 /**
  * Representa una isla de tierra
  */

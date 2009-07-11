@@ -14,7 +14,7 @@ class Mar : public Dibujable
 {
     public:
         /**
-         * @brief Construye el Mar con todo lo necsario para dibujarlo dinamicamente
+         * @brief Construye el Mar dejandolo listo para generarse
          * @param dimension Determina el largo=ancho del mar
          * @param alturaOlasMax Determina la Max altura que puede tener una ola medida
          *                      en m
@@ -23,6 +23,18 @@ class Mar : public Dibujable
         Mar(const unsigned short dimension, const float alturaOlasMax);
 
         ~Mar();
+
+        /**
+         * @brief Genera el mar para que pueda dibujarse
+         */
+        void generar();
+
+        /**
+         * @brief indica una zona del mar de alta profundidad que rodea al origen de coordenadas
+         *        Habra oleaje suave alli.
+         * @param XMin,xMax,yMin,yMax Los puntos sobre los ejes x e y que delimitan el area.
+         */
+        void definirZonaProfunda(const float xMin,const float xMax,const float yMin, const float yMax);
 
         /**
          * @brief Detiene/Continua el oleaje
@@ -36,15 +48,16 @@ class Mar : public Dibujable
         void dibujar();
 
     private:
-        /* Carga la matriz con valores entre 0 y altura maxima */
-        void generar();
         /* Suaviza la matriz */
         void aplicarFiltro();
+        /* Suaviza aun mas la matriz para la zona de alta profundidad */
+        void aplicarFiltroAltaProfundidad();
         /* Calcula las de los puntos de control de la ola para el (x,y) dado */
         void calcularAlturas(float* alturas,const unsigned short int x, const unsigned short int y);
 
         bool detenido;
         float alturaOlasMax;
+        float zonaProfunda[4];//xMin;xMax;yMin;yMax
         unsigned short int dimension;
         unsigned short int lineaBarrido;
         float** alturaOlas; // Matrix de dimensionXdimension

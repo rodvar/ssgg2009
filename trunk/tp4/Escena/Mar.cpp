@@ -13,7 +13,6 @@ Mar::Mar(const unsigned short dimension, const float alturaOlasMax)
     this->alturaOlas = new float*[dimension];
     for (int i = 0 ; i < dimension ; i++)
         this->alturaOlas[i] = new float[dimension];
-    this->generar();
 }
 
 Mar::~Mar()
@@ -28,6 +27,13 @@ Mar::~Mar()
  */
 void Mar::switchCalmoInquieto(){
     this->detenido = !this->detenido;
+}
+
+void Mar::definirZonaProfunda(const float xMin,const float xMax,const float yMin, const float yMax){
+    this->zonaProfunda[0] = xMin;
+    this->zonaProfunda[1] = xMax;
+    this->zonaProfunda[2] = yMin;
+    this->zonaProfunda[3] = yMax;
 }
 
 void Mar::dibujar(){
@@ -63,6 +69,9 @@ void Mar::dibujar(){
     if (!this->detenido)
         this->lineaBarrido++;
 }
+
+
+// Private:
 
 // TODO: ELIMINAME!
 void mostrar(float** alturaOlas, int dimension){
@@ -104,7 +113,7 @@ void Mar::aplicarFiltro(){
 void Mar::calcularAlturas(float* alturas,const unsigned short int x, const unsigned short int y){
     alturas[0] = this->alturaOlas[y][x];
     bool ymas1 = (y+1 < this->dimension);
-    bool xmas1 = (y+1 < this->dimension);
+    bool xmas1 = (x+1 < this->dimension);
     bool ambas = (ymas1 && xmas1);
 
     if (xmas1)

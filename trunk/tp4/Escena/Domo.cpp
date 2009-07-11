@@ -7,6 +7,7 @@ Domo::Domo(const float lado) {
 Domo::~Domo() {}
 
 void Domo::dibujar() {
+    glColor4f(155.0f/256.0f, 196.0f/256.0f, 226.0f/256.0f, 0.0f);
 	glPushMatrix();
 		glPushMatrix();
 			glBegin(GL_QUADS);
