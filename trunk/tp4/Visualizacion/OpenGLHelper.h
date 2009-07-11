@@ -78,11 +78,6 @@ class OpenGLHelper
         static void dibujarEjes();
 
         /**
-         * @brief Dibuja una grilla XY en el plano z=0
-         */
-        static void dibujarGrillaXY();
-
-        /**
          * Hace el switch entre modo SOLIDO y modo "ALAMBRE" para el dibujado de poligonos
          */
         static void cambiarModoPoligonos();
