@@ -2,7 +2,6 @@
 #include "../Geometria/Matematica.h"
 #include "../Visualizacion/OpenGLSurfacer.h"
 #include <stdlib.h>
-#include <iostream>
 
 Mar::Mar(const unsigned short dimension, const float alturaOlasMax)
 {
@@ -47,7 +46,7 @@ void Mar::dibujar(){
 	if (this->lineaBarrido == this->dimension)
         this->lineaBarrido = 0;
 
-    //OpenGLSurfacer::setAguaSalada();
+    OpenGLSurfacer::setAguaSalada();
     glColor3f(0.27, 0.44, 0.76);
 	glBegin(GL_QUADS);
         for(int i=-dimension; i<dimension; i++){
@@ -75,7 +74,7 @@ void Mar::dibujar(){
             }
         }
 	glEnd();
-	//OpenGLSurfacer::setPorDefecto();
+	OpenGLSurfacer::setPorDefecto();
 
     if (!this->detenido)
         this->lineaBarrido++;
@@ -83,16 +82,6 @@ void Mar::dibujar(){
 
 
 // Private:
-
-// TODO: ELIMINAME!
-void mostrar(float** alturaOlas, int dimension){
-    for (int i = 0 ; i < dimension; i++){
-        for (int j = 0 ; j < dimension; j++)
-            std::cout << alturaOlas[i][j] << " ";
-        std::cout << std::endl;
-    }
-}
-
 void Mar::generar(){
     // Obtendo los decimales
     int random;
@@ -137,6 +126,8 @@ void Mar::calcularAlturas(float* alturas,const unsigned short int x, const unsig
         alturas[2] = this->alturaOlas[0][0];
     if (ymas1)
         alturas[3] = this->alturaOlas[y+1][x];
-    else
+    else{
+        alturas[2] = this->alturaOlas[0][x+1];
         alturas[3] = this->alturaOlas[0][x];
+    }
 }
