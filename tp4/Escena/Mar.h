@@ -30,13 +30,6 @@ class Mar : public Dibujable
         void generar();
 
         /**
-         * @brief indica una zona del mar de alta profundidad que rodea al origen de coordenadas
-         *        Habra oleaje suave alli.
-         * @param XMin,xMax,yMin,yMax Los puntos sobre los ejes x e y que delimitan el area.
-         */
-        void definirZonaProfunda(const float xMin,const float xMax,const float yMin, const float yMax);
-
-        /**
          * @brief Detiene/Continua el oleaje
          */
         void switchCalmoInquieto();
@@ -57,7 +50,6 @@ class Mar : public Dibujable
 
         bool detenido;
         float alturaOlasMax;
-        float zonaProfunda[4];//xMin;xMax;yMin;yMax
         unsigned short int dimension;
         unsigned short int lineaBarrido;
         float** alturaOlas; // Matrix de dimensionXdimension
