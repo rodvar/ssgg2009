@@ -89,7 +89,8 @@ class Matematica
         static float anguloGrados(const float anguloRadianes);
         /** Normaliza las coordenadas pasadas por parametro **/
         static void normalizar(Coordenadas& coordenadas);
-
+        /** Normaliza las coordenadas pasadas por parametro y las devuelve**/
+        static Coordenadas obtenerNormalizado(Coordenadas c);
         /**
          * @brief Calcula el factorial de un numero entero.
          * @param n Numero al cual se le quiere calcular el factorial.

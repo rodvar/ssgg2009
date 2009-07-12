@@ -85,6 +85,16 @@ void Matematica::normalizar(Coordenadas& c){
     }
 }
 
+Coordenadas Matematica::obtenerNormalizado(Coordenadas c) {
+    const float norma = calcularNorma(c);
+    if (norma > 0.0f){
+        c.setX(c.getX()/norma);
+        c.setY(c.getY()/norma);
+        c.setZ(c.getZ()/norma);
+    }
+    return c;
+}
+
 void Matematica::discretizarCircunferencia(Coordenadas* vector, const float radio, const float paso, const float z){
     Coordenadas punto;
     unsigned short int i = 0;
