@@ -25,6 +25,14 @@ class Texturable : public Dibujable
          */
         void dibujarTexturado();
 
+        /**
+         * @brief Levanta la imagen del archivo y la carga al buffer del pipeline grafico
+         *        llamando por ej en ope glTexImage2D(...)
+         *        TODOS LOS HIJOS DEBEN IMPLEMENTAR ESTE METODO DICIENDOLE AL PIPELINE
+         *        EL FORMATO DE LOS PIXELS, Y PASANDO UN BUFFER CON LA TIRA DE BYTES DEL MISMO
+         */
+        virtual void cargarImagen() = 0;
+
         /** Dibujar el elemento dibujable **/
         virtual void dibujar() = 0;
 
