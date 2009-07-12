@@ -24,6 +24,7 @@ void Texturable::dibujarTexturado(){
     glEnable(GL_TEXTURE_2D);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
     glBindTexture(GL_TEXTURE_2D,this->idTextura);
+    this->cargarImagen();
     this->dibujar();
     glFlush();
     glDisable(GL_TEXTURE_2D);
