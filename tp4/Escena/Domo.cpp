@@ -1,36 +1,46 @@
 #include "Domo.h"
 
-Domo::Domo(const float lado) {
+Domo::Domo(const float lado, const float altura) {
 	this->lado = lado;
+	this->altura = altura;
 }
 
 Domo::~Domo() {}
 
 void Domo::dibujar() {
-    glColor4f(155.0f/256.0f, 196.0f/256.0f, 226.0f/256.0f, 0.0f);
+	Coordenadas c;
+	glColor4f(135.0f/256.0f, 206.0f/256.0f, 255.0f/256.0f, 0.0f);
 	glPushMatrix();
 		glPushMatrix();
 			glBegin(GL_QUADS);
-				glNormal3f(UNITARIO,UNITARIO,-UNITARIO); //(1)
+				c=Matematica::obtenerNormalizado(Coordenadas(UNITARIO,UNITARIO,-UNITARIO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(1)
 				glVertex3f(NULO,NULO,NULO);
-				glNormal3f(-UNITARIO,UNITARIO,-UNITARIO); //(2)
+				c=Matematica::obtenerNormalizado(Coordenadas(-UNITARIO,UNITARIO,-UNITARIO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(2)
 				glVertex3f(lado,NULO,NULO);
-				glNormal3f(-UNITARIO,-UNITARIO,-UNITARIO); //(3)
+				c=Matematica::obtenerNormalizado(Coordenadas(-UNITARIO,-UNITARIO,-UNITARIO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(3)
 				glVertex3f(lado,lado,NULO);
-				glNormal3f(UNITARIO,-UNITARIO,-UNITARIO); //(4)
+				c=Matematica::obtenerNormalizado(Coordenadas(UNITARIO,-UNITARIO,-UNITARIO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(4)
 				glVertex3f(NULO,lado,NULO);
 			glEnd();
 		glPopMatrix();
 		glPushMatrix();
 			glRotated(90,NULO,UNITARIO,NULO);
 			glBegin(GL_QUADS);
-				glNormal3f(UNITARIO,UNITARIO,-UNITARIO); //(1)
+				c=Matematica::obtenerNormalizado(Coordenadas(UNITARIO,UNITARIO,-UNITARIO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(1)
 				glVertex3f(NULO,NULO,NULO);
-				glNormal3f(UNITARIO,UNITARIO,NULO); //(5)
+				c=Matematica::obtenerNormalizado(Coordenadas(UNITARIO,UNITARIO,NULO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(5)
 				glVertex3f(lado,NULO,NULO);
-				glNormal3f(UNITARIO,-UNITARIO,NULO); //(6)
+				c=Matematica::obtenerNormalizado(Coordenadas(UNITARIO,-UNITARIO,NULO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(6)
 				glVertex3f(lado,lado,NULO);
-				glNormal3f(UNITARIO,-UNITARIO,-UNITARIO); //(4)
+				c=Matematica::obtenerNormalizado(Coordenadas(UNITARIO,-UNITARIO,-UNITARIO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(4)
 				glVertex3f(NULO,lado,NULO);
 			glEnd();
 		glPopMatrix();
@@ -38,13 +48,17 @@ void Domo::dibujar() {
 			glRotated(90,NULO,UNITARIO,NULO);
 			glTranslated(NULO,NULO,this->lado);
 			glBegin(GL_QUADS);
-				glNormal3f(-UNITARIO,UNITARIO,-UNITARIO); //(2)
+				c=Matematica::obtenerNormalizado(Coordenadas(-UNITARIO,UNITARIO,-UNITARIO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(2)
 				glVertex3f(NULO,NULO,NULO);
-				glNormal3f(-UNITARIO,UNITARIO,NULO); //(7)
+				c=Matematica::obtenerNormalizado(Coordenadas(-UNITARIO,UNITARIO,NULO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(7)
 				glVertex3f(lado,NULO,NULO);
-				glNormal3f(-UNITARIO,-UNITARIO,NULO); //(8)
+				c=Matematica::obtenerNormalizado(Coordenadas(-UNITARIO,-UNITARIO,NULO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(8)
 				glVertex3f(lado,lado,NULO);
-				glNormal3f(-UNITARIO,-UNITARIO,-UNITARIO); //(3)
+				c=Matematica::obtenerNormalizado(Coordenadas(-UNITARIO,-UNITARIO,-UNITARIO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(3)
 				glVertex3f(NULO,lado,NULO);
 			glEnd();
 		glPopMatrix();
@@ -52,13 +66,17 @@ void Domo::dibujar() {
 			glRotated(90,UNITARIO,NULO,NULO);
 			glTranslated(NULO,-this->lado,NULO);
 			glBegin(GL_QUADS);
-				glNormal3f(UNITARIO,UNITARIO,NULO); //(5)
+				c=Matematica::obtenerNormalizado(Coordenadas(UNITARIO,UNITARIO,NULO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(5)
 				glVertex3f(NULO,NULO,NULO);
-				glNormal3f(-UNITARIO,UNITARIO,NULO); //(7)
+				c=Matematica::obtenerNormalizado(Coordenadas(-UNITARIO,UNITARIO,NULO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(7)
 				glVertex3f(lado,NULO,NULO);
-				glNormal3f(-UNITARIO,UNITARIO,-UNITARIO); //(2)
+				c=Matematica::obtenerNormalizado(Coordenadas(-UNITARIO,UNITARIO,-UNITARIO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(2)
 				glVertex3f(lado,lado,NULO);
-				glNormal3f(UNITARIO,UNITARIO,-UNITARIO); //(1)
+				c=Matematica::obtenerNormalizado(Coordenadas(UNITARIO,UNITARIO,-UNITARIO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(1)
 				glVertex3f(NULO,lado,NULO);
 			glEnd();
 		glPopMatrix();
@@ -66,13 +84,17 @@ void Domo::dibujar() {
 			glRotated(90,UNITARIO,NULO,NULO);
 			glTranslated(NULO,-this->lado,-this->lado);
 			glBegin(GL_QUADS);
-				glNormal3f(UNITARIO,-UNITARIO,NULO); //(6)
+				c=Matematica::obtenerNormalizado(Coordenadas(UNITARIO,-UNITARIO,NULO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(6)
 				glVertex3f(NULO,NULO,NULO);
-				glNormal3f(-UNITARIO,-UNITARIO,NULO); //(8)
+				c=Matematica::obtenerNormalizado(Coordenadas(-UNITARIO,-UNITARIO,NULO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(8)
 				glVertex3f(lado,NULO,NULO);
-				glNormal3f(-UNITARIO,-UNITARIO,-UNITARIO); //(3)
+				c=Matematica::obtenerNormalizado(Coordenadas(-UNITARIO,-UNITARIO,-UNITARIO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(3)
 				glVertex3f(lado,lado,NULO);
-				glNormal3f(UNITARIO,-UNITARIO,-UNITARIO); //(4)
+				c=Matematica::obtenerNormalizado(Coordenadas(UNITARIO,-UNITARIO,-UNITARIO));
+				glNormal3f(c.getX(),c.getY(),c.getZ()); //(4)
 				glVertex3f(NULO,lado,NULO);
 			glEnd();
 		glPopMatrix();

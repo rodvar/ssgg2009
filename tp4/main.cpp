@@ -18,7 +18,8 @@ bool esDia = true;
 #define ALTURA_FARO         5.00f
 #define ALTURA_CLAVADO_FARO 0.75f
 #define ALTURA_ISLA         0.30f
-#define LADO_DOMO           100
+#define LADO_DOMO           70
+#define ALTURA_DOMO         70
 
 // Handle para el control de las Display Lists
 GLuint dl_handle;
@@ -51,9 +52,9 @@ void recalcularDisplayLists(){
             OpenGLHelper::dibujarEjes();
         glEndList();
         glNewList(DL_DOME, GL_COMPILE);
-			Domo domo(LADO_DOMO);
+			Domo domo(LADO_DOMO, ALTURA_DOMO);
 			glPushMatrix();
-				glTranslatef(-LADO_DOMO/2,-LADO_DOMO/2,LADO_DOMO-1);
+				glTranslatef(-LADO_DOMO/2,-LADO_DOMO/2,ALTURA_DOMO);
 				domo.dibujar();
 			glPopMatrix();
         glEndList();
