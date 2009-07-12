@@ -41,6 +41,8 @@ void Mar::dibujar(){
     float alturas[4] = {0,0,0,0};
     unsigned short int x,y,offsetY;
     offsetY = this->lineaBarrido;
+    Coordenadas referencia;
+    Coordenadas normal;
 
 	if (this->lineaBarrido == this->dimension)
         this->lineaBarrido = 0;
@@ -48,7 +50,6 @@ void Mar::dibujar(){
     //OpenGLSurfacer::setAguaSalada();
     glColor3f(0.27, 0.44, 0.76);
 	glBegin(GL_QUADS);
-        glNormal3f(NULO,NULO,UNITARIO);
         for(int i=-dimension; i<dimension; i++){
             y = dimension + i + offsetY;
             if (y >= this->dimension){
@@ -57,9 +58,19 @@ void Mar::dibujar(){
             for(int j=-dimension; j<dimension;j++){
                 x = j + dimension;
                 this->calcularAlturas(alturas,x,y);
+
+                referencia = Coordenadas(j+0.5f,i+0.5f,NULO);
+                normal = Matematica::calcularNormalReferencia(Coordenadas((float)j,(float)i,alturas[0]),referencia);
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
                 glVertex3f(j, i ,alturas[0]);
+                normal = Matematica::calcularNormalReferencia(Coordenadas((float)j,(float)i,alturas[1]),referencia);
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
                 glVertex3f(j+1 , i ,alturas[1]);
+                normal = Matematica::calcularNormalReferencia(Coordenadas((float)j,(float)i,alturas[2]),referencia);
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
                 glVertex3f(j+1 , i+1 ,alturas[2]);
+                normal = Matematica::calcularNormalReferencia(Coordenadas((float)j,(float)i,alturas[3]),referencia);
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
                 glVertex3f(j , i+1 ,alturas[3]);
             }
         }

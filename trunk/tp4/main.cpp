@@ -94,8 +94,6 @@ void display(void)
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	Set3DEnv();
 
-	glCallList(DL_DOME);
-
 	mar.dibujar();
 
 	if (view_axis)
@@ -112,6 +110,7 @@ void display(void)
 
     glCallList(DL_FARO);
     glCallList(DL_ISLA);
+	glCallList(DL_DOME);
     glPushMatrix();
         glTranslatef(NULO,NULO,ALTURA_CLAVADO_FARO);
         Faro::iluminar(esDia);
