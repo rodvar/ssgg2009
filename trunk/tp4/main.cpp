@@ -18,7 +18,7 @@ bool esDia = true;
 #define ALTURA_FARO         5.00f
 #define ALTURA_CLAVADO_FARO 0.75f
 #define ALTURA_ISLA         0.30f
-#define LADO_DOMO           70
+#define LADO_DOMO           100
 #define ALTURA_DOMO         70
 
 // Handle para el control de las Display Lists

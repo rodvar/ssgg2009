@@ -1,13 +1,15 @@
 #include "Texturable.h"
+#include <GL/glut.h>
+#include <iostream>
 
 Texturable::Texturable()
 {
-   //TODO : si algo se ejecuta siempre independientemente del nombre del archivo iria aca
+    glGenTextures(1, &this->idTextura);
 }
 
 Texturable::~Texturable()
 {
-    //dtor
+    glDeleteTextures(1,&this->idTextura);
 }
 
 void Texturable::setTextura(std::string nombre) {
@@ -15,13 +17,15 @@ void Texturable::setTextura(std::string nombre) {
 }
 
 bool Texturable::listoTexturar(){
-    return nombreArchivo != ""; // NIC FIJATE SI ESTO ANDA!
+    return nombreArchivo != "";
 }
 
 void Texturable::dibujarTexturado(){
-    // TODO: Nico aca configuras el Pipeline para que pueda dibujar texturado, supongo q tenes
-    // que abrir el archivo de (this->nombreArchivo) y demas
-
+    glEnable(GL_TEXTURE_2D);
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+    glBindTexture(GL_TEXTURE_2D,this->idTextura);
     this->dibujar();
+    glFlush();
+    glDisable(GL_TEXTURE_2D);
 }
 
