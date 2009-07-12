@@ -7,19 +7,21 @@
 #include "Escena/Mar.h"
 #include "Escena/Domo.h"
 
+// PARAMETROS DIMENSIONALES
+#define ALTURA_FARO         5.00f
+#define ALTURA_ISLA         0.50f
+#define ALTURA_CLAVADO_FARO 1.25f
+#define LADO_DOMO           100
+#define ALTURA_DOMO         70
+#define DIMENSIONES_MAR     100
+#define ALTURA_MAX_OLAS     0.50f
+
 // Objetos unicos
 Camara camara;
-Mar mar(100,0.50);
+Mar mar(DIMENSIONES_MAR,ALTURA_MAX_OLAS);
 // Variables de control
 bool view_axis = false;
 bool esDia = true;
-
-// Altura base del faro
-#define ALTURA_FARO         5.00f
-#define ALTURA_CLAVADO_FARO 0.75f
-#define ALTURA_ISLA         0.30f
-#define LADO_DOMO           100
-#define ALTURA_DOMO         70
 
 // Handle para el control de las Display Lists
 GLuint dl_handle;
@@ -67,10 +69,7 @@ void recalcularDisplayLists(){
         glEndList();
         glNewList(DL_ISLA, GL_COMPILE); // Isla
             Isla isla(ALTURA_ISLA);
-            glPushMatrix();
-                glTranslatef(NULO,NULO,0.1f); //correccion evita mescla texturas
-                isla.dibujar();
-            glPopMatrix();
+            isla.dibujar();
         glEndList();
     //glDisable(GL_NORMALIZE);
 }
@@ -215,7 +214,6 @@ void init(void)
     OpenGLSurfacer::setPorDefecto();
     OpenGLLighter::generarLuzAmbienteDiurna();
 
-    mar.definirZonaProfunda(ISLA_MIN_X,ISLA_MAX_X,ISLA_MIN_Y,ISLA_MAX_Y);
     mar.generar();
 
 	// Generacion de las Display Lists

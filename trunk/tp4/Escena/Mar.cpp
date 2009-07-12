@@ -28,13 +28,6 @@ void Mar::switchCalmoInquieto(){
     this->detenido = !this->detenido;
 }
 
-void Mar::definirZonaProfunda(const float xMin,const float xMax,const float yMin, const float yMax){
-    this->zonaProfunda[0] = xMin;
-    this->zonaProfunda[1] = xMax;
-    this->zonaProfunda[2] = yMin;
-    this->zonaProfunda[3] = yMax;
-}
-
 void Mar::dibujar(){
     static unsigned short int dimension = this->dimension/2;
     float alturas[4] = {0,0,0,0};
