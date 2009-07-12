@@ -1,7 +1,7 @@
 #ifndef FARO_H
 #define FARO_H
 
-#include "../Visualizacion/Dibujable.h"
+#include "../Visualizacion/Texturable.h"
 
 #define LUZ_FARO 4
 #define PRECISION_COLUMNA 20.0
@@ -11,7 +11,7 @@
 /**
  * Representa la construccion Faro que sostiene el Foco que ilumina el mar de noche.
  */
-class Faro : public Dibujable
+class Faro : public Texturable
 {
     public:
         /**

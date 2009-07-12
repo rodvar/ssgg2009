@@ -5,7 +5,8 @@
 #include <string>
 
 /**
- *   Clase
+ * Clase abstracta que marca que define el comportamiento de objetos que a los cuales
+ * se les pueden aplicar texturas en su dibujado
  */
 class Texturable : public Dibujable
 {
@@ -29,12 +30,12 @@ class Texturable : public Dibujable
 
     protected:
         /**
-         * @brief Devuelve true si el archivo se puede texturar, false en caso contrario.
+         * @brief Devuelve true si el archivo se puede usar, false en caso contrario.
          *      Las clases hijas deberian preguntar esto antes de ejecutar comandos de
          *      Coordenadas de Texels
          */
         bool listoTexturar();
-
+        unsigned int idTextura;
         // Nombre del archivo donde esta la textura a apĺicar
         std::string nombreArchivo; // Si es "" significa que no se seteo la textura
 };
