@@ -50,9 +50,6 @@ void Domo::dibujar() {
 	glEnd();
 
 
-//	delete image;
-
-//
 //	glBindTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_X, _textureId);
 //	glBindTexture(GL_TEXTURE_CUBE_MAP_NEGATIVE_X, _textureId);
 //	glBindTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_Y, _textureId);
