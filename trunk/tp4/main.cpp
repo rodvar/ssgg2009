@@ -94,7 +94,7 @@ void display(void)
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	Set3DEnv();
 
-	mar.dibujar();
+	//mar.dibujar();
 
 	if (view_axis)
 		 glCallList(DL_AXIS);
@@ -108,8 +108,8 @@ void display(void)
         glPopMatrix();
 	}
 
-    glCallList(DL_FARO);
-    glCallList(DL_ISLA);
+    //glCallList(DL_FARO);
+    //glCallList(DL_ISLA);
 	glCallList(DL_DOME);
     glPushMatrix();
         glTranslatef(NULO,NULO,ALTURA_CLAVADO_FARO);

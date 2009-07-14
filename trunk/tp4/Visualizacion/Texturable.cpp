@@ -1,6 +1,7 @@
 #include "Texturable.h"
 #include <GL/glut.h>
 #include <iostream>
+#include "ImageLoader.h"
 
 Texturable::Texturable()
 {
@@ -20,10 +21,16 @@ bool Texturable::listoTexturar(){
     return nombreArchivo != "";
 }
 
+void Texturable::cargarImagen(){
+    Image* image = ImageLoader::loadBMP(this->nombreArchivo.c_str());
+	this->idTextura = ImageLoader::loadTexture(image);
+	delete image;
+}
+
 void Texturable::dibujarTexturado(){
     glEnable(GL_TEXTURE_2D);
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
-    glBindTexture(GL_TEXTURE_2D,this->idTextura);
+    //glBindTexture(GL_TEXTURE_2D,this->idTextura);
     this->cargarImagen();
     this->dibujar();
     glFlush();

@@ -7,13 +7,8 @@ Domo::Domo(const float lado, const float altura) {
 
 Domo::~Domo() {}
 
-void Domo::cargarImagen() {
-	Image* image = ImageLoader::loadBMP(this->nombreArchivo.c_str());
-	this->idTextura = ImageLoader::loadTexture(image);
-}
-
 void Domo::dibujar() {
-
+    glBindTexture(GL_TEXTURE_2D, this->idTextura);
 	//Bottom
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

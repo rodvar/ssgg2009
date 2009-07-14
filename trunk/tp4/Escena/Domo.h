@@ -26,8 +26,6 @@ public:
 	/* Dibuja el domo que tiene forma de Cubo */
 	void dibujar();
 
-	/* Levanta la imagen a texturar en las caras del Domo */
-	void cargarImagen();
 private:
 	float lado;
 	float altura;
