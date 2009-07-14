@@ -5,8 +5,8 @@
 #include <string>
 
 /**
- * Clase abstracta que marca que define el comportamiento de objetos que a los cuales
- * se les pueden aplicar texturas en su dibujado
+ * Clase abstracta que agrega comportamiento a la interfaz dibujable, implementando lo
+ * necesario para que al dibujo se le pueda agregar texturas.
  */
 class Texturable : public Dibujable
 {
