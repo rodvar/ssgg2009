@@ -57,7 +57,8 @@ void recalcularDisplayLists(){
 			Domo domo(LADO_DOMO, ALTURA_DOMO);
 			glPushMatrix();
 				glTranslatef(-LADO_DOMO/2,-LADO_DOMO/2,ALTURA_DOMO);
-				domo.dibujar();
+				domo.setTextura("vtr.bmp");
+				domo.dibujarTexturado();
 			glPopMatrix();
         glEndList();
         glNewList(DL_FARO, GL_COMPILE); // Faro

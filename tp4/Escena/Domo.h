@@ -17,7 +17,7 @@
  * Clase que permite dibujar un Domo texturado, a partir de un Cubo
  */
 
-class Domo : Texturable {
+class Domo : public Texturable {
 
 public:
 	Domo(const float lado, const float altura);
