@@ -7,6 +7,10 @@ Domo::Domo(const float lado, const float altura) {
 
 Domo::~Domo() {}
 
+void Domo::cargarImagen() {
+
+}
+
 void Domo::dibujar() {
 	GLuint _textureId; //The id of the texture
 	Image* image = ImageLoader::loadBMP("vtr.bmp");
