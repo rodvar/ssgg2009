@@ -1,7 +1,7 @@
 #ifndef ISLA_H
 #define ISLA_H
 
-#include "../Visualizacion/Dibujable.h"
+#include "../Visualizacion/Texturable.h"
 #include "../Geometria/Coordenadas.h"
 #include <vector>
 
@@ -14,7 +14,7 @@
 /**
  * Representa una isla de tierra
  */
-class Isla : public Dibujable
+class Isla : public Texturable
 {
     public:
         /** Constructor
