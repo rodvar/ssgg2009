@@ -1,6 +1,9 @@
 #include "OpenGLHelper.h"
 #include <iostream>
 
+// Atributos
+bool OpenGLHelper::aplicarTextura = false;
+
 void OpenGLHelper::dibujarRecta(float longitud){
     glBegin(GL_LINES);
         glNormal3f(NULO,NULO,UNITARIO);
@@ -62,6 +65,8 @@ void OpenGLHelper::dibujarCirculo(const float paso, const float radio){
 void OpenGLHelper::dibujarCilindro(const float precision,const float radioBase,
                                     const float radioTapa, const float altura){
     GLUquadricObj* quadric = gluNewQuadric();
+    if (aplicarTextura)
+        gluQuadricTexture(quadric, GL_TRUE);
     gluCylinder(quadric, radioBase, radioTapa, altura , precision, precision);
     gluDeleteQuadric(quadric);
 }
