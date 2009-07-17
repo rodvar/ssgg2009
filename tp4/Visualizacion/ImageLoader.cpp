@@ -100,9 +100,7 @@ namespace {
 }
 
 //Makes the image into a texture, and returns the id of the texture
-GLuint ImageLoader::loadTexture(Image* image) {
-	GLuint textureId;
-	glGenTextures(1, &textureId); //Make room for our texture
+void ImageLoader::loadTexture(Image* image, GLuint textureId) {
 	glBindTexture(GL_TEXTURE_2D, textureId); //Tell OpenGL which texture to edit
 	//Map the image to the texture
 	glTexImage2D(GL_TEXTURE_2D,                //Always GL_TEXTURE_2D
@@ -114,7 +112,6 @@ GLuint ImageLoader::loadTexture(Image* image) {
 				 GL_UNSIGNED_BYTE, //GL_UNSIGNED_BYTE, because pixels are stored
 				                   //as unsigned numbers
 				 image->getPixels());               //The actual pixel data
-	return textureId; //Returns the id of the texture
 }
 
 Image* ImageLoader::loadBMP(const char* filename) {

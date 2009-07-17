@@ -25,7 +25,7 @@ bool Texturable::listoTexturar(){
 void Texturable::cargarImagen(){
     if (this->listoTexturar()){
         Image* image = ImageLoader::loadBMP(this->nombreArchivo.c_str());
-        this->idTextura = ImageLoader::loadTexture(image);
+        ImageLoader::loadTexture(image, this->idTextura);
         delete image;
     // TODO: Nico busca el metodo glTexEnvf a ver como combiene configurarlo segun el caso
     // por un tema de performance..
@@ -34,7 +34,7 @@ void Texturable::cargarImagen(){
         glBindTexture(GL_TEXTURE_2D,this->idTextura);
     }
     else{
-        glBindTexture(GL_TEXTURE_2D,0);
+        glDeleteTextures(1,&this->idTextura);
         glDisable(GL_TEXTURE_2D);
     }
 }
