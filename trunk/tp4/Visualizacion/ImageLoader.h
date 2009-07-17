@@ -11,7 +11,7 @@ public:
 	static Image* loadBMP(const char* filename);
 
 	//Levanta una textura
-	static GLuint loadTexture(Image* image);
+	static void loadTexture(Image* image, GLuint textureId);
 
 };
 
