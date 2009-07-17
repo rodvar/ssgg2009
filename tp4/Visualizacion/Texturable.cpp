@@ -34,7 +34,7 @@ void Texturable::cargarImagen(){
         glBindTexture(GL_TEXTURE_2D,this->idTextura);
     }
     else{
-        glDeleteTextures(1,&this->idTextura);
+        glBindTexture(GL_TEXTURE_2D,0);
         glDisable(GL_TEXTURE_2D);
     }
 }
