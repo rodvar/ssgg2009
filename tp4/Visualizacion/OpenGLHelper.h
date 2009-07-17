@@ -2,7 +2,6 @@
 #define OPENGLHELPER_H
 
 #include <list>
-#include <string>
 #include "GL/glut.h"
 #include "../Geometria/Matematica.h"
 
@@ -88,7 +87,9 @@ class OpenGLHelper
          */
         static bool mostrarError();
 
-    private:
+        /*********/
+        /** Si esta activado, genera coordenadas para los texturados de los objetos **/
+        static bool aplicarTextura;
 };
 
 #endif // OPENGLHELPER_H
