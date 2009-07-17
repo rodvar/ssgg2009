@@ -23,10 +23,12 @@ void PintorCurva::pintarSuperficie(std::vector<Coordenadas> &puntos, Coordenadas
 	glBegin(GL_TRIANGLE_FAN);
 		normal = Matematica::calcularNormalReferencia(puntos[0],referencia);//Matematica::calcularNormal(puntosA[i], puntosB[i]);//Matematica::calcularNormal(suma,-angulo);
 		glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+		glTexCoord2f(0,0);
         glVertex3f(NULO,NULO,puntos[0].getZ());
 		for(unsigned int i=0;i<puntos.size();i++) {
 			normal = Matematica::calcularNormalReferencia(puntos[i],referencia);//Matematica::calcularNormal(puntosA[i], puntosB[i]);//Matematica::calcularNormal(suma,-angulo);
 			glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+			glTexCoord2f(i,1);
 			glVertex3f(puntos[i].getX(),puntos[i].getY(),puntos[i].getZ());
 		}
     glEnd();
