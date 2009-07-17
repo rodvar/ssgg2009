@@ -11,7 +11,7 @@
 /**
  * Representa la construccion Faro que sostiene el Foco que ilumina el mar de noche.
  */
-class Faro : public Dibujable
+class Faro : public Texturable
 {
     public:
         /**

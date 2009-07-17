@@ -82,16 +82,26 @@ void Faro::iluminar(bool apagado){
 }
 
 void Faro::dibujar(){
+    this->setTextura("torre.bmp"); this->cargarImagen();
     this->dibujarColumna();
+    this->setTextura(""); this->cargarImagen();
     this->dibujarCabina();
+    this->setTextura(""); this->cargarImagen();
     this->dibujarSombrero();
 }
 
 void Faro::dibujarColumna(){
     float altura = PORCENTAJE_ESCALA * this->altura;
 
+    glBindTexture(GL_TEXTURE_2D, this->idTextura);
+	//Bottom
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
     glColor3f(0.75f,0.75f,0.8f);
+    OpenGLHelper::aplicarTextura = true;
     OpenGLHelper::dibujarCilindro(PRECISION_COLUMNA,this->radioMax, this->radioMin, altura);
+    OpenGLHelper::aplicarTextura = false;
     glPushMatrix();
         glTranslatef(0,0,altura);
         OpenGLHelper::dibujarSamba(PRECISION_COLUMNA,this->radioMax, 0.30f*this->radioMax);
