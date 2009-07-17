@@ -83,7 +83,7 @@ void Camara::setVistaStd(){
 
 void Camara::setVistaBalconFaro(){
     float radio = Faro::getDistanciaVistaStd();
-    float posicion[3] = {radio, radio, Faro::getAlturaFoco()+0.5f};
+    float posicion[3] = {radio, radio, Faro::getAlturaFoco()+1.0f};
     this->eye[0] = posicion[0];
     this->eye[1] = posicion[1];
     this->eye[2] = posicion[2];
