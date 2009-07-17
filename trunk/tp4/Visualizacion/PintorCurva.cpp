@@ -44,9 +44,11 @@ void PintorCurva::pintarGajo(std::vector<Coordenadas> &puntosA, std::vector<Coor
 
 			normal = Matematica::calcularNormalReferencia(puntosA[i],referencia);//Matematica::calcularNormal(puntosA[i], puntosB[i]);//Matematica::calcularNormal(suma,-angulo);
 			glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+			glTexCoord2f(i,0);
 			glVertex3f(puntosA[i].getX(), puntosA[i].getY(), puntosA[i].getZ());
 			normal = Matematica::calcularNormalReferencia(puntosB[i],referencia);//Matematica::calcularNormal(puntosA[i], puntosB[i]);//Matematica::calcularNormal(suma,-angulo);
 			glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+			glTexCoord2f(i,1);
 			glVertex3f(puntosB[i].getX(), puntosB[i].getY(), puntosB[i].getZ());
 		}
         glEnd();
