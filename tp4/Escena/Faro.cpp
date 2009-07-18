@@ -93,9 +93,6 @@ void Faro::dibujar(){
 void Faro::dibujarColumna(){
     float altura = PORCENTAJE_ESCALA * this->altura;
 	//Bottom
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
     glColor3f(0.75f,0.75f,0.8f);
     OpenGLHelper::aplicarTextura = true;
     OpenGLHelper::dibujarCilindro(PRECISION_COLUMNA,this->radioMax, this->radioMin, altura);
