@@ -22,9 +22,6 @@ void Isla::dibujar(){
     int pasoZ = 6;
     float angulo;
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
     glPushMatrix();
     glColor3f(0.8,0.72,0.62);
     for(float z = NULO; z <= this->altura; z+=this->altura/pasoZ){
