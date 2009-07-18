@@ -109,7 +109,7 @@ void Faro::dibujarCabina(){
     float largo = largoBarrote*3.33f;
     float altura = PORCENTAJE_ESCALA*this->altura;
 
-    glColor3f(0.50f,0.50f,0.50f);
+    glColor3f(0.50f,0.25f,0.25f);
     for (int i = 0; i < PRECISION_CABINA ; i++){
         // Barrotes de soporte piso / techo
         glPushMatrix();
