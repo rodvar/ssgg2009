@@ -11,7 +11,7 @@
 #define ALTURA_FARO         5.00f
 #define ALTURA_ISLA         0.50f
 #define ALTURA_CLAVADO_FARO 1.25f
-#define LADO_DOMO           70
+#define LADO_DOMO           100
 #define ALTURA_DOMO         70
 #define DIMENSIONES_MAR     100
 #define ALTURA_MAX_OLAS     0.50f
