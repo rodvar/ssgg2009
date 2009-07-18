@@ -80,10 +80,12 @@ void OpenGLHelper::dibujarAbanico(const float paso, const float radio){
     glBegin(GL_TRIANGLE_FAN);
         glNormal3f(NULO,NULO,-UNITARIO);
         glVertex3f(0.0f,0.0f,0.0f);
+        glTexCoord2f(0.5f,0.0f);
         for (int j =0; j < tamano; j++){
             norma = puntos[j];
             Matematica::normalizar(norma);
             glNormal3f(norma.getX(),norma.getY(),norma.getZ());
+            glTexCoord2f(j%2,1.0f);
             glVertex3f(puntos[j].getX(), puntos[j].getY(), 0.0f);
         }
         glVertex3f(puntos[0].getX(), puntos[0].getY(), 0.0f);
@@ -101,26 +103,38 @@ void OpenGLHelper::dibujarSamba(const float precision, const float radio, const 
             glRotatef(i*deltaAlfa,0,0,1);
             glBegin(GL_QUADS);// Baranda
                 glNormal3f(-1,0,0);
+                glTexCoord2f(0,0);
                 glVertex3f(radio,0.0f,0.0f);
+                glTexCoord2f(0,1);
                 glVertex3f(radio,0.0f,altura);
                 glNormal3f(-normal.getX(),normal.getY(),normal.getZ()); // Asegura sup suave
+                glTexCoord2f(1,1);
                 glVertex3f(proxPuntoCirc.getX(),proxPuntoCirc.getY(),altura);
+                glTexCoord2f(1,0);
                 glVertex3f(proxPuntoCirc.getX(),proxPuntoCirc.getY(),NULO);
                 //idem para la extension
                 glNormal3f(1,0,0);
+                glTexCoord2f(0,0);
                 glVertex3f(radioExtendido,0.0f,0.0f);
+                glTexCoord2f(0,1);
                 glVertex3f(radioExtendido,0.0f,altura);
                 glNormal3f(normal.getX(),normal.getY(),normal.getZ()); // Asegura sup suave
+                glTexCoord2f(1,1);
                 glVertex3f(proxPuntoCircExt.getX(),proxPuntoCircExt.getY(),altura);
+                glTexCoord2f(1,0);
                 glVertex3f(proxPuntoCircExt.getX(),proxPuntoCircExt.getY(),NULO);
                 //Le pongo la tapa
                 glNormal3f(-UNITARIO,NULO,NULO);
+                glTexCoord2f(0,0);
                 glVertex3f(radio,0.0f,altura);
                 glNormal3f(-normal.getX(),normal.getY(),normal.getZ());
+                glTexCoord2f(0,1);
                 glVertex3f(proxPuntoCirc.getX(),proxPuntoCirc.getY(),altura);
                 glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+                glTexCoord2f(1,1);
                 glVertex3f(proxPuntoCircExt.getX(),proxPuntoCircExt.getY(),altura);
                 glNormal3f(UNITARIO,NULO,NULO);
+                glTexCoord2f(1,0);
                 glVertex3f(radioExtendido,0.0f,altura);
             glEnd();
         glPopMatrix();
