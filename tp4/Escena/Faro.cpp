@@ -82,11 +82,11 @@ void Faro::iluminar(bool apagado){
 }
 
 void Faro::dibujar(){
-    this->setTextura("torre.bmp"); this->cargarImagen();
+    this->cambiarTextura("torre.bmp");
     this->dibujarColumna();
-    this->setTextura(""); this->cargarImagen();
+    this->cambiarTextura("");
     this->dibujarCabina();
-    this->setTextura(""); this->cargarImagen();
+    this->cambiarTextura("");
     this->dibujarSombrero();
 }
 

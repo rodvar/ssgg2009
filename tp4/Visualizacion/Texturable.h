@@ -36,15 +36,23 @@ class Texturable : public Dibujable
         virtual void dibujar() = 0;
 
     protected:
+        /** @brief Permite cambiar la textura para implementaciones internas que
+         *         requieren varias texturas
+         *  @post La textura ya queda cargada y lista para usarse
+         */
+        void cambiarTextura(std::string nombre);
+
         /**
          * @brief Devuelve true si el archivo se puede usar, false en caso contrario.
          *      Las clases hijas deberian preguntar esto antes de ejecutar comandos de
          *      Coordenadas de Texels
          */
         bool listoTexturar();
+
         unsigned int idTextura;
         // Nombre del archivo donde esta la textura a apĺicar
         std::string nombreArchivo; // Si es "" significa que no se seteo la textura
+        bool imagenCargada;
 };
 
 #endif // TEXTURABLE_H
