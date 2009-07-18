@@ -40,7 +40,7 @@ void Texturable::cargarImagen(){
     // TODO: Nico busca el metodo glTexEnvf a ver como combiene configurarlo segun el caso
     // por un tema de performance..
         glEnable(GL_TEXTURE_2D);
-        glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
+        glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
         glBindTexture(GL_TEXTURE_2D,this->idTextura);
     }
     else{

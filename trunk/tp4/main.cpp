@@ -102,7 +102,7 @@ void display(void)
 
 	if (!esDia){// dibujar luna
         glPushMatrix();
-            glTranslatef (-50.0f, -10.0f, 10.0f);
+            glTranslatef (-LADO_DOMO/2, -10.0f, 10.0f);
             OpenGLSurfacer::setLuna();
             glutSolidSphere(1.0f, 16, 16);
             OpenGLSurfacer::setPorDefecto();
@@ -154,7 +154,7 @@ void keyboard (unsigned char key, int x, int y){
         case '1':
         case '2':
         case '3':
-        //case '4': Se evita que se pueda controlar la luz del faro
+        case '4': //Se evita que se pueda controlar la luz del faro
         case '5':
         case '6':
         case '7':
