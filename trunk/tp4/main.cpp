@@ -57,7 +57,7 @@ void recalcularDisplayLists(){
 			Domo domo(LADO_DOMO, ALTURA_DOMO);
 			glPushMatrix();
 				glTranslatef(-LADO_DOMO/2,-LADO_DOMO/2,ALTURA_DOMO);
-	            domo.setTextura("cielo.bmp");
+	            domo.setTextura("domo.bmp");
 				domo.dibujarTexturado();
 			glPopMatrix();
         glEndList();

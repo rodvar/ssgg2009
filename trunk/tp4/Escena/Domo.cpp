@@ -1,6 +1,6 @@
 #include "Domo.h"
 
-#define BASE  0.52f
+#define BASE  0.55f
 #define PASO  (float)1/6
 #define TECHO 1.00f
 #define PISO  0.00f
