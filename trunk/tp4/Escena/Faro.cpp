@@ -73,7 +73,7 @@ void Faro::iluminar(bool apagado){
         if (!apagado){
             OpenGLSurfacer::setTranslucido();
             glColor4f(0.5,0.5,0.3,0.1);// amarillento clarito
-            OpenGLHelper::dibujarCilindro(20, radio, 2*radio, 30);
+            OpenGLHelper::dibujarCilindro(20, 0, 8*radio, 30);
             OpenGLSurfacer::setPorDefecto();
         }
     glPopMatrix();
