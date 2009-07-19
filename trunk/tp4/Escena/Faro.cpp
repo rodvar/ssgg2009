@@ -46,6 +46,7 @@ void Faro::iluminar(bool apagado){
         glRotatef(++rotacionZ,NULO,NULO,UNITARIO);
         glRotatef(-102,NULO,UNITARIO,NULO);
 
+        glColor4f(0.40f,0.40f,0.40f,1.0);
         OpenGLHelper::dibujarSamba(PRECISION_COLUMNA,radio,altura);
         OpenGLSurfacer::setTranslucido(); // vidrio del foco
         glColor4f(0.25f,0.25f,0.25f,0.1);
