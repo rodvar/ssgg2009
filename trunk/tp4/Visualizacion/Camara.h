@@ -1,6 +1,10 @@
 #ifndef CAMARA_H
 #define CAMARA_H
 
+#define MIN_ZOOM 70.0f
+#define MAX_ZOOM 01.0f
+#define ZOOM_STD 45.0f
+
 /**
  * Representa la camara con la que se enfoca la escena.
  */
@@ -44,6 +48,8 @@ class Camara
         void setVistaBalconFaro();
         void setVistaBaseIsla();
         void setVistaAguaLejos();
+        // Resetea valores de movimiento de la camara
+        void reset();
 
     private:
         // Variables que controlan la ubicaci�n de la c�mara en la Escena 3D
@@ -56,6 +62,7 @@ class Camara
         float zoom;
         float anguloXY;
         float anguloZ;
+        float rangoZ[2];
 };
 
 #endif // CAMARA_H
