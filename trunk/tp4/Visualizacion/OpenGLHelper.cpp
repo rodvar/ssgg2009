@@ -22,6 +22,36 @@ void OpenGLHelper::dibujarRectangulo(const float base, const float altura){
     glEnd();
 }
 
+void OpenGLHelper::dibujarCuboide(const float ancho, const float alto, const float largo){
+    glPushMatrix();// Techo
+        glTranslatef(NULO,NULO,largo);
+        OpenGLHelper::dibujarRectangulo(ancho,alto);
+    glPopMatrix();
+    glPushMatrix();// Piso
+        glTranslatef(NULO,alto,NULO);
+        glRotatef(180,1,0,0);
+        OpenGLHelper::dibujarRectangulo(ancho,alto);
+    glPopMatrix();
+    glPushMatrix();// Costado ancho, alto
+        glRotatef(90,1,0,0); // Lo paro contra el plano y = 0
+        OpenGLHelper::dibujarRectangulo(ancho,largo);
+    glPopMatrix();
+    glPushMatrix();// Costado ancho, alto
+        glTranslatef(0,alto,largo);
+        glRotatef(-90,1,0,0); // Lo paro contra el plano y = 0
+        OpenGLHelper::dibujarRectangulo(ancho,largo);
+    glPopMatrix();
+    glPushMatrix();// Costado alto, largo
+        glRotatef(-90,0,1,0); // Lo paro contra el plano x = 0
+        OpenGLHelper::dibujarRectangulo(largo,alto);
+    glPopMatrix();
+    glPushMatrix();// Costado alto, largo
+        glTranslatef(ancho,0,largo);
+        glRotatef(90,0,1,0); // Lo paro contra el plano x = 0
+        OpenGLHelper::dibujarRectangulo(largo,alto);
+    glPopMatrix();
+}
+
 void OpenGLHelper::dibujarCuadrado(const float lado){
     dibujarRectangulo(lado,lado);
 }
