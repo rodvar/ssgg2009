@@ -27,6 +27,12 @@ class OpenGLHelper
         static void dibujarRectangulo(const float base, const float altura);
 
         /**
+         * @brief Dibuja un cubo rectangular con el ancho, largo y alto dados. El ancho
+         *        son las distancias al 0 de x y 0 de y respectivamente
+         */
+        static void dibujarCuboide(const float ancho, const float alto, const float largo);
+
+        /**
          * @brief LLama a dibujar Rectangulo con los lados iguales
          * @see OpenGLHelper::dibujarRectangulo
          */
