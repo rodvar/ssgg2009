@@ -70,7 +70,7 @@ void recalcularDisplayLists(){
         glEndList();
         glNewList(DL_ISLA, GL_COMPILE); // Isla
             Isla isla(ALTURA_ISLA);
-            isla.setTextura("tierra.bmp");
+            isla.setTextura("pasto.bmp");
             isla.dibujarTexturado();
         glEndList();
     //glDisable(GL_NORMALIZE);
