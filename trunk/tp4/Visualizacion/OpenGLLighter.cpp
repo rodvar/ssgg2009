@@ -74,7 +74,6 @@ void OpenGLLighter::switchIluminador(const int i){
         default:
             break;
     }
-    glutPostRedisplay();
 }
 
 void OpenGLLighter::generarLuzAmbiente(){
