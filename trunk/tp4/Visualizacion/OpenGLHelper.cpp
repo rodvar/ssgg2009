@@ -143,43 +143,69 @@ void OpenGLHelper::dibujarSamba(const float precision, const float radio, const 
     float radioExtendido = 1.1f*radio;
     Coordenadas proxPuntoCirc= Matematica::rotar(Coordenadas(radio,NULO,NULO),deltaAlfa);
     Coordenadas proxPuntoCircExt= Matematica::rotar(Coordenadas(radioExtendido,NULO,NULO),deltaAlfa);
-    Coordenadas normal = Matematica::calcularNormal(Coordenadas(1,0,0),deltaAlfa);
+    Coordenadas normalSalienteSuperior = Matematica::calcularNormal(0, 45);
+    Coordenadas normalSalienteSuperiorExt = Matematica::calcularNormal(deltaAlfa, 45);
+    Coordenadas normalSalienteInferior = Matematica::calcularNormal(0, 135);
+    Coordenadas normalSalienteInferiorExt = Matematica::calcularNormal(deltaAlfa, 135);
+    Coordenadas normalEntranteSuperior = Matematica::calcularNormal(0, -45);
+    Coordenadas normalEntranteSuperiorExt = Matematica::calcularNormal(deltaAlfa, -45);
+    Coordenadas normalEntranteInferior = Matematica::calcularNormal(0, -135);
+    Coordenadas normalEntranteInferiorExt = Matematica::calcularNormal(deltaAlfa, -135);
+    Coordenadas normal;
+
     for (int i = 0; i < precision ; i++){
         glPushMatrix();
             glRotatef(i*deltaAlfa,0,0,1);
             glBegin(GL_QUADS);// Baranda
-                glNormal3f(-1,0,0);
+                normal = normalEntranteInferior;
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
                 glTexCoord2f(0,0);
                 glVertex3f(radio,0.0f,0.0f);
+                normal = normalEntranteSuperior;
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
                 glTexCoord2f(0,1);
                 glVertex3f(radio,0.0f,altura);
-                glNormal3f(-normal.getX(),normal.getY(),normal.getZ()); // Asegura sup suave
+                normal = normalEntranteSuperiorExt;
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
                 glTexCoord2f(1,1);
                 glVertex3f(proxPuntoCirc.getX(),proxPuntoCirc.getY(),altura);
+                normal = normalEntranteInferiorExt;
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
                 glTexCoord2f(1,0);
                 glVertex3f(proxPuntoCirc.getX(),proxPuntoCirc.getY(),NULO);
                 //idem para la extension
-                glNormal3f(1,0,0);
+                normal = normalSalienteInferior;
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
                 glTexCoord2f(0,0);
                 glVertex3f(radioExtendido,0.0f,0.0f);
+                normal = normalSalienteSuperior;
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
                 glTexCoord2f(0,1);
                 glVertex3f(radioExtendido,0.0f,altura);
-                glNormal3f(normal.getX(),normal.getY(),normal.getZ()); // Asegura sup suave
-                glTexCoord2f(1,1);
-                glVertex3f(proxPuntoCircExt.getX(),proxPuntoCircExt.getY(),altura);
-                glTexCoord2f(1,0);
-                glVertex3f(proxPuntoCircExt.getX(),proxPuntoCircExt.getY(),NULO);
-                //Le pongo la tapa
-                glNormal3f(-UNITARIO,NULO,NULO);
-                glTexCoord2f(0,0);
-                glVertex3f(radio,0.0f,altura);
-                glNormal3f(-normal.getX(),normal.getY(),normal.getZ());
-                glTexCoord2f(0,1);
-                glVertex3f(proxPuntoCirc.getX(),proxPuntoCirc.getY(),altura);
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+                normal = normalSalienteSuperiorExt;
                 glNormal3f(normal.getX(),normal.getY(),normal.getZ());
                 glTexCoord2f(1,1);
                 glVertex3f(proxPuntoCircExt.getX(),proxPuntoCircExt.getY(),altura);
-                glNormal3f(UNITARIO,NULO,NULO);
+                normal = normalSalienteInferiorExt;
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+                glTexCoord2f(1,0);
+                glVertex3f(proxPuntoCircExt.getX(),proxPuntoCircExt.getY(),NULO);
+                //Le pongo la tapa
+                normal = normalEntranteSuperior;
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+                glTexCoord2f(0,0);
+                glVertex3f(radio,0.0f,altura);
+                normal = normalEntranteSuperiorExt;
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+                glTexCoord2f(0,1);
+                glVertex3f(proxPuntoCirc.getX(),proxPuntoCirc.getY(),altura);
+                normal = normalSalienteSuperiorExt;
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+                glTexCoord2f(1,1);
+                glVertex3f(proxPuntoCircExt.getX(),proxPuntoCircExt.getY(),altura);
+                normal = normalSalienteSuperior;
+                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
                 glTexCoord2f(1,0);
                 glVertex3f(radioExtendido,0.0f,altura);
             glEnd();
