@@ -22,6 +22,7 @@ Mar mar(DIMENSIONES_MAR,ALTURA_MAX_OLAS);
 // Variables de control
 bool view_axis = false;
 bool esDia = true;
+bool diaIniciado = false;
 
 // Handle para el control de las Display Lists
 GLuint dl_handle;
@@ -116,6 +117,11 @@ void display(void)
         glTranslatef(NULO,NULO,ALTURA_CLAVADO_FARO);
         Faro::iluminar(esDia);
     glPopMatrix();
+    if(!diaIniciado) {
+    	OpenGLLighter::generarLuzAmbienteDiurna();
+    	diaIniciado=true;
+    }
+
 	glutSwapBuffers();
 }
 
@@ -201,20 +207,13 @@ void keyboard (unsigned char key, int x, int y){
     }
 }
 
-void init(void)
-{
-    // Variables asociadas a �nica fuente de luz de la escena
-	dl_handle = glGenLists(3);
-
+void init(void) {
 	glClearColor (155.0f/256.0f, 196.0f/256.0f, 226.0f/256.0f, 0.0f);
     glShadeModel (GL_SMOOTH);
     glEnable(GL_DEPTH_TEST);
 
     glEnable(GL_LIGHTING);
     glEnable(GL_COLOR_MATERIAL);
-
-    OpenGLSurfacer::setPorDefecto();
-    OpenGLLighter::generarLuzAmbienteDiurna();
 
     mar.generar();
 
