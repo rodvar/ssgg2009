@@ -13,7 +13,7 @@
 #define ALTURA_CLAVADO_FARO 1.25f
 #define LADO_DOMO           100
 #define ALTURA_DOMO         70
-#define DIMENSIONES_MAR     100
+#define DIMENSIONES_MAR     80
 #define ALTURA_MAX_OLAS     0.50f
 
 // Objetos unicos
@@ -48,33 +48,31 @@ GLfloat window_size[2];
 
 /* Activa el NORMALIZE de OpenGL solo para las DisplayList */
 void recalcularDisplayLists(){
-    //glEnable(GL_NORMALIZE);
-        glDeleteLists(dl_handle,3);
-        dl_handle = glGenLists(3);
-        glNewList(DL_AXIS, GL_COMPILE);
-            OpenGLHelper::dibujarEjes();
-        glEndList();
-        glNewList(DL_DOME, GL_COMPILE);
-			Domo domo(LADO_DOMO, ALTURA_DOMO);
-			glPushMatrix();
-				glTranslatef(-LADO_DOMO/2,-LADO_DOMO/2,ALTURA_DOMO);
-	            domo.setTextura("domo.bmp");
-				domo.dibujarTexturado();
-			glPopMatrix();
-        glEndList();
-        glNewList(DL_FARO, GL_COMPILE); // Faro
-            Faro faro(ALTURA_FARO);
-            glPushMatrix();
-                glTranslatef(NULO,NULO,ALTURA_CLAVADO_FARO);
-                faro.dibujarTexturado();
-            glPopMatrix();
-        glEndList();
-        glNewList(DL_ISLA, GL_COMPILE); // Isla
-            Isla isla(ALTURA_ISLA);
-            isla.setTextura("pasto.bmp");
-            isla.dibujarTexturado();
-        glEndList();
-    //glDisable(GL_NORMALIZE);
+    glDeleteLists(dl_handle,3);
+    dl_handle = glGenLists(3);
+    glNewList(DL_AXIS, GL_COMPILE);
+        OpenGLHelper::dibujarEjes();
+    glEndList();
+    glNewList(DL_DOME, GL_COMPILE);
+        Domo domo(LADO_DOMO, ALTURA_DOMO);
+        glPushMatrix();
+            glTranslatef(NULO,NULO,-2.5);
+            domo.setTextura("cielo.bmp");
+            domo.dibujarTexturado();
+        glPopMatrix();
+    glEndList();
+    glNewList(DL_FARO, GL_COMPILE); // Faro
+        Faro faro(ALTURA_FARO);
+        glPushMatrix();
+            glTranslatef(NULO,NULO,ALTURA_CLAVADO_FARO);
+            faro.dibujarTexturado();
+        glPopMatrix();
+    glEndList();
+    glNewList(DL_ISLA, GL_COMPILE); // Isla
+        Isla isla(ALTURA_ISLA);
+        isla.setTextura("pasto.bmp");
+        isla.dibujarTexturado();
+    glEndList();
 }
 
 void OnIdle (void){
@@ -103,7 +101,7 @@ void display(void)
 
 	if (!esDia){// dibujar luna
         glPushMatrix();
-            glTranslatef (-LADO_DOMO/2, -10.0f, 10.0f);
+            glTranslatef (0.0f, 8.5f-LADO_DOMO/2, 10.0f);
             OpenGLSurfacer::setLuna();
             glutSolidSphere(1.0f, 16, 16);
             OpenGLSurfacer::setPorDefecto();
@@ -208,7 +206,7 @@ void keyboard (unsigned char key, int x, int y){
 }
 
 void init(void) {
-	glClearColor (155.0f/256.0f, 196.0f/256.0f, 226.0f/256.0f, 0.0f);
+	glClearColor (155.0f/256.0f, 196.0f/256.0f, 226.0f/256.0f, 1.0f);
     glShadeModel (GL_SMOOTH);
     glEnable(GL_DEPTH_TEST);
 
