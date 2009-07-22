@@ -105,6 +105,14 @@ void OpenGLHelper::dibujarCilindro(const float precision,const float radioBase,
     gluDeleteQuadric(quadric);
 }
 
+void OpenGLHelper::dibujarSeccionAbanico(Coordenadas puntos, int j) {
+    Coordenadas norma = puntos;
+    Matematica::normalizar(norma);
+    glNormal3f(norma.getX(), norma.getY(), norma.getZ());
+    glTexCoord2f(j % 2, 1.0f);
+    glVertex3f(puntos.getX(), puntos.getY(), 0.0f);
+}
+
 void OpenGLHelper::dibujarAbanico(const float paso, const float radio){
     unsigned short int tamano = (int)(DOSPI/paso);
     Coordenadas puntos[tamano];
@@ -115,13 +123,17 @@ void OpenGLHelper::dibujarAbanico(const float paso, const float radio){
         glNormal3f(NULO,NULO,-UNITARIO);
         glVertex3f(0.0f,0.0f,0.0f);
         glTexCoord2f(0.5f,0.0f);
-        for (int j =0; j < tamano; j++){
+        for (int j=0; j<tamano; j++){
             norma = puntos[j];
             Matematica::normalizar(norma);
-            glNormal3f(norma.getX(),norma.getY(),norma.getZ());
-            glTexCoord2f(j%2,1.0f);
+            glNormal3f(norma.getX(), norma.getY(), norma.getZ());
+            glTexCoord2f(j % 2, 1.0f);
             glVertex3f(puntos[j].getX(), puntos[j].getY(), 0.0f);
         }
+        norma = puntos[0];
+        Matematica::normalizar(norma);
+        glNormal3f(norma.getX(), norma.getY(), norma.getZ());
+        glTexCoord2f(0 % 2, 1.0f);
         glVertex3f(puntos[0].getX(), puntos[0].getY(), 0.0f);
     glEnd();
 }
