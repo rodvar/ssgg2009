@@ -108,10 +108,10 @@ void OpenGLLighter::generarLuzAmbienteDiurna(){
     GLfloat light_specular[4] = {0.0f, 0.0f, 0.0f, 1.0f};
     GLfloat light_color[4] = {0.05f, 0.05f, 0.05f, 1.0f};
     GLfloat light_ambient[4] = {0.05f, 0.05f, 0.05f, 1.0f}; //intensidad
-    GLfloat light_position0[4] = {34.0f, 34.0f, 34.0f, 1.0f};
-    GLfloat light_position1[4] = {-34.0f, 34.0f, 34.0f, 1.0f};
-    GLfloat light_position2[4] = {-34.0f, -34.0f, 34.0f, 1.0f};
-    GLfloat light_position3[4] = {34.0f, -34.0f, 34.0f, 1.0f};
+    GLfloat light_position0[4] = {34.0f, 34.0f, 10.0f, 1.0f};
+    GLfloat light_position1[4] = {-34.0f, 34.0f, 10.0f, 1.0f};
+    GLfloat light_position2[4] = {-34.0f, -34.0f, 10.0f, 1.0f};
+    GLfloat light_position3[4] = {34.0f, -34.0f, 10.0f, 1.0f};
     GLfloat sol_color[4] = {1.0f, 1.0f, 0.80f, 1.0f};
     GLfloat sol_ambient[4] = {1.0f, 1.0f, 0.80f, 1.0f}; //intensidad
     GLfloat sol_position[4] = {0.0f, 0.0f, 50.0f, 0.0f}; // Luz del sol direccional

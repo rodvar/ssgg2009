@@ -12,8 +12,8 @@
 #define ALTURA_ISLA         0.50f
 #define ALTURA_CLAVADO_FARO 1.25f
 #define LADO_DOMO           100
-#define ALTURA_DOMO         70
-#define DIMENSIONES_MAR     80
+#define ALTURA_DOMO         100
+#define DIMENSIONES_MAR     100
 #define ALTURA_MAX_OLAS     0.50f
 
 // Objetos unicos
@@ -56,7 +56,6 @@ void recalcularDisplayLists(){
     glNewList(DL_DOME, GL_COMPILE);
         Domo domo(LADO_DOMO, ALTURA_DOMO);
         glPushMatrix();
-            glTranslatef(NULO,NULO,-2.5);
             domo.setTextura("cielo.bmp");
             domo.dibujarTexturado();
         glPopMatrix();
