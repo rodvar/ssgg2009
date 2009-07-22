@@ -15,6 +15,6 @@ Domo::~Domo() {}
 void Domo::dibujar() {
     glClearColor (155.0f/256.0f, 196.0f/256.0f, 226.0f/256.0f, 0.0f);
     OpenGLHelper::aplicarTextura = true;
-    OpenGLHelper::dibujarCilindro(20.0f,this->lado/2, 0.0f, this->altura);
+    OpenGLHelper::dibujarCilindro(50.0f,this->lado/2, 0.0f, this->altura);
     OpenGLHelper::aplicarTextura = false;
 }
