@@ -18,7 +18,7 @@ Coordenadas Matematica::calcularNormalMedia(Coordenadas dir1, Coordenadas dir2){
 Coordenadas Matematica::calcularNormal(float anguloAlfa, float anguloFi){
     float alfa = anguloRadianes(anguloAlfa);
     float fi = anguloRadianes(anguloFi);
-    Coordenadas normal(cos(alfa), sin(alfa), cos(fi));
+    Coordenadas normal(cos(alfa)*sin(fi), sin(alfa)*sin(fi), cos(fi));
     normalizar(normal);
     return normal;
 }
