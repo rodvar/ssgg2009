@@ -15,10 +15,14 @@ void OpenGLHelper::dibujarRecta(float longitud){
 void OpenGLHelper::dibujarRectangulo(const float base, const float altura){
     glBegin(GL_QUADS);
         glNormal3f(NULO,NULO,UNITARIO);
-        glVertex3f(0.0f,0.0f,0.0f);
-        glVertex3f(base,0.0f,0.0f);
-        glVertex3f(base,altura,0.0f);
-        glVertex3f(0.0f,altura,0.0f);
+        glTexCoord2f(NULO,NULO);
+        glVertex3f(NULO,NULO,NULO);
+        glTexCoord2f(UNITARIO,NULO);
+        glVertex3f(base,NULO,NULO);
+        glTexCoord2f(UNITARIO,UNITARIO);
+        glVertex3f(base,altura,NULO);
+        glTexCoord2f(NULO,UNITARIO);
+        glVertex3f(NULO,altura,NULO);
     glEnd();
 }
 
