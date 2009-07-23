@@ -1,6 +1,8 @@
 #ifndef OPENGLLIGHTER_H
 #define OPENGLLIGHTER_H
 
+#define DISTANCIA_LUCES 34.0f
+
 #include <GL/glut.h>
 
 /**
