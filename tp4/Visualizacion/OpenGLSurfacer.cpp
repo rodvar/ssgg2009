@@ -42,7 +42,7 @@ void OpenGLSurfacer::setLuna(){
 
 void OpenGLSurfacer::setAguaSalada(){
     GLfloat mat_amb_diff[] = { 0.0025f, 0.125f, 0.2f, 1.0f };
-    GLfloat mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    GLfloat mat_specular[] = { 0.5f, 0.5f, 0.5f, 1.0f };
     glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, mat_amb_diff);
     glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
     setFactorFocalizacion(50.0f);
