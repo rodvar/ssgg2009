@@ -110,31 +110,31 @@ void Faro::dibujarCabina(){
     float largo = largoBarrote*3.33f;
     float altura = PORCENTAJE_ESCALA*this->altura;
 
-    glColor3f(0.50f,0.25f,0.25f);
     for (int i = 0; i < PRECISION_CABINA ; i++){
         // Barrotes de soporte piso / techo
+        glColor3f(0.50f,0.25f,0.25f);
         glPushMatrix();
             glRotatef(i*deltaAlfa,0,0,1);
             glPushMatrix();
                 glTranslatef(PORCENTAJE_ESCALA*this->radioMax,largoBarrote/2,altura+0.01f);
                 glRotatef(90,1,0,0);
-                OpenGLHelper::dibujarCilindro(PRECISION_CABINA/2,0.01f,0.01f,largoBarrote);
+                OpenGLHelper::dibujarCuboide(0.01f,0.01f,largoBarrote);
             glPopMatrix();
             glPushMatrix();
                 glTranslatef(PORCENTAJE_ESCALA*this->radioMax,largoBarrote/2,altura+largo);
                 glRotatef(90,1,0,0);
-                OpenGLHelper::dibujarCilindro(PRECISION_CABINA/2,0.01f,0.01f,largoBarrote);
+                OpenGLHelper::dibujarCuboide(0.01f,0.01f,largoBarrote);
             glPopMatrix();
             // Barrotes soporta ventana verticales y ventanas
             glPushMatrix();
                 glTranslatef(PORCENTAJE_ESCALA*this->radioMax,largoBarrote/2,altura);
-                OpenGLHelper::dibujarCilindro(PRECISION_CABINA/2,0.01f,0.01f,largo);
+                OpenGLHelper::dibujarCuboide(0.01f,0.01f,largo);
             glPopMatrix();
             // Barrotes de soporte de los anteriores
             glPushMatrix();
                 glTranslatef(PORCENTAJE_ESCALA*this->radioMax,largoBarrote/2,altura + PORCENTAJE_ESCALA*largo);
                 glRotatef(90,1,0,0);
-                OpenGLHelper::dibujarCilindro(PRECISION_CABINA/2,0.01f,0.01f,largoBarrote);
+                OpenGLHelper::dibujarCuboide(0.01f,0.01f,largoBarrote);
             glPopMatrix();
             // Vidrios
             OpenGLSurfacer::setTranslucido(); // vidrio del foco
