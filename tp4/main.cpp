@@ -12,7 +12,7 @@
 #define ALTURA_ISLA         0.50f
 #define ALTURA_CLAVADO_FARO 1.25f
 #define LADO_DOMO           100
-#define ALTURA_DOMO         100
+#define ALTURA_DOMO         50
 #define DIMENSIONES_MAR     100
 #define ALTURA_MAX_OLAS     0.50f
 
@@ -100,7 +100,7 @@ void display(void)
 
 	if (!esDia){// dibujar luna
         glPushMatrix();
-            glTranslatef (0.0f, 8.5f-LADO_DOMO/2, 10.0f);
+            glTranslatef (0.0f, -DISTANCIA_LUCES, 10.0f);
             OpenGLSurfacer::setLuna();
             glutSolidSphere(1.0f, 16, 16);
             OpenGLSurfacer::setPorDefecto();

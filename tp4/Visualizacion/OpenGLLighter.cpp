@@ -80,10 +80,10 @@ void OpenGLLighter::generarLuzAmbiente(){
     // Le pongo max intensidad difusa para que se note dsede donde viene la luz ambiente
     GLfloat light_color[4] = {1.0f, 1.0f, 1.0f, 1.0f};
     GLfloat light_ambient[4] = {0.05f, 0.05f, 0.05f, 1.0f}; //intensidad
-    GLfloat light_position0[4] = {34.0f, 34.0f, 34.0f, 1.0f};
-    GLfloat light_position1[4] = {-34.0f, 34.0f, 34.0f, 1.0f};
-    GLfloat light_position2[4] = {-34.0f, -34.0f, 34.0f, 1.0f};
-    GLfloat light_position3[4] = {34.0f, -34.0f, 34.0f, 1.0f};
+    GLfloat light_position0[4] = {DISTANCIA_LUCES, DISTANCIA_LUCES, DISTANCIA_LUCES, 1.0f};
+    GLfloat light_position1[4] = {-DISTANCIA_LUCES, DISTANCIA_LUCES, DISTANCIA_LUCES, 1.0f};
+    GLfloat light_position2[4] = {-DISTANCIA_LUCES, -DISTANCIA_LUCES, DISTANCIA_LUCES, 1.0f};
+    GLfloat light_position3[4] = {DISTANCIA_LUCES, -DISTANCIA_LUCES, DISTANCIA_LUCES, 1.0f};
 
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_color);
     glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
@@ -108,10 +108,10 @@ void OpenGLLighter::generarLuzAmbienteDiurna(){
     GLfloat light_specular[4] = {0.0f, 0.0f, 0.0f, 1.0f};
     GLfloat light_color[4] = {0.05f, 0.05f, 0.05f, 1.0f};
     GLfloat light_ambient[4] = {0.05f, 0.05f, 0.05f, 1.0f}; //intensidad
-    GLfloat light_position0[4] = {34.0f, 34.0f, 10.0f, 1.0f};
-    GLfloat light_position1[4] = {-34.0f, 34.0f, 10.0f, 1.0f};
-    GLfloat light_position2[4] = {-34.0f, -34.0f, 10.0f, 1.0f};
-    GLfloat light_position3[4] = {34.0f, -34.0f, 10.0f, 1.0f};
+    GLfloat light_position0[4] = {DISTANCIA_LUCES, DISTANCIA_LUCES, 10.0f, 1.0f};
+    GLfloat light_position1[4] = {-DISTANCIA_LUCES, DISTANCIA_LUCES, 10.0f, 1.0f};
+    GLfloat light_position2[4] = {-DISTANCIA_LUCES, -DISTANCIA_LUCES, 10.0f, 1.0f};
+    GLfloat light_position3[4] = {DISTANCIA_LUCES, -DISTANCIA_LUCES, 10.0f, 1.0f};
     GLfloat sol_color[4] = {1.0f, 1.0f, 0.80f, 1.0f};
     GLfloat sol_ambient[4] = {1.0f, 1.0f, 0.80f, 1.0f}; //intensidad
     GLfloat sol_position[4] = {0.0f, 0.0f, 50.0f, 0.0f}; // Luz del sol direccional
@@ -149,13 +149,13 @@ void OpenGLLighter::generarLuzAmbienteNocturna(){
     GLfloat light_specular[4] = {0.0f, 0.0f, 0.0f, 1.0f};
     GLfloat light_color[4] = {0.2f*0.27f, 0.2f*0.44f, 0.2f*0.76f, 1.0f};
     GLfloat light_ambient[4] = {0.01f, 0.01f, 0.01f, 1.0f}; //intensidad
-    GLfloat light_position0[4] = {34.0f, 34.0f, 1.0f, 1.0f};
-    GLfloat light_position1[4] = {-34.0f, 34.0f, 1.0f, 1.0f};
-    GLfloat light_position2[4] = {-34.0f, -34.0f, 1.0f, 1.0f};
-    GLfloat light_position3[4] = {34.0f, -34.0f, 1.0f, 1.0f};
+    GLfloat light_position0[4] = {DISTANCIA_LUCES, DISTANCIA_LUCES, 1.0f, 1.0f};
+    GLfloat light_position1[4] = {-DISTANCIA_LUCES, DISTANCIA_LUCES, 1.0f, 1.0f};
+    GLfloat light_position2[4] = {-DISTANCIA_LUCES, -DISTANCIA_LUCES, 1.0f, 1.0f};
+    GLfloat light_position3[4] = {DISTANCIA_LUCES, -DISTANCIA_LUCES, 1.0f, 1.0f};
     GLfloat luna_color[4] = {1.0f, 1.0f, 1.0f, 1.0f};
     GLfloat luna_ambient[4] = {0.0f, 0.0f, 0.0f, 1.0f}; //intensidad
-    GLfloat luna_position[4] = {0.0f, 8.5f-50.0f, 10.0f}; // Luz de luna
+    GLfloat luna_position[4] = {0.0f, DISTANCIA_LUCES, 10.0f}; // Luz de luna
     GLfloat luna_specular[4] = {1.0f, 1.0f, 1.0f, 1.0f}; //
 
     glLightfv(GL_LIGHT0, GL_DIFFUSE, light_color);
