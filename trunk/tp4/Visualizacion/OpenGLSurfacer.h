@@ -36,6 +36,12 @@ class OpenGLSurfacer
         static void setAguaSalada();
 
         /**
+         * Configura el material para que refleje luz ambiente y difusa en todas direcciones
+         * y sentidos
+         */
+        static void setCielo();
+
+        /**
          * Configura el material como translucido, util para dibujar vidio por ej
          */
         static void setTranslucido();
