@@ -48,6 +48,13 @@ void OpenGLSurfacer::setAguaSalada(){
     setFactorFocalizacion(50.0f);
 }
 
+void OpenGLSurfacer::setCielo(){
+    GLfloat mat_amb_diff[] = { 155.0f/256.0f, 196.0f/256.0f, 226.0f/256.0f, 0.0f};
+    GLfloat mat_specular[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+    glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, mat_amb_diff);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+}
+
 void OpenGLSurfacer::setTranslucido(){
     glEnable (GL_BLEND);
     glDepthMask (GL_FALSE);
