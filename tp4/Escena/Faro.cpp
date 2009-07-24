@@ -56,7 +56,7 @@ void Faro::iluminar(bool apagado){
         glPopMatrix();
         OpenGLSurfacer::setPorDefecto();
 
-        direccionIluminada = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,135);
+        direccionIluminada = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,0);
 
         GLfloat light_diffuse[] = { UNITARIO, UNITARIO, UNITARIO, UNITARIO };
         GLfloat light_specular[] = { UNITARIO, UNITARIO, UNITARIO, UNITARIO };
@@ -67,9 +67,9 @@ void Faro::iluminar(bool apagado){
         glLightfv(GL_LIGHT4, GL_DIFFUSE, light_diffuse);
         glLightfv(GL_LIGHT4, GL_SPECULAR, light_specular);
         glLightfv(GL_LIGHT4, GL_POSITION, light_position);
-        glLightf(GL_LIGHT4, GL_SPOT_CUTOFF, 45.0);
+        glLightf(GL_LIGHT4, GL_SPOT_CUTOFF, 35.0);
         glLightfv(GL_LIGHT4, GL_SPOT_DIRECTION, light_direction);
-        glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 3.0f);
+        glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 40.0f);
 
         if (!apagado){
             OpenGLSurfacer::setTranslucido();
