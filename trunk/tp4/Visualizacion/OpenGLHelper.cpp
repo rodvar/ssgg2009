@@ -96,6 +96,14 @@ void OpenGLHelper::dibujarCirculo(const float paso, const float radio){
     glEnd();
 }
 
+void OpenGLHelper::dibujarEsfera(const float radio, const int precision){
+    GLUquadricObj* quadric = gluNewQuadric();
+    if (aplicarTextura)
+        gluQuadricTexture(quadric, GL_TRUE);
+    gluSphere(quadric, radio, precision, precision);
+    gluDeleteQuadric(quadric);
+}
+
 void OpenGLHelper::dibujarCilindro(const float precision,const float radioBase,
                                     const float radioTapa, const float altura){
     GLUquadricObj* quadric = gluNewQuadric();
