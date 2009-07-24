@@ -21,6 +21,7 @@ class OpenGLHelper
     static void dibujarCurva(std::list<Coordenadas> discretizacion);
     static void dibujarCircunferencia(const float paso, const float radio);
     static void dibujarCirculo(const float paso, const float radio);
+    static void dibujarEsfera(const float radio, const int precision);
     static void dibujarCilindro(const float precision, const float radioBase, const float radioTapa, const float altura);
     static void dibujarAbanico(const float paso, const float radio);
     static void dibujarSamba(const float precision, const float radio, const float altura);
