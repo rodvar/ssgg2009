@@ -54,15 +54,19 @@ void Mar::dibujar(){
                 referencia = Coordenadas(j+0.5f,i+0.5f,NULO);
                 normal = Matematica::calcularNormalReferencia(Coordenadas((float)j,(float)i,alturas[0]),referencia);
                 glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+                glTexCoord2f(NULO,NULO);
                 glVertex3f(j, i ,alturas[0]);
                 normal = Matematica::calcularNormalReferencia(Coordenadas((float)j,(float)i,alturas[1]),referencia);
                 glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+                glTexCoord2f(UNITARIO,NULO);
                 glVertex3f(j+1 , i ,alturas[1]);
                 normal = Matematica::calcularNormalReferencia(Coordenadas((float)j,(float)i,alturas[2]),referencia);
                 glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+                glTexCoord2f(UNITARIO,UNITARIO);
                 glVertex3f(j+1 , i+1 ,alturas[2]);
                 normal = Matematica::calcularNormalReferencia(Coordenadas((float)j,(float)i,alturas[3]),referencia);
                 glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+                glTexCoord2f(NULO,UNITARIO);
                 glVertex3f(j , i+1 ,alturas[3]);
             }
         }

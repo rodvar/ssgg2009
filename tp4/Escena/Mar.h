@@ -1,7 +1,7 @@
 #ifndef MAR_H
 #define MAR_H
 
-#include "../Visualizacion/Dibujable.h"
+#include "../Visualizacion/Texturable.h"
 
 #define MAX_FILTRO 4 // Debe ser par
 #define DIMENSION_FILTRO 5 // Debe ser multiplo de 5
@@ -10,7 +10,7 @@
  * Simula un Mar plano que a traves del tiempo tiene cierto patron de oleaje. Esto se
  * logra con llamadas sucesivas al metodo dibujar().
  */
-class Mar : public Dibujable
+class Mar : public Texturable
 {
     public:
         /**

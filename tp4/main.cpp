@@ -15,6 +15,9 @@
 #define ALTURA_DOMO         50
 #define DIMENSIONES_MAR     100
 #define ALTURA_MAX_OLAS     0.50f
+#define TEXTURA_DOMO "cielo.bmp"
+#define TEXTURA_MAR "mar.bmp"
+#define TEXTURA_ISLA "tierra.bmp"
 
 // Objetos unicos
 Camara camara;
@@ -48,15 +51,15 @@ GLfloat window_size[2];
 
 /* Activa el NORMALIZE de OpenGL solo para las DisplayList */
 void recalcularDisplayLists(){
-    glDeleteLists(dl_handle,3);
-    dl_handle = glGenLists(3);
+    glDeleteLists(dl_handle,4);
+    dl_handle = glGenLists(4);
     glNewList(DL_AXIS, GL_COMPILE);
         OpenGLHelper::dibujarEjes();
     glEndList();
     glNewList(DL_DOME, GL_COMPILE);
         Domo domo(LADO_DOMO, ALTURA_DOMO);
         glPushMatrix();
-            domo.setTextura("cielo.bmp");
+            domo.setTextura(TEXTURA_DOMO);
             domo.dibujarTexturado();
         glPopMatrix();
     glEndList();
@@ -69,7 +72,7 @@ void recalcularDisplayLists(){
     glEndList();
     glNewList(DL_ISLA, GL_COMPILE); // Isla
         Isla isla(ALTURA_ISLA);
-        isla.setTextura("pasto.bmp");
+        isla.setTextura(TEXTURA_ISLA);
         isla.dibujarTexturado();
     glEndList();
 }
@@ -93,7 +96,7 @@ void display(void)
 	glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	Set3DEnv();
 
-	mar.dibujar();
+	mar.dibujarTexturado();
 
 	if (view_axis)
 		 glCallList(DL_AXIS);
@@ -211,8 +214,11 @@ void init(void) {
 
     glEnable(GL_LIGHTING);
     glEnable(GL_COLOR_MATERIAL);
+    float iluminacion[4] ={0.2, 0.2, 0.2, 1.0}; // TODO AFTER DATOS: Ver donde poner esto
+    OpenGLLighter::setModeloIluminacion(iluminacion,true,false);
 
     mar.generar();
+    mar.setTextura(TEXTURA_MAR);
 
 	// Generacion de las Display Lists
 	recalcularDisplayLists();
