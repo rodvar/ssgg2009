@@ -2,6 +2,7 @@
 #define MAR_H
 
 #include "../Visualizacion/Texturable.h"
+#include "../Geometria/Matematica.h"
 
 #define MAX_FILTRO 4 // Debe ser par
 #define DIMENSION_FILTRO 5 // Debe ser multiplo de 5
@@ -47,12 +48,15 @@ class Mar : public Texturable
         void aplicarFiltroAltaProfundidad();
         /* Calcula las de los puntos de control de la ola para el (x,y) dado */
         void calcularAlturas(float* alturas,const unsigned short int x, const unsigned short int y);
+        /* Precalcula las normales que se usaran para la animacion */
+        void generarNormales();
 
         bool detenido;
         float alturaOlasMax;
         unsigned short int dimension;
         unsigned short int lineaBarrido;
-        float** alturaOlas; // Matrix de dimensionXdimension
+        float** alturaOlas; // Matriz de dimensionXdimension
+        Coordenadas** normalOlas; // Matriz de dimensionxdimension
 };
 
 #endif // MAR_H
