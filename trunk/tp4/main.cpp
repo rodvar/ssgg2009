@@ -33,6 +33,8 @@ GLuint dl_handle;
 #define DL_DOME (dl_handle+1)
 #define DL_FARO (dl_handle+2)
 #define DL_ISLA (dl_handle+3)
+#define DL_LUNA (dl_handle+4)
+#define DL_HAZ (dl_handle+5)
 
 // Tama�o de la ventana
 GLfloat window_size[2];
@@ -51,8 +53,8 @@ GLfloat window_size[2];
 
 /* Activa el NORMALIZE de OpenGL solo para las DisplayList */
 void recalcularDisplayLists(){
-    glDeleteLists(dl_handle,4);
-    dl_handle = glGenLists(4);
+    glDeleteLists(dl_handle,6);
+    dl_handle = glGenLists(6);
     glNewList(DL_AXIS, GL_COMPILE);
         OpenGLHelper::dibujarEjes();
     glEndList();
@@ -70,10 +72,24 @@ void recalcularDisplayLists(){
             faro.dibujarTexturado();
         glPopMatrix();
     glEndList();
+    glNewList(DL_HAZ, GL_COMPILE); // Haz Luz Faro
+        OpenGLSurfacer::setTranslucido();
+        glColor4f(0.5,0.5,0.3,0.1);// amarillento clarito
+        OpenGLHelper::dibujarCilindro(20, 0.3, 10*UNITARIO/3, 40);
+        OpenGLSurfacer::setPorDefecto();
+    glEndList();
     glNewList(DL_ISLA, GL_COMPILE); // Isla
         Isla isla(ALTURA_ISLA);
         isla.setTextura(TEXTURA_ISLA);
         isla.dibujarTexturado();
+    glEndList();
+    glNewList(DL_LUNA, GL_COMPILE); // Luna
+        glPushMatrix();
+            glTranslatef (0.0f, -DISTANCIA_LUCES, 10.0f);
+            OpenGLSurfacer::setLuna();
+            glutSolidSphere(1.0f, 10, 10);
+            OpenGLSurfacer::setPorDefecto();
+        glPopMatrix();
     glEndList();
 }
 
@@ -102,12 +118,7 @@ void display(void)
 		 glCallList(DL_AXIS);
 
 	if (!esDia){// dibujar luna
-        glPushMatrix();
-            glTranslatef (0.0f, -DISTANCIA_LUCES, 10.0f);
-            OpenGLSurfacer::setLuna();
-            glutSolidSphere(1.0f, 16, 16);
-            OpenGLSurfacer::setPorDefecto();
-        glPopMatrix();
+	    glCallList(DL_LUNA);
 	}
 
     glCallList(DL_FARO);
@@ -115,10 +126,12 @@ void display(void)
 	glCallList(DL_DOME);
     glPushMatrix();
         glTranslatef(NULO,NULO,ALTURA_CLAVADO_FARO);
-        Faro::iluminar(esDia);
+        Faro::iluminar(esDia?-1:DL_HAZ);
     glPopMatrix();
     if(!diaIniciado) {
     	OpenGLLighter::generarLuzAmbienteDiurna();
+    	GLfloat posicion[4] = {0.05f,0.05f,Faro::getAlturaFoco()-0.05f,UNITARIO};
+    	OpenGLLighter::generarLuzSpot(posicion);
     	diaIniciado=true;
     }
 
@@ -143,9 +156,9 @@ void mousePressed(int x,int y){
     int deltaY = y - ultimoY;
 
     if (deltaX > 0) camara.incrementarRotacionXY(0.50f);
-    if (deltaX < 0) camara.incrementarRotacionXY(-0.50f);
+    else if (deltaX < 0) camara.incrementarRotacionXY(-0.50f);
     if (deltaY > 0) camara.incrementarRotacionZ(0.50f);
-    if (deltaY < 0) camara.incrementarRotacionZ(-0.50f);
+    else if (deltaY < 0) camara.incrementarRotacionZ(-0.50f);
 
     ultimoX = x;
     ultimoY = y;
@@ -160,7 +173,7 @@ void keyboard (unsigned char key, int x, int y){
         case '1':
         case '2':
         case '3':
-        case '4': //Se evita que se pueda controlar la luz del faro
+        case '4':
         case '5':
         case '6':
         case '7':

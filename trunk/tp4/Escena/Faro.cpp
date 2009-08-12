@@ -33,7 +33,7 @@ float Faro::getDistanciaVistaStd(){
     return radioMin-0.05f;
 }
 
-void Faro::iluminar(bool apagado){
+void Faro::iluminar(const int luz){
     static int rotacionZ = 180;
     static float altura = UNITARIO/5; // Se hacen static para q no se recalcule todo el tiempo
     static float radio = UNITARIO/3;
@@ -57,26 +57,10 @@ void Faro::iluminar(bool apagado){
         OpenGLSurfacer::setPorDefecto();
 
         direccionIluminada = Matematica::rotar(Coordenadas(0,0,1),rotacionZ,0);
-
-        GLfloat light_diffuse[] = { UNITARIO, UNITARIO, UNITARIO, UNITARIO };
-        GLfloat light_specular[] = { UNITARIO, UNITARIO, UNITARIO, UNITARIO };
-        GLfloat light_position[] = { 0.05f, 0.05f, (alturaFoco-0.05f), UNITARIO };
         GLfloat light_direction[] = { direccionIluminada.getX(), direccionIluminada.getY(), direccionIluminada.getZ() };
-        // TODO: Nic fijate aca de solo dejar las cosas que varian en el tiempo, el resto
-        // se podria poner en la configuracion del a GL_LIGHT4 en el OpenGLLighter ;)
-        glLightfv(GL_LIGHT4, GL_DIFFUSE, light_diffuse);
-        glLightfv(GL_LIGHT4, GL_SPECULAR, light_specular);
-        glLightfv(GL_LIGHT4, GL_POSITION, light_position);
-        glLightf(GL_LIGHT4, GL_SPOT_CUTOFF, 35.0);
         glLightfv(GL_LIGHT4, GL_SPOT_DIRECTION, light_direction);
-        glLightf(GL_LIGHT4, GL_SPOT_EXPONENT, 40.0f);
 
-        if (!apagado){
-            OpenGLSurfacer::setTranslucido();
-            glColor4f(0.5,0.5,0.3,0.1);// amarillento clarito
-            OpenGLHelper::dibujarCilindro(20, 0.3, 10*radio, 40);
-            OpenGLSurfacer::setPorDefecto();
-        }
+        glCallList(luz);
     glPopMatrix();
     if (rotacionZ == 360)
         rotacionZ = 0;
