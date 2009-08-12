@@ -59,9 +59,11 @@ class OpenGLLighter
         static void generarLuzAmbienteNocturna();
 
         /**
-         * Genera una luz posicional por defecto (la numero i=4)
+         * @brief Genera una luz posicional por defecto (la numero i=4). la direccion de la
+         *        se deja intacta a cargo del usuario.
+         * @param Las coordenadas de la posicion de la luz
          */
-        static void generarLuzSpot();
+        static void generarLuzSpot(const float* posicion);
 };
 
 #endif // OPENGLLIGHTER_H

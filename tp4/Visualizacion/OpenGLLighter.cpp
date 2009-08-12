@@ -142,6 +142,7 @@ void OpenGLLighter::generarLuzAmbienteDiurna(){
     glEnable(GL_LIGHT1);
     glEnable(GL_LIGHT2);
     glEnable(GL_LIGHT3);
+    glDisable(GL_LIGHT4);
     glEnable(GL_LIGHT7);
 }
 
@@ -184,24 +185,22 @@ void OpenGLLighter::generarLuzAmbienteNocturna(){
     glEnable(GL_LIGHT1);
     glEnable(GL_LIGHT2);
     glEnable(GL_LIGHT3);
+    glEnable(GL_LIGHT4);
     glEnable(GL_LIGHT7);
 }
 
-void OpenGLLighter::generarLuzSpot(){
+void OpenGLLighter::generarLuzSpot(const float* posicion){
     //TODO: Modificar y Utilizar para la unica luz spot de la escena
     GLfloat n = 30.0;
     GLfloat cutoff = 45;
-    GLfloat light_ambient[4] = {0.2f, 0.2f, 0.2f, 1.0f};
-    GLfloat light_color1[4] = {1.0f, 1.0f, 1.0f, 1.0f};
-    GLfloat light_specular1[4] = {1.0f, 1.0f, 1.0f, 1.0f}; //intensidad
-    GLfloat light_position1[4] = {0.0f, 3.0f, 0.0f,1.0f};
-    GLfloat light_direccion1[4] = {0, -1, 0.0f, 1.0f};
+    //GLfloat light_ambient[4] = {0.2f, 0.2f, 0.2f, 1.0f};
+    GLfloat light_color[4] = {1.0f, 1.0f, 1.0f, 1.0f};
+    GLfloat light_specular[4] = {1.0f, 1.0f, 1.0f, 1.0f}; //intensidad
 
     glLightfv(GL_LIGHT4, GL_SPOT_EXPONENT,&n);
     glLightfv(GL_LIGHT4, GL_SPOT_CUTOFF,&cutoff);
-    glLightfv(GL_LIGHT4, GL_SPOT_DIRECTION, light_direccion1);
-    glLightfv(GL_LIGHT4, GL_AMBIENT, light_ambient);
-    glLightfv(GL_LIGHT4, GL_DIFFUSE, light_color1);
-    glLightfv(GL_LIGHT4, GL_SPECULAR, light_specular1);
-    glLightfv(GL_LIGHT4, GL_POSITION, light_position1);
+    //glLightfv(GL_LIGHT4, GL_AMBIENT, light_ambient);
+    glLightfv(GL_LIGHT4, GL_DIFFUSE, light_color);
+    glLightfv(GL_LIGHT4, GL_SPECULAR, light_specular);
+    glLightfv(GL_LIGHT4, GL_POSITION, posicion);
 }

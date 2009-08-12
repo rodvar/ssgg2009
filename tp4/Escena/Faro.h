@@ -47,9 +47,9 @@ class Faro : public Texturable
 
         /**
          * @brief Dibuja el foco luminoso del faro y lo rota en cada llamada
-         * @param True si el foco debe estar apagado, false encaso contrario
+         * @param luz -1 si el foco debe estar apagado, el puntero a la DisplayList del haz sino
          */
-        static void iluminar(bool apagado);
+        static void iluminar(const int luz);
 
         /* Dibuja el faro en el origen de coordenadas*/
         void dibujar();
