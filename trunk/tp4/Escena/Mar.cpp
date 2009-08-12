@@ -1,5 +1,4 @@
 #include "Mar.h"
-#include "../Geometria/Matematica.h"
 #include "../Visualizacion/OpenGLSurfacer.h"
 #include <stdlib.h>
 
@@ -10,15 +9,22 @@ Mar::Mar(const unsigned short dimension, const float alturaOlasMax)
     this->dimension = dimension;
     this->alturaOlasMax = alturaOlasMax;
     this->alturaOlas = new float*[dimension];
-    for (int i = 0 ; i < dimension ; i++)
+    this->normalOlas = new Coordenadas*[dimension+1];
+    for (int i = 0 ; i < dimension ; i++){
         this->alturaOlas[i] = new float[dimension];
+        this->normalOlas[i] = new Coordenadas[dimension+1];
+    }
+    this->normalOlas[dimension] = new Coordenadas[dimension+1];
 }
 
 Mar::~Mar()
 {
-    for (int i = 0 ; i < dimension ; i++)
+    for (int i = 0 ; i < dimension ; i++){
         delete [] this->alturaOlas[i];
+        delete [] this->normalOlas[i];
+    }
     delete [] this->alturaOlas;
+    delete [] this->normalOlas;
 }
 
 /**
@@ -30,11 +36,9 @@ void Mar::switchCalmoInquieto(){
 
 void Mar::dibujar(){
     static unsigned short int dimension = this->dimension/2;
-    float alturas[4] = {0,0,0,0};
     unsigned short int x,y,offsetY;
     offsetY = this->lineaBarrido;
-    Coordenadas referencia;
-    Coordenadas normal;
+    float alturas[4] = {0,0,0,0};
 
 	if (this->lineaBarrido == this->dimension)
         this->lineaBarrido = 0;
@@ -51,21 +55,16 @@ void Mar::dibujar(){
                 x = j + dimension;
                 this->calcularAlturas(alturas,x,y);
 
-                referencia = Coordenadas(j+0.5f,i+0.5f,NULO);
-                normal = Matematica::calcularNormalReferencia(Coordenadas((float)j,(float)i,alturas[0]),referencia);
-                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+                glNormal3f(this->normalOlas[x][y].getX(),this->normalOlas[x][y].getY(),this->normalOlas[x][y].getZ());
                 glTexCoord2f(NULO,NULO);
                 glVertex3f(j, i ,alturas[0]);
-                normal = Matematica::calcularNormalReferencia(Coordenadas((float)j,(float)i,alturas[1]),referencia);
-                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+                glNormal3f(this->normalOlas[x+1][y].getX(),this->normalOlas[x+1][y].getY(),this->normalOlas[x+1][y].getZ());
                 glTexCoord2f(UNITARIO,NULO);
                 glVertex3f(j+1 , i ,alturas[1]);
-                normal = Matematica::calcularNormalReferencia(Coordenadas((float)j,(float)i,alturas[2]),referencia);
-                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+                glNormal3f(this->normalOlas[x+1][y+1].getX(),this->normalOlas[x+1][y+1].getY(),this->normalOlas[x+1][y+1].getZ());
                 glTexCoord2f(UNITARIO,UNITARIO);
                 glVertex3f(j+1 , i+1 ,alturas[2]);
-                normal = Matematica::calcularNormalReferencia(Coordenadas((float)j,(float)i,alturas[3]),referencia);
-                glNormal3f(normal.getX(),normal.getY(),normal.getZ());
+                glNormal3f(this->normalOlas[x][y+1].getX(),this->normalOlas[x][y+1].getY(),this->normalOlas[x][y+1].getZ());
                 glTexCoord2f(NULO,UNITARIO);
                 glVertex3f(j , i+1 ,alturas[3]);
             }
@@ -91,6 +90,7 @@ void Mar::generar(){
             this->alturaOlas[i][j] += (float)(random%(decimales+1))/100.0f;
         }
     this->aplicarFiltro();
+    this->generarNormales();
 }
 
 void Mar::aplicarFiltro(){
@@ -105,6 +105,20 @@ void Mar::aplicarFiltro(){
     for (int i = 0 ; i < this->dimension; i++)
         for (int j = 0 ; j < this->dimension; j++)
             this->alturaOlas[i][j] *= filtro[i%DIMENSION_FILTRO][j%DIMENSION_FILTRO];
+}
+
+void Mar::generarNormales(){
+    float alturas[4] = {0,0,0,0};
+    Coordenadas referencia;
+    for (int i = 0 ; i < this->dimension; i++)
+        for (int j = 0 ; j < this->dimension; j++){
+            this->calcularAlturas(alturas,j,i);
+            referencia = Coordenadas(j+0.5f,i+0.5f,NULO);
+            this->normalOlas[j][i] = Matematica::calcularNormalReferencia(Coordenadas((float)j,(float)i,alturas[0]),referencia);
+            this->normalOlas[j+1][i] = Matematica::calcularNormalReferencia(Coordenadas((float)j,(float)i,alturas[1]),referencia);
+            this->normalOlas[j+1][i+1] = Matematica::calcularNormalReferencia(Coordenadas((float)j,(float)i,alturas[2]),referencia);
+            this->normalOlas[j][i+1] = Matematica::calcularNormalReferencia(Coordenadas((float)j,(float)i,alturas[3]),referencia);
+        }
 }
 
 void Mar::calcularAlturas(float* alturas,const unsigned short int x, const unsigned short int y){
