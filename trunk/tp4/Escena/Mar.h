@@ -25,6 +25,9 @@ class Mar : public Texturable
 
         ~Mar();
 
+        /** Para uso de Listas graficas de la libreria **/
+        void setDL(int dl){ this->punteroDL = dl; }
+
         /**
          * @brief Genera el mar para que pueda dibujarse
          */
@@ -50,7 +53,10 @@ class Mar : public Texturable
         void calcularAlturas(float* alturas,const unsigned short int x, const unsigned short int y);
         /* Precalcula las normales que se usaran para la animacion */
         void generarNormales();
+        /* Precarga como debe dibujarse el mar en listas de la libreria grafica */
+        void precargarDibujado();
 
+        int punteroDL; // puntero a las listas de la libreria grafica
         bool detenido;
         float alturaOlasMax;
         unsigned short int dimension;
