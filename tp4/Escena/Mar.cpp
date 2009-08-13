@@ -35,42 +35,22 @@ void Mar::switchCalmoInquieto(){
 }
 
 void Mar::dibujar(){
-    static unsigned short int dimension = this->dimension/2;
-    unsigned short int x,y,offsetY;
+    unsigned short int offsetY;
     offsetY = this->lineaBarrido;
-    float alturas[4] = {0,0,0,0};
 
 	if (this->lineaBarrido == this->dimension)
         this->lineaBarrido = 0;
 
-    OpenGLSurfacer::setAguaSalada();
-    glColor3f(0.27, 0.44, 0.76);
-	glBegin(GL_QUADS);
-        for(int i=-dimension; i<dimension; i++){
-            y = dimension + i + offsetY;
-            if (y >= this->dimension){
-                y %= this->dimension;
-            }
-            for(int j=-dimension; j<dimension;j++){
-                x = j + dimension;
-                this->calcularAlturas(alturas,x,y);
-
-                glNormal3f(this->normalOlas[x][y].getX(),this->normalOlas[x][y].getY(),this->normalOlas[x][y].getZ());
-                glTexCoord2f(NULO,NULO);
-                glVertex3f(j, i ,alturas[0]);
-                glNormal3f(this->normalOlas[x+1][y].getX(),this->normalOlas[x+1][y].getY(),this->normalOlas[x+1][y].getZ());
-                glTexCoord2f(UNITARIO,NULO);
-                glVertex3f(j+1 , i ,alturas[1]);
-                glNormal3f(this->normalOlas[x+1][y+1].getX(),this->normalOlas[x+1][y+1].getY(),this->normalOlas[x+1][y+1].getZ());
-                glTexCoord2f(UNITARIO,UNITARIO);
-                glVertex3f(j+1 , i+1 ,alturas[2]);
-                glNormal3f(this->normalOlas[x][y+1].getX(),this->normalOlas[x][y+1].getY(),this->normalOlas[x][y+1].getZ());
-                glTexCoord2f(NULO,UNITARIO);
-                glVertex3f(j , i+1 ,alturas[3]);
-            }
-        }
-	glEnd();
-	OpenGLSurfacer::setPorDefecto();
+    glPushMatrix();
+        glTranslatef(NULO,this->lineaBarrido,NULO);
+        for (int i = 0; i < this->dimension - this->lineaBarrido; i++)
+            glCallList(this->punteroDL + i);
+    glPopMatrix();
+    glPushMatrix();
+        glTranslatef(NULO,this->lineaBarrido-this->dimension,NULO);
+        for (int i = this->dimension - this->lineaBarrido; i < this->dimension; i++)
+            glCallList(this->punteroDL + i);
+    glPopMatrix();
 
     if (!this->detenido)
         this->lineaBarrido++;
@@ -91,6 +71,40 @@ void Mar::generar(){
         }
     this->aplicarFiltro();
     this->generarNormales();
+    this->precargarDibujado();
+}
+
+void Mar::precargarDibujado(){
+    float alturas[4] = {0,0,0,0};
+    float dimension = this->dimension/2;
+    unsigned short int x,y;
+
+    for(int i=-dimension; i<dimension; i++){
+        y = dimension + i;
+        glNewList(this->punteroDL + y, GL_COMPILE);
+            OpenGLSurfacer::setAguaSalada();
+            glColor3f(0.27, 0.44, 0.76);
+            glBegin(GL_QUADS);
+            for(int j=-dimension; j<dimension;j++){
+                x = j + dimension;
+                this->calcularAlturas(alturas,x,y);
+                glNormal3f(this->normalOlas[x][y].getX(),this->normalOlas[x][y].getY(),this->normalOlas[x][y].getZ());
+                glTexCoord2f(NULO,NULO);
+                glVertex3f(j, i ,alturas[0]);
+                glNormal3f(this->normalOlas[x+1][y].getX(),this->normalOlas[x+1][y].getY(),this->normalOlas[x+1][y].getZ());
+                glTexCoord2f(UNITARIO,NULO);
+                glVertex3f(j+1 , i ,alturas[1]);
+                glNormal3f(this->normalOlas[x+1][y+1].getX(),this->normalOlas[x+1][y+1].getY(),this->normalOlas[x+1][y+1].getZ());
+                glTexCoord2f(UNITARIO,UNITARIO);
+                glVertex3f(j+1 , i+1 ,alturas[2]);
+                glNormal3f(this->normalOlas[x][y+1].getX(),this->normalOlas[x][y+1].getY(),this->normalOlas[x][y+1].getZ());
+                glTexCoord2f(NULO,UNITARIO);
+                glVertex3f(j , i+1 ,alturas[3]);
+            }
+            glEnd();
+            OpenGLSurfacer::setPorDefecto();
+        glEndList();
+    }
 }
 
 void Mar::aplicarFiltro(){

@@ -35,6 +35,8 @@ GLuint dl_handle;
 #define DL_ISLA (dl_handle+3)
 #define DL_LUNA (dl_handle+4)
 #define DL_HAZ (dl_handle+5)
+#define DL_MAR (dl_handle+6)
+#define QTY_DL 107 // se reserva para el mar
 
 // Tama�o de la ventana
 GLfloat window_size[2];
@@ -53,8 +55,8 @@ GLfloat window_size[2];
 
 /* Activa el NORMALIZE de OpenGL solo para las DisplayList */
 void recalcularDisplayLists(){
-    glDeleteLists(dl_handle,6);
-    dl_handle = glGenLists(6);
+    glDeleteLists(dl_handle,QTY_DL);
+    dl_handle = glGenLists(QTY_DL);
     glNewList(DL_AXIS, GL_COMPILE);
         OpenGLHelper::dibujarEjes();
     glEndList();
@@ -91,6 +93,8 @@ void recalcularDisplayLists(){
             OpenGLSurfacer::setPorDefecto();
         glPopMatrix();
     glEndList();
+    mar.setDL(DL_MAR);
+    mar.generar();
 }
 
 void OnIdle (void){
@@ -230,9 +234,7 @@ void init(void) {
     float iluminacion[4] ={0.2, 0.2, 0.2, 1.0}; // TODO AFTER DATOS: Ver donde poner esto
     OpenGLLighter::setModeloIluminacion(iluminacion,true,false);
 
-    mar.generar();
     mar.setTextura(TEXTURA_MAR);
-
 	// Generacion de las Display Lists
 	recalcularDisplayLists();
 }
