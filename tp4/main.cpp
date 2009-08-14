@@ -62,10 +62,9 @@ void recalcularDisplayLists(){
     glEndList();
     glNewList(DL_DOME, GL_COMPILE);
         Domo domo(LADO_DOMO, ALTURA_DOMO);
-        glPushMatrix();
-            domo.setTextura(TEXTURA_DOMO);
-            domo.dibujarTexturado();
-        glPopMatrix();
+        domo.setAltaCalidad();
+        domo.setTextura(TEXTURA_DOMO);
+        domo.dibujarTexturado();
     glEndList();
     glNewList(DL_FARO, GL_COMPILE); // Faro
         Faro faro(ALTURA_FARO);
@@ -82,6 +81,7 @@ void recalcularDisplayLists(){
     glEndList();
     glNewList(DL_ISLA, GL_COMPILE); // Isla
         Isla isla(ALTURA_ISLA);
+        isla.setAltaCalidad();
         isla.setTextura(TEXTURA_ISLA);
         isla.dibujarTexturado();
     glEndList();
