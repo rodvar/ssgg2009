@@ -35,6 +35,10 @@ class Texturable : public Dibujable
         /** Dibujar el elemento dibujable **/
         virtual void dibujar() = 0;
 
+        /** El parametro esta apagado por defecto. LLamar si se quiere alta calidad en el texturado
+            a costa de performance**/
+        void setAltaCalidad();
+
     protected:
         /** @brief Permite cambiar la textura para implementaciones internas que
          *         requieren varias texturas
@@ -53,6 +57,7 @@ class Texturable : public Dibujable
         // Nombre del archivo donde esta la textura a apĺicar
         std::string nombreArchivo; // Si es "" significa que no se seteo la textura
         bool imagenCargada;
+        bool altaCalidad;
 };
 
 #endif // TEXTURABLE_H
